@@ -1,0 +1,39 @@
+{% trans_default_domain 'sfs_user' %}
+{% extends '@SfsUser/admin_layout.html.twig' %}
+
+{% block content %}
+
+    <div class="text-right">
+        <a href="{{ url('sfs_user_admin_invitations_invite') }}" class="btn btn-outline-secondary">Invite</a>
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">{{ 'admin_users.list.fields.name.header'|trans }}</th>
+            <th scope="col">{{ 'admin_users.list.fields.surname.header'|trans }}</th>
+            <th scope="col">{{ 'admin_users.list.fields.username.header'|trans }}</th>
+            <th scope="col">{{ 'admin_users.list.fields.email.header'|trans }}</th>
+            <th scope="col">{{ 'admin_users.list.fields.acceptedAt.header'|trans }}</th>
+            <th scope="col">{{ 'admin_users.list.fields.role.header'|trans }}</th>
+            <th>&nbsp;</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for invitation in invitations %}
+            <tr>
+                <td>{{ invitation.name }}</td>
+                <td>{{ invitation.surname }}</td>
+                <td>{{ invitation.username }}</td>
+                <td>{{ invitation.email }}</td>
+                <td>{{ invitation.acceptedAt ? invitation.acceptedAt|date('H:i d-m-Y') : 'not yet' }}</td>
+                <td>{{ invitation.roles|join(', ') }}</td>
+                <td>
+                    <a href="{{ url('sfs_user_admin_invitations_details', {'invitation': invitation}) }}">details</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}

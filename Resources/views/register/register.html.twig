@@ -1,0 +1,9 @@
+{% trans_default_domain 'sfs_user' %}
+{% extends '@SfsUser/layout_fullscreen.html.twig' %}
+
+{% block content %}
+    {{ form_start(register_form) }}
+        {{ form_rest(register_form) }}
+        <input type="submit" value="{{ 'register.actions.register.button'|trans }}" class="btn btn-primary btn-block" />
+    {{ form_end(register_form) }}
+{% endblock content %}

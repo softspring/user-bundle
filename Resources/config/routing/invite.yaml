@@ -1,0 +1,8 @@
+sfs_user_invite_accept:
+    controller: Softspring\UserBundle\Controller\InviteController::accept
+    path: /accept/{token}
+
+sfs_user_invite_success:
+    controller: Softspring\UserBundle\Controller\InviteController::success
+    path: /welcome
+

@@ -1,0 +1,13 @@
+sfs_user_login:
+    path: /login
+    controller: Softspring\UserBundle\Controller\LoginController::login
+
+# dummy route for logout (does not be attached by controller)
+sfs_user_login_check:
+    path: /login_check
+    controller: Softspring\UserBundle\Controller\LoginController::check
+
+# dummy route for logout (does not be attached by controller)
+sfs_user_logout:
+    path: /logout
+    controller: Softspring\UserBundle\Controller\LoginController::logout

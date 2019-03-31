@@ -1,0 +1,9 @@
+{% trans_default_domain 'sfs_user' %}
+{% extends '@SfsUser/admin_layout.html.twig' %}
+
+{% block content %}
+    {{ form_start(create_form) }}
+    {{ form_rest(create_form) }}
+    <input type="submit" value="{{ 'admin_invitation.create.actions.create.button'|trans }}" class="btn btn-primary btn-block" />
+    {{ form_end(create_form) }}
+{% endblock content %}

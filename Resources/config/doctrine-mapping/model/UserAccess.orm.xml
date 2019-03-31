@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                      https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <mapped-superclass name="Softspring\UserBundle\Model\UserAccess" table="user_access">
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <many-to-one field="user" target-entity="Softspring\UserBundle\Model\UserInterface">
+            <join-column name="user_id" referenced-column-name="id" on-delete="CASCADE" />
+        </many-to-one>
+
+        <field name="userAgent" column="user_agent" type="string" nullable="true" />
+
+        <field name="ip" column="ip" type="string" nullable="false" length="15">
+            <options>
+                <option name="fixed">true</option>
+            </options>
+        </field>
+
+        <field name="loginAt" column="login_at" type="integer" nullable="false">
+            <options>
+                <option name="unsigned">true</option>
+            </options>
+        </field>
+    </mapped-superclass>
+
+</doctrine-mapping>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                      https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <mapped-superclass name="Softspring\UserBundle\Model\UserInvitation" table="user_invitation">
+        <id name="id" type="guid" column="id">
+            <generator strategy="UUID"/>
+        </id>
+
+        <field name="username" column="username" type="string" nullable="false" length="180" />
+        <field name="email" column="email" type="string" nullable="false" length="180" />
+
+        <field name="name" column="name" type="string" nullable="true" length="50" />
+        <field name="surname" column="surname" type="string" nullable="true" length="80" />
+
+        <field name="enabled" column="enabled" type="boolean">
+            <options>
+                <option name="default">0</option>
+            </options>
+        </field>
+
+        <field name="roles" column="roles" type="array" />
+
+        <field name="invitationToken" column="invitation_token" type="string" length="180" unique="true" nullable="true" />
+
+        <field name="acceptedAt" column="accepted_at" type="integer" nullable="true">
+            <options>
+                <option name="unsigned">true</option>
+            </options>
+        </field>
+
+        <many-to-one field="inviter" target-entity="Softspring\UserBundle\Model\UserInterface">
+            <join-column name="inviter_id" referenced-column-name="id" on-delete="SET NULL" />
+        </many-to-one>
+
+        <many-to-one field="user" target-entity="Softspring\UserBundle\Model\UserInterface">
+            <join-column name="user_id" referenced-column-name="id" on-delete="SET NULL" />
+        </many-to-one>
+    </mapped-superclass>
+
+</doctrine-mapping>

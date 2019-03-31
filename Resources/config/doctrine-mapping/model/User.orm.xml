@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                      https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <mapped-superclass name="Softspring\UserBundle\Model\User" table="user">
+        <id name="id" type="guid" column="id">
+            <generator strategy="UUID"/>
+        </id>
+
+        <field name="username" column="username" type="string" nullable="false" length="180" unique="true" />
+        <field name="email" column="email" type="string" nullable="false" length="180" unique="true" />
+
+        <field name="name" column="name" type="string" nullable="true" length="50" />
+        <field name="surname" column="surname" type="string" nullable="true" length="80" />
+
+        <field name="password" column="password_encoded" type="string" nullable="true" />
+        <field name="salt" column="salt" type="string" nullable="true" />
+
+        <field name="enabled" column="enabled" type="boolean">
+            <options>
+                <option name="default">0</option>
+            </options>
+        </field>
+
+        <field name="admin" column="is_admin" type="boolean">
+            <options>
+                <option name="default">0</option>
+            </options>
+        </field>
+
+        <field name="superAdmin" column="is_super_admin" type="boolean">
+            <options>
+                <option name="default">0</option>
+            </options>
+        </field>
+
+        <field name="lastLogin" column="last_login" type="integer" nullable="true">
+            <options>
+                <option name="unsigned">true</option>
+            </options>
+        </field>
+
+        <field name="roles" column="roles" type="array" />
+
+        <field name="passwordRequestToken" column="password_request_token" type="string" length="180" unique="true" nullable="true" />
+
+        <field name="passwordRequestedAt" column="password_requested_at" type="integer" nullable="true">
+            <options>
+                <option name="unsigned">true</option>
+            </options>
+        </field>
+
+        <field name="confirmationToken" column="confirmation_token" type="string" length="180" unique="true" nullable="true" />
+
+        <field name="confirmedAt" column="confirmed_at" type="integer" nullable="true">
+            <options>
+                <option name="unsigned">true</option>
+            </options>
+        </field>
+    </mapped-superclass>
+
+</doctrine-mapping>

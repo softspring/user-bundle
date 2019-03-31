@@ -1,0 +1,34 @@
+{% trans_default_domain 'sfs_user' %}
+{% extends '@SfsUser/admin_layout.html.twig' %}
+
+{% block content %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">{{ 'admin_users.list.fields.name.header'|trans }}</th>
+            <th scope="col">{{ 'admin_users.list.fields.surname.header'|trans }}</th>
+            <th scope="col">{{ 'admin_users.list.fields.username.header'|trans }}</th>
+            <th scope="col">{{ 'admin_users.list.fields.email.header'|trans }}</th>
+            <th scope="col">{{ 'admin_users.list.fields.lastLogin.header'|trans }}</th>
+            <th scope="col">{{ 'admin_users.list.fields.role.header'|trans }}</th>
+            <th>&nbsp;</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for administrator in administrators %}
+            <tr>
+                <td>{{ administrator.name }}</td>
+                <td>{{ administrator.surname }}</td>
+                <td>{{ administrator.username }}</td>
+                <td>{{ administrator.email }}</td>
+                <td>{{ administrator.lastLogin ? administrator.lastLogin|date('H:i d-m-Y') : 'not yet' }}</td>
+                <td>{{ administrator.roles|join(', ') }}</td>
+                <td>
+                    <a href="{{ url('sfs_user_admin_administrators_details', {'administrator': administrator}) }}">details</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}

@@ -1,0 +1,19 @@
+{% trans_default_domain 'sfs_user' %}
+
+{% block subject %}
+{%- autoescape false -%}
+{{ 'invite.accept.email.subject'|trans({'%username%': user.username}) }}
+{%- endautoescape -%}
+{% endblock %}
+
+{% block text %}
+{% autoescape false %}
+{{ 'invite.accept.email.message'|trans({'%username%': user.username, '%acceptUrl%': acceptUrl}) }}
+{% endautoescape %}
+{% endblock %}
+
+{% block html %}
+{% autoescape false %}
+{{ 'invite.accept.email.html'|trans({'%username%': user.username, '%acceptUrl%': acceptUrl}) }}
+{% endautoescape %}
+{% endblock %}

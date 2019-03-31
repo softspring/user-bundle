@@ -1,0 +1,13 @@
+{% trans_default_domain 'sfs_user' %}
+{% extends '@SfsUser/admin_layout.html.twig' %}
+
+{% block content %}
+    <h2>{{ invitation.name }} {{ invitation.surname }}</h2>
+
+    <p><strong>name:</strong> {{ invitation.name }}</p>
+    <p><strong>surname:</strong> {{ invitation.surname }}</p>
+    <p><strong>username:</strong> {{ invitation.username }}</p>
+    <p><strong>email:</strong> {{ invitation.email }}</p>
+    <p><strong>acceptedAt:</strong> {{ invitation.acceptedAt ? invitation.acceptedAt|date('H:i d-m-Y') : 'not yet' }}</p>
+    <p><strong>role:</strong> {{ invitation.roles|join(', ') }}</p>
+{% endblock content %}

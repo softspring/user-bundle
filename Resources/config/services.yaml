@@ -1,0 +1,51 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            $changeEmailConfig: []
+            $changePasswordConfig: []
+            $changeUsernameConfig: []
+            $preferencesConfig: []
+            $firewallMap: '@security.firewall.map'
+
+    Softspring\UserBundle\Command\:
+        resource: '../../Command/*'
+
+    Softspring\UserBundle\Controller\:
+        resource: '../../Controller/*'
+        public: true
+
+    Softspring\UserBundle\EventListener\:
+        resource: '../../EventListener/*'
+
+    Softspring\UserBundle\Form\:
+        resource: '../../Form/*'
+
+    Softspring\UserBundle\Mailer\:
+        resource: '../../Mailer/*'
+
+    Softspring\UserBundle\Manager\:
+        resource: '../../Manager/*'
+
+    Softspring\UserBundle\Manipulator\:
+        resource: '../../Manipulator/*'
+
+    Softspring\UserBundle\Provider\:
+        resource: '../../Provider/*'
+
+    Softspring\UserBundle\Security\:
+        resource: '../../Security/*'
+
+    Softspring\UserBundle\Util\:
+        resource: '../../Util/*'
+
+    # tags
+    Softspring\UserBundle\Mailer\Loader\MailTemplateLoader:
+        tags: ['sfs_mailer.template_loader']
+
+    # service aliases
+    sfs_user.user_provider: '@Softspring\UserBundle\Provider\UserProvider'
+    sfs_user.user_provider.email: '@Softspring\UserBundle\Provider\EmailProvider'
+    sfs_user.user_provider.username: '@Softspring\UserBundle\Provider\UsernameProvider'

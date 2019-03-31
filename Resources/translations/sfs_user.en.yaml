@@ -1,0 +1,46 @@
+login:
+    form:
+        _username.label: "Username"
+        _password.label: "Password"
+    actions:
+        login.button: "Login"
+
+register:
+    form:
+        name.label: "Name"
+        surname.label: "Surname"
+        username.label: "Username"
+        email.label: "Email"
+        plainPassword.label: "Password"
+        acceptConditions.label: "Accept terms and conditions"
+    actions:
+        register.button: "Register"
+
+invite:
+    accept:
+        email:
+            subject: "Welcome!"
+            message: |
+                Welcome %username%:
+
+                You have been invited to join our app.
+
+                Go to %acceptUrl% to accept the invitation.
+
+                Regards.
+            html: |
+                <p>Welcome %username%:</p>
+                <p>You have been invited to join our app.</p>
+                <p><a href="%acceptUrl%">Click here</a> to accept the invitation.</p>
+                <p>Regards.</p>
+
+admin_users:
+    list:
+        fields:
+            name.header: "Name"
+            surname.header: "Surname"
+            username.header: "Username"
+            email.header: "Email"
+            lastLogin.header: "Last login"
+            role:
+                header: "Role"

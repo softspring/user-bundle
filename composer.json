@@ -1,0 +1,23 @@
+{
+    "name": "softspring/user-bundle",
+    "description": "A complete user bundle",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "require": {
+        "softspring/mailer-bundle": "*",
+        "symfony/config": "^4.2",
+        "symfony/console": "^4.2",
+        "symfony/event-dispatcher": "^4.2",
+        "symfony/form": "^4.2",
+        "symfony/framework-bundle": "^4.2",
+        "symfony/http-foundation": "^4.2",
+        "symfony/security-bundle": "^4.2",
+        "symfony/validator": "^4.2",
+        "symfony/yaml": "^4.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Softspring\\UserBundle\\": ""
+        }
+    }
+}

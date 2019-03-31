@@ -1,0 +1,14 @@
+sfs_user_admin_invitations_list:
+    controller: Softspring\UserBundle\Controller\Admin\InvitationsController::list
+    path: /
+
+sfs_user_admin_invitations_invite:
+    controller: Softspring\UserBundle\Controller\Admin\InvitationsController::create
+    path: /invite
+
+sfs_user_admin_invitations_details:
+    controller: Softspring\UserBundle\Controller\Admin\InvitationsController::details
+    path: /{invitation}/details
+
+
+

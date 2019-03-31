@@ -1,0 +1,9 @@
+{% trans_default_domain 'sfs_user' %}
+{% extends '@SfsUser/layout_fullscreen.html.twig' %}
+
+{% block content %}
+    {{ form_start(accept_form) }}
+        {{ form_rest(accept_form) }}
+        <input type="submit" value="{{ 'accept.actions.accept.button'|trans }}" class="btn btn-primary btn-block" />
+    {{ form_end(accept_form) }}
+{% endblock content %}
