@@ -69,4 +69,22 @@ class AdministratorsController extends AbstractController
             'administrator' => $administrator,
         ]);
     }
+
+    /**
+     * @param string  $administrator
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function demoteAdmin(string $administrator, Request $request): Response
+    {
+        $administrator = $this->userManager->findUserBy(['id' => $administrator]);
+
+        if ($administrator->isAdmin()) {
+            $administrator->setAdmin(false);
+            $this->getDoctrine()->getManager()->flush();
+        }
+
+        return $this->redirectToRoute('sfs_user_admin_users_list');
+    }
 }

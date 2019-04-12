@@ -69,4 +69,22 @@ class UsersController extends AbstractController
             'user' => $user,
         ]);
     }
+
+    /**
+     * @param string  $user
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function promoteAdmin(string $user, Request $request): Response
+    {
+        $user = $this->userManager->findUserBy(['id' => $user]);
+
+        if (!$user->isAdmin()) {
+            $user->setAdmin(true);
+            $this->getDoctrine()->getManager()->flush();
+        }
+
+        return $this->redirectToRoute('sfs_user_admin_administrators_list');
+    }
 }
