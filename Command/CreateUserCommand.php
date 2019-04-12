@@ -49,8 +49,12 @@ class CreateUserCommand extends Command
         $password = $input->getArgument('password');
         $roles = $input->getOption('role');
         $enabled = $input->getOption('enabled');
-        $admin = $input->getOption('enabled');
-        $superAdmin = $input->getOption('enabled');
+        $admin = $input->getOption('admin');
+        $superAdmin = $input->getOption('super-admin');
+
+        if ($superAdmin) {
+            $admin = true;
+        }
 
         $this->userManipulator->create($username, $email, $password, $roles, $enabled, $admin, $superAdmin);
     }
