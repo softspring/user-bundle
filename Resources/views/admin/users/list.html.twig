@@ -25,7 +25,7 @@
                 <td>{{ user.lastLogin ? user.lastLogin|date('H:i d-m-Y') : 'not yet' }}</td>
                 <td>{{ user.roles|join(', ') }}</td>
                 <td>
-                    <a href="{{ url('sfs_user_admin_users_details', {'user': user}) }}">details</a>
+                    <a href="{{ url('sfs_user_admin_users_details', {'user': user}) }}">{{ 'admin_users.list.actions.details.link'|trans }}</a>
                 </td>
             </tr>
         {% endfor %}

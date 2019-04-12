@@ -33,3 +33,48 @@ invite:
                 <p>Has sido invitad@ a unirte a nuestra aplicación.</p>
                 <p><a href="%acceptUrl%">Pincha aquí</a> para aceptar la invitación.</p>
                 <p>Saludos.</p>
+
+admin_users:
+    list:
+        fields:
+            name.header: "Nombre"
+            surname.header: "Apellidos"
+            username.header: "Username"
+            email.header: "Email"
+            lastLogin.header: "Última entrada"
+            role.header: "Rol"
+        actions:
+            details:
+                link: "detalles"
+
+admin_administrators:
+    list:
+        fields:
+            name.header: "Nombre"
+            surname.header: "Apellidos"
+            username.header: "Username"
+            email.header: "Email"
+            lastLogin.header: "Última entrada"
+            role.header: "Rol"
+
+admin_invitations:
+    list:
+        fields:
+            name.header: "Nombre"
+            surname.header: "Apellidos"
+            username.header: "Username"
+            email.header: "Email"
+            acceptedAt.header: "Aceptado"
+            role.header: "Rol"
+        actions:
+            invite:
+                link: "Invitar"
+    create:
+        actions:
+            create:
+                button: "Invitar"
+    form:
+        name.label: "Nombre"
+        surname.label: "Apellidos"
+        email.label: "Email"
+        username.label: "Username"

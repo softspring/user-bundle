@@ -5,3 +5,7 @@ sfs_user_admin_users_list:
 sfs_user_admin_users_details:
     controller: Softspring\UserBundle\Controller\Admin\UsersController::details
     path: /{user}/details
+
+sfs_user_admin_users_promote_admin:
+    controller: Softspring\UserBundle\Controller\Admin\UsersController::promoteAdmin
+    path: /{user}/promote-admin

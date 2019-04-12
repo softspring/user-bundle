@@ -4,18 +4,18 @@
 {% block content %}
 
     <div class="text-right">
-        <a href="{{ url('sfs_user_admin_invitations_invite') }}" class="btn btn-outline-secondary">Invite</a>
+        <a href="{{ url('sfs_user_admin_invitations_invite') }}" class="btn btn-outline-secondary">{{ 'admin_invitations.list.actions.invite.link'|trans }}</a>
     </div>
 
     <table class="table">
         <thead>
         <tr>
-            <th scope="col">{{ 'admin_users.list.fields.name.header'|trans }}</th>
-            <th scope="col">{{ 'admin_users.list.fields.surname.header'|trans }}</th>
-            <th scope="col">{{ 'admin_users.list.fields.username.header'|trans }}</th>
-            <th scope="col">{{ 'admin_users.list.fields.email.header'|trans }}</th>
-            <th scope="col">{{ 'admin_users.list.fields.acceptedAt.header'|trans }}</th>
-            <th scope="col">{{ 'admin_users.list.fields.role.header'|trans }}</th>
+            <th scope="col">{{ 'admin_invitations.list.fields.name.header'|trans }}</th>
+            <th scope="col">{{ 'admin_invitations.list.fields.surname.header'|trans }}</th>
+            <th scope="col">{{ 'admin_invitations.list.fields.username.header'|trans }}</th>
+            <th scope="col">{{ 'admin_invitations.list.fields.email.header'|trans }}</th>
+            <th scope="col">{{ 'admin_invitations.list.fields.acceptedAt.header'|trans }}</th>
+            <th scope="col">{{ 'admin_invitations.list.fields.role.header'|trans }}</th>
             <th>&nbsp;</th>
         </tr>
         </thead>

@@ -7,3 +7,7 @@ sfs_user_admin_administrators_details:
     path: /{administrator}/details
 
 
+sfs_user_admin_administrators_demote_admin:
+    controller: Softspring\UserBundle\Controller\Admin\AdministratorsController::demoteAdmin
+    path: /{administrator}/demote-admin
+

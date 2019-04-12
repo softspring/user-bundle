@@ -42,5 +42,39 @@ admin_users:
             username.header: "Username"
             email.header: "Email"
             lastLogin.header: "Last login"
-            role:
-                header: "Role"
+            role.header: "Role"
+        actions:
+            details:
+                link: "details"
+
+admin_administrators:
+    list:
+        fields:
+            name.header: "Name"
+            surname.header: "Surname"
+            username.header: "Username"
+            email.header: "Email"
+            lastLogin.header: "Last login"
+            role.header: "Role"
+
+admin_invitations:
+    list:
+        fields:
+            name.header: "Name"
+            surname.header: "Surname"
+            username.header: "Username"
+            email.header: "Email"
+            acceptedAt.header: "Aceptado"
+            role.header: "Role"
+        actions:
+            invite:
+                link: "Invite"
+    create:
+        actions:
+            create:
+                button: "Invite"
+    form:
+        name.label: "Name"
+        surname.label: "Surname"
+        email.label: "Email"
+        username.label: "Username"

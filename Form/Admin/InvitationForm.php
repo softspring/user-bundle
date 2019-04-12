@@ -19,7 +19,7 @@ class InvitationForm extends AbstractType implements InvitationFormInterface
             'data_class' => UserInvitationInterface::class,
             'csrf_token_id' => 'invitation',
             'translation_domain' => 'sfs_user',
-            'label_format' => 'admin_invitation.form.%name%.label',
+            'label_format' => 'admin_invitations.form.%name%.label',
             'validation_groups' => ['Default'],
         ));
     }
