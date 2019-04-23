@@ -23,11 +23,17 @@ services:
     Softspring\UserBundle\Form\:
         resource: '../../Form/*'
 
-    Softspring\UserBundle\Mailer\:
-        resource: '../../Mailer/*'
+    Softspring\User\Mailer\MailerInterface:
+        class: Softspring\UserBundle\Mailer\MailerTemplate
 
-    Softspring\UserBundle\Manager\:
-        resource: '../../Manager/*'
+    Softspring\User\Manager\UserAccessManagerInterface:
+        class: Softspring\UserBundle\Manager\UserAccessManager
+
+    Softspring\User\Manager\UserInvitationManagerInterface:
+        class: Softspring\UserBundle\Manager\UserInvitationManager
+
+    Softspring\User\Manager\UserManagerInterface:
+        class: Softspring\UserBundle\Manager\UserManager
 
     Softspring\UserBundle\Manipulator\:
         resource: '../../Manipulator/*'
