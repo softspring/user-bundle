@@ -4,8 +4,10 @@ namespace Softspring\UserBundle\Manager;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
-use Softspring\UserBundle\Model\UserInterface;
-use Softspring\UserBundle\Model\UserInvitationInterface;
+use Softspring\User\Manager\UserInvitationManagerInterface;
+use Softspring\User\Manager\UserManagerInterface;
+use Softspring\User\Model\UserInterface;
+use Softspring\User\Model\UserInvitationInterface;
 
 class UserInvitationManager implements UserInvitationManagerInterface
 {

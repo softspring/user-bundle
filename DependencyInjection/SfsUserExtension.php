@@ -4,7 +4,7 @@ namespace Softspring\UserBundle\DependencyInjection;
 
 use Softspring\UserBundle\Entity\Base\User;
 use Softspring\UserBundle\Entity\Invite\UserInvitation;
-use Softspring\UserBundle\Model\UserInterface;
+use Softspring\User\Model\UserInterface;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

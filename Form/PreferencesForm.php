@@ -2,7 +2,7 @@
 
 namespace Softspring\UserBundle\Form;
 
-use Softspring\UserBundle\Model\UserInterface;
+use Softspring\User\Model\UserInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

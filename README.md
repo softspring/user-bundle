@@ -14,14 +14,14 @@ $ composer require softspring/user-bundle
 
 ## Custom User entity class
 
-Create your entity class, implementing Softspring\UserBundle\Model\UserInterface:
+Create your entity class, implementing Softspring\User\Model\UserInterface:
 
     <?php
 
     namespace App\Entity;
 
     use Doctrine\ORM\Mapping as ORM;
-    use Softspring\UserBundle\Model\User as UserModel;
+    use Softspring\User\Model\User as UserModel;
 
     /**
      * @ORM\Entity()

@@ -1,12 +1,10 @@
 <?php
 
-
 namespace Softspring\UserBundle\Manipulator;
 
-
-use Softspring\UserBundle\Manager\UserAccessManagerInterface;
-use Softspring\UserBundle\Model\UserAccessInterface;
-use Softspring\UserBundle\Model\UserInterface;
+use Softspring\User\Manager\UserAccessManagerInterface;
+use Softspring\User\Model\UserAccessInterface;
+use Softspring\User\Model\UserInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class UserAccessManipulator

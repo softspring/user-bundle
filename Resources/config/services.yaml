@@ -17,7 +17,7 @@ services:
         resource: '../../Controller/*'
         public: true
 
-    Softspring\UserBundle\EventListener\:
+    Softspring\User\EventListener\:
         resource: '../../EventListener/*'
 
     Softspring\UserBundle\Form\:

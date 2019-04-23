@@ -1,9 +1,9 @@
 <?php
 
-namespace Softspring\UserBundle\EventListener;
+namespace Softspring\User\EventListener;
 
-use Softspring\UserBundle\Event\UserInvitationEvent;
-use Softspring\UserBundle\Mailer\MailerInterface;
+use Softspring\User\Event\UserInvitationEvent;
+use Softspring\User\Mailer\MailerInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 

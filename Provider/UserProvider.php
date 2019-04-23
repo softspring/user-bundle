@@ -2,8 +2,8 @@
 
 namespace Softspring\UserBundle\Provider;
 
-use Softspring\UserBundle\Model\UserInterface as SfsUserInterface;
-use Softspring\UserBundle\Manager\UserManagerInterface;
+use Softspring\User\Model\UserInterface as SfsUserInterface;
+use Softspring\User\Manager\UserManagerInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
@@ -46,7 +46,7 @@ class UserProvider implements UserProviderInterface
     public function refreshUser(SymfonyUserInterface $user)
     {
         if (!$user instanceof SfsUserInterface) {
-            throw new UnsupportedUserException(sprintf('Expected an instance of Softspring\UserBundle\Model\UserInterface, but got "%s".', get_class($user)));
+            throw new UnsupportedUserException(sprintf('Expected an instance of Softspring\User\Model\UserInterface, but got "%s".', get_class($user)));
         }
 
         if (!$this->supportsClass(get_class($user))) {

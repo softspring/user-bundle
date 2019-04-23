@@ -5,6 +5,7 @@
     "license": "MIT",
     "require": {
         "softspring/mailer-bundle": "*",
+        "softspring/user": "*",
         "symfony/config": "^4.2",
         "symfony/console": "^4.2",
         "symfony/event-dispatcher": "^4.2",

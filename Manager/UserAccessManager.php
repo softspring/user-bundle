@@ -4,7 +4,8 @@ namespace Softspring\UserBundle\Manager;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
-use Softspring\UserBundle\Model\UserAccessInterface;
+use Softspring\User\Manager\UserAccessManagerInterface;
+use Softspring\User\Model\UserAccessInterface;
 
 class UserAccessManager implements UserAccessManagerInterface
 {

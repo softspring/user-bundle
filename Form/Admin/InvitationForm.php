@@ -2,7 +2,7 @@
 
 namespace Softspring\UserBundle\Form\Admin;
 
-use Softspring\UserBundle\Model\UserInvitationInterface;
+use Softspring\User\Model\UserInvitationInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;

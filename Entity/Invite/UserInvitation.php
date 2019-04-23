@@ -2,7 +2,7 @@
 
 namespace Softspring\UserBundle\Entity\Invite;
 
-use Softspring\UserBundle\Model\UserInvitation as UserInvitationModel;
+use Softspring\User\Model\UserInvitation as UserInvitationModel;
 
 class UserInvitation extends UserInvitationModel
 {

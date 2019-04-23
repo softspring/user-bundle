@@ -1,10 +1,10 @@
 <?php
 
-namespace Softspring\UserBundle\EventListener;
+namespace Softspring\User\EventListener;
 
-use Softspring\UserBundle\Event\UserEvent;
+use Softspring\User\Event\UserEvent;
 use Softspring\UserBundle\Manipulator\UserAccessManipulator;
-use Softspring\UserBundle\Model\UserInterface;
+use Softspring\User\Model\UserInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;

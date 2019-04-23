@@ -2,10 +2,10 @@
 
 namespace Softspring\UserBundle\Controller;
 
-use Softspring\UserBundle\Event\GetResponseFormEvent;
-use Softspring\UserBundle\Event\GetResponseUserEvent;
+use Softspring\User\Event\GetResponseFormEvent;
+use Softspring\User\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Form\RegisterFormInterface;
-use Softspring\UserBundle\Manager\UserManagerInterface;
+use Softspring\User\Manager\UserManagerInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
