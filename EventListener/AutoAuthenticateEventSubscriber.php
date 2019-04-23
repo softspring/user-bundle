@@ -1,6 +1,6 @@
 <?php
 
-namespace Softspring\User\EventListener;
+namespace Softspring\UserBundle\EventListener;
 
 use Softspring\User\Event\GetResponseUserEvent;
 use Softspring\User\Event\UserEvent;
