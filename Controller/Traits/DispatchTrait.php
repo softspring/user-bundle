@@ -2,7 +2,7 @@
 
 namespace Softspring\UserBundle\Controller\Traits;
 
-use Softspring\User\Event\GetResponseEventInterface;
+use Softspring\UserBundle\Event\GetResponseEventInterface;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;

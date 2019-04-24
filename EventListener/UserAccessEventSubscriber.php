@@ -2,7 +2,7 @@
 
 namespace Softspring\UserBundle\EventListener;
 
-use Softspring\User\Event\UserEvent;
+use Softspring\UserBundle\Event\UserEvent;
 use Softspring\UserBundle\Manipulator\UserAccessManipulator;
 use Softspring\User\Model\UserInterface;
 use Softspring\UserBundle\SfsUserEvents;

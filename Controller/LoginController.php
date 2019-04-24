@@ -2,7 +2,7 @@
 
 namespace Softspring\UserBundle\Controller;
 
-use Softspring\User\Event\GetResponseFormEvent;
+use Softspring\UserBundle\Event\GetResponseFormEvent;
 use Softspring\UserBundle\Form\LoginFormInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

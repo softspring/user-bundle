@@ -3,7 +3,7 @@
 namespace Softspring\UserBundle\Controller\Admin;
 
 use Softspring\UserBundle\Controller\Traits\DispatchTrait;
-use Softspring\User\Event\UserInvitationEvent;
+use Softspring\UserBundle\Event\UserInvitationEvent;
 use Softspring\UserBundle\Form\Admin\InvitationFormInterface;
 use Softspring\User\Manager\UserInvitationManagerInterface;
 use Softspring\UserBundle\SfsUserEvents;

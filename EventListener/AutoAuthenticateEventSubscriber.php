@@ -2,8 +2,8 @@
 
 namespace Softspring\UserBundle\EventListener;
 
-use Softspring\User\Event\GetResponseUserEvent;
-use Softspring\User\Event\UserEvent;
+use Softspring\UserBundle\Event\GetResponseUserEvent;
+use Softspring\UserBundle\Event\UserEvent;
 use Softspring\UserBundle\Security\LoginManager;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
