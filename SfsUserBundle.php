@@ -18,10 +18,7 @@ class SfsUserBundle extends Bundle
 
         $basePath = realpath(__DIR__.'/Resources/config/doctrine-mapping/');
 
-        $this->addRegisterMappingsPass($container, [$basePath.'/entities/base' => 'Softspring\UserBundle\Entity\Base'], 'sfs_user.user.load_user_default_mapping');
-        $this->addRegisterMappingsPass($container, [$basePath.'/entities/invite' => 'Softspring\UserBundle\Entity\Invite'], 'sfs_user.user.load_user_invitation_default_mapping');
-        $this->addRegisterMappingsPass($container, [$basePath.'/entities/history' => 'Softspring\UserBundle\Entity\History'], 'sfs_user.user.load_history_default_mapping');
-        $this->addRegisterMappingsPass($container, [$basePath.'/model' => 'Softspring\User\Model']);
+        $this->addRegisterMappingsPass($container, [$basePath => 'Softspring\User\Model']);
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntityPass());
     }

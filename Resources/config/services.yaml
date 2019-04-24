@@ -17,8 +17,9 @@ services:
         resource: '../../Controller/*'
         public: true
 
-    Softspring\UserBundle\EventListener\:
-        resource: '../../EventListener/*'
+    Softspring\UserBundle\EventListener\AutoAuthenticateEventSubscriber: ~
+    Softspring\UserBundle\EventListener\EmailInvitationListener: ~
+    Softspring\UserBundle\EventListener\LastLoginEventSubscriber: ~
 
     Softspring\UserBundle\Form\:
         resource: '../../Form/*'
@@ -35,8 +36,8 @@ services:
     Softspring\User\Manager\UserManagerInterface:
         class: Softspring\UserBundle\Manager\UserManager
 
-    Softspring\UserBundle\Manipulator\:
-        resource: '../../Manipulator/*'
+    Softspring\UserBundle\Manipulator\UserInvitationManipulator: ~
+    Softspring\UserBundle\Manipulator\UserManipulator: ~
 
     Softspring\UserBundle\Provider\:
         resource: '../../Provider/*'

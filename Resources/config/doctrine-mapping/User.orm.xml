@@ -12,9 +12,6 @@
         <field name="username" column="username" type="string" nullable="false" length="180" unique="true" />
         <field name="email" column="email" type="string" nullable="false" length="180" unique="true" />
 
-        <field name="name" column="name" type="string" nullable="true" length="50" />
-        <field name="surname" column="surname" type="string" nullable="true" length="80" />
-
         <field name="password" column="password_encoded" type="string" nullable="true" />
         <field name="salt" column="salt" type="string" nullable="true" />
 
@@ -43,22 +40,6 @@
         </field>
 
         <field name="roles" column="roles" type="array" />
-
-        <field name="passwordRequestToken" column="password_request_token" type="string" length="180" unique="true" nullable="true" />
-
-        <field name="passwordRequestedAt" column="password_requested_at" type="integer" nullable="true">
-            <options>
-                <option name="unsigned">true</option>
-            </options>
-        </field>
-
-        <field name="confirmationToken" column="confirmation_token" type="string" length="180" unique="true" nullable="true" />
-
-        <field name="confirmedAt" column="confirmed_at" type="integer" nullable="true">
-            <options>
-                <option name="unsigned">true</option>
-            </options>
-        </field>
     </mapped-superclass>
 
 </doctrine-mapping>

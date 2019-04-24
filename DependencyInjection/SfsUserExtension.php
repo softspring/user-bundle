@@ -2,8 +2,6 @@
 
 namespace Softspring\UserBundle\DependencyInjection;
 
-use Softspring\UserBundle\Entity\Base\User;
-use Softspring\UserBundle\Entity\Invite\UserInvitation;
 use Softspring\User\Model\UserInterface;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
@@ -26,23 +24,22 @@ class SfsUserExtension extends Extension implements PrependExtensionInterface
         // set config parameters
         $container->setParameter('sfs_user.user.class', $config['class']);
         $container->setParameter('sfs_user.invite.class', $config['invite']['class']);
-        $container->setParameter('sfs_user.history.config', $config['history']);
-        $container->setParameter('sfs_user.resetting.config', $config['resetting']);
 
-        // load default mappings
-        if ($config['class'] === User::class) {
-            $container->setParameter('sfs_user.user.load_user_default_mapping', true);
-        }
-        if ($config['invite']['class'] === UserInvitation::class) {
-            $container->setParameter('sfs_user.user.load_user_invitation_default_mapping', true);
-        }
+
+        $container->setParameter('sfs_user.history.enabled', $config['history']['enabled']);
         if ($config['history']['enabled']) {
-            $container->setParameter('sfs_user.user.load_history_default_mapping', true);
+            $container->setParameter('sfs_user.history.class', $config['history']['class']);
         }
+
+        $container->setParameter('sfs_user.resetting.config', $config['resetting']);
 
         // load services
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yaml');
+
+        if ($config['history']['enabled']) {
+            $loader->load('services/history.yaml');
+        }
     }
 
     public function prepend(ContainerBuilder $container)
@@ -50,7 +47,7 @@ class SfsUserExtension extends Extension implements PrependExtensionInterface
         $doctrineConfig = [];
 
         // add a default config to force load target_entities, will be overwritten by ResolveDoctrineTargetEntityPass
-        $doctrineConfig['orm']['resolve_target_entities'][UserInterface::class] = User::class;
+        $doctrineConfig['orm']['resolve_target_entities'][UserInterface::class] = 'App\Entity\User';
 
         // disable auto-mapping for this bundle to prevent mapping errors
         $doctrineConfig['orm']['mappings']['SfsUserBundle'] = [

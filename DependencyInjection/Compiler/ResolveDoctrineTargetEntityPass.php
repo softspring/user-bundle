@@ -25,17 +25,20 @@ class ResolveDoctrineTargetEntityPass implements CompilerPassInterface
 
         // configure user entity
         $userInvitationClass = $container->getParameter('sfs_user.invite.class');
-        if (!class_implements($userInvitationClass, UserInvitationInterface::class)) {
-            throw new LogicException(sprintf('%s class must implements %s interface', $userInvitationClass, UserInvitationInterface::class));
-        }
-        $this->setTargetEntity($container, UserInvitationInterface::class, $userInvitationClass);
-
-        $historyConfig = $container->getParameter('sfs_user.history.config');
-        if ($historyConfig['enabled']) {
-            if (!class_implements($historyConfig['class'], UserAccessInterface::class)) {
-                throw new LogicException(sprintf('%s class must implements %s interface', $historyConfig['class'], UserAccessInterface::class));
+        if ($userInvitationClass) {
+            if (!class_implements($userInvitationClass, UserInvitationInterface::class)) {
+                throw new LogicException(sprintf('%s class must implements %s interface', $userInvitationClass, UserInvitationInterface::class));
             }
-            $this->setTargetEntity($container, UserAccessInterface::class, $historyConfig['class']);
+
+            $this->setTargetEntity($container, UserInvitationInterface::class, $userInvitationClass);
+        }
+
+        if ($historyClass = $container->getParameter('sfs_user.history.class')) {
+            if (!class_implements($historyClass, UserAccessInterface::class)) {
+                throw new LogicException(sprintf('%s class must implements %s interface', $historyClass, UserAccessInterface::class));
+            }
+
+            $this->setTargetEntity($container, UserAccessInterface::class, $historyClass);
         }
     }
 

@@ -2,9 +2,6 @@
 
 namespace Softspring\UserBundle\DependencyInjection;
 
-use Softspring\UserBundle\Entity\Base\User;
-use Softspring\UserBundle\Entity\History\UserAccess;
-use Softspring\UserBundle\Entity\Invite\UserInvitation;
 use Softspring\UserBundle\Form\ChangeEmailForm;
 use Softspring\UserBundle\Form\ChangePasswordForm;
 use Softspring\UserBundle\Form\ChangeUsernameForm;
@@ -22,13 +19,13 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('class')
-                    ->defaultValue(User::class)
+                    ->defaultValue('App\Entity\User')
                 ->end()
 
                 ->arrayNode('invite')
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('class')->defaultValue(UserInvitation::class)->end()
+                        ->scalarNode('class')->defaultNull()->end()
                     ->end()
                 ->end()
 
@@ -48,7 +45,7 @@ class Configuration implements ConfigurationInterface
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->booleanNode('enabled')->defaultTrue()->end()
-                        ->scalarNode('class')->defaultValue(UserAccess::class)->end()
+                        ->scalarNode('class')->defaultNull()->end()
                     ->end()
                 ->end()
 
