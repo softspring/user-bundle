@@ -23,9 +23,8 @@ class ResolveDoctrineTargetEntityPass implements CompilerPassInterface
         }
         $this->setTargetEntity($container, UserInterface::class, $userClass);
 
-        // configure user entity
-        $userInvitationClass = $container->getParameter('sfs_user.invite.class');
-        if ($userInvitationClass) {
+        // configure invitation entity
+        if ($userInvitationClass = $container->getParameter('sfs_user.invite.class')) {
             if (!class_implements($userInvitationClass, UserInvitationInterface::class)) {
                 throw new LogicException(sprintf('%s class must implements %s interface', $userInvitationClass, UserInvitationInterface::class));
             }
@@ -33,6 +32,7 @@ class ResolveDoctrineTargetEntityPass implements CompilerPassInterface
             $this->setTargetEntity($container, UserInvitationInterface::class, $userInvitationClass);
         }
 
+        // configure user access history entity
         if ($historyClass = $container->getParameter('sfs_user.history.class')) {
             if (!class_implements($historyClass, UserAccessInterface::class)) {
                 throw new LogicException(sprintf('%s class must implements %s interface', $historyClass, UserAccessInterface::class));
