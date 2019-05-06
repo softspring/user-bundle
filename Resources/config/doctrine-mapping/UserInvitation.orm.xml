@@ -21,6 +21,18 @@
             </options>
         </field>
 
+        <field name="admin" column="is_admin" type="boolean">
+            <options>
+                <option name="default">0</option>
+            </options>
+        </field>
+
+        <field name="superAdmin" column="is_super_admin" type="boolean">
+            <options>
+                <option name="default">0</option>
+            </options>
+        </field>
+
         <field name="roles" column="roles" type="array" />
 
         <field name="invitationToken" column="invitation_token" type="string" length="180" unique="true" nullable="true" />

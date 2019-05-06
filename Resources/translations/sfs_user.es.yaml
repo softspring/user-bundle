@@ -78,3 +78,5 @@ admin_invitations:
         surname.label: "Apellidos"
         email.label: "Email"
         username.label: "Username"
+        admin.label: "Administrador"
+        superAdmin.label: "Super-administrador"

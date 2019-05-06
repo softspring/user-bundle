@@ -4,6 +4,7 @@ namespace Softspring\UserBundle\Form\Admin;
 
 use Softspring\User\Model\UserInvitationInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -29,9 +30,15 @@ class InvitationForm extends AbstractType implements InvitationFormInterface
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('email', EmailType::class);
-        $builder->add('username');
         $builder->add('name');
         $builder->add('surname');
+        $builder->add('username');
+        $builder->add('email', EmailType::class);
+        $builder->add('admin', CheckboxType::class, [
+            'required' => false,
+        ]);
+        $builder->add('superAdmin', CheckboxType::class, [
+            'required' => false,
+        ]);
     }
 }
