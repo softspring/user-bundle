@@ -16,6 +16,19 @@ register:
     actions:
         register.button: "Register"
 
+invitation:
+    accept:
+        form:
+            email.label: "Email"
+            username.label: "Username"
+            name.label: "Name"
+            surname.label: "Surname"
+            password.label: "Password"
+            password_confirmation.label: "Repeat password"
+            acceptConditions.label: "Accept terms and conditions"
+        actions:
+            accept.button: "Accept invitation"
+
 invite:
     accept:
         email:
