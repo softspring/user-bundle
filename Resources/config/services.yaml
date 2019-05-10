@@ -7,7 +7,6 @@ services:
             $changeEmailConfig: []
             $changePasswordConfig: []
             $changeUsernameConfig: []
-            $preferencesConfig: []
             $firewallMap: '@security.firewall.map'
 
     Softspring\UserBundle\Command\:

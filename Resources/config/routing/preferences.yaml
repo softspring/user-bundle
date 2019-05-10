@@ -1,0 +1,3 @@
+sfs_user_preferences:
+    path: /
+    controller: Softspring\UserBundle\Controller\PreferencesController::preferences

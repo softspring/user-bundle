@@ -137,24 +137,6 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-
-                ->arrayNode('preferences')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->scalarNode('form')->defaultValue(PreferencesForm::class)->end()
-                        ->arrayNode('validation_groups')->treatNullLike(['Preferences', 'Default'])->scalarPrototype()->end()->end()
-                        ->scalarNode('template')->defaultValue('@SfsUser/preferences/preferences.html.twig')->end()
-                        ->arrayNode('success')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('route')->defaultValue('sfs_user_preferences_success')->end()
-                                ->arrayNode('route_params')->treatNullLike([])->scalarPrototype()->end()->end()
-                                ->scalarNode('template')->defaultValue('@SfsUser/preferences/success.html.twig')->end()
-                            ->end()
-                        ->end()
-                    ->end()
-                ->end()
-
             ->end()
         ;
 

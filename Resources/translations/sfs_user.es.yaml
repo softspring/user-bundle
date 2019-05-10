@@ -47,6 +47,11 @@ invite:
                 <p><a href="%acceptUrl%">Pincha aquí</a> para aceptar la invitación.</p>
                 <p>Saludos.</p>
 
+preferences:
+    actions:
+        submit:
+            button: "Guardar cambios"
+
 admin_users:
     list:
         fields:

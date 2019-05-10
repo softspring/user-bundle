@@ -1,0 +1,9 @@
+{% trans_default_domain 'sfs_user' %}
+{% extends '@SfsUser/preferences_layout.html.twig' %}
+
+{% block content %}
+    {{ form_start(preferences_form) }}
+    {{ form_rest(preferences_form) }}
+    <input type="submit" value="{{ 'preferences.actions.submit.button'|trans }}" class="btn btn-primary btn-block" />
+    {{ form_end(preferences_form) }}
+{% endblock content %}

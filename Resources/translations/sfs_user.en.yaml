@@ -47,6 +47,11 @@ invite:
                 <p><a href="%acceptUrl%">Click here</a> to accept the invitation.</p>
                 <p>Regards.</p>
 
+preferences:
+    actions:
+        submit:
+            button: "Save changes"
+
 admin_users:
     list:
         fields:
