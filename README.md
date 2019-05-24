@@ -1,5 +1,12 @@
 This package provides a new complete user bundle out of the box (it's based on FOSUserBundle ideas and some code).
 
+*This bundle is under development, more features will be added soon, and existing ones may change.*
+
+[![Latest Stable Version](https://poser.pugx.org/softspring/user-bundle/v/stable.svg)](https://packagist.org/packages/softspring/user-bundle)
+[![Latest Unstable Version](https://poser.pugx.org/softspring/user-bundle/v/unstable.svg)](https://packagist.org/packages/softspring/user-bundle)
+[![License](https://poser.pugx.org/softspring/user-bundle/license.svg)](https://packagist.org/packages/softspring/user-bundle)
+[![Total Downloads](https://poser.pugx.org/softspring/user-bundle/downloads)](https://packagist.org/packages/softspring/user-bundle)
+
 # Installation
 
 ## Applications that use Symfony Flex
