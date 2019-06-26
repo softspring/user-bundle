@@ -6,6 +6,7 @@ use Softspring\UserBundle\Event\GetResponseFormEvent;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\User\Manager\UserManagerInterface;
 use Softspring\User\Model\UserInterface;
+use Softspring\UserBundle\Form\ChangePasswordFormInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -27,22 +28,22 @@ class ChangePasswordController extends AbstractController
     protected $eventDispatcher;
 
     /**
-     * @var array
+     * @var ChangePasswordFormInterface
      */
-    protected $changePasswordConfig;
+    protected $changePasswordForm;
 
     /**
      * ChangePasswordController constructor.
      *
-     * @param UserManagerInterface     $userManager
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param array                    $changePasswordConfig
+     * @param UserManagerInterface        $userManager
+     * @param EventDispatcherInterface    $eventDispatcher
+     * @param ChangePasswordFormInterface $changePasswordForm
      */
-    public function __construct(UserManagerInterface $userManager, EventDispatcherInterface $eventDispatcher, array $changePasswordConfig)
+    public function __construct(UserManagerInterface $userManager, EventDispatcherInterface $eventDispatcher, ChangePasswordFormInterface $changePasswordForm)
     {
         $this->userManager = $userManager;
         $this->eventDispatcher = $eventDispatcher;
-        $this->changePasswordConfig = $changePasswordConfig;
+        $this->changePasswordForm = $changePasswordForm;
     }
 
     public function changePassword(Request $request): Response
@@ -50,7 +51,7 @@ class ChangePasswordController extends AbstractController
         /** @var UserInterface $user */
         $user = $this->getUser();
 
-        $form = $this->createForm($this->getParameter('sfs_user.change_password.form'), $user, [
+        $form = $this->createForm(get_class($this->changePasswordForm), $user, [
             'method' => 'POST',
         ])->handleRequest($request);
 
@@ -66,7 +67,7 @@ class ChangePasswordController extends AbstractController
                     return $response;
                 }
 
-                return $this->redirect('/');
+                return $this->redirectToRoute('sfs_user_preferences');
             } else {
                 if ($response = $this->dispatchGetResponse(SfsUserEvents::CHANGE_PASSWORD_FORM_INVALID, new GetResponseFormEvent($form, $request))) {
                     return $response;
@@ -74,7 +75,7 @@ class ChangePasswordController extends AbstractController
             }
         }
 
-        return $this->render($this->getParameter('sfs_user.change_password.template'), [
+        return $this->render('@SfsUser/change_password/change_password.html.twig', [
             'change_password_form' => $form->createView(),
         ]);
     }

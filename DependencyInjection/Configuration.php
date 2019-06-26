@@ -5,7 +5,6 @@ namespace Softspring\UserBundle\DependencyInjection;
 use Softspring\UserBundle\Form\ChangeEmailForm;
 use Softspring\UserBundle\Form\ChangePasswordForm;
 use Softspring\UserBundle\Form\ChangeUsernameForm;
-use Softspring\UserBundle\Form\PreferencesForm;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -82,23 +81,6 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('route')->defaultValue('sfs_user_resetting_success')->end()
                                 ->arrayNode('route_params')->treatNullLike([])->scalarPrototype()->end()->end()
                                 ->scalarNode('template')->defaultValue('@SfsUser/resetting/success.html.twig')->end()
-                            ->end()
-                        ->end()
-                    ->end()
-                ->end()
-
-                ->arrayNode('change_password')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->scalarNode('form')->defaultValue(ChangePasswordForm::class)->end()
-                        ->arrayNode('validation_groups')->treatNullLike(['ChangePassword', 'Default'])->scalarPrototype()->end()->end()
-                        ->scalarNode('template')->defaultValue('@SfsUser/change_password/change_password.html.twig')->end()
-                        ->arrayNode('success')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('route')->defaultValue('sfs_user_change_password_success')->end()
-                                ->arrayNode('route_params')->treatNullLike([])->scalarPrototype()->end()->end()
-                                ->scalarNode('template')->defaultValue('@SfsUser/change_password/success.html.twig')->end()
                             ->end()
                         ->end()
                     ->end()

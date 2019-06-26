@@ -5,7 +5,6 @@ services:
         public: false
         bind:
             $changeEmailConfig: []
-            $changePasswordConfig: []
             $changeUsernameConfig: []
             $firewallMap: '@security.firewall.map'
 

@@ -51,6 +51,18 @@ preferences:
     actions:
         submit:
             button: "Guardar cambios"
+    form:
+        name.label: "Nombre"
+        surname.label: "Apellidos"
+
+change_password:
+    form:
+        currentPassword.label: "Contraseña actual"
+        newPassword:
+            password.label: "Nueva contraseña"
+            confirmation.label: "Repite la nueva contraseña"
+    actions:
+        submit.button: "Cambiar contraseña"
 
 admin_users:
     list:

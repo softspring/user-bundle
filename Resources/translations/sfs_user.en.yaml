@@ -51,6 +51,9 @@ preferences:
     actions:
         submit:
             button: "Save changes"
+    form:
+        name.label: "Name"
+        surname.label: "Surname"
 
 admin_users:
     list:
