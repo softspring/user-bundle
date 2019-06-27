@@ -1,0 +1,10 @@
+<div class="border-danger position-absolute text-center" style="top: 0;border-top: 5px solid;width: 100%;left: 0;z-index: 1000000;">
+    <div class="bg-danger text-small text-white p-2" style="height: 35px;width: auto;display: inline-block;">
+
+        <span class="pr-1">Admin authenticated as: {{ app.user.username }}</span>
+
+        <a class="close float-right" href="{{ url(exit_route, exit_route_params) }}">
+            <span aria-hidden="true">×</span>
+        </a>
+    </div>
+</div>

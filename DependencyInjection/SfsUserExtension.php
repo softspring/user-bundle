@@ -25,6 +25,7 @@ class SfsUserExtension extends Extension implements PrependExtensionInterface
         $container->setParameter('sfs_user.user.class', $config['class']);
         $container->setParameter('sfs_user.invite.class', $config['invite']['class']);
 
+        $container->setParameter('sfs_user.impersonate_bar', $config['impersonate_bar']);
 
         $container->setParameter('sfs_user.history.enabled', $config['history']['enabled']);
         if ($config['history']['enabled']) {

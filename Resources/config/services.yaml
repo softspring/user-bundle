@@ -7,6 +7,7 @@ services:
             $changeEmailConfig: []
             $changeUsernameConfig: []
             $firewallMap: '@security.firewall.map'
+            $impersonateBarConfig: '%sfs_user.impersonate_bar%'
 
     Softspring\UserBundle\Command\:
         resource: '../../Command/*'
@@ -16,6 +17,7 @@ services:
         public: true
 
     Softspring\UserBundle\EventListener\AutoAuthenticateEventSubscriber: ~
+    Softspring\UserBundle\EventListener\ImpersonateBarListener: ~
     Softspring\UserBundle\EventListener\EmailInvitationListener: ~
     Softspring\UserBundle\EventListener\LastLoginEventSubscriber: ~
 

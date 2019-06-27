@@ -119,6 +119,18 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+
+                ->arrayNode('impersonate_bar')
+                    ->canBeEnabled()
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->booleanNode('enabled')->defaultTrue()->end()
+                        ->scalarNode('switch_role')->defaultValue('ROLE_ALLOWED_TO_SWITCH')->end()
+                        ->scalarNode('switch_route')->defaultValue('configure_switch_route')->end()
+                        ->arrayNode('switch_route_params')->treatNullLike([])->scalarPrototype()->end()->end()
+                        ->scalarNode('switch_parameter')->defaultValue('_switch_user')->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 

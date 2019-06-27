@@ -24,15 +24,21 @@ class UsersController extends AbstractController
     protected $eventDispatcher;
 
     /**
-     * UsersController constructor.
-     *
-     * @param UserManagerInterface     $userManager
-     * @param EventDispatcherInterface $eventDispatcher
+     * @var array
      */
-    public function __construct(UserManagerInterface $userManager, EventDispatcherInterface $eventDispatcher)
+    protected $impersonateBarConfig;
+
+    /**
+     * UsersController constructor.
+     * @param UserManagerInterface $userManager
+     * @param EventDispatcherInterface $eventDispatcher
+     * @param array $impersonateBarConfig
+     */
+    public function __construct(UserManagerInterface $userManager, EventDispatcherInterface $eventDispatcher, array $impersonateBarConfig)
     {
         $this->userManager = $userManager;
         $this->eventDispatcher = $eventDispatcher;
+        $this->impersonateBarConfig = $impersonateBarConfig;
     }
 
     /**
@@ -48,6 +54,10 @@ class UsersController extends AbstractController
 
         return $this->render('@SfsUser/admin/users/list.html.twig', [
             'users' => $users,
+            'switch_role' => $this->impersonateBarConfig['switch_role'],
+            'switch_route' => $this->impersonateBarConfig['switch_route'],
+            'switch_route_params' => $this->impersonateBarConfig['switch_route_params'],
+            'switch_parameter' => $this->impersonateBarConfig['switch_parameter'],
         ]);
     }
 
