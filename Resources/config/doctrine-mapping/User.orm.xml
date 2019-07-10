@@ -5,10 +5,6 @@
                       https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Softspring\User\Model\User" table="user">
-        <id name="id" type="guid" column="id">
-            <generator strategy="UUID"/>
-        </id>
-
         <field name="username" column="username" type="string" nullable="false" length="180" unique="true" />
         <field name="email" column="email" type="string" nullable="false" length="180" unique="true" />
 
