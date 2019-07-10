@@ -50,6 +50,6 @@ class ResolveDoctrineTargetEntityPass implements CompilerPassInterface
             $resolveTargetEntityListener->addTag('doctrine.event_subscriber');
         }
 
-        $resolveTargetEntityListener->addMethodCall('addResolveTargetEntity', [$interface, $class, []]);
+        $resolveTargetEntityListener->addMethodCall('addResolveTargetEntity', [$interface, $class, [$container->getParameter('sfs_user.entity_manager_name')]]);
     }
 }

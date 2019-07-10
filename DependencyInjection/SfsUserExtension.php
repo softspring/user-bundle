@@ -22,6 +22,8 @@ class SfsUserExtension extends Extension implements PrependExtensionInterface
         $config = $processor->processConfiguration($configuration, $configs);
 
         // set config parameters
+        $container->setParameter('sfs_user.entity_manager_name', $config['entity_manager']);
+
         $container->setParameter('sfs_user.user.class', $config['class']);
         $container->setParameter('sfs_user.invite.class', $config['invite']['class']);
 

@@ -21,6 +21,10 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('App\Entity\User')
                 ->end()
 
+                ->scalarNode('entity_manager')
+                    ->defaultValue('default')
+                ->end()
+
                 ->arrayNode('invite')
                     ->addDefaultsIfNotSet()
                     ->children()

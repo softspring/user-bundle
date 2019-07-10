@@ -8,6 +8,7 @@ services:
             $changeUsernameConfig: []
             $firewallMap: '@security.firewall.map'
             $impersonateBarConfig: '%sfs_user.impersonate_bar%'
+            $em: '@sfs_user.entity_manager'
 
     Softspring\UserBundle\Command\:
         resource: '../../Command/*'

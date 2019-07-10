@@ -3,6 +3,7 @@
 namespace Softspring\UserBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
+use Softspring\UserBundle\DependencyInjection\Compiler\AliasDoctrineEntityManagerPass;
 use Softspring\UserBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntityPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -20,6 +21,7 @@ class SfsUserBundle extends Bundle
 
         $this->addRegisterMappingsPass($container, [$basePath => 'Softspring\User\Model']);
 
+        $container->addCompilerPass(new AliasDoctrineEntityManagerPass());
         $container->addCompilerPass(new ResolveDoctrineTargetEntityPass());
     }
 
