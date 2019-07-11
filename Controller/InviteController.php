@@ -16,8 +16,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class InviteController extends AbstractController
 {
-    use Traits\DispatchTrait;
-
     /**
      * @var UserManagerInterface
      */

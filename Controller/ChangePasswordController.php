@@ -15,8 +15,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ChangePasswordController extends AbstractController
 {
-    use Traits\DispatchTrait;
-
     /**
      * @var UserManagerInterface
      */

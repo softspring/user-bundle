@@ -15,8 +15,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class PreferencesController extends AbstractController
 {
-    use Traits\DispatchTrait;
-
     /**
      * @var UserManagerInterface
      */

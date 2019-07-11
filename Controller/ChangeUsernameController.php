@@ -14,8 +14,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ChangeUsernameController extends AbstractController
 {
-    use Traits\DispatchTrait;
-
     /**
      * @var UserManagerInterface
      */

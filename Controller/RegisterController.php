@@ -14,8 +14,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RegisterController extends AbstractController
 {
-    use Traits\DispatchTrait;
-
     /**
      * @var UserManagerInterface
      */

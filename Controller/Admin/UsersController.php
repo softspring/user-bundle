@@ -3,7 +3,6 @@
 namespace Softspring\UserBundle\Controller\Admin;
 
 use Softspring\ExtraBundle\Controller\AbstractController;
-use Softspring\UserBundle\Controller\Traits\DispatchTrait;
 use Softspring\User\Manager\UserManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,8 +10,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UsersController extends AbstractController
 {
-    use DispatchTrait;
-
     /**
      * @var UserManagerInterface
      */

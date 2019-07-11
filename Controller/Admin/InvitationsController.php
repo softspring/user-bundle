@@ -3,7 +3,6 @@
 namespace Softspring\UserBundle\Controller\Admin;
 
 use Softspring\ExtraBundle\Controller\AbstractController;
-use Softspring\UserBundle\Controller\Traits\DispatchTrait;
 use Softspring\UserBundle\Event\UserInvitationEvent;
 use Softspring\UserBundle\Form\Admin\InvitationFormInterface;
 use Softspring\User\Manager\UserInvitationManagerInterface;
@@ -15,8 +14,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class InvitationsController extends AbstractController
 {
-    use DispatchTrait;
-
     /**
      * @var UserInvitationManagerInterface
      */

@@ -14,8 +14,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ChangeEmailController extends AbstractController
 {
-    use Traits\DispatchTrait;
-
     /**
      * @var UserManagerInterface
      */

@@ -15,8 +15,6 @@ use Symfony\Component\Security\Core\Security;
 
 class LoginController extends AbstractController
 {
-    use Traits\DispatchTrait;
-
     /**
      * @var EventDispatcherInterface
      */
