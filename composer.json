@@ -4,8 +4,9 @@
     "type": "symfony-bundle",
     "license": "MIT",
     "require": {
+        "softspring/extra-bundle": "^1.1",
         "softspring/mailer-bundle": "*",
-        "softspring/user": "*",
+        "softspring/user": "^1.0",
         "symfony/config": "^4.2",
         "symfony/console": "^4.2",
         "symfony/event-dispatcher": "^4.2",

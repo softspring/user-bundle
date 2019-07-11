@@ -2,9 +2,9 @@
 
 namespace Softspring\UserBundle\Controller\Admin;
 
+use Softspring\ExtraBundle\Controller\AbstractController;
 use Softspring\UserBundle\Controller\Traits\DispatchTrait;
 use Softspring\User\Manager\UserManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

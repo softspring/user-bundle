@@ -2,13 +2,13 @@
 
 namespace Softspring\UserBundle\Controller\Admin;
 
+use Softspring\ExtraBundle\Controller\AbstractController;
 use Softspring\UserBundle\Controller\Traits\DispatchTrait;
 use Softspring\UserBundle\Event\UserInvitationEvent;
 use Softspring\UserBundle\Form\Admin\InvitationFormInterface;
 use Softspring\User\Manager\UserInvitationManagerInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Softspring\User\Util\TokenGeneratorInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

@@ -2,10 +2,10 @@
 
 namespace Softspring\UserBundle\Controller;
 
+use Softspring\ExtraBundle\Controller\AbstractController;
 use Softspring\UserBundle\Event\GetResponseFormEvent;
 use Softspring\UserBundle\Form\LoginFormInterface;
 use Softspring\UserBundle\SfsUserEvents;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
