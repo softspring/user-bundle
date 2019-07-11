@@ -123,4 +123,34 @@ class SfsUserEvents
      * @Event("Softspring\UserBundle\Event\GetResponseFormEvent")
      */
     const CHANGE_USERNAME_FORM_INVALID = 'sfs_user.change_username.form_invalid';
+
+    /**
+     * @Event("Softspring\UserBundle\Event\GetResponseEvent")
+     */
+    const RESET_REQUEST_INITIALIZE = 'sfs_user.reset_request.initialize';
+
+    /**
+     * @Event("Softspring\UserBundle\Event\GetResponseFormEvent")
+     */
+    const RESET_REQUEST_FORM_VALID = 'sfs_user.reset_request.form_valid';
+
+    /**
+     * @Event("Softspring\UserBundle\Event\GetResponseFormEvent")
+     */
+    const RESET_REQUEST_DO_REQUEST = 'sfs_user.reset_request.do_request';
+
+    /**
+     * @Event("Softspring\UserBundle\Event\GetResponseFormEvent")
+     */
+    const RESET_REQUEST_FORM_INVALID = 'sfs_user.reset_request.form_invalid';
+
+    /**
+     * @Event("Softspring\UserBundle\Event\ViewEvent")
+     */
+    const RESET_REQUEST_VIEW = 'sfs_user.reset_request.view';
+
+    /**
+     * @Event("Softspring\UserBundle\Event\ViewEvent")
+     */
+    const RESET_REQUESTED_VIEW = 'sfs_user.reset_done.view';
 }

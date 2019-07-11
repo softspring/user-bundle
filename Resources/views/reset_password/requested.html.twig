@@ -1,0 +1,6 @@
+{% trans_default_domain 'sfs_user' %}
+{% extends '@SfsUser/layout_fullscreen.html.twig' %}
+
+{% block content %}
+    <p>{{ 'reset_password.requested.message'|trans({'%tokenTTLhours%': (resetTokenTTL/3600)|round, '%requestedEmail%':requestedEmail})|nl2br }}</p>
+{% endblock content %}

@@ -16,6 +16,20 @@ register:
     actions:
         register.button: "Register"
 
+reset_password:
+    request:
+        form:
+            email.label: "Email"
+        actions:
+            reset.button: "Reset"
+    requested:
+        message: |
+            If %requestedEmail% email matches with a registered user, we'll send you an email containing a link that you must click to perform your password resetting.
+
+            This link is only valid on the next %tokenTTLhours% hours.
+
+            If you don't receive the email, please, check your spam folder or try to request the resseting again.
+
 invitation:
     accept:
         form:
@@ -54,6 +68,15 @@ preferences:
     form:
         name.label: "Name"
         surname.label: "Surname"
+
+change_password:
+    form:
+        currentPassword.label: "Current password"
+        newPassword:
+            password.label: "New password"
+            confirmation.label: "Repeat new password"
+    actions:
+        submit.button: "Change password"
 
 admin_users:
     list:

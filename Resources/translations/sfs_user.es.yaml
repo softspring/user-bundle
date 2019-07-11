@@ -16,6 +16,20 @@ register:
     actions:
         register.button: "Registrar"
 
+reset_password:
+    request:
+        form:
+            email.label: "Email"
+        actions:
+            reset.button: "Enviar"
+    requested:
+        message: |
+            Si la dirección %requestedEmail% corresponde a un usuario registrado, te enviaremos un enlace que debes seguir para finalizar con el reestablecimiento de tu contraseña.
+
+            El enlace solicitado es válido durante las próximas %tokenTTLhours% horas.
+
+            Si no recibes el correo, por favor, revisa tu carpeta de spam o vuelve a solicitar el reestablecimiento.
+
 invitation:
     accept:
         form:
