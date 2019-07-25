@@ -30,9 +30,7 @@ class SfsUserExtension extends Extension implements PrependExtensionInterface
         $container->setParameter('sfs_user.impersonate_bar', $config['impersonate_bar']);
 
         $container->setParameter('sfs_user.history.enabled', $config['history']['enabled']);
-        if ($config['history']['enabled']) {
-            $container->setParameter('sfs_user.history.class', $config['history']['class']);
-        }
+        $container->setParameter('sfs_user.history.class', $config['history']['enabled'] ? $config['history']['class'] : null);
 
         $container->setParameter('sfs_user.reset_password.token_ttl', $config['reset_password']['token_ttl']);
 
