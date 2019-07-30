@@ -50,6 +50,6 @@ class AutoAuthenticateEventSubscriber implements EventSubscriberInterface
 
         $this->loginManager->loginUser($event->getRequest(), $event->getUser(), $event->getResponse());
 
-        $eventDispatcher->dispatch(SfsUserEvents::LOGIN_IMPLICIT, new UserEvent($event->getUser(), $event->getRequest()));
+        $eventDispatcher->dispatch(new UserEvent($event->getUser(), $event->getRequest()), SfsUserEvents::LOGIN_IMPLICIT);
     }
 }
