@@ -2,6 +2,7 @@
 
 namespace Softspring\UserBundle\Controller\Admin;
 
+use Softspring\Account\Model\UserMultiAccountedInterface;
 use Softspring\ExtraBundle\Controller\AbstractController;
 use Softspring\User\Manager\UserManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -51,10 +52,11 @@ class UsersController extends AbstractController
 
         return $this->render('@SfsUser/admin/users/list.html.twig', [
             'users' => $users,
-            'switch_role' => $this->impersonateBarConfig['switch_role'],
-            'switch_route' => $this->impersonateBarConfig['switch_route'],
-            'switch_route_params' => $this->impersonateBarConfig['switch_route_params'],
-            'switch_parameter' => $this->impersonateBarConfig['switch_parameter'],
+            'switch_enabled' => $this->impersonateBarConfig['enabled'] ?? false,
+            'switch_role' => $this->impersonateBarConfig['switch_role'] ?? null,
+            'switch_route' => $this->impersonateBarConfig['switch_route'] ?? null,
+            'switch_route_params' => $this->impersonateBarConfig['switch_route_params'] ?? null,
+            'switch_parameter' => $this->impersonateBarConfig['switch_parameter'] ?? null,
         ]);
     }
 
@@ -74,6 +76,7 @@ class UsersController extends AbstractController
 
         return $this->render('@SfsUser/admin/users/details.html.twig', [
             'user' => $user,
+            'multi_accounted_user' => $user instanceof UserMultiAccountedInterface,
         ]);
     }
 

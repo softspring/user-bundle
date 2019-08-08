@@ -27,7 +27,7 @@
                 <td>
                     <a href="{{ url('sfs_user_admin_users_details', {'user': user}) }}">{{ 'admin_users.list.actions.details.link'|trans }}</a>
 
-                    {% if is_granted(switch_role) %}
+                    {% if switch_enabled and is_granted(switch_role) %}
                         <a href="{{ url(switch_route, switch_route_params) }}{{ switch_route_params|length ? '&' : '?' }}{{ switch_parameter }}={{ user.username }}">view as {{ user.username }}</a>
                     {% endif %}
                 </td>

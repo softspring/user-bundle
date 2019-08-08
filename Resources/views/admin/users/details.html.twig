@@ -20,17 +20,31 @@
     <p><strong>role:</strong> {{ user.roles|join(', ') }}</p>
 
     <div class="row">
-        <div class="col-4">
+        {% if multi_accounted_user %}
+        <div class="col">
             <div class="card">
                 <div class="card-header">
                     <h4>Accounts</h4>
                 </div>
                 <div class="card-body">
-                    <p><i>TODO</i></p>
+                    {% if user.relations.count %}
+                    <ul>
+                        {% for relation in user.relations %}
+                            <li>
+                                {{ relation.account.name }}
+                                (granted by {{ relation.grantedBy.username }})
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                        <p><em>This user is not associated to any account</em></p>
+                    {% endif %}
                 </div>
             </div>
         </div>
-        <div class="col-4">
+        {% endif %}
+
+        <div class="col">
             <div class="card">
                 <div class="card-header">
                     <h4>Latest access</h4>
@@ -40,7 +54,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col">
             <div class="card">
                 <div class="card-header">
                     <h4>Emails sent</h4>
