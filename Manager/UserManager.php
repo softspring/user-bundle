@@ -73,6 +73,15 @@ class UserManager implements UserManagerInterface
     }
 
     /**
+     * @inheritDoc
+     */
+    public function delete(UserInterface $user): void
+    {
+        $this->em->remove($user);
+        $this->em->flush();
+    }
+
+    /**
      * @inheritdoc
      */
     public function findUserBy(array $criteria): ?UserInterface
