@@ -2,6 +2,7 @@ login:
     form:
         _username.label: "Username"
         _password.label: "Password"
+        _remember_me.label: "Remember me"
     actions:
         login.button: "Login"
 

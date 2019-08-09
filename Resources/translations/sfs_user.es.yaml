@@ -2,6 +2,7 @@ login:
     form:
         _username.label: "Usuario"
         _password.label: "Contraseña"
+        _remember_me.label: "Recordarme en este equipo"
     actions:
         login.button: "Entrar"
 
