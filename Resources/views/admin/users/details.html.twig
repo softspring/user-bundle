@@ -9,7 +9,7 @@
         <a href="#" class="btn btn-outline-secondary disabled">Edit</a>
         <a href="#" class="btn btn-outline-secondary disabled">Reset password</a>
         <a href="#" class="btn btn-outline-secondary disabled">Manual password</a>
-        <a href="#" class="btn btn-outline-secondary disabled">Delete</a>
+        <a href="{{ url('sfs_user_admin_users_delete', {'user':user}) }}" class="btn btn-outline-secondary">Delete</a>
     </div>
 
     <p><strong>name:</strong> {{ user.name }}</p>

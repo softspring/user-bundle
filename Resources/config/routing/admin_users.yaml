@@ -9,3 +9,7 @@ sfs_user_admin_users_details:
 sfs_user_admin_users_promote_admin:
     controller: Softspring\UserBundle\Controller\Admin\UsersController::promoteAdmin
     path: /{user}/promote-admin
+
+sfs_user_admin_users_delete:
+    controller: Softspring\UserBundle\Controller\Admin\UsersController::delete
+    path: /{user}/delete

@@ -90,6 +90,13 @@ admin_users:
         actions:
             details:
                 link: "details"
+    delete:
+        confirm_message: "Are you sure to delete this user?"
+        actions:
+            delete.button: "Delete"
+            cancel: "Cancel"
+        form:
+            deleteOwnedAccounts.label: "Delete owned accounts?"
 
 admin_administrators:
     list:

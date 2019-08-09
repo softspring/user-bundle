@@ -90,6 +90,13 @@ admin_users:
         actions:
             details:
                 link: "detalles"
+    delete:
+        confirm_message: "¿Confirmas que deseas eliminar este usuario?"
+        actions:
+            delete.button: "Eliminar"
+            cancel: "Cancelar"
+        form:
+            deleteOwnedAccounts.label: "¿Eliminar las cuentas asociadas de las que es propietario/a?"
 
 admin_administrators:
     list:

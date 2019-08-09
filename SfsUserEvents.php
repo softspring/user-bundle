@@ -153,4 +153,29 @@ class SfsUserEvents
      * @Event("Softspring\UserBundle\Event\ViewEvent")
      */
     const RESET_REQUESTED_VIEW = 'sfs_user.reset_done.view';
+
+    /**
+     * @Event("Softspring\UserBundle\Event\GetResponseUserEvent")
+     */
+    const ADMIN_USERS_DELETE_INITIALIZE = 'sfs_user.admin.users.delete_initialize';
+
+    /**
+     * @Event("Softspring\UserBundle\Event\GetResponseFormEvent")
+     */
+    const ADMIN_USERS_DELETE_FORM_VALID = 'sfs_user.admin.users.delete_form_valid';
+
+    /**
+     * @Event("Softspring\UserBundle\Event\GetResponseUserEvent")
+     */
+    const ADMIN_USERS_DELETE_SUCCESS = 'sfs_user.admin.users.delete_success';
+
+    /**
+     * @Event("Softspring\UserBundle\Event\GetResponseFormEvent")
+     */
+    const ADMIN_USERS_DELETE_FORM_INVALID = 'sfs_user.admin.users.delete_form_invalid';
+
+    /**
+     * @Event("Softspring\AdminBundle\Event\ViewEvent")
+     */
+    const ADMIN_USERS_DELETE_VIEW = 'sfs_user.admin.users.delete_view';
 }
