@@ -32,7 +32,9 @@
                         {% for relation in user.relations %}
                             <li>
                                 {{ relation.account.name }}
-                                (granted by {{ relation.grantedBy.username }})
+                                {% if relation.grantedBy != relation.user %}
+                                    (granted by {{ relation.grantedBy.username }})
+                                {% endif %}
                             </li>
                         {% endfor %}
                     </ul>
