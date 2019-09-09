@@ -66,7 +66,7 @@ class UserManipulator
         $this->userManager->save($user);
 
         $event = new UserEvent($user, $this->requestStack->getCurrentRequest());
-        $this->eventDispatcher->dispatch(SfsUserEvents::USER_CREATED, $event);
+        $this->eventDispatcher->dispatch($event, SfsUserEvents::USER_CREATED);
 
         return $user;
     }
