@@ -55,6 +55,11 @@ class SfsUserEvents
     const INVITATION_FORM_INVALID = 'sfs_user.invitation.form_valid' ;
 
     /**
+     * @Event("Softspring\UserBundle\Event\GetResponseUserEvent")
+     */
+    const CONFIRMATION_SUCCESS = 'sfs_user.confirmation.success';
+
+    /**
      * @Event("Softspring\UserBundle\Event\UserEvent")
      */
     const LOGIN_IMPLICIT = 'sfs_user.login.implicit' ;
