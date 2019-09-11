@@ -2,7 +2,7 @@
 
 namespace Softspring\UserBundle\Controller\Admin;
 
-use Softspring\Account\Model\UserMultiAccountedInterface;
+use Softspring\AccountBundle\Model\UserMultiAccountedInterface;
 use Softspring\AdminBundle\Event\ViewEvent;
 use Softspring\ExtraBundle\Controller\AbstractController;
 use Softspring\UserBundle\Manager\UserManagerInterface;
