@@ -5,7 +5,9 @@
     "license": "MIT",
     "require": {
         "softspring/extra-bundle": "^1.1",
-        "softspring/mailer-bundle": "*",
+        "softspring/mailer-bundle": "*"
+    },
+    "require-dev": {
         "symfony/config": "^4.2",
         "symfony/console": "^4.2",
         "symfony/event-dispatcher": "^4.2",
@@ -15,6 +17,9 @@
         "symfony/security-bundle": "^4.2",
         "symfony/validator": "^4.2",
         "symfony/yaml": "^4.2"
+    },
+    "suggest": {
+        "softspring/admin-bundle": "Use softspring admin templates"
     },
     "autoload": {
         "psr-4": {
