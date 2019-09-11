@@ -2,18 +2,18 @@
 
 {% block subject %}
 {%- autoescape false -%}
-{{ 'invite.accept.email.subject'|trans({'%username%': user.username}) }}
+{{ 'invite.accept.email.subject'|trans({'%username%': user_username, '%name%': user_name, '%surname%': user_surname, '%email%': user_email}) }}
 {%- endautoescape -%}
 {% endblock %}
 
 {% block text %}
 {% autoescape false %}
-{{ 'invite.accept.email.message'|trans({'%username%': user.username, '%acceptUrl%': acceptUrl}) }}
+{{ 'invite.accept.email.message'|trans({'%username%': user_username, '%name%': user_name, '%surname%': user_surname, '%email%': user_email, '%acceptUrl%': acceptUrl}) }}
 {% endautoescape %}
 {% endblock %}
 
 {% block html %}
 {% autoescape false %}
-{{ 'invite.accept.email.html'|trans({'%username%': user.username, '%acceptUrl%': acceptUrl}) }}
+{{ 'invite.accept.email.html'|trans({'%username%': user_username, '%name%': user_name, '%surname%': user_surname, '%email%': user_email, '%acceptUrl%': acceptUrl}) }}
 {% endautoescape %}
 {% endblock %}

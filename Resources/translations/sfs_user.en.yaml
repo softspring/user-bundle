@@ -47,9 +47,9 @@ invitation:
 invite:
     accept:
         email:
-            subject: "Welcome!"
+            subject: "Welcome %name%!"
             message: |
-                Welcome %username%:
+                Welcome %name%:
 
                 You have been invited to join our app.
 
@@ -57,7 +57,7 @@ invite:
 
                 Regards.
             html: |
-                <p>Welcome %username%:</p>
+                <p>Welcome %name%:</p>
                 <p>You have been invited to join our app.</p>
                 <p><a href="%acceptUrl%">Click here</a> to accept the invitation.</p>
                 <p>Regards.</p>

@@ -10,6 +10,7 @@ services:
             $impersonateBarConfig: '%sfs_user.impersonate_bar%'
             $em: '@sfs_user.entity_manager'
             $resetTokenTTL: '%sfs_user.reset_password.token_ttl%'
+            $inviteClass: '%sfs_user.invite.class%'
 
     Softspring\UserBundle\Command\:
         resource: '../../Command/*'

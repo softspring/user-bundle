@@ -53,7 +53,10 @@ class MailerTemplate implements MailerInterface
         $acceptUrl = $this->urlGenerator->generate('sfs_user_invite_accept', array('token' => $invitation->getInvitationToken()), UrlGeneratorInterface::ABSOLUTE_URL);
 
         $this->templateMailer->send('sfs_user.invite', 'es', [
-            'user' => $invitation,
+            'user_name' => $invitation->getName(),
+            'user_surname' => $invitation->getSurname(),
+            'user_username' => $invitation->getUsername(),
+            'user_email' => $invitation->getEmail(),
             'acceptUrl' => $acceptUrl,
         ], $invitation->getEmail(), $toName);
     }
