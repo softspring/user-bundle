@@ -4,7 +4,7 @@ namespace Softspring\UserBundle\EventListener;
 
 use Softspring\UserBundle\Event\UserEvent;
 use Softspring\UserBundle\Manipulator\UserAccessManipulator;
-use Softspring\User\Model\UserInterface;
+use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;

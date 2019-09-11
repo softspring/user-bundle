@@ -19,7 +19,7 @@ class SfsUserBundle extends Bundle
 
         $basePath = realpath(__DIR__.'/Resources/config/doctrine-mapping/');
 
-        $this->addRegisterMappingsPass($container, [$basePath => 'Softspring\User\Model']);
+        $this->addRegisterMappingsPass($container, [$basePath => 'Softspring\UserBundle\Model']);
 
         $container->addCompilerPass(new AliasDoctrineEntityManagerPass());
         $container->addCompilerPass(new ResolveDoctrineTargetEntityPass());

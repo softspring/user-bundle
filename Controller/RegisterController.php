@@ -6,7 +6,7 @@ use Softspring\ExtraBundle\Controller\AbstractController;
 use Softspring\UserBundle\Event\GetResponseFormEvent;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Form\RegisterFormInterface;
-use Softspring\User\Manager\UserManagerInterface;
+use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;

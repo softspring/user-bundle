@@ -2,9 +2,9 @@
 
 namespace Softspring\UserBundle\DependencyInjection\Compiler;
 
-use Softspring\User\Model\UserAccessInterface;
-use Softspring\User\Model\UserInterface;
-use Softspring\User\Model\UserInvitationInterface;
+use Softspring\UserBundle\Model\UserAccessInterface;
+use Softspring\UserBundle\Model\UserInterface;
+use Softspring\UserBundle\Model\UserInvitationInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Exception\LogicException;

@@ -3,7 +3,7 @@
 namespace Softspring\UserBundle\EventListener;
 
 use Softspring\UserBundle\Event\UserInvitationEvent;
-use Softspring\User\Mailer\MailerInterface;
+use Softspring\UserBundle\Mailer\MailerInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 

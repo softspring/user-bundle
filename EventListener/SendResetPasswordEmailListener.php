@@ -2,9 +2,9 @@
 
 namespace Softspring\UserBundle\EventListener;
 
-use Softspring\User\Mailer\MailerInterface;
-use Softspring\User\Manager\UserManagerInterface;
-use Softspring\User\Model\UserInterface;
+use Softspring\UserBundle\Mailer\MailerInterface;
+use Softspring\UserBundle\Manager\UserManagerInterface;
+use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Event\GetResponseFormEvent;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

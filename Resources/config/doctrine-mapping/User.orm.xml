@@ -4,7 +4,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                       https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Softspring\User\Model\User" table="user">
+    <mapped-superclass name="Softspring\UserBundle\Model\User" table="user">
         <field name="username" column="username" type="string" nullable="false" length="180" unique="true" />
         <field name="email" column="email" type="string" nullable="false" length="180" unique="true" />
 

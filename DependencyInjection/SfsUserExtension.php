@@ -2,7 +2,7 @@
 
 namespace Softspring\UserBundle\DependencyInjection;
 
-use Softspring\User\Model\UserInterface;
+use Softspring\UserBundle\Model\UserInterface;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

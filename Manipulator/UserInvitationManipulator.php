@@ -3,10 +3,10 @@
 namespace Softspring\UserBundle\Manipulator;
 
 use Softspring\UserBundle\Event\UserInvitationEvent;
-use Softspring\User\Manager\UserInvitationManagerInterface;
-use Softspring\User\Model\UserInvitationInterface;
+use Softspring\UserBundle\Manager\UserInvitationManagerInterface;
+use Softspring\UserBundle\Model\UserInvitationInterface;
 use Softspring\UserBundle\SfsUserEvents;
-use Softspring\User\Util\TokenGeneratorInterface;
+use Softspring\UserBundle\Util\TokenGeneratorInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 

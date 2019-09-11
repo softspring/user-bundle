@@ -3,8 +3,8 @@
 namespace Softspring\UserBundle\Manipulator;
 
 use Softspring\UserBundle\Event\UserEvent;
-use Softspring\User\Manager\UserManagerInterface;
-use Softspring\User\Model\UserInterface;
+use Softspring\UserBundle\Manager\UserManagerInterface;
+use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RequestStack;

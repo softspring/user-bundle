@@ -28,16 +28,16 @@ services:
     Softspring\UserBundle\Form\:
         resource: '../../Form/*'
 
-    Softspring\User\Mailer\MailerInterface:
+    Softspring\UserBundle\Mailer\MailerInterface:
         class: Softspring\UserBundle\Mailer\MailerTemplate
 
-    Softspring\User\Manager\UserAccessManagerInterface:
+    Softspring\UserBundle\Manager\UserAccessManagerInterface:
         class: Softspring\UserBundle\Manager\UserAccessManager
 
-    Softspring\User\Manager\UserInvitationManagerInterface:
+    Softspring\UserBundle\Manager\UserInvitationManagerInterface:
         class: Softspring\UserBundle\Manager\UserInvitationManager
 
-    Softspring\User\Manager\UserManagerInterface:
+    Softspring\UserBundle\Manager\UserManagerInterface:
         class: Softspring\UserBundle\Manager\UserManager
 
     Softspring\UserBundle\Manipulator\UserInvitationManipulator: ~
@@ -49,7 +49,7 @@ services:
     Softspring\UserBundle\Security\:
         resource: '../../Security/*'
 
-    Softspring\User\Util\:
+    Softspring\UserBundle\Util\:
         resource: '../../../user/Util/*'
 
     # tags

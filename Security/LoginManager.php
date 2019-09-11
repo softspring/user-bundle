@@ -2,7 +2,7 @@
 
 namespace Softspring\UserBundle\Security;
 
-use Softspring\User\Model\UserInterface;
+use Softspring\UserBundle\Model\UserInterface;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;

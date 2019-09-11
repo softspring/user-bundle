@@ -2,7 +2,7 @@
 
 namespace Softspring\UserBundle\Form;
 
-use Softspring\User\Model\UserInterface;
+use Softspring\UserBundle\Model\UserInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;

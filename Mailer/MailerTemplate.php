@@ -3,9 +3,9 @@
 namespace Softspring\UserBundle\Mailer;
 
 use Softspring\MailerBundle\Mailer\TemplateMailer;
-use Softspring\User\Mailer\MailerInterface;
-use Softspring\User\Model\UserInterface;
-use Softspring\User\Model\UserInvitationInterface;
+use Softspring\UserBundle\Mailer\MailerInterface;
+use Softspring\UserBundle\Model\UserInterface;
+use Softspring\UserBundle\Model\UserInvitationInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class MailerTemplate implements MailerInterface

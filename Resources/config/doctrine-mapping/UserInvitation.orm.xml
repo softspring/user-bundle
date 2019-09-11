@@ -4,7 +4,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                       https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Softspring\User\Model\UserInvitation" table="user_invitation">
+    <mapped-superclass name="Softspring\UserBundle\Model\UserInvitation" table="user_invitation">
         <field name="username" column="username" type="string" nullable="false" length="180" />
         <field name="email" column="email" type="string" nullable="false" length="180" />
 
@@ -39,11 +39,11 @@
             </options>
         </field>
 
-        <many-to-one field="inviter" target-entity="Softspring\User\Model\UserInterface">
+        <many-to-one field="inviter" target-entity="Softspring\UserBundle\Model\UserInterface">
             <join-column name="inviter_id" referenced-column-name="id" on-delete="SET NULL" />
         </many-to-one>
 
-        <many-to-one field="user" target-entity="Softspring\User\Model\UserInterface">
+        <many-to-one field="user" target-entity="Softspring\UserBundle\Model\UserInterface">
             <join-column name="user_id" referenced-column-name="id" on-delete="SET NULL" />
         </many-to-one>
     </mapped-superclass>
