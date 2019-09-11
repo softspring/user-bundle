@@ -5,16 +5,13 @@
     "license": "MIT",
     "require": {
         "softspring/extra-bundle": "^1.1",
-        "softspring/mailer-bundle": "^2.0@dev"
-    },
-    "require-dev": {
+        "softspring/mailer-bundle": "^2.0@dev",
         "symfony/config": "^4.2",
         "symfony/console": "^4.2",
         "symfony/event-dispatcher": "^4.2",
         "symfony/form": "^4.2",
         "symfony/framework-bundle": "^4.2",
         "symfony/http-foundation": "^4.2",
-        "symfony/security-bundle": "^4.2",
         "symfony/validator": "^4.2",
         "symfony/yaml": "^4.2"
     },

@@ -50,7 +50,7 @@ services:
         resource: '../../Security/*'
 
     Softspring\UserBundle\Util\:
-        resource: '../../../user/Util/*'
+        resource: '../../Util/*'
 
     # tags
     Softspring\UserBundle\Mailer\Loader\MailTemplateLoader:
