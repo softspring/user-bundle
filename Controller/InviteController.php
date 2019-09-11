@@ -82,7 +82,7 @@ class InviteController extends AbstractController
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 $event = new FormEvent($form, $request);
-                $this->eventDispatcher->dispatch(SfsUserEvents::INVITATION_FORM_VALID, $event);
+                $this->eventDispatcher->dispatch($event, SfsUserEvents::INVITATION_FORM_VALID);
 
                 $invitation->setUser($user);
                 $invitation->setAcceptedAt(new \DateTime('now'));

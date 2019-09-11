@@ -97,7 +97,7 @@ class InvitationsController extends AbstractController
                 $invitation->setInvitationToken($this->tokenGenerator->generateToken());
                 $this->invitationManager->save($invitation);
 
-                $this->eventDispatcher->dispatch(SfsUserEvents::USER_INVITED, new UserInvitationEvent($invitation, $request));
+                $this->eventDispatcher->dispatch(new UserInvitationEvent($invitation, $request), SfsUserEvents::USER_INVITED);
 
                 return $this->redirectToRoute('sfs_user_admin_invitations_list');
             }
