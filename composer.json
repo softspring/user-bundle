@@ -5,7 +5,7 @@
     "license": "MIT",
     "require": {
         "softspring/extra-bundle": "^1.1",
-        "softspring/mailer-bundle": "*"
+        "softspring/mailer-bundle": "^2.0@dev"
     },
     "require-dev": {
         "symfony/config": "^4.2",
