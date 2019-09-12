@@ -5,6 +5,8 @@ namespace Softspring\UserBundle\Mailer\Loader;
 use Softspring\MailerBundle\Loader\TemplateLoaderInterface;
 use Softspring\MailerBundle\Model\Template;
 use Softspring\MailerBundle\Model\TemplateCollection;
+use Softspring\UserBundle\Manager\UserManagerInterface;
+use Softspring\UserBundle\Model\ConfirmableInterface;
 
 class MailTemplateLoader implements TemplateLoaderInterface
 {
@@ -14,12 +16,20 @@ class MailTemplateLoader implements TemplateLoaderInterface
     protected $inviteClass;
 
     /**
-     * MailTemplateLoader constructor.
-     * @param string|null $inviteClass
+     * @var UserManagerInterface
      */
-    public function __construct(?string $inviteClass)
+    protected $userManager;
+
+    /**
+     * MailTemplateLoader constructor.
+     *
+     * @param string|null          $inviteClass
+     * @param UserManagerInterface $userManager
+     */
+    public function __construct(?string $inviteClass, UserManagerInterface $userManager)
     {
         $this->inviteClass = $inviteClass;
+        $this->userManager = $userManager;
     }
 
     /**
@@ -43,19 +53,22 @@ class MailTemplateLoader implements TemplateLoaderInterface
         // TODO SET FROM EMAIL AND NAME (WITH DEFAULT FALLBACK)
         $collection->addTemplate($template);
 
-        $template = new Template();
-        $template->setId('sfs_user.register_confirm');
-        $template->setName('User register confirmation');
-        $template->setTwigTemplate('@SfsUser/register/confirm.email.twig');
-        $template->setExampleContext([
-            'user_name' => 'Mathew',
-            'user_surname' => 'Smith',
-            'user_username' => 'mathewsmith',
-            'user_email' => 'mathewsmith@example.local',
-            'confirmUrl' => '#',
-        ]);
-        // TODO SET FROM EMAIL AND NAME (WITH DEFAULT FALLBACK)
-        $collection->addTemplate($template);
+        $userReflection = new \ReflectionClass($this->userManager->getClass());
+        if ($userReflection->implementsInterface(ConfirmableInterface::class)) {
+            $template = new Template();
+            $template->setId('sfs_user.register_confirm');
+            $template->setName('User register confirmation');
+            $template->setTwigTemplate('@SfsUser/register/confirm.email.twig');
+            $template->setExampleContext([
+                'user_name' => 'Mathew',
+                'user_surname' => 'Smith',
+                'user_username' => 'mathewsmith',
+                'user_email' => 'mathewsmith@example.local',
+                'confirmationUrl' => '#',
+            ]);
+            // TODO SET FROM EMAIL AND NAME (WITH DEFAULT FALLBACK)
+            $collection->addTemplate($template);
+        }
 
         if (!empty($this->inviteClass)) {
             $template = new Template();

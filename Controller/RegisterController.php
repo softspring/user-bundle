@@ -7,6 +7,8 @@ use Softspring\UserBundle\Event\GetResponseFormEvent;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Form\RegisterFormInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
+use Softspring\UserBundle\Model\ConfirmableInterface;
+use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -91,6 +93,31 @@ class RegisterController extends AbstractController
     public function success(Request $request): Response
     {
         return $this->render('@SfsUser/register/success.html.twig', [
+
+        ]);
+    }
+
+    /**
+     * @param string  $user
+     * @param string  $token
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function confirm(string $user, string $token, Request $request): Response
+    {
+        /** @var UserInterface|ConfirmableInterface $user */
+        $user = $this->userManager->getRepository()->findOneById($user);
+
+        if ($user->getConfirmationToken() !== $token) {
+            return $this->redirectToRoute('sfs_user_register');
+        }
+
+        $user->setConfirmationToken(null);
+        $user->setConfirmedAt(new \DateTime('now'));
+        $this->userManager->save($user);
+
+        return $this->render('@SfsUser/register/confirmed.html.twig', [
 
         ]);
     }

@@ -24,6 +24,7 @@ services:
     Softspring\UserBundle\EventListener\EmailInvitationListener: ~
     Softspring\UserBundle\EventListener\LastLoginEventSubscriber: ~
     Softspring\UserBundle\EventListener\SendResetPasswordEmailListener: ~
+    Softspring\UserBundle\EventListener\UserRegistrationListener: ~
 
     Softspring\UserBundle\Form\:
         resource: '../../Form/*'

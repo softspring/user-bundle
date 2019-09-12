@@ -5,3 +5,7 @@ sfs_user_register:
 sfs_user_register_success:
     path: /welcome
     controller: Softspring\UserBundle\Controller\RegisterController::success
+
+sfs_user_register_confirm:
+    path: /{user}/confirm/{token}
+    controller: Softspring\UserBundle\Controller\RegisterController::confirm

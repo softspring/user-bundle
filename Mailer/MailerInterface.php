@@ -12,7 +12,7 @@ interface MailerInterface
      *
      * @param UserInterface $user
      */
-    public function sendConfirmationEmail(UserInterface $user);
+    public function sendRegisterConfirmationEmail(UserInterface $user);
 
     /**
      * Send an invitation email to a user

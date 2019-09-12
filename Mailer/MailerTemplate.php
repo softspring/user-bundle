@@ -3,6 +3,7 @@
 namespace Softspring\UserBundle\Mailer;
 
 use Softspring\MailerBundle\Mailer\TemplateMailer;
+use Softspring\UserBundle\Model\ConfirmableInterface;
 use Softspring\UserBundle\Model\PasswordRequestInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Model\UserInvitationInterface;
@@ -33,11 +34,28 @@ class MailerTemplate implements MailerInterface
     }
 
     /**
-     * @inheritdoc
+     * @param UserInterface|ConfirmableInterface $user
+     *
+     * @throws \Softspring\MailerBundle\Exception\InvalidTemplateException
+     * @throws \Softspring\MailerBundle\Exception\TemplateRenderException
      */
-    public function sendConfirmationEmail(UserInterface $user)
+    public function sendRegisterConfirmationEmail(UserInterface $user)
     {
-        // TODO: Implement sendConfirmationEmail() method.
+        $name = method_exists($user, 'getName') ? $user->getName() : '';
+        $surname = method_exists($user, 'getSurname') ? $user->getSurname() : '';
+
+        $confirmationUrl = $this->urlGenerator->generate('sfs_user_register_confirm', [
+            'user' => $user->getId(),
+            'token' => $user->getConfirmationToken(),
+        ], UrlGeneratorInterface::ABSOLUTE_URL);
+
+        $this->templateMailer->send('sfs_user.register_confirm', 'es', [
+            'user_name' => $name,
+            'user_surname' => $surname,
+            'user_username' => $user->getUsername(),
+            'user_email' => $user->getEmail(),
+            'confirmationUrl' => $confirmationUrl,
+        ], $user->getEmail(), "$name $surname");
     }
 
     /**
