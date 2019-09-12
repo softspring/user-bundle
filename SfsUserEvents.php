@@ -160,6 +160,36 @@ class SfsUserEvents
     const RESET_REQUESTED_VIEW = 'sfs_user.reset_done.view';
 
     /**
+     * @Event("Softspring\UserBundle\Event\GetResponseEvent")
+     */
+    const RESET_INITIALIZE = 'sfs_user.reset.initialize';
+
+    /**
+     * @Event("Softspring\UserBundle\Event\GetResponseFormEvent")
+     */
+    const RESET_FORM_VALID = 'sfs_user.reset.form_valid';
+
+    /**
+     * @Event("Softspring\UserBundle\Event\GetResponseUserEvent")
+     */
+    const RESET_SUCCESS = 'sfs_user.reset.success';
+
+    /**
+     * @Event("Softspring\UserBundle\Event\GetResponseFormEvent")
+     */
+    const RESET_FORM_INVALID = 'sfs_user.reset.form_invalid';
+
+    /**
+     * @Event("Softspring\UserBundle\Event\ViewEvent")
+     */
+    const RESET_VIEW = 'sfs_user.reset.view';
+
+    /**
+     * @Event("Softspring\UserBundle\Event\ViewEvent")
+     */
+    const RESET_SUCCESS_VIEW = 'sfs_user.reset_success.view';
+
+    /**
      * @Event("Softspring\UserBundle\Event\GetResponseUserEvent")
      */
     const ADMIN_USERS_DELETE_INITIALIZE = 'sfs_user.admin.users.delete_initialize';

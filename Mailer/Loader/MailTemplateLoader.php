@@ -32,7 +32,7 @@ class MailTemplateLoader implements TemplateLoaderInterface
         $template = new Template();
         $template->setId('sfs_user.reset_password');
         $template->setName('User password resetting request');
-        $template->setTwigTemplate('@SfsUser/resetting/resetting.email.twig');
+        $template->setTwigTemplate('@SfsUser/reset_password/resetting.email.twig');
         $template->setExampleContext([
             'user_name' => 'Mathew',
             'user_surname' => 'Smith',

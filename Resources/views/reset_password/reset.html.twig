@@ -1,0 +1,9 @@
+{% trans_default_domain 'sfs_user' %}
+{% extends '@SfsUser/layout_fullscreen.html.twig' %}
+
+{% block content %}
+    {{ form_start(reset_form) }}
+        {{ form_rest(reset_form) }}
+        <input type="submit" value="{{ 'reset_password.reset.actions.reset.button'|trans }}" class="btn btn-primary btn-block" />
+    {{ form_end(reset_form) }}
+{% endblock content %}

@@ -3,7 +3,7 @@
 namespace Softspring\UserBundle\Mailer;
 
 use Softspring\MailerBundle\Mailer\TemplateMailer;
-use Softspring\UserBundle\Mailer\MailerInterface;
+use Softspring\UserBundle\Model\PasswordRequestInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Model\UserInvitationInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -62,10 +62,27 @@ class MailerTemplate implements MailerInterface
     }
 
     /**
-     * @inheritdoc
+     * @param UserInterface|PasswordRequestInterface $user
+     *
+     * @throws \Softspring\MailerBundle\Exception\InvalidTemplateException
+     * @throws \Softspring\MailerBundle\Exception\TemplateRenderException
      */
     public function sendResettingEmail(UserInterface $user)
     {
-        // TODO: Implement sendResettingEmail() method.
+        $name = method_exists($user, 'getName') ? $user->getName() : '';
+        $surname = method_exists($user, 'getSurname') ? $user->getSurname() : '';
+
+        $resetUrl = $this->urlGenerator->generate('sfs_user_reset_password', [
+            'user' => $user->getId(),
+            'token' => $user->getPasswordRequestToken(),
+        ], UrlGeneratorInterface::ABSOLUTE_URL);
+
+        $this->templateMailer->send('sfs_user.reset_password', 'es', [
+            'user_name' => $name,
+            'user_surname' => $surname,
+            'user_username' => $user->getUsername(),
+            'user_email' => $user->getEmail(),
+            'resetUrl' => $resetUrl,
+        ], $user->getEmail(), "$name $surname");
     }
 }

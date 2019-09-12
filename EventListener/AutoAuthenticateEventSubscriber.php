@@ -35,6 +35,7 @@ class AutoAuthenticateEventSubscriber implements EventSubscriberInterface
             SfsUserEvents::REGISTER_SUCCESS => [['authenticate', 0]],
             SfsUserEvents::INVITATION_ACCEPTED => [['authenticate', 0]],
             SfsUserEvents::CONFIRMATION_SUCCESS => [['authenticate', 0]],
+            SfsUserEvents::RESET_SUCCESS => [['authenticate', 0]],
         ];
     }
 
