@@ -18,8 +18,6 @@ interface UserAccessManagerInterface
 
     /**
      * @param UserAccessInterface $userAccess
-     *
-     * @throws \Exception
      */
     public function save(UserAccessInterface $userAccess): void;
 }

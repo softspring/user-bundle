@@ -4,7 +4,6 @@ namespace Softspring\UserBundle\Manager;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
-use Softspring\UserBundle\Manager\UserAccessManagerInterface;
 use Softspring\UserBundle\Model\UserAccessInterface;
 
 class UserAccessManager implements UserAccessManagerInterface
@@ -38,7 +37,10 @@ class UserAccessManager implements UserAccessManagerInterface
      */
     public function getRepository(): EntityRepository
     {
-        return $this->em->getRepository(UserAccessInterface::class);
+        /** @var EntityRepository $repo */
+        $repo = $this->em->getRepository(UserAccessInterface::class);
+
+        return $repo;
     }
 
     /**
@@ -52,8 +54,6 @@ class UserAccessManager implements UserAccessManagerInterface
 
     /**
      * @param UserAccessInterface $userAccess
-     *
-     * @throws \Exception
      */
     public function save(UserAccessInterface $userAccess): void
     {

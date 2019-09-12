@@ -4,7 +4,8 @@ namespace Softspring\UserBundle\Manager;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
-use Softspring\UserBundle\Manager\UserManagerInterface;
+use Exception;
+use RuntimeException;
 use Softspring\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
@@ -47,7 +48,10 @@ class UserManager implements UserManagerInterface
      */
     public function getRepository(): EntityRepository
     {
-        return $this->em->getRepository(UserInterface::class);
+        /** @var EntityRepository $repo */
+        $repo = $this->em->getRepository(UserInterface::class);
+
+        return $repo;
     }
 
     /**
@@ -61,8 +65,7 @@ class UserManager implements UserManagerInterface
 
     /**
      * @param UserInterface $user
-     *
-     * @throws \Exception
+     * @throws Exception
      */
     public function save(UserInterface $user): void
     {
@@ -86,7 +89,10 @@ class UserManager implements UserManagerInterface
      */
     public function findUserBy(array $criteria): ?UserInterface
     {
-        return $this->getRepository()->findOneBy($criteria);
+        /** @var UserInterface|null $user */
+        $user = $this->getRepository()->findOneBy($criteria);
+
+        return $user;
     }
 
     /**
@@ -110,7 +116,7 @@ class UserManager implements UserManagerInterface
      */
     public function findUserByUsernameOrEmail(string $usernameOrEmail): ?UserInterface
     {
-        if (preg_match('/^.+\@\S+\.\S+$/', $usernameOrEmail)) {
+        if (preg_match('/^.+@\S+\.\S+$/', $usernameOrEmail)) {
             return $this->findUserByEmail($usernameOrEmail);
         }
 
@@ -130,7 +136,7 @@ class UserManager implements UserManagerInterface
     /**
      * @param UserInterface $user
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function hashPassword(UserInterface $user): void
     {
@@ -140,7 +146,7 @@ class UserManager implements UserManagerInterface
 
         try {
             $encoder = $this->encoderFactory->getEncoder($user);
-        } catch (\RuntimeException $e) {
+        } catch (RuntimeException $e) {
             $encoder = $this->encoderFactory->getEncoder(UserInterface::class);
         }
 
