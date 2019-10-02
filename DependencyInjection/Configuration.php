@@ -112,6 +112,18 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('switch_parameter')->defaultValue('_switch_user')->end()
                     ->end()
                 ->end()
+
+                ->arrayNode('oauth')
+                    ->children()
+                        ->arrayNode('facebook')
+                            ->children()
+                                ->scalarNode('application_id')->end()
+                                ->scalarNode('application_secret')->end()
+                                ->booleanNode('login_create')->defaultFalse()->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 

@@ -5,6 +5,7 @@ login:
         _remember_me.label: "Recordarme en este equipo"
     actions:
         login.button: "Entrar"
+        facebook_oauth.button: "Entrar con Facebook"
 
 register:
     form:

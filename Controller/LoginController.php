@@ -26,15 +26,22 @@ class LoginController extends AbstractController
     protected $loginForm;
 
     /**
+     * @var array
+     */
+    protected $oauthServices;
+
+    /**
      * LoginController constructor.
      *
      * @param EventDispatcherInterface $eventDispatcher
      * @param LoginFormInterface       $loginForm
+     * @param array                    $oauthServices
      */
-    public function __construct(EventDispatcherInterface $eventDispatcher, LoginFormInterface $loginForm)
+    public function __construct(EventDispatcherInterface $eventDispatcher, LoginFormInterface $loginForm, array $oauthServices)
     {
         $this->eventDispatcher = $eventDispatcher;
         $this->loginForm = $loginForm;
+        $this->oauthServices = $oauthServices;
     }
 
     /**
@@ -67,6 +74,7 @@ class LoginController extends AbstractController
 
         return $this->render('@SfsUser/login/login.html.twig', [
             'login_form' => $form->createView(),
+            'oauth_services' => $this->oauthServices,
         ]);
     }
 

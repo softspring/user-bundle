@@ -3,6 +3,7 @@
 namespace Softspring\UserBundle\DependencyInjection;
 
 use Softspring\UserBundle\Model\UserInterface;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -40,6 +41,23 @@ class SfsUserExtension extends Extension implements PrependExtensionInterface
 
         if ($config['history']['enabled']) {
             $loader->load('services/history.yaml');
+        }
+
+        $oauthServicesConfig = $config['oauth'];
+        $container->setParameter('sfs_user.oauth.services', $oauthServicesConfig ?? []);
+
+        if (!empty($oauthServicesConfig)) {
+            if (!class_exists('HWI\Bundle\OAuthBundle\HWIOAuthBundle')) {
+                throw new InvalidConfigurationException('Oauth features requires HWIOAuthBundle, see documentation.');
+            }
+
+            foreach ($oauthServicesConfig as $service => $serviceConfig) {
+                foreach ($serviceConfig as $field => $value) {
+                    $container->setParameter("sfs_user.oauth.$service.$field", $value);
+                }
+            }
+
+            $loader->load('services/oauth.yaml');
         }
     }
 

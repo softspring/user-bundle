@@ -11,6 +11,7 @@ services:
             $em: '@sfs_user.entity_manager'
             $resetTokenTTL: '%sfs_user.reset_password.token_ttl%'
             $inviteClass: '%sfs_user.invite.class%'
+            $oauthServices: '%sfs_user.oauth.services%'
 
     Softspring\UserBundle\Command\:
         resource: '../../Command/*'

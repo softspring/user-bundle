@@ -1,0 +1,14 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            $oauthServices: '%sfs_user.oauth.services%'
+
+    Softspring\UserBundle\Provider\OauthUserProvider:
+        arguments:
+            $properties: { facebook: 'facebookUserId' }
+
+    sfs_user.oauth_provider:
+        alias: 'Softspring\UserBundle\Provider\OauthUserProvider'

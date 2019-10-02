@@ -1,0 +1,12 @@
+sfs_user_login_oauth_facebook:
+    path: /oauth/facebook
+
+sfs_user_login_oauth_facebook_js:
+    path: /oauth/facebook.js
+    controller: Softspring\UserBundle\Controller\OauthLoginIntegrationController::facebookJs
+
+sfs_user_login_oauth_facebook_redirect:
+    path: /oauth/facebook-connect
+    controller: HWI\Bundle\OAuthBundle\Controller\ConnectController::redirectToServiceAction
+    defaults:
+        service: 'facebook'

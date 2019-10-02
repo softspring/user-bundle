@@ -6,4 +6,16 @@
         {{ form_rest(login_form) }}
         <input type="submit" value="{{ 'login.actions.login.button'|trans }}" class="btn btn-primary btn-block" />
     {{ form_end(login_form) }}
+
+    {% if attribute(oauth_services, 'facebook') is defined %}
+        {% include '@SfsUser/oauth_login_integration/facebook_oauth_button.html.twig' %}
+    {% endif %}
 {% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% if attribute(oauth_services, 'facebook') is defined %}
+        <script type="text/javascript">{{ render(url('sfs_user_login_oauth_facebook_js')) }}</script>
+    {% endif %}
+{% endblock javascripts %}

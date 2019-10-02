@@ -17,7 +17,8 @@
         "symfony/yaml": "^4.2"
     },
     "suggest": {
-        "softspring/admin-bundle": "Use softspring admin templates"
+        "softspring/admin-bundle": "Use softspring admin templates",
+        "hwi/oauth-bundle": "Integrate oauth clients"
     },
     "autoload": {
         "psr-4": {

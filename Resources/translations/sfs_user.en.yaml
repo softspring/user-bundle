@@ -5,6 +5,7 @@ login:
         _remember_me.label: "Remember me"
     actions:
         login.button: "Login"
+        facebook_oauth.button: "Facebook login"
 
 register:
     form:
