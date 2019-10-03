@@ -110,12 +110,20 @@ class RegisterController extends AbstractController
         $user = $this->userManager->getRepository()->findOneById($user);
 
         if ($user->getConfirmationToken() !== $token) {
+            if ($response = $this->dispatchGetResponse(SfsUserEvents::CONFIRMATION_FAILED, new GetResponseUserEvent($user, $request))) {
+                return $response;
+            }
+
             return $this->redirectToRoute('sfs_user_register');
         }
 
         $user->setConfirmationToken(null);
         $user->setConfirmedAt(new \DateTime('now'));
         $this->userManager->save($user);
+
+        if ($response = $this->dispatchGetResponse(SfsUserEvents::CONFIRMATION_SUCCESS, new GetResponseUserEvent($user, $request))) {
+            return $response;
+        }
 
         return $this->render('@SfsUser/register/confirmed.html.twig', [
 
