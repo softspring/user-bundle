@@ -43,8 +43,8 @@ class SfsUserExtension extends Extension implements PrependExtensionInterface
             $loader->load('services/history.yaml');
         }
 
-        $oauthServicesConfig = $config['oauth'];
-        $container->setParameter('sfs_user.oauth.services', $oauthServicesConfig ?? []);
+        $oauthServicesConfig = $config['oauth'] ?? [];
+        $container->setParameter('sfs_user.oauth.services', $oauthServicesConfig);
 
         if (!empty($oauthServicesConfig)) {
             if (!class_exists('HWI\Bundle\OAuthBundle\HWIOAuthBundle')) {
