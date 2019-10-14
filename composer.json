@@ -19,6 +19,7 @@
     },
     "suggest": {
         "softspring/admin-bundle": "Use softspring admin templates",
+        "softspring/core-bundle": "Use softspring core bundle",
         "hwi/oauth-bundle": "Integrate oauth clients"
     },
     "autoload": {
