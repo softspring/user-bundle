@@ -6,6 +6,11 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\EventDispatcher\Event;
 
+/**
+ * Class FormEvent
+ *
+ * @deprecated Use Softspring\CoreBundle\Event\FormEvent instead
+ */
 class FormEvent extends Event
 {
     /**

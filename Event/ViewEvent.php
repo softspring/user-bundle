@@ -4,6 +4,11 @@ namespace Softspring\UserBundle\Event;
 
 use Symfony\Contracts\EventDispatcher\Event;
 
+/**
+ * Class ViewEvent
+ *
+ * @deprecated Use Softspring\CoreBundle\Event\ViewEvent instead
+ */
 class ViewEvent extends Event
 {
     /**

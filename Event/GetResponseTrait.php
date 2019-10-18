@@ -4,6 +4,11 @@ namespace Softspring\UserBundle\Event;
 
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Trait GetResponseTrait
+ *
+ * @deprecated Use Softspring\CoreBundle\Event\GetResponseTrait instead
+ */
 trait GetResponseTrait
 {
     /**
