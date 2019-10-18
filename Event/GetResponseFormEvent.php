@@ -2,7 +2,8 @@
 
 namespace Softspring\UserBundle\Event;
 
-use Softspring\ExtraBundle\Event\GetResponseEventInterface;
+use Softspring\CoreBundle\Event\GetResponseEventInterface;
+use Softspring\CoreBundle\Event\GetResponseTrait;
 
 /**
  * Class GetResponseFormEvent
