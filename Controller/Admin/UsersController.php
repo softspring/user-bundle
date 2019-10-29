@@ -4,7 +4,7 @@ namespace Softspring\UserBundle\Controller\Admin;
 
 use Softspring\AccountBundle\Model\UserMultiAccountedInterface;
 use Softspring\AdminBundle\Event\ViewEvent;
-use Softspring\ExtraBundle\Controller\AbstractController;
+use Softspring\CoreBundle\Controller\AbstractController;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Event\GetResponseFormEvent;

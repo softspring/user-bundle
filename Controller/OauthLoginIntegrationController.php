@@ -2,7 +2,7 @@
 
 namespace Softspring\UserBundle\Controller;
 
-use Softspring\ExtraBundle\Controller\AbstractController;
+use Softspring\CoreBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
 class OauthLoginIntegrationController extends AbstractController
