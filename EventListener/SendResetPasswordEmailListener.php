@@ -2,11 +2,11 @@
 
 namespace Softspring\UserBundle\EventListener;
 
+use Softspring\CoreBundle\Event\GetResponseFormEvent;
 use Softspring\UserBundle\Mailer\MailerInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\PasswordRequestInterface;
 use Softspring\UserBundle\Model\UserInterface;
-use Softspring\UserBundle\Event\GetResponseFormEvent;
 use Softspring\UserBundle\SfsUserEvents;
 use Softspring\UserBundle\Util\TokenGenerator;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

@@ -3,7 +3,7 @@
 namespace Softspring\UserBundle\Controller;
 
 use Softspring\CoreBundle\Controller\AbstractController;
-use Softspring\UserBundle\Event\GetResponseFormEvent;
+use Softspring\CoreBundle\Event\GetResponseFormEvent;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\UserInterface;

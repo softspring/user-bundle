@@ -3,8 +3,8 @@
 namespace Softspring\UserBundle\Controller;
 
 use Softspring\CoreBundle\Controller\AbstractController;
-use Softspring\UserBundle\Event\FormEvent;
-use Softspring\UserBundle\Event\GetResponseFormEvent;
+use Softspring\CoreBundle\Event\FormEvent;
+use Softspring\CoreBundle\Event\GetResponseFormEvent;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Form\AcceptInvitationFormInterface;
 use Softspring\UserBundle\Manager\UserInvitationManagerInterface;

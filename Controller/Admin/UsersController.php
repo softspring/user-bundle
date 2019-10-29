@@ -3,11 +3,11 @@
 namespace Softspring\UserBundle\Controller\Admin;
 
 use Softspring\AccountBundle\Model\UserMultiAccountedInterface;
-use Softspring\AdminBundle\Event\ViewEvent;
 use Softspring\CoreBundle\Controller\AbstractController;
+use Softspring\CoreBundle\Event\ViewEvent;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\UserInterface;
-use Softspring\UserBundle\Event\GetResponseFormEvent;
+use Softspring\CoreBundle\Event\GetResponseFormEvent;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Form\Admin\UserDeleteFormInterface;
 use Softspring\UserBundle\SfsUserEvents;

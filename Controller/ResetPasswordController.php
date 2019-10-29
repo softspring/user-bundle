@@ -4,11 +4,11 @@ namespace Softspring\UserBundle\Controller;
 
 use Softspring\CoreBundle\Controller\AbstractController;
 use Softspring\CoreBundle\Event\GetResponseEvent;
+use Softspring\CoreBundle\Event\ViewEvent;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Form\ResetPasswordFormInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
-use Softspring\UserBundle\Event\GetResponseFormEvent;
-use Softspring\UserBundle\Event\ViewEvent;
+use Softspring\CoreBundle\Event\GetResponseFormEvent;
 use Softspring\UserBundle\Form\ResetPasswordRequestFormInterface;
 use Softspring\UserBundle\Model\PasswordRequestInterface;
 use Softspring\UserBundle\Model\UserInterface;
