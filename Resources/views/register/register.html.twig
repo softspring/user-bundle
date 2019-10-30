@@ -5,5 +5,6 @@
     {{ form_start(register_form) }}
         {{ form_rest(register_form) }}
         <input type="submit" value="{{ 'register.actions.register.button'|trans }}" class="btn btn-primary btn-block" />
+        <a href="{{ url('sfs_user_login') }}" class="mt-2 btn btn-secondary btn-block">Sign in</a>
     {{ form_end(register_form) }}
 {% endblock content %}
