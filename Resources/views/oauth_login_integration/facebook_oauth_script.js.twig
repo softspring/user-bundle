@@ -28,7 +28,7 @@ function fb_login() {
                 if (response.authResponse) {
                     document.location = "{{ url("sfs_user_login_oauth_facebook_redirect") }}";
                 }
-            }, {scope: 'email'});
+            }, {scope: 'email,instagram_basic,pages_show_list'});
         }
     });
 }
