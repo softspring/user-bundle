@@ -2,8 +2,8 @@
 {% extends '@SfsUser/admin_layout.html.twig' %}
 
 {% block content %}
-
-    <div class="text-right">
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3">Invitations</h1>
         <a href="{{ url('sfs_user_admin_invitations_invite') }}" class="btn btn-outline-secondary">{{ 'admin_invitations.list.actions.invite.link'|trans }}</a>
     </div>
 
@@ -30,7 +30,7 @@
                 <td>{{ invitation.acceptedAt ? invitation.acceptedAt|date('H:i d-m-Y') : 'not yet' }}</td>
                 <td>{{ invitation.roles|join(', ') }}</td>
                 <td>
-                    <a href="{{ url('sfs_user_admin_invitations_details', {'invitation': invitation}) }}">details</a>
+                    <a href="{{ url('sfs_user_admin_invitations_details', {'invitation': invitation}) }}" class="text-nowrap">details <span class="mdi mdi-18px mdi-eye-outline align-middle"></span></a>
                 </td>
             </tr>
         {% endfor %}
