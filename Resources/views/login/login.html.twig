@@ -9,7 +9,7 @@
     {{ form_end(login_form) }}
 
     {% if route_defined('sfs_user_register') %}
-        <a href="{{ url('sfs_user_register') }}" class="mt-2 btn btn-secondary btn-block">Sign up</a>
+        <a href="{{ url('sfs_user_register', register_params) }}" class="mt-2 btn btn-secondary btn-block">Sign up</a>
     {% endif %}
 
     {% if attribute(oauth_services, 'facebook') is defined %}

@@ -87,6 +87,7 @@ class LoginController extends AbstractController
         return $this->render('@SfsUser/login/login.html.twig', [
             'login_form' => $form->createView(),
             'oauth_services' => $this->oauthServices,
+            'register_params' => $loginCheckParams,
         ]);
     }
 
