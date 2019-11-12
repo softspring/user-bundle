@@ -25,6 +25,13 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('default')
                 ->end()
 
+                ->arrayNode('login')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('target_path_parameter')->defaultNull()->end()
+                    ->end()
+                ->end()
+
                 ->arrayNode('invite')
                     ->addDefaultsIfNotSet()
                     ->children()

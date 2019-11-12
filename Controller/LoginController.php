@@ -31,17 +31,24 @@ class LoginController extends AbstractController
     protected $oauthServices;
 
     /**
+     * @var string|null
+     */
+    protected $targetPathParameter;
+
+    /**
      * LoginController constructor.
      *
      * @param EventDispatcherInterface $eventDispatcher
      * @param LoginFormInterface       $loginForm
      * @param array                    $oauthServices
+     * @param string|null              $targetPathParameter
      */
-    public function __construct(EventDispatcherInterface $eventDispatcher, LoginFormInterface $loginForm, array $oauthServices)
+    public function __construct(EventDispatcherInterface $eventDispatcher, LoginFormInterface $loginForm, array $oauthServices, ?string $targetPathParameter)
     {
         $this->eventDispatcher = $eventDispatcher;
         $this->loginForm = $loginForm;
         $this->oauthServices = $oauthServices;
+        $this->targetPathParameter = $targetPathParameter;
     }
 
     /**
@@ -54,11 +61,16 @@ class LoginController extends AbstractController
         /** @var $session Session */
         $session = $request->getSession();
 
+        $loginCheckParams = [];
+        if ($this->targetPathParameter && $targetPath = $request->get($this->targetPathParameter)) {
+            $loginCheckParams[$this->targetPathParameter] = $targetPath;
+        }
+
         $form = $this->createForm(get_class($this->loginForm), [
             '_username' => $session->get(Security::LAST_USERNAME) ?? '',
             '_password' => '',
         ], [
-            'action' => $this->generateUrl('sfs_user_login_check'),
+            'action' => $this->generateUrl('sfs_user_login_check', $loginCheckParams),
         ]);
 
         if ($request->attributes->has(Security::AUTHENTICATION_ERROR)) {

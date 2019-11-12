@@ -12,6 +12,7 @@ services:
             $resetTokenTTL: '%sfs_user.reset_password.token_ttl%'
             $inviteClass: '%sfs_user.invite.class%'
             $oauthServices: '%sfs_user.oauth.services%'
+            $targetPathParameter: '%sfs_user.login.target_path_parameter'
 
     Softspring\UserBundle\Command\:
         resource: '../../Command/*'

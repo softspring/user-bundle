@@ -34,6 +34,7 @@ class SfsUserExtension extends Extension implements PrependExtensionInterface
         $container->setParameter('sfs_user.history.class', $config['history']['enabled'] ? $config['history']['class'] : null);
 
         $container->setParameter('sfs_user.reset_password.token_ttl', $config['reset_password']['token_ttl']);
+        $container->setParameter('sfs_user.login.target_path_parameter', $config['login']['target_path_parameter']);
 
         // load services
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
