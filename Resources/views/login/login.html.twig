@@ -5,11 +5,16 @@
     {{ form_start(login_form) }}
         {{ form_rest(login_form) }}
         {{ form_errors(login_form) }}
+
+        {% if route_defined('sfs_user_reset_password_request') %}
+            <a href="{{ url('sfs_user_reset_password_request') }}" class="mt-2 btn btn-link btn-block">{{ 'login.actions.resetting.link'|trans }}</a>
+        {% endif %}
+
         <input type="submit" value="{{ 'login.actions.login.button'|trans }}" class="btn btn-primary btn-block" />
     {{ form_end(login_form) }}
 
     {% if route_defined('sfs_user_register') %}
-        <a href="{{ url('sfs_user_register', register_params) }}" class="mt-2 btn btn-secondary btn-block">Sign up</a>
+        <a href="{{ url('sfs_user_register', register_params) }}" class="mt-2 btn btn-secondary btn-block">{{ 'login.actions.signup.button'|trans }}</a>
     {% endif %}
 
     {% if attribute(oauth_services, 'facebook') is defined %}

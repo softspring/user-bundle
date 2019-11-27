@@ -6,6 +6,8 @@ login:
     actions:
         login.button: "Login"
         facebook_oauth.button: "Facebook login"
+        resetting.link: "Forgot password"
+        signup.button: "Sign up"
 
 register:
     form:

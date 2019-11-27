@@ -6,6 +6,8 @@ login:
     actions:
         login.button: "Entrar"
         facebook_oauth.button: "Entrar con Facebook"
+        resetting.link: "¿olvidaste tu contraseña?"
+        signup.button: "Registrarme"
 
 register:
     form:
