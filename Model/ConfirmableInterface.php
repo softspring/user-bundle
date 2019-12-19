@@ -23,4 +23,9 @@ interface ConfirmableInterface
      * @param \DateTime|null $confirmedAt
      */
     public function setConfirmedAt(?\DateTime $confirmedAt): void;
+
+    /**
+     * @return bool
+     */
+    public function isConfirmed(): bool;
 }

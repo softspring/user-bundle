@@ -49,4 +49,12 @@ trait ConfirmableTrait
     {
         $this->confirmedAt = $confirmedAt instanceof \DateTime ? $confirmedAt->format('U') : null;
     }
+
+    /**
+     * @return bool
+     */
+    public function isConfirmed(): bool
+    {
+        return !! $this->confirmedAt;
+    }
 }
