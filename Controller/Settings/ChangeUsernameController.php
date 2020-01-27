@@ -1,6 +1,6 @@
 <?php
 
-namespace Softspring\UserBundle\Controller;
+namespace Softspring\UserBundle\Controller\Settings;
 
 use Softspring\CoreBundle\Controller\AbstractController;
 use Softspring\CoreBundle\Event\GetResponseFormEvent;
@@ -8,7 +8,6 @@ use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\SfsUserEvents;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,11 +19,6 @@ class ChangeUsernameController extends AbstractController
     protected $userManager;
 
     /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
-
-    /**
      * @var array
      */
     protected $changeUsernameConfig;
@@ -32,14 +26,12 @@ class ChangeUsernameController extends AbstractController
     /**
      * ChangeUsernameController constructor.
      *
-     * @param UserManagerInterface     $userManager
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param array                    $changeUsernameConfig
+     * @param UserManagerInterface $userManager
+     * @param array                $changeUsernameConfig
      */
-    public function __construct(UserManagerInterface $userManager, EventDispatcherInterface $eventDispatcher, array $changeUsernameConfig)
+    public function __construct(UserManagerInterface $userManager, array $changeUsernameConfig)
     {
         $this->userManager = $userManager;
-        $this->eventDispatcher = $eventDispatcher;
         $this->changeUsernameConfig = $changeUsernameConfig;
     }
 

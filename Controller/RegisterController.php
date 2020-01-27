@@ -10,7 +10,6 @@ use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\ConfirmableInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\SfsUserEvents;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -22,11 +21,6 @@ class RegisterController extends AbstractController
     protected $userManager;
 
     /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
-
-    /**
      * @var RegisterFormInterface
      */
     protected $registerForm;
@@ -34,14 +28,12 @@ class RegisterController extends AbstractController
     /**
      * RegisterController constructor.
      *
-     * @param UserManagerInterface     $userManager
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param RegisterFormInterface    $registerForm
+     * @param UserManagerInterface  $userManager
+     * @param RegisterFormInterface $registerForm
      */
-    public function __construct(UserManagerInterface $userManager, EventDispatcherInterface $eventDispatcher, RegisterFormInterface $registerForm)
+    public function __construct(UserManagerInterface $userManager, RegisterFormInterface $registerForm)
     {
         $this->userManager = $userManager;
-        $this->eventDispatcher = $eventDispatcher;
         $this->registerForm = $registerForm;
     }
 
