@@ -4,6 +4,7 @@ namespace Softspring\UserBundle\Controller;
 
 use Softspring\CoreBundle\Controller\AbstractController;
 use Softspring\CoreBundle\Event\GetResponseFormEvent;
+use Softspring\CoreBundle\Event\ViewEvent;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Form\RegisterFormInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
@@ -72,9 +73,13 @@ class RegisterController extends AbstractController
             }
         }
 
-        return $this->render('@SfsUser/register/register.html.twig', [
+        $viewData = new \ArrayObject([
             'register_form' => $form->createView(),
         ]);
+
+        $this->dispatch(SfsUserEvents::REGISTER_VIEW, new ViewEvent($viewData));
+
+        return $this->render('@SfsUser/register/register.html.twig', $viewData->getArrayCopy());
     }
 
     /**
@@ -84,9 +89,11 @@ class RegisterController extends AbstractController
      */
     public function success(Request $request): Response
     {
-        return $this->render('@SfsUser/register/success.html.twig', [
+        $viewData = new \ArrayObject([]);
 
-        ]);
+        $this->dispatch(SfsUserEvents::REGISTER_SUCCESS_VIEW, new ViewEvent($viewData));
+
+        return $this->render('@SfsUser/register/success.html.twig', $viewData->getArrayCopy());
     }
 
     /**
@@ -95,6 +102,7 @@ class RegisterController extends AbstractController
      * @param Request $request
      *
      * @return Response
+     * @throws \Exception
      */
     public function confirm(string $user, string $token, Request $request): Response
     {
@@ -117,8 +125,10 @@ class RegisterController extends AbstractController
             return $response;
         }
 
-        return $this->render('@SfsUser/register/confirmed.html.twig', [
+        $viewData = new \ArrayObject([]);
 
-        ]);
+        $this->dispatch(SfsUserEvents::CONFIRMATION_VIEW, new ViewEvent($viewData));
+
+        return $this->render('@SfsUser/register/confirmed.html.twig', $viewData->getArrayCopy());
     }
 }
