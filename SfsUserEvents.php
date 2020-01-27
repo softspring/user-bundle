@@ -215,7 +215,7 @@ class SfsUserEvents
     const ADMIN_USERS_DELETE_FORM_INVALID = 'sfs_user.admin.users.delete_form_invalid';
 
     /**
-     * @Event("Softspring\AdminBundle\Event\ViewEvent")
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
      */
     const ADMIN_USERS_DELETE_VIEW = 'sfs_user.admin.users.delete_view';
 }
