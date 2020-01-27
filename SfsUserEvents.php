@@ -35,6 +35,16 @@ class SfsUserEvents
     const REGISTER_FORM_INVALID = 'sfs_user.register.form_invalid' ;
 
     /**
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
+     */
+    const REGISTER_VIEW = 'sfs_user.register.view' ;
+
+    /**
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
+     */
+    const REGISTER_SUCCESS_VIEW = 'sfs_user.register.success.view' ;
+
+    /**
      * @Event("Softspring\UserBundle\Event\GetResponseUserEvent")
      */
     const INVITATION_ACCEPT = 'sfs_user.invitation.accept' ;
@@ -63,6 +73,11 @@ class SfsUserEvents
      * @Event("Softspring\UserBundle\Event\GetResponseUserEvent")
      */
     const CONFIRMATION_FAILED = 'sfs_user.confirmation.failed';
+
+    /**
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
+     */
+    const CONFIRMATION_VIEW = 'sfs_user.confirmation.view';
 
     /**
      * @Event("Softspring\UserBundle\Event\UserEvent")
