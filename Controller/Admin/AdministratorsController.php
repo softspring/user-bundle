@@ -4,7 +4,6 @@ namespace Softspring\UserBundle\Controller\Admin;
 
 use Softspring\CoreBundle\Controller\AbstractController;
 use Softspring\UserBundle\Manager\UserManagerInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -16,20 +15,13 @@ class AdministratorsController extends AbstractController
     protected $userManager;
 
     /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
-
-    /**
-     * UsersController constructor.
+     * AdministratorsController constructor.
      *
-     * @param UserManagerInterface     $userManager
-     * @param EventDispatcherInterface $eventDispatcher
+     * @param UserManagerInterface $userManager
      */
-    public function __construct(UserManagerInterface $userManager, EventDispatcherInterface $eventDispatcher)
+    public function __construct(UserManagerInterface $userManager)
     {
         $this->userManager = $userManager;
-        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**

@@ -11,7 +11,6 @@ use Softspring\CoreBundle\Event\GetResponseFormEvent;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Form\Admin\UserDeleteFormInterface;
 use Softspring\UserBundle\SfsUserEvents;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,11 +21,6 @@ class UsersController extends AbstractController
      * @var UserManagerInterface
      */
     protected $userManager;
-
-    /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
 
     /**
      * @var array
@@ -40,15 +34,14 @@ class UsersController extends AbstractController
 
     /**
      * UsersController constructor.
-     * @param UserManagerInterface $userManager
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param array $impersonateBarConfig
+     *
+     * @param UserManagerInterface    $userManager
+     * @param array                   $impersonateBarConfig
      * @param UserDeleteFormInterface $deleteForm
      */
-    public function __construct(UserManagerInterface $userManager, EventDispatcherInterface $eventDispatcher, array $impersonateBarConfig, UserDeleteFormInterface $deleteForm)
+    public function __construct(UserManagerInterface $userManager, array $impersonateBarConfig, UserDeleteFormInterface $deleteForm)
     {
         $this->userManager = $userManager;
-        $this->eventDispatcher = $eventDispatcher;
         $this->impersonateBarConfig = $impersonateBarConfig;
         $this->deleteForm = $deleteForm;
     }
@@ -158,7 +151,7 @@ class UsersController extends AbstractController
             'user' => $user,
         ]);
 
-        $this->eventDispatcher->dispatch(new ViewEvent($viewData), SfsUserEvents::ADMIN_USERS_DELETE_VIEW);
+        $this->dispatch(SfsUserEvents::ADMIN_USERS_DELETE_VIEW, new ViewEvent($viewData));
 
         return $this->render('@SfsUser/admin/users/delete.html.twig', $viewData->getArrayCopy());
     }
