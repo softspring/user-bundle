@@ -23,15 +23,12 @@ register:
         email:
             subject: "Welcome %name%!"
             message: |
-                Welcome %name%:
-
                 You have registered in our app.
 
                 Go to %confirmationUrl% to confirm your email.
 
                 Regards.
             html: |
-                <p>Welcome %name%:</p>
                 <p>You have registered in our app.</p>
                 <p><a href="%confirmationUrl%">Click here</a> to confirm your email.</p>
                 <p>Regards.</p>

@@ -23,18 +23,15 @@ register:
         email:
             subject: "Bienvenid@ %name%!"
             message: |
-                Bienvenid@ %name%:
-
                 Tu registro en nuestra aplicación se ha realizado correctamente.
 
                 Ve a %confirmationUrl% para confirmar tu email.
 
-                Saludos.
+                Atentamente, el equipo de Ellu.
             html: |
-                <p>Bienvenid@ %name%:</p>
                 <p>Tu registro en nuestra aplicación se ha realizado correctamente.</p>
                 <p><a href="%confirmationUrl%">Pincha aquí</a> para confirmar tu email.</p>
-                <p>Saludos.</p>
+                <p>Atentamente, el equipo de Ellu.</p>
 
 reset_password:
     request:
@@ -56,11 +53,11 @@ reset_password:
 
             Para resetear tu contraseña sigue el siguiente enlace: %resetUrl%
 
-            Saludos.
+            Atentamente, el equipo de Ellu.
         html: |
             <p>Hola %name%:</p>
             <p><a href="%resetUrl%">Pincha aquí</a> para cambiar tu contraseña.</p>
-            <p>Saludos.</p>
+            <p>Atentamente, el equipo de Ellu.</p>
     reset:
         form:
             newPassword:
@@ -87,19 +84,15 @@ invite:
         email:
             subject: "Bienvenid@ %name%!"
             message: |
-                Bienvenid@ %name%:
-
                 Has sido invitad@ a unirte a nuestra aplicación.
 
                 Ve a %acceptUrl% para aceptar la invitación.
 
-                Saludos.
+                Atentamente, el equipo de Ellu.
             html: |
-                <p>Bienvenid@ %name%:</p>
                 <p>Has sido invitad@ a unirte a nuestra aplicación.</p>
                 <p><a href="%acceptUrl%">Pincha aquí</a> para aceptar la invitación.</p>
-                <p>Saludos.</p>
-
+                <p>Atentamente, el equipo de Ellu.</p>
 preferences:
     actions:
         submit:

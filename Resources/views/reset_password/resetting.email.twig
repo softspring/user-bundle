@@ -14,6 +14,55 @@
 
 {% block html %}
 {% autoescape false %}
-{{ 'reset_password.email.html'|trans({'%username%': user_username, '%name%': user_name, '%surname%': user_surname, '%email%': user_email, '%resetUrl%': resetUrl}) }}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>https://pvet.qpv.es/</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:200,400,700" rel="stylesheet">
+</head>
+<body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0"  bgcolor="#f2f2f2" width="100%" style="padding-top:20px;">
+
+<table width="640" cellspacing="0" cellpadding="0" border="0" align="center" style="max-width:640px; width:100%;" bgcolor="#f2f2f2">
+    <tr>
+        <td align="center" valign="top" style="padding: 20px;">
+            <center>
+                <table bgcolor="#ffffff" cellspacing="0" cellpadding="0" width="600" style="max-width:600px; width:100%; padding:0 0 34px 0; margin-left:auto; margin-right:auto; font-family:'Roboto','Arial','Helvetica'; font-weight:400; color:#4d4d4f; border-radius: 2px;">
+                    <!-- Content mail -->
+
+                    <tr>
+                        <!-- Title -->
+                        <td style="font-size:16px; line-height:25px;  padding-right: 30px; padding-left: 30px;">
+                            <h1 style="color:#333;font-size: 18px; text-align: center; margin-bottom:35px; margin-top:25px; font-weight: bold; padding-right: 30px; padding-left: 30px;">
+                                {{ 'reset_password.email.subject'|trans({'%username%': user_username, '%name%': user_name, '%surname%': user_surname, '%email%': user_email}) }}
+                            </h1>
+                        </td>
+                        <!-- /Title -->
+                    </tr>
+                    <tr>
+                        <!-- Main -->
+                        <td style="font-size:16px; line-height:25px;  padding-right: 30px; padding-left: 30px;">
+                            {{ 'reset_password.email.html'|trans({'%username%': user_username, '%name%': user_name, '%surname%': user_surname, '%email%': user_email, '%resetUrl%': resetUrl}) }}
+                        </td>
+                        <!-- /Main -->
+                    </tr>
+                    <!-- / Content mail -->
+                </table>
+                <table bgcolor="#f2f2f2" cellspacing="0" cellpadding="0" width="100%" style="max-width:600px; padding:15px 0px 20px 0px; margin:0 auto;font-family:'Roboto','Arial','Helvetica'; font-weight:300; color:#9b9b9b">
+                    <!-- Content footer -->
+                    <tr valign="top">
+                        <td style="text-align: center;">
+                            <a style="color: #404040; text-decoration: none;" href="http://app.pvet.es">ELLU<!--<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAjCAYAAAADp43CAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA11JREFUeNrsV8Fx2zAQZDz6m+lAHUSpwFQFoSuI+MnX5iNvye88JH39EVlB5ApCVWB2YLoDpoMcNIdkdQMSgEj5EeNmMOSAIAgudm8PUeQY3+6+x9SmUYiTuHIFjy4vqtF9GmDzBJBiQS3m+1mAzR/AO7i/DrB5AEiSTeiCuS8wEGLiMOZrD7gLfl4+bn8U0K9AXlOrqT9/twxk85CmMRXgKoaueayOJfffi/53x8AUzMMEoJazBlqzMBFjKrExOzGPTzyp7xCzW48KQqmhRTVwSaYUdDMAv9YGIJpHJYCJBLiKdQXLF/sTBJCer3jh54aab0nzzAmQ2mH8Wn+P3nmidypOPbtRGMg7dG94dg0MUwAcNIAKJMPip2w40mQ+ueZUj9CsmlvYl8JmKcbW3LcbScFHBi47AMQoheRiZprJcKQ0Z8J09HMlw8xntbzZzzxHomRIczQ9YxGoTMme+pfQl1PfBqqNn6CejzpN8LNf3P9A/Ss0kVfLuht22KZHvlhwJxbT0bH13W7+obJjbhk7WOOe3t2LDa00eDx3BTncuVybqEkI4aoDED1xJABUk9eW/ChrSTSXyjF/mSSJebnuGZeCdHNYw19iGPpevXMgg1SfkYMSwSa5mALyz0zkwtIC1JSl2lcCVSYnNkmX82VqUMtiaBK88hjbB3Ir6H/MFXD/BRbbYNHdEVMLeGotWUceRukWIF1vgxgVQLHbN3gmZplvBTsaWEQyIPcVvBm6KTP4zAx95poSTSqFlJMDC3OxqZWYF9utqyonA9g7EwCrEqHgH9gCUxILU21RQh42mdiCvqsZv5auC5uv3Va7cI1uKo6mR+O5BIDaLGITxbkswdLkIADcu54gHCKDXLcQp6ZNB+gnOZAAKzXT2FDWltQxKAdK9sUAqmvefBjrDMp5NDMwsrF8p4DxKgWo9sJ1Xgwbf1EAXeukRrCvGfMgbwDxRLodkYuNnYl6spDS7jMXXwAPPm7F8thAwvZx/D232gHEW/5GZpOuApdNKON3dFPzzE2nI54z5385yeEfPAvZFR/9TmRp2bH/OnwZ2EYhBgFYW/JcAPCMCAAGsN4IwI4yJDBwYC0WABzBSAKAZ5YydQBwWLQBwCDhNwfwt+VsHAAMcVkAqwDbv/gjwADJS2BHc3+F/QAAAABJRU5ErkJggg==" width="80px" alt="ELLU" />--></a>
+                        </td>
+                    </tr>
+                    <!-- /Content footer -->
+                </table>
+            </center>
+        </td>
+    </tr>
+</table>
+</body>
 {% endautoescape %}
 {% endblock %}
