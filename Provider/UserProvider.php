@@ -50,7 +50,7 @@ class UserProvider implements UserProviderInterface
         }
 
         if (!$this->supportsClass(get_class($user))) {
-            throw new UnsupportedUserException(sprintf('Expected an instance of %s, but got "%s".', $this->userManager->getClass(), get_class($user)));
+            throw new UnsupportedUserException(sprintf('Expected an instance of %s, but got "%s".', $this->userManager->getEntityClass(), get_class($user)));
         }
 
         if (null === $reloadedUser = $this->userManager->findUserBy(['id' => $user->getId()])) {
@@ -65,7 +65,7 @@ class UserProvider implements UserProviderInterface
      */
     public function supportsClass($class)
     {
-        return $this->userManager->getClass() === $class || is_subclass_of($class, $this->userManager->getClass());
+        return $this->userManager->getEntityClass() === $class || is_subclass_of($class, $this->userManager->getEntityClass());
     }
 
     /**

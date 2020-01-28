@@ -81,13 +81,13 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
             $user = $this->userManager->findUserByEmail($response->getEmail());
             if ($user) {
                 $this->linkUser($user, $response);
-                $this->userManager->save($user);
+                $this->userManager->saveEntity($user);
                 return $user;
             }
 
             if ($this->oauthServices[$response->getResourceOwner()->getName()]['login_create']) {
                 $user = $this->createUser($response);
-                $this->userManager->save($user);
+                $this->userManager->saveEntity($user);
                 return $user;
             }
 
@@ -119,7 +119,7 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
             throw new \RuntimeException(sprintf('Could not determine access type for property "%s".', $property));
         }
 
-        $this->userManager->save($user);
+        $this->userManager->saveEntity($user);
     }
 
     /**
@@ -133,7 +133,7 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
         $property = $this->getProperty($response);
 
         $this->accessor->setValue($user, $property, null);
-        $this->userManager->save($user);
+        $this->userManager->saveEntity($user);
     }
 
     /**
@@ -159,7 +159,7 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
      */
     public function supportsClass($class)
     {
-        $userClass = $this->userManager->getClass();
+        $userClass = $this->userManager->getEntityClass();
 
         return $userClass === $class || is_subclass_of($class, $userClass);
     }
@@ -194,7 +194,7 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
     protected function createUser(UserResponseInterface $response): SoftspringUserInterface
     {
         /** @var SoftspringUserInterface $user */
-        $user = $this->userManager->create();
+        $user = $this->userManager->createEntity();
 //        $user->setLastLogin(new \DateTime());
 
         $user->setEnabled(true);

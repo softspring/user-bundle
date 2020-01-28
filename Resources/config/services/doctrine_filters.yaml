@@ -1,0 +1,16 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            $em: '@sfs_shop.entity_manager'
+            $storeRouteParamName: '%sfs_shop.store.route_param_name%'
+            $twigAppVariable: '@twig.app_variable'
+            $findParamName: '%sfs_shop.store.find_field_name%'
+
+    Softspring\ShopBundle\EventListener\StoreDoctrineFilterListener:
+        tags: ['kernel.event_subscriber']
+
+    Softspring\ShopBundle\EventListener\StoreRequestListener:
+        tags: ['kernel.event_subscriber']

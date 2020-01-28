@@ -51,7 +51,7 @@ class PreferencesController extends AbstractController
                     return $response;
                 }
 
-                $this->userManager->save($user);
+                $this->userManager->saveEntity($user);
 
                 if ($response = $this->dispatchGetResponse(SfsUserEvents::PREFERENCES_UPDATED, new GetResponseUserEvent($user, $request))) {
                     return $response;

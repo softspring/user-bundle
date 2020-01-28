@@ -19,19 +19,7 @@
         </thead>
 
         <tbody>
-        {% for administrator in administrators %}
-            <tr>
-                <td>{{ administrator.name }}</td>
-                <td>{{ administrator.surname }}</td>
-                <td>{{ administrator.username }}</td>
-                <td>{{ administrator.email }}</td>
-                <td>{{ administrator.lastLogin ? administrator.lastLogin|date('H:i d-m-Y') : 'not yet' }}</td>
-                <td>{{ administrator.roles|join(', ') }}</td>
-                <td>
-                    <a class="text-nowrap" href="{{ url('sfs_user_admin_administrators_details', {'administrator': administrator}) }}">details <span class="mdi mdi-18px mdi-eye-outline align-middle"></span></a>
-                </td>
-            </tr>
-        {% endfor %}
+        {% include '@SfsUser/admin/administrators/list-page.html.twig' %}
         </tbody>
     </table>
 {% endblock content %}

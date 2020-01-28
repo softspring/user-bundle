@@ -1,0 +1,66 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            $impersonateBarConfig: '%sfs_user.impersonate_bar%'
+
+    Softspring\UserBundle\Form\Admin\:
+        resource: '../../../../Form/Admin/User*'
+
+    Softspring\UserBundle\EventListener\Admin\:
+        resource: '../../../../EventListener/Admin/User*'
+
+    sfs_user.admin.user.controller:
+        class: Softspring\CrudlBundle\Controller\CrudlController
+        public: true
+        calls:
+            - { method: setContainer, arguments: ['@service_container'] }
+        arguments:
+            $manager: '@Softspring\UserBundle\Manager\UserManagerInterface'
+            $listFilterForm: '@Softspring\UserBundle\Form\Admin\UserListFilterFormInterface'
+#            $createForm: '@Softspring\UserBundle\Form\Admin\UserCreateFormInterface'
+#            $updateForm: '@Softspring\UserBundle\Form\Admin\UserUpdateFormInterface'
+            $deleteForm: '@Softspring\UserBundle\Form\Admin\UserDeleteFormInterface'
+            $config:
+                entity_attribute: 'user'
+                list:
+                    is_granted: 'ROLE_ADMIN_USERS_LIST'
+                    initialize_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_LIST_INITIALIZE
+                    view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_LIST_VIEW
+                    view: '@@SfsUser/admin/users/list.html.twig'
+                    view_page: '@@SfsUser/admin/users/list-page.html.twig'
+#                create:
+#                    initialize_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_CREATE_INITIALIZE
+#                    form_valid_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_CREATE_FORM_VALID
+#                    success_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_CREATE_SUCCESS
+#                    form_invalid_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_CREATE_FORM_INVALID
+#                    view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_CREATE_VIEW
+#                    success_redirect_to: 'sfs_user_admin_users_list'
+#                    view: '@@SfsUser/admin/users/create.html.twig'
+#                update:
+#                    param_converter_key: 'id'
+#                    initialize_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_UPDATE_INITIALIZE
+#                    form_valid_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_UPDATE_FORM_VALID
+#                    success_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_UPDATE_SUCCESS
+#                    form_invalid_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_UPDATE_FORM_INVALID
+#                    view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_UPDATE_VIEW
+#                    success_redirect_to: 'sfs_user_admin_users_list'
+#                    view: '@@SfsUser/admin/users/update.html.twig'
+                delete:
+                    is_granted: 'ROLE_ADMIN_USERS_DELETE'
+                    param_converter_key: 'id'
+                    initialize_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_DELETE_INITIALIZE
+                    form_valid_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_DELETE_FORM_VALID
+                    success_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_DELETE_SUCCESS
+                    form_invalid_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_DELETE_FORM_INVALID
+                    view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_DELETE_VIEW
+                    success_redirect_to: 'sfs_user_admin_users_list'
+                    view: '@@SfsUser/admin/users/delete.html.twig'
+                read:
+                    is_granted: 'ROLE_ADMIN_USERS_DETAILS'
+                    param_converter_key: 'id'
+                    initialize_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_DETAILS_INITIALIZE
+                    view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_DETAILS_VIEW
+                    view: '@@SfsUser/admin/users/details.html.twig'

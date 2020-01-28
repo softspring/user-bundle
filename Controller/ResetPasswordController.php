@@ -144,7 +144,7 @@ class ResetPasswordController extends AbstractController
 
                 $user->setPasswordRequestedAt(null);
                 $user->setPasswordRequestToken(null);
-                $this->userManager->save($user);
+                $this->userManager->saveEntity($user);
 
                 if ($response = $this->dispatchGetResponse(SfsUserEvents::RESET_SUCCESS, new GetResponseUserEvent($user, $request))) {
                     return $response;

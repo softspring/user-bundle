@@ -210,6 +210,26 @@ class SfsUserEvents
     const RESET_SUCCESS_VIEW = 'sfs_user.reset_success.view';
 
     /**
+     * @Event("Softspring\CoreBundle\Event\GetResponseRequestEvent")
+     */
+    const ADMIN_USERS_LIST_INITIALIZE = 'sfs_user.admin.users.list_initialize';
+
+    /**
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
+     */
+    const ADMIN_USERS_LIST_VIEW = 'sfs_user.admin.users.list_view';
+
+    /**
+     * @Event("Softspring\CoreBundle\Event\GetResponseRequestEvent")
+     */
+    const ADMIN_USERS_DETAILS_INITIALIZE = 'sfs_user.admin.users.details_initialize';
+
+    /**
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
+     */
+    const ADMIN_USERS_DETAILS_VIEW = 'sfs_user.admin.users.details_view';
+
+    /**
      * @Event("Softspring\UserBundle\Event\GetResponseUserEvent")
      */
     const ADMIN_USERS_DELETE_INITIALIZE = 'sfs_user.admin.users.delete_initialize';
@@ -233,4 +253,44 @@ class SfsUserEvents
      * @Event("Softspring\CoreBundle\Event\ViewEvent")
      */
     const ADMIN_USERS_DELETE_VIEW = 'sfs_user.admin.users.delete_view';
+
+    /**
+     * @Event("Softspring\UserBundle\Event\GetResponseUserEvent")
+     */
+    const ADMIN_USERS_PROMOTE_INITIALIZE = 'sfs_user.admin.users.promote_initialize';
+
+    /**
+     * @Event("Softspring\UserBundle\Event\GetResponseUserEvent")
+     */
+    const ADMIN_USERS_PROMOTE_SUCCESS = 'sfs_user.admin.users.promote_success';
+
+    /**
+     * @Event("Softspring\CoreBundle\Event\GetResponseRequestEvent")
+     */
+    const ADMIN_ADMINISTRATORS_LIST_INITIALIZE = 'sfs_user.admin.administrators.list_initialize';
+
+    /**
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
+     */
+    const ADMIN_ADMINISTRATORS_LIST_VIEW = 'sfs_user.admin.administrators.list_view';
+
+    /**
+     * @Event("Softspring\CoreBundle\Event\GetResponseRequestEvent")
+     */
+    const ADMIN_ADMINISTRATORS_DETAILS_INITIALIZE = 'sfs_user.admin.administrators.details_initialize';
+
+    /**
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
+     */
+    const ADMIN_ADMINISTRATORS_DETAILS_VIEW = 'sfs_user.admin.administrators.details_view';
+
+    /**
+     * @Event("Softspring\UserBundle\Event\GetResponseUserEvent")
+     */
+    const ADMIN_ADMINISTRATORS_DEMOTE_INITIALIZE = 'sfs_user.admin.administrators.demote_initialize';
+
+    /**
+     * @Event("Softspring\UserBundle\Event\GetResponseUserEvent")
+     */
+    const ADMIN_ADMINISTRATORS_DEMOTE_SUCCESS = 'sfs_user.admin.administrators.demote_success';
 }

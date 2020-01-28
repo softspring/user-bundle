@@ -59,7 +59,7 @@ class UserRegistrationListener implements EventSubscriberInterface
         }
 
         $user->setConfirmationToken($this->tokenGenerator->generateToken());
-        $this->userManager->save($user);
+        $this->userManager->saveEntity($user);
 
         $this->mailer->sendRegisterConfirmationEmail($user);
     }

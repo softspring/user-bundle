@@ -48,7 +48,7 @@ class LastLoginEventSubscriber implements EventSubscriberInterface
         $user = $event->getUser();
 
         $user->setLastLogin(new \DateTime());
-        $this->userManager->save($user);
+        $this->userManager->saveEntity($user);
     }
 
     /**
@@ -62,7 +62,7 @@ class LastLoginEventSubscriber implements EventSubscriberInterface
 
         if ($user instanceof UserInterface) {
             $user->setLastLogin(new \DateTime());
-            $this->userManager->save($user);
+            $this->userManager->saveEntity($user);
         }
     }
 }
