@@ -56,7 +56,7 @@ class PromoteUserCommand extends Command
             $user->setSuperAdmin(true);
         }
 
-        $this->userManager->save($user);
+        $this->userManager->saveEntity($user);
 
         $output->writeln(sprintf('User %s has been promoted', $username));
     }

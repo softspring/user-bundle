@@ -53,7 +53,7 @@ class MailTemplateLoader implements TemplateLoaderInterface
         // TODO SET FROM EMAIL AND NAME (WITH DEFAULT FALLBACK)
         $collection->addTemplate($template);
 
-        $userReflection = new \ReflectionClass($this->userManager->getClass());
+        $userReflection = new \ReflectionClass($this->userManager->getEntityClass());
         if ($userReflection->implementsInterface(ConfirmableInterface::class)) {
             $template = new Template();
             $template->setId('sfs_user.register_confirm');

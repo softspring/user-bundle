@@ -53,7 +53,8 @@ class UserManipulator
      */
     public function create(string $username, string $email, string $plainPassword, array $roles = [], bool $enabled = false, bool $admin = false, bool $superAdmin = false): UserInterface
     {
-        $user = $this->userManager->create();
+        /** @var UserInterface $user */
+        $user = $this->userManager->createEntity();
 
         $user->setUsername($username);
         $user->setEmail($email);
@@ -63,7 +64,7 @@ class UserManipulator
         $user->setAdmin($admin);
         $user->setSuperAdmin($superAdmin);
 
-        $this->userManager->save($user);
+        $this->userManager->saveEntity($user);
 
         $event = new UserEvent($user, $this->requestStack->getCurrentRequest());
         $this->eventDispatcher->dispatch($event, SfsUserEvents::USER_CREATED);

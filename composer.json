@@ -6,6 +6,7 @@
     "require": {
         "php": "^7.2",
         "softspring/core-bundle": "^1.1",
+        "softspring/crudl-bundle": "^1.0.1",
         "softspring/mailer-bundle": "^2.0@dev",
         "symfony/config": "^4.2",
         "symfony/console": "^4.2",

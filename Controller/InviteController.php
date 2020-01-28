@@ -80,7 +80,7 @@ class InviteController extends AbstractController
                 $invitation->setAcceptedAt(new \DateTime('now'));
                 $user->setEnabled(true);
 
-                $this->userManager->save($user);
+                $this->userManager->saveEntity($user);
                 $this->invitationManager->save($invitation);
 
                 if ($response = $this->dispatchGetResponse(SfsUserEvents::INVITATION_ACCEPTED, new GetResponseUserEvent($user, $request))) {

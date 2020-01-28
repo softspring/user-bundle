@@ -1,9 +1,9 @@
 sfs_user_admin_users_list:
-    controller: Softspring\UserBundle\Controller\Admin\UsersController::list
+    controller: sfs_user.admin.user.controller::list
     path: /
 
 sfs_user_admin_users_details:
-    controller: Softspring\UserBundle\Controller\Admin\UsersController::details
+    controller: sfs_user.admin.user.controller::read
     path: /{user}/details
 
 sfs_user_admin_users_promote_admin:
@@ -11,5 +11,5 @@ sfs_user_admin_users_promote_admin:
     path: /{user}/promote-admin
 
 sfs_user_admin_users_delete:
-    controller: Softspring\UserBundle\Controller\Admin\UsersController::delete
+    controller: sfs_user.admin.user.controller::delete
     path: /{user}/delete

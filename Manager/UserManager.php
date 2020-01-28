@@ -3,9 +3,9 @@
 namespace Softspring\UserBundle\Manager;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
 use Exception;
 use RuntimeException;
+use Softspring\CrudlBundle\Manager\CrudlEntityManagerTrait;
 use Softspring\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
@@ -34,53 +34,26 @@ class UserManager implements UserManagerInterface
         $this->encoderFactory = $encoderFactory;
     }
 
-    /**
-     * @return string
-     */
-    public function getClass(): string
-    {
-        $metadata = $this->em->getClassMetadata(UserInterface::class);
-        return $metadata->getName();
-    }
+    use CrudlEntityManagerTrait;
 
-    /**
-     * @return EntityRepository
-     */
-    public function getRepository(): EntityRepository
+    public function getTargetClass(): string
     {
-        /** @var EntityRepository $repo */
-        $repo = $this->em->getRepository(UserInterface::class);
-
-        return $repo;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function create(): UserInterface
-    {
-        $className = $this->getClass();
-        return new $className();
+        return UserInterface::class;
     }
 
     /**
      * @param UserInterface $user
      * @throws Exception
      */
-    public function save(UserInterface $user): void
+    public function saveEntity($user): void
     {
+        if (!$this->getEntityClassReflection()->isInstance($user)) {
+            throw new \InvalidArgumentException(sprintf('$user must be an instance of %s', $this->getEntityClass()));
+        }
+
         $this->hashPassword($user);
 
         $this->em->persist($user);
-        $this->em->flush();
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function delete(UserInterface $user): void
-    {
-        $this->em->remove($user);
         $this->em->flush();
     }
 

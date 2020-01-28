@@ -45,7 +45,7 @@ class RegisterController extends AbstractController
      */
     public function register(Request $request): Response
     {
-        $user = $this->userManager->create();
+        $user = $this->userManager->createEntity();
 
         if ($response = $this->dispatchGetResponse(SfsUserEvents::REGISTER_INITIALIZE, new GetResponseUserEvent($user, $request))) {
             return $response;
@@ -59,7 +59,7 @@ class RegisterController extends AbstractController
                     return $response;
                 }
 
-                $this->userManager->save($user);
+                $this->userManager->saveEntity($user);
 
                 if ($response = $this->dispatchGetResponse(SfsUserEvents::REGISTER_SUCCESS, new GetResponseUserEvent($user, $request))) {
                     return $response;
@@ -119,7 +119,7 @@ class RegisterController extends AbstractController
 
         $user->setConfirmationToken(null);
         $user->setConfirmedAt(new \DateTime('now'));
-        $this->userManager->save($user);
+        $this->userManager->saveEntity($user);
 
         if ($response = $this->dispatchGetResponse(SfsUserEvents::CONFIRMATION_SUCCESS, new GetResponseUserEvent($user, $request))) {
             return $response;
