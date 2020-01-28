@@ -5,7 +5,8 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
-        "softspring/core-bundle": "*",
+        "softspring/core-bundle": "^1.1",
+        "softspring/crudl-bundle": "^1.0.1",
         "softspring/mailer-bundle": "^2.0@dev",
         "symfony/config": "^4.2",
         "symfony/console": "^4.2",
@@ -19,7 +20,7 @@
     },
     "suggest": {
         "softspring/admin-bundle": "Use softspring admin templates",
-        "softspring/core-bundle": "Use softspring core bundle",
+        "softspring/crudl-bundle": "Use softspring crud+list features",
         "hwi/oauth-bundle": "Integrate oauth clients"
     },
     "autoload": {

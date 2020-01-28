@@ -13,7 +13,6 @@ use Softspring\UserBundle\Form\ResetPasswordRequestFormInterface;
 use Softspring\UserBundle\Model\PasswordRequestInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\SfsUserEvents;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -23,11 +22,6 @@ class ResetPasswordController extends AbstractController
      * @var UserManagerInterface
      */
     protected $userManager;
-
-    /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
 
     /**
      * @var ResetPasswordRequestFormInterface
@@ -46,16 +40,15 @@ class ResetPasswordController extends AbstractController
 
     /**
      * ResetPasswordController constructor.
-     * @param UserManagerInterface $userManager
-     * @param EventDispatcherInterface $eventDispatcher
+     *
+     * @param UserManagerInterface              $userManager
      * @param ResetPasswordRequestFormInterface $resetRequestForm
-     * @param int $resetTokenTTL
-     * @param ResetPasswordFormInterface $resetForm
+     * @param int                               $resetTokenTTL
+     * @param ResetPasswordFormInterface        $resetForm
      */
-    public function __construct(UserManagerInterface $userManager, EventDispatcherInterface $eventDispatcher, ResetPasswordRequestFormInterface $resetRequestForm, int $resetTokenTTL, ResetPasswordFormInterface $resetForm)
+    public function __construct(UserManagerInterface $userManager, ResetPasswordRequestFormInterface $resetRequestForm, int $resetTokenTTL, ResetPasswordFormInterface $resetForm)
     {
         $this->userManager = $userManager;
-        $this->eventDispatcher = $eventDispatcher;
         $this->resetRequestForm = $resetRequestForm;
         $this->resetTokenTTL = $resetTokenTTL;
         $this->resetForm = $resetForm;
@@ -98,7 +91,7 @@ class ResetPasswordController extends AbstractController
             'reset_form' => $form->createView(),
         ]);
 
-         $this->eventDispatcher->dispatch(new ViewEvent($viewData), SfsUserEvents::RESET_REQUEST_VIEW);
+         $this->dispatch(SfsUserEvents::RESET_REQUEST_VIEW, new ViewEvent($viewData));
 
         return $this->render('@SfsUser/reset_password/request.html.twig', $viewData->getArrayCopy());
     }
@@ -115,10 +108,10 @@ class ResetPasswordController extends AbstractController
             return $this->redirectToRoute('sfs_user_reset_password_request');
         }
 
-        $this->eventDispatcher->dispatch(new ViewEvent($viewData = new \ArrayObject([
+        $this->dispatch(SfsUserEvents::RESET_REQUESTED_VIEW, new ViewEvent($viewData = new \ArrayObject([
             'resetTokenTTL' => $this->resetTokenTTL,
             'requestedEmail' => $requestedEmail,
-        ])), SfsUserEvents::RESET_REQUESTED_VIEW);
+        ])));
 
         return $this->render('@SfsUser/reset_password/requested.html.twig', $viewData->getArrayCopy());
     }
@@ -151,7 +144,7 @@ class ResetPasswordController extends AbstractController
 
                 $user->setPasswordRequestedAt(null);
                 $user->setPasswordRequestToken(null);
-                $this->userManager->save($user);
+                $this->userManager->saveEntity($user);
 
                 if ($response = $this->dispatchGetResponse(SfsUserEvents::RESET_SUCCESS, new GetResponseUserEvent($user, $request))) {
                     return $response;
@@ -169,7 +162,7 @@ class ResetPasswordController extends AbstractController
             'reset_form' => $form->createView(),
         ]);
 
-        $this->eventDispatcher->dispatch(new ViewEvent($viewData), SfsUserEvents::RESET_VIEW);
+        $this->dispatch(SfsUserEvents::RESET_VIEW, new ViewEvent($viewData));
 
         return $this->render('@SfsUser/reset_password/reset.html.twig', $viewData->getArrayCopy());
     }
@@ -178,7 +171,7 @@ class ResetPasswordController extends AbstractController
     {
         $viewData = new \ArrayObject([]);
 
-        $this->eventDispatcher->dispatch(new ViewEvent($viewData), SfsUserEvents::RESET_SUCCESS_VIEW);
+        $this->dispatch(SfsUserEvents::RESET_SUCCESS_VIEW, new ViewEvent($viewData));
 
         return $this->render('@SfsUser/reset_password/success.html.twig', $viewData->getArrayCopy());
     }

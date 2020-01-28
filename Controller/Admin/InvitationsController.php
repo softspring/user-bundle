@@ -8,7 +8,6 @@ use Softspring\UserBundle\Form\Admin\InvitationFormInterface;
 use Softspring\UserBundle\Manager\UserInvitationManagerInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Softspring\UserBundle\Util\TokenGeneratorInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -18,11 +17,6 @@ class InvitationsController extends AbstractController
      * @var UserInvitationManagerInterface
      */
     protected $invitationManager;
-
-    /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
 
     /**
      * @var InvitationFormInterface
@@ -38,14 +32,12 @@ class InvitationsController extends AbstractController
      * InvitationsController constructor.
      *
      * @param UserInvitationManagerInterface $invitationManager
-     * @param EventDispatcherInterface       $eventDispatcher
      * @param InvitationFormInterface        $invitationForm
      * @param TokenGeneratorInterface        $tokenGenerator
      */
-    public function __construct(UserInvitationManagerInterface $invitationManager, EventDispatcherInterface $eventDispatcher, InvitationFormInterface $invitationForm, TokenGeneratorInterface $tokenGenerator)
+    public function __construct(UserInvitationManagerInterface $invitationManager, InvitationFormInterface $invitationForm, TokenGeneratorInterface $tokenGenerator)
     {
         $this->invitationManager = $invitationManager;
-        $this->eventDispatcher = $eventDispatcher;
         $this->invitationForm = $invitationForm;
         $this->tokenGenerator = $tokenGenerator;
     }
@@ -97,7 +89,7 @@ class InvitationsController extends AbstractController
                 $invitation->setInvitationToken($this->tokenGenerator->generateToken());
                 $this->invitationManager->save($invitation);
 
-                $this->eventDispatcher->dispatch(new UserInvitationEvent($invitation, $request), SfsUserEvents::USER_INVITED);
+                $this->dispatch(SfsUserEvents::USER_INVITED, new UserInvitationEvent($invitation, $request));
 
                 return $this->redirectToRoute('sfs_user_admin_invitations_list');
             }

@@ -10,7 +10,6 @@ use Softspring\UserBundle\Form\AcceptInvitationFormInterface;
 use Softspring\UserBundle\Manager\UserInvitationManagerInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\SfsUserEvents;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -27,11 +26,6 @@ class InviteController extends AbstractController
     protected $invitationManager;
 
     /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
-
-    /**
      * @var AcceptInvitationFormInterface
      */
     protected $acceptForm;
@@ -41,14 +35,12 @@ class InviteController extends AbstractController
      *
      * @param UserManagerInterface           $userManager
      * @param UserInvitationManagerInterface $invitationManager
-     * @param EventDispatcherInterface       $eventDispatcher
      * @param AcceptInvitationFormInterface  $acceptForm
      */
-    public function __construct(UserManagerInterface $userManager, UserInvitationManagerInterface $invitationManager, EventDispatcherInterface $eventDispatcher, AcceptInvitationFormInterface $acceptForm)
+    public function __construct(UserManagerInterface $userManager, UserInvitationManagerInterface $invitationManager, AcceptInvitationFormInterface $acceptForm)
     {
         $this->userManager = $userManager;
         $this->invitationManager = $invitationManager;
-        $this->eventDispatcher = $eventDispatcher;
         $this->acceptForm = $acceptForm;
     }
 
@@ -82,13 +74,13 @@ class InviteController extends AbstractController
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 $event = new FormEvent($form, $request);
-                $this->eventDispatcher->dispatch($event, SfsUserEvents::INVITATION_FORM_VALID);
+                $this->dispatch(SfsUserEvents::INVITATION_FORM_VALID, $event);
 
                 $invitation->setUser($user);
                 $invitation->setAcceptedAt(new \DateTime('now'));
                 $user->setEnabled(true);
 
-                $this->userManager->save($user);
+                $this->userManager->saveEntity($user);
                 $this->invitationManager->save($invitation);
 
                 if ($response = $this->dispatchGetResponse(SfsUserEvents::INVITATION_ACCEPTED, new GetResponseUserEvent($user, $request))) {

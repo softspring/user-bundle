@@ -20,23 +20,7 @@
         </thead>
 
         <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.name }}</td>
-                <td>{{ user.surname }}</td>
-                <td>{{ user.username }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.lastLogin ? user.lastLogin|date('H:i d-m-Y') : 'not yet' }}</td>
-                <td>{{ user.roles|join(', ') }}</td>
-                <td>
-                    <a href="{{ url('sfs_user_admin_users_details', {'user': user}) }}" class="text-nowrap">{{ 'admin_users.list.actions.details.link'|trans }} <span class="mdi mdi-18px mdi-eye-outline align-middle"></span></a>
-
-                    {% if switch_enabled and is_granted(switch_role) %}
-                        <a href="{{ url(switch_route, switch_route_params) }}{{ switch_route_params|length ? '&' : '?' }}{{ switch_parameter }}={{ user.username }}" class="ml-2 text-nowrap">view as {{ user.username }} <span class="mdi mdi-18px mdi-account-switch align-middle"></span></a>
-                    {% endif %}
-                </td>
-            </tr>
-        {% endfor %}
+            {% include '@SfsUser/admin/users/list-page.html.twig' %}
         </tbody>
     </table>
 {% endblock content %}

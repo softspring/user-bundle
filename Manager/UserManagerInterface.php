@@ -3,36 +3,12 @@
 namespace Softspring\UserBundle\Manager;
 
 use Doctrine\ORM\EntityRepository;
+use Softspring\CrudlBundle\Manager\CrudlEntityManagerInterface;
 use Softspring\UserBundle\Model\ConfirmableInterface;
 use Softspring\UserBundle\Model\UserInterface;
 
-interface UserManagerInterface
+interface UserManagerInterface extends CrudlEntityManagerInterface
 {
-    /**
-     * @return string
-     */
-    public function getClass(): string;
-
-    /**
-     * @return EntityRepository
-     */
-    public function getRepository(): EntityRepository;
-
-    /**
-     * @return UserInterface
-     */
-    public function create(): UserInterface;
-
-    /**
-     * @param UserInterface $user
-     */
-    public function save(UserInterface $user): void;
-
-    /**
-     * @param UserInterface $user
-     */
-    public function delete(UserInterface $user): void;
-
     /**
      * @param array $criteria
      *

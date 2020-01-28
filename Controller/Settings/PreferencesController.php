@@ -1,6 +1,6 @@
 <?php
 
-namespace Softspring\UserBundle\Controller;
+namespace Softspring\UserBundle\Controller\Settings;
 
 use Softspring\CoreBundle\Controller\AbstractController;
 use Softspring\CoreBundle\Event\GetResponseFormEvent;
@@ -9,7 +9,6 @@ use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Form\PreferencesFormInterface;
 use Softspring\UserBundle\SfsUserEvents;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -21,25 +20,19 @@ class PreferencesController extends AbstractController
     protected $userManager;
 
     /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
-
-    /**
      * @var PreferencesFormInterface
      */
     protected $preferencesForm;
 
     /**
      * PreferencesController constructor.
-     * @param UserManagerInterface $userManager
-     * @param EventDispatcherInterface $eventDispatcher
+     *
+     * @param UserManagerInterface     $userManager
      * @param PreferencesFormInterface $preferencesForm
      */
-    public function __construct(UserManagerInterface $userManager, EventDispatcherInterface $eventDispatcher, PreferencesFormInterface $preferencesForm)
+    public function __construct(UserManagerInterface $userManager, PreferencesFormInterface $preferencesForm)
     {
         $this->userManager = $userManager;
-        $this->eventDispatcher = $eventDispatcher;
         $this->preferencesForm = $preferencesForm;
     }
 
@@ -58,7 +51,7 @@ class PreferencesController extends AbstractController
                     return $response;
                 }
 
-                $this->userManager->save($user);
+                $this->userManager->saveEntity($user);
 
                 if ($response = $this->dispatchGetResponse(SfsUserEvents::PREFERENCES_UPDATED, new GetResponseUserEvent($user, $request))) {
                     return $response;

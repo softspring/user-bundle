@@ -1,6 +1,6 @@
 <?php
 
-namespace Softspring\UserBundle\Controller;
+namespace Softspring\UserBundle\Controller\Settings;
 
 use Softspring\CoreBundle\Controller\AbstractController;
 use Softspring\CoreBundle\Event\GetResponseFormEvent;
@@ -8,7 +8,6 @@ use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\SfsUserEvents;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,11 +19,6 @@ class ChangeEmailController extends AbstractController
     protected $userManager;
 
     /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
-
-    /**
      * @var array
      */
     protected $changeEmailConfig;
@@ -32,14 +26,12 @@ class ChangeEmailController extends AbstractController
     /**
      * ChangeEmailController constructor.
      *
-     * @param UserManagerInterface     $userManager
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param array                    $changeEmailConfig
+     * @param UserManagerInterface $userManager
+     * @param array                $changeEmailConfig
      */
-    public function __construct(UserManagerInterface $userManager, EventDispatcherInterface $eventDispatcher, array $changeEmailConfig)
+    public function __construct(UserManagerInterface $userManager, array $changeEmailConfig)
     {
         $this->userManager = $userManager;
-        $this->eventDispatcher = $eventDispatcher;
         $this->changeEmailConfig = $changeEmailConfig;
     }
 
@@ -58,7 +50,7 @@ class ChangeEmailController extends AbstractController
                     return $response;
                 }
 
-                $this->userManager->save($user);
+                $this->userManager->saveEntity($user);
 
                 if ($response = $this->dispatchGetResponse(SfsUserEvents::CHANGE_EMAIL_UPDATED, new GetResponseUserEvent($user, $request))) {
                     return $response;

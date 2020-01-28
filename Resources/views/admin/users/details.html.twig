@@ -5,11 +5,21 @@
     <h1 class="h3 mb-4">{{ user.name }} {{ user.surname }}</h1>
 
     <div class="text-right">
-        <a href="{{ url('sfs_user_admin_users_promote_admin', {'user':user}) }}" class="btn btn-outline-secondary">Promote Admin</a>
+        {% if is_granted('ROLE_ADMIN_USERS_PROMOTE', user) %}
+            <a href="{{ url('sfs_user_admin_users_promote_admin', {'user':user}) }}" class="btn btn-outline-secondary">Promote Admin</a>
+        {% endif %}
+
         <a href="#" class="btn btn-outline-secondary disabled">Edit</a>
         <a href="#" class="btn btn-outline-secondary disabled">Reset password</a>
         <a href="#" class="btn btn-outline-secondary disabled">Manual password</a>
-        <a href="{{ url('sfs_user_admin_users_delete', {'user':user}) }}" class="btn btn-outline-secondary">Delete</a>
+
+        {% if is_granted('ROLE_ADMIN_USERS_DELETE', user) %}
+            <a href="{{ url('sfs_user_admin_users_delete', {'user':user}) }}" class="btn btn-outline-secondary">Delete</a>
+        {% endif %}
+
+        {% if switch_enabled and is_granted(switch_role) %}
+            <a href="{{ url(switch_route, switch_route_params) }}{{ switch_route_params|length ? '&' : '?' }}{{ switch_parameter }}={{ user.username }}" class="ml-2 text-nowrap">view as {{ user.username }} <span class="mdi mdi-18px mdi-account-switch align-middle"></span></a>
+        {% endif %}
     </div>
 
     <p><strong>name:</strong> {{ user.name }}</p>

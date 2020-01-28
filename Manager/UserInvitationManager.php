@@ -67,7 +67,8 @@ class UserInvitationManager implements UserInvitationManagerInterface
      */
     public function createUser(UserInvitationInterface $invitation): UserInterface
     {
-        $user = $this->userManager->create();
+        /** @var UserInterface $user */
+        $user = $this->userManager->createEntity();
 
         $user->setUsername($invitation->getUsername());
         $user->setEmail($invitation->getEmail());

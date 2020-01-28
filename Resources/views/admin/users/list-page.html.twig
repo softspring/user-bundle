@@ -1,0 +1,16 @@
+{% trans_default_domain 'sfs_user' %}
+{% for user in entities %}
+    <tr>
+        <td>{{ user.name }}</td>
+        <td>{{ user.surname }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.lastLogin ? user.lastLogin|date('H:i d-m-Y') : 'not yet' }}</td>
+        <td>{{ user.roles|join(', ') }}</td>
+        <td>
+            {% if is_granted('ROLE_ADMIN_USERS_DETAILS', user) %}
+                <a href="{{ url('sfs_user_admin_users_details', {'user': user}) }}" class="text-nowrap">{{ 'admin_users.list.actions.details.link'|trans }} <span class="mdi mdi-18px mdi-eye-outline align-middle"></span></a>
+            {% endif %}
+        </td>
+    </tr>
+{% endfor %}

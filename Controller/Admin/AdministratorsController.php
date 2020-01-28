@@ -3,8 +3,9 @@
 namespace Softspring\UserBundle\Controller\Admin;
 
 use Softspring\CoreBundle\Controller\AbstractController;
+use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Manager\UserManagerInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -16,55 +17,13 @@ class AdministratorsController extends AbstractController
     protected $userManager;
 
     /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
-
-    /**
-     * UsersController constructor.
+     * AdministratorsController constructor.
      *
-     * @param UserManagerInterface     $userManager
-     * @param EventDispatcherInterface $eventDispatcher
+     * @param UserManagerInterface $userManager
      */
-    public function __construct(UserManagerInterface $userManager, EventDispatcherInterface $eventDispatcher)
+    public function __construct(UserManagerInterface $userManager)
     {
         $this->userManager = $userManager;
-        $this->eventDispatcher = $eventDispatcher;
-    }
-
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
-    public function list(Request $request): Response
-    {
-        $repo = $this->userManager->getRepository();
-
-        $administrators = $repo->findBy(['admin' => true]);
-
-        return $this->render('@SfsUser/admin/administrators/list.html.twig', [
-            'administrators' => $administrators,
-        ]);
-    }
-
-    /**
-     * @param string  $administrator
-     * @param Request $request
-     *
-     * @return Response
-     */
-    public function details(string $administrator, Request $request): Response
-    {
-        $administrator = $this->userManager->findUserBy(['id' => $administrator]);
-
-        if (!$administrator->isAdmin()) {
-            return $this->redirectToRoute('sfs_user_admin_administrators_list');
-        }
-
-        return $this->render('@SfsUser/admin/administrators/details.html.twig', [
-            'administrator' => $administrator,
-        ]);
     }
 
     /**
@@ -77,11 +36,25 @@ class AdministratorsController extends AbstractController
     {
         $administrator = $this->userManager->findUserBy(['id' => $administrator]);
 
+        $this->denyAccessUnlessGranted('ROLE_ADMIN_ADMINISTRATORS_DEMOTE', $administrator);
+
+        if ($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_ADMINISTRATORS_DEMOTE_INITIALIZE, new GetResponseUserEvent($administrator, $request))) {
+            return $response;
+        }
+
         if ($administrator->isAdmin()) {
             $administrator->setAdmin(false);
             $this->getDoctrine()->getManager()->flush();
         }
 
-        return $this->redirectToRoute('sfs_user_admin_users_list');
+        if ($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_ADMINISTRATORS_DEMOTE_SUCCESS, new GetResponseUserEvent($administrator, $request))) {
+            return $response;
+        }
+
+        if ($this->isGranted('ROLE_ADMIN_USERS_LIST')) {
+            return $this->redirectToRoute('sfs_user_admin_users_list');
+        } else {
+            return $this->redirectToRoute('sfs_user_admin_administrators_list');
+        }
     }
 }

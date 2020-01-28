@@ -1,6 +1,6 @@
 <?php
 
-namespace Softspring\UserBundle\Controller;
+namespace Softspring\UserBundle\Controller\Settings;
 
 use Softspring\CoreBundle\Controller\AbstractController;
 use Softspring\CoreBundle\Event\GetResponseFormEvent;
@@ -9,7 +9,6 @@ use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Form\ChangePasswordFormInterface;
 use Softspring\UserBundle\SfsUserEvents;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -21,11 +20,6 @@ class ChangePasswordController extends AbstractController
     protected $userManager;
 
     /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
-
-    /**
      * @var ChangePasswordFormInterface
      */
     protected $changePasswordForm;
@@ -34,13 +28,11 @@ class ChangePasswordController extends AbstractController
      * ChangePasswordController constructor.
      *
      * @param UserManagerInterface        $userManager
-     * @param EventDispatcherInterface    $eventDispatcher
      * @param ChangePasswordFormInterface $changePasswordForm
      */
-    public function __construct(UserManagerInterface $userManager, EventDispatcherInterface $eventDispatcher, ChangePasswordFormInterface $changePasswordForm)
+    public function __construct(UserManagerInterface $userManager, ChangePasswordFormInterface $changePasswordForm)
     {
         $this->userManager = $userManager;
-        $this->eventDispatcher = $eventDispatcher;
         $this->changePasswordForm = $changePasswordForm;
     }
 
@@ -59,7 +51,7 @@ class ChangePasswordController extends AbstractController
                     return $response;
                 }
 
-                $this->userManager->save($user);
+                $this->userManager->saveEntity($user);
 
                 if ($response = $this->dispatchGetResponse(SfsUserEvents::CHANGE_PASSWORD_UPDATED, new GetResponseUserEvent($user, $request))) {
                     return $response;

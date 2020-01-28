@@ -64,7 +64,7 @@ class SendResetPasswordEmailListener implements EventSubscriberInterface
 
         $user->setPasswordRequestToken($this->tokenGenerator->generateToken());
         $user->setPasswordRequestedAt(new \DateTime('now'));
-        $this->userManager->save($user);
+        $this->userManager->saveEntity($user);
     }
 
     public function sendResetEmail(GetResponseFormEvent $event)
