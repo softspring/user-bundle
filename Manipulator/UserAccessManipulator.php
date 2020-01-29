@@ -29,13 +29,13 @@ class UserAccessManipulator
      */
     public function register(UserInterface $user, Request $request): UserAccessInterface
     {
-        $userAccess = $this->userAccessManager->create();
+        $userAccess = $this->userAccessManager->createEntity();
         $userAccess->setUser($user);
         $userAccess->setLoginAt(new \DateTime('now'));
         $userAccess->setIp($request->getClientIp());
         $userAccess->setUserAgent($request->headers->get('User-Agent'));
 
-        $this->userAccessManager->save($userAccess);
+        $this->userAccessManager->saveEntity($userAccess);
 
         return $userAccess;
     }

@@ -2,22 +2,9 @@
 
 namespace Softspring\UserBundle\Manager;
 
-use Softspring\UserBundle\Model\UserAccessInterface;
+use Softspring\CrudlBundle\Manager\CrudlEntityManagerInterface;
 
-interface UserAccessManagerInterface
+interface UserAccessManagerInterface extends CrudlEntityManagerInterface
 {
-    /**
-     * @inheritdoc
-     */
-    public function getClass(): string;
 
-    /**
-     * @inheritdoc
-     */
-    public function create(): UserAccessInterface;
-
-    /**
-     * @param UserAccessInterface $userAccess
-     */
-    public function save(UserAccessInterface $userAccess): void;
 }

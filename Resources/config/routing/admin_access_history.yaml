@@ -1,0 +1,3 @@
+sfs_user_admin_access_history_list:
+    controller: sfs_user.admin.access_history.controller::list
+    path: /
