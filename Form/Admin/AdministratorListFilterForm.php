@@ -45,6 +45,8 @@ class AdministratorListFilterForm extends EntityListFilterForm implements Admini
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        parent::buildForm($builder, $options);
+
         $named = $this->userManager->getEntityClassReflection()->implementsInterface(NameSurnameInterface::class);
 
         if ($this->userManager->getRepository() instanceof FilterRepositoryInterface) {

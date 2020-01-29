@@ -43,6 +43,8 @@ class AccessHistoryListFilterForm extends EntityListFilterForm implements Access
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        parent::buildForm($builder, $options);
+
         $builder->add('search', SubmitType::class);
     }
 
