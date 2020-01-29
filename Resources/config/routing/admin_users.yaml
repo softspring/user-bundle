@@ -6,6 +6,10 @@ sfs_user_admin_users_details:
     controller: sfs_user.admin.user.controller::read
     path: /{user}/details
 
+sfs_user_admin_users_update:
+    controller: sfs_user.admin.user.controller::update
+    path: /{user}/update
+
 sfs_user_admin_users_promote_admin:
     controller: Softspring\UserBundle\Controller\Admin\UsersController::promoteAdmin
     path: /{user}/promote-admin

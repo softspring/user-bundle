@@ -23,35 +23,49 @@
     <p><strong>role:</strong> {{ administrator.roles|join(', ') }}</p>
 
     <div class="row">
-        <div class="col-4">
-            <div class="card">
-                <div class="card-header">
-                    <h4>Accounts</h4>
-                </div>
-                <div class="card-body">
-                    <p><i>TODO</i></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="card">
-                <div class="card-header">
-                    <h4>Latest access</h4>
-                </div>
-                <div class="card-body">
-                    <p><i>TODO</i></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="card">
-                <div class="card-header">
-                    <h4>Emails sent</h4>
-                </div>
-                <div class="card-body">
-                    <p><i>TODO</i></p>
+        {% if multi_accounted_user %}
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Accounts</h4>
+                    </div>
+                    <div class="card-body">
+                        {% if user.relations.count %}
+                            <ul>
+                                {% for relation in user.relations %}
+                                    <li>
+                                        {{ relation.account.name }}
+                                        {% if relation.grantedBy != relation.user %}
+                                            (granted by {{ relation.grantedBy.username }})
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p><em>This user is not associated to any account</em></p>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
-        </div>
+        {% endif %}
+
+        {% if user_access_history is defined %}
+            <div class="col">
+                {% include '@SfsUser/admin/components/_user_access_history_card.html.twig' %}
+            </div>
+        {% endif %}
+
+        {% if false %}
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Emails sent</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><i>TODO</i></p>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
     </div>
 {% endblock content %}

@@ -5,7 +5,7 @@ namespace Softspring\UserBundle\Model;
 /**
  * Class User
  */
-class User implements UserInterface
+abstract class User implements UserInterface
 {
     /**
      * @var mixed

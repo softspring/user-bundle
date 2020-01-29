@@ -55,7 +55,7 @@ class Configuration implements ConfigurationInterface
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->booleanNode('enabled')->defaultTrue()->end()
-                        ->scalarNode('class')->defaultNull()->end()
+                        ->scalarNode('class')->defaultValue('App\\Entity\\UserAccess')->end()
                     ->end()
                 ->end()
 

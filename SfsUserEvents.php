@@ -257,6 +257,31 @@ class SfsUserEvents
     /**
      * @Event("Softspring\UserBundle\Event\GetResponseUserEvent")
      */
+    const ADMIN_USERS_UPDATE_INITIALIZE = 'sfs_user.admin.users.update_initialize';
+
+    /**
+     * @Event("Softspring\UserBundle\Event\GetResponseFormEvent")
+     */
+    const ADMIN_USERS_UPDATE_FORM_VALID = 'sfs_user.admin.users.update_form_valid';
+
+    /**
+     * @Event("Softspring\UserBundle\Event\GetResponseUserEvent")
+     */
+    const ADMIN_USERS_UPDATE_SUCCESS = 'sfs_user.admin.users.update_success';
+
+    /**
+     * @Event("Softspring\UserBundle\Event\GetResponseFormEvent")
+     */
+    const ADMIN_USERS_UPDATE_FORM_INVALID = 'sfs_user.admin.users.update_form_invalid';
+
+    /**
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
+     */
+    const ADMIN_USERS_UPDATE_VIEW = 'sfs_user.admin.users.update_view';
+
+    /**
+     * @Event("Softspring\UserBundle\Event\GetResponseUserEvent")
+     */
     const ADMIN_USERS_PROMOTE_INITIALIZE = 'sfs_user.admin.users.promote_initialize';
 
     /**

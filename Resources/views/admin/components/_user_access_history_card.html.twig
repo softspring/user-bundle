@@ -1,0 +1,30 @@
+<div class="card">
+    <div class="card-header">
+        <h4>Latest access</h4>
+    </div>
+    <div class="card-body">
+        {% if not user_access_history|length %}
+            <p>User has not access yet</p>
+        {% else %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Login at</th>
+                    <th>IP</th>
+                    <th>User agent</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for access in user_access_history %}
+                    <tr>
+                        <td>{{ access.loginAt|date('H:i:s d-m-Y') }}</td>
+                        <td>{{ access.ip }}</td>
+                        <td>{{ access.userAgent }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+</div>
