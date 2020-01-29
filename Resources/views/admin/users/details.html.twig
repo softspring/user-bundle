@@ -9,9 +9,12 @@
             <a href="{{ url('sfs_user_admin_users_promote_admin', {'user':user}) }}" class="btn btn-outline-secondary">Promote Admin</a>
         {% endif %}
 
-        <a href="#" class="btn btn-outline-secondary disabled">Edit</a>
+        {% if is_granted('ROLE_ADMIN_USERS_UPDATE', user) %}
+            <a href="{{ url('sfs_user_admin_users_update', {'user': user}) }}" class="btn btn-outline-secondary">Edit</a>
+        {% endif %}
+
         <a href="#" class="btn btn-outline-secondary disabled">Reset password</a>
-        <a href="#" class="btn btn-outline-secondary disabled">Manual password</a>
+{#        <a href="#" class="btn btn-outline-secondary disabled">Manual password</a>#}
 
         {% if is_granted('ROLE_ADMIN_USERS_DELETE', user) %}
             <a href="{{ url('sfs_user_admin_users_delete', {'user':user}) }}" class="btn btn-outline-secondary">Delete</a>
@@ -56,16 +59,13 @@
         </div>
         {% endif %}
 
-        <div class="col">
-            <div class="card">
-                <div class="card-header">
-                    <h4>Latest access</h4>
-                </div>
-                <div class="card-body">
-                    <p><i>TODO</i></p>
-                </div>
+        {% if user_access_history is defined %}
+            <div class="col">
+                {% include '@SfsUser/admin/components/_user_access_history_card.html.twig' %}
             </div>
-        </div>
+        {% endif %}
+
+        {% if false %}
         <div class="col">
             <div class="card">
                 <div class="card-header">
@@ -76,5 +76,6 @@
                 </div>
             </div>
         </div>
+        {% endif %}
     </div>
 {% endblock content %}

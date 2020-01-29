@@ -3,6 +3,8 @@ services:
         autowire: true
         autoconfigure: true
         public: false
+        bind:
+            $impersonateBarConfig: '%sfs_user.impersonate_bar%'
 
     Softspring\UserBundle\Form\Admin\:
         resource: '../../../../Form/Admin/Admin*'

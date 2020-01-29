@@ -5,7 +5,7 @@ namespace Softspring\UserBundle\Model;
 /**
  * Class UserAccess
  */
-class UserAccess implements UserAccessInterface
+abstract class UserAccess implements UserAccessInterface
 {
     /**
      * @var mixed

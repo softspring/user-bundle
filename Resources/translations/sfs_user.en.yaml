@@ -126,6 +126,14 @@ admin_users:
             email.header: "Email"
             lastLogin.header: "Last login"
             role.header: "Role"
+        filter_form:
+            name_like.label: "Name"
+            surname_like.label: "Surname"
+            email_like.label: "Email"
+            name.label: "Name"
+            surname.label: "Surname"
+            email.label: "Email"
+            search.label: "Search"
         actions:
             details:
                 link: "details"
@@ -136,6 +144,15 @@ admin_users:
             cancel: "Cancel"
         form:
             deleteOwnedAccounts.label: "Delete owned accounts?"
+    update:
+        actions:
+            update.button: "Save changes"
+            cancel: "Cancel"
+        form:
+            name.label: "Name"
+            surname.label: "Surname"
+            username.label: "Username"
+            email.label: "Email"
 
 admin_administrators:
     list:
@@ -146,6 +163,14 @@ admin_administrators:
             email.header: "Email"
             lastLogin.header: "Last login"
             role.header: "Role"
+        filter_form:
+            name_like.label: "Name"
+            surname_like.label: "Surname"
+            email_like.label: "Email"
+            name.label: "Name"
+            surname.label: "Surname"
+            email.label: "Email"
+            search.label: "Search"
 
 admin_invitations:
     list:

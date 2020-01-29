@@ -1,10 +1,25 @@
 {% trans_default_domain 'sfs_user' %}
 {% extends '@SfsUser/admin_layout.html.twig' %}
 
+{% form_theme filterForm 'form/form_app_horizontal.html.twig' %}
+
 {% block content %}
     <div class="d-flex align-items-center justify-content-between mb-4">
         <h1 class="h3">Users</h1>
     </div>
+
+    {{ form_start(filterForm) }}
+    <div class="row">
+        {% if filterForm.name_like is defined %}<div class="col">{{ form_row(filterForm.name_like) }}</div>{% endif %}
+        {% if filterForm.name is defined %}<div class="col">{{ form_row(filterForm.name) }}</div>{% endif %}
+        {% if filterForm.surname_like is defined %}<div class="col">{{ form_row(filterForm.surname_like) }}</div>{% endif %}
+        {% if filterForm.surname is defined %}<div class="col">{{ form_row(filterForm.surname) }}</div>{% endif %}
+        {% if filterForm.email_like is defined %}<div class="col">{{ form_row(filterForm.email_like) }}</div>{% endif %}
+        <div class="col">{{ form_row(filterForm.search) }}</div>
+    </div>
+    {{ form_widget(filterForm) }}
+    {{ form_rest(filterForm) }}
+    {{ form_end(filterForm) }}
 
     <table class="table">
         <thead>
@@ -22,5 +37,21 @@
         <tbody>
             {% include '@SfsUser/admin/users/list-page.html.twig' %}
         </tbody>
+
+        {% if entities.pages|default(false) %}
+            <tfoot>
+            <tr>
+                <td colspan="20">
+                    {% if entities.prevPage %}
+                        <a href="{{ url('sfs_user_admin_users_list', app.request.query.all|merge({ page: entities.prevPage })) }}" title="Prev page"><span class="mdi mdi-24px mdi-chevron-left"></span></a>
+                    {% endif %}
+
+                    {% if entities.nextPage %}
+                        <a class="float-right" href="{{ url('sfs_user_admin_users_list', app.request.query.all|merge({ page: entities.nextPage })) }}" title="Next page"><span class="mdi mdi-24px mdi-chevron-right"></span></a>
+                    {% endif %}
+                </td>
+            </tr>
+            </tfoot>
+        {% endif %}
     </table>
 {% endblock content %}

@@ -1,0 +1,14 @@
+{% trans_default_domain 'sfs_user' %}
+{% extends '@SfsUser/admin_layout.html.twig' %}
+
+{% block content %}
+    <h2>{{ user.name }}</h2>
+
+    {{ form_start(form) }}
+    {{ form_rest(form) }}
+    <a href="{{ url('sfs_user_admin_users_details', {'user':user}) }}" class="btn btn-outline-secondary">{{ 'admin_users.update.actions.cancel'|trans }}</a>
+    <input type="submit" value="{{ 'admin_users.update.actions.update.button'|trans }}" class="btn btn-primary" />
+    {{ form_end(form) }}
+
+
+{% endblock content %}

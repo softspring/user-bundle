@@ -5,7 +5,7 @@ namespace Softspring\UserBundle\Model;
 /**
  * Class User
  */
-class UserInvitation implements UserInvitationInterface
+abstract class UserInvitation implements UserInvitationInterface
 {
     /**
      * @var mixed|null

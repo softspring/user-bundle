@@ -126,6 +126,14 @@ admin_users:
             email.header: "Email"
             lastLogin.header: "Última entrada"
             role.header: "Rol"
+        filter_form:
+            name_like.label: "Nombre"
+            surname_like.label: "Apellidos"
+            email_like.label: "Email"
+            name.label: "Nombre"
+            surname.label: "Apellidos"
+            email.label: "Email"
+            search.label: "Buscar"
         actions:
             details:
                 link: "detalles"
@@ -136,6 +144,15 @@ admin_users:
             cancel: "Cancelar"
         form:
             deleteOwnedAccounts.label: "¿Eliminar las cuentas asociadas de las que es propietario/a?"
+    update:
+        actions:
+            update.button: "Guardar cambios"
+            cancel: "Cancelar"
+        form:
+            name.label: "Nombre"
+            surname.label: "Apellidos"
+            username.label: "Username"
+            email.label: "Email"
 
 admin_administrators:
     list:
@@ -146,6 +163,14 @@ admin_administrators:
             email.header: "Email"
             lastLogin.header: "Última entrada"
             role.header: "Rol"
+        filter_form:
+            name_like.label: "Nombre"
+            surname_like.label: "Apellidos"
+            email_like.label: "Email"
+            name.label: "Nombre"
+            surname.label: "Apellidos"
+            email.label: "Email"
+            search.label: "Buscar"
 
 admin_invitations:
     list:

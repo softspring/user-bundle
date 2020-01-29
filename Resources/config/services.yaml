@@ -34,9 +34,6 @@ services:
     Softspring\UserBundle\Mailer\MailerInterface:
         class: Softspring\UserBundle\Mailer\MailerTemplate
 
-    Softspring\UserBundle\Manager\UserAccessManagerInterface:
-        class: Softspring\UserBundle\Manager\UserAccessManager
-
     Softspring\UserBundle\Manager\UserInvitationManagerInterface:
         class: Softspring\UserBundle\Manager\UserInvitationManager
 

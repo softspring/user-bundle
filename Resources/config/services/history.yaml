@@ -6,3 +6,6 @@ services:
 
     Softspring\UserBundle\Manipulator\UserAccessManipulator: ~
     Softspring\UserBundle\EventListener\UserAccessEventSubscriber: ~
+
+    Softspring\UserBundle\Manager\UserAccessManagerInterface:
+        class: Softspring\UserBundle\Manager\UserAccessManager
