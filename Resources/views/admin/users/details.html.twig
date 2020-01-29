@@ -59,7 +59,7 @@
         </div>
         {% endif %}
 
-        {% if user_access_history is defined %}
+        {% if is_granted('ROLE_ADMIN_ACCESS_HISTORY_LIST') and user_access_history is defined %}
             <div class="col">
                 {% include '@SfsUser/admin/components/_user_access_history_card.html.twig' %}
             </div>
