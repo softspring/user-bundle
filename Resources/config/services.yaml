@@ -19,6 +19,7 @@ services:
 
     Softspring\UserBundle\Controller\:
         resource: '../../Controller/*'
+        exclude:  '../../Controller/Admin/*'
         public: true
 
     Softspring\UserBundle\EventListener\AutoAuthenticateEventSubscriber: ~
@@ -30,6 +31,7 @@ services:
 
     Softspring\UserBundle\Form\:
         resource: '../../Form/*'
+        exclude:  '../../Form/Admin/*'
 
     Softspring\UserBundle\Mailer\MailerInterface:
         class: Softspring\UserBundle\Mailer\MailerTemplate
