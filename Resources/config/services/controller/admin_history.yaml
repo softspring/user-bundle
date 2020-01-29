@@ -1,0 +1,25 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Softspring\UserBundle\Form\Admin\:
+        resource: '../../../../Form/Admin/AccessHistory*'
+
+    sfs_user.admin.access_history.controller:
+        class: Softspring\CrudlBundle\Controller\CrudlController
+        public: true
+        calls:
+            - { method: setContainer, arguments: ['@service_container'] }
+        arguments:
+            $manager: '@Softspring\UserBundle\Manager\UserAccessManagerInterface'
+            $listFilterForm: '@Softspring\UserBundle\Form\Admin\AccessHistoryListFilterFormInterface'
+            $config:
+                entity_attribute: 'access'
+                list:
+                    is_granted: 'ROLE_ADMIN_ACCESS_HISTORY_LIST'
+                    initialize_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ACCESS_HISTORY_LIST_INITIALIZE
+                    view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ACCESS_HISTORY_LIST_VIEW
+                    view: '@@SfsUser/admin/access-history/list.html.twig'
+                    view_page: '@@SfsUser/admin/access-history/list-page.html.twig'

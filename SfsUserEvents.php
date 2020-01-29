@@ -318,4 +318,14 @@ class SfsUserEvents
      * @Event("Softspring\UserBundle\Event\GetResponseUserEvent")
      */
     const ADMIN_ADMINISTRATORS_DEMOTE_SUCCESS = 'sfs_user.admin.administrators.demote_success';
+
+    /**
+     * @Event("Softspring\CoreBundle\Event\GetResponseRequestEvent")
+     */
+    const ADMIN_ACCESS_HISTORY_LIST_INITIALIZE = 'sfs_user.admin.access_history.list_initialize';
+
+    /**
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
+     */
+    const ADMIN_ACCESS_HISTORY_LIST_VIEW = 'sfs_user.admin.access_history.list_view';
 }

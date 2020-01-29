@@ -172,6 +172,16 @@ admin_administrators:
             email.label: "Email"
             search.label: "Search"
 
+admin_access_history:
+    list:
+        fields:
+            loginAt.header: "Login at"
+            user.header: "User"
+            ip.header: "IP"
+            userAgent.header: "User agent"
+        filter_form:
+            search.label: "Search"
+
 admin_invitations:
     list:
         fields:

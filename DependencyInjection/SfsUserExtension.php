@@ -42,6 +42,7 @@ class SfsUserExtension extends Extension implements PrependExtensionInterface
 
         if ($config['history']['enabled']) {
             $loader->load('services/history.yaml');
+            $loader->load('services/controller/admin_history.yaml');
         }
 
         $loader->load('services/controller/admin_administrators.yaml');
