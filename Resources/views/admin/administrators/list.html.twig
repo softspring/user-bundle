@@ -1,7 +1,7 @@
 {% trans_default_domain 'sfs_user' %}
 {% extends '@SfsUser/admin_layout.html.twig' %}
 
-{% form_theme filterForm 'form/form_app_horizontal.html.twig' %}
+{#{% form_theme filterForm 'form/form_app_horizontal.html.twig' %}#}
 
 {% block content %}
     <div class="d-flex align-items-center justify-content-between mb-4">
@@ -24,8 +24,10 @@
     <table class="table">
         <thead>
         <tr>
+            {% if sfs_user_is_name_surname() %}
             <th scope="col">{{ 'admin_administrators.list.fields.name.header'|trans }}</th>
             <th scope="col">{{ 'admin_administrators.list.fields.surname.header'|trans }}</th>
+            {% endif %}
             <th scope="col">{{ 'admin_administrators.list.fields.username.header'|trans }}</th>
             <th scope="col">{{ 'admin_administrators.list.fields.email.header'|trans }}</th>
             <th scope="col">{{ 'admin_administrators.list.fields.lastLogin.header'|trans }}</th>
