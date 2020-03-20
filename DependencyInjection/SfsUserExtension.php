@@ -80,5 +80,11 @@ class SfsUserExtension extends Extension implements PrependExtensionInterface
         ];
 
         $container->prependExtensionConfig('doctrine', $doctrineConfig);
+
+        $container->prependExtensionConfig('sfs_core', [
+            'twig' => [
+                'routing_extension' => true,
+            ],
+        ]);
     }
 }
