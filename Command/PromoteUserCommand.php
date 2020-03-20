@@ -59,5 +59,7 @@ class PromoteUserCommand extends Command
         $this->userManager->saveEntity($user);
 
         $output->writeln(sprintf('User %s has been promoted', $username));
+
+        return 0;
     }
 }
