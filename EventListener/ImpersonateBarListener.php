@@ -6,6 +6,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -60,9 +61,10 @@ class ImpersonateBarListener implements EventSubscriberInterface
     }
 
     /**
-     * @param FilterResponseEvent $event
+     * @param FilterResponseEvent|ResponseEvent $event
+     * Note: in SF4 FilterResponseEvent, in SF5 ResponseEvent
      */
-    public function onKernelResponse(FilterResponseEvent $event): void
+    public function onKernelResponse($event): void
     {
         $response = $event->getResponse();
         $request = $event->getRequest();
