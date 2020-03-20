@@ -2,6 +2,7 @@
 
 namespace Softspring\UserBundle\Command;
 
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Softspring\UserBundle\Manipulator\UserManipulator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -40,6 +41,7 @@ class CreateUserCommand extends Command
         $this->addOption('enabled', null, InputOption::VALUE_NONE, 'User enabled');
         $this->addOption('admin', 'a', InputOption::VALUE_NONE, 'User is admin');
         $this->addOption('super-admin', 's', InputOption::VALUE_NONE, 'User is super admin');
+        $this->addOption('skip-existing', 'k', InputOption::VALUE_NONE, 'Skip if user exists');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -51,11 +53,23 @@ class CreateUserCommand extends Command
         $enabled = $input->getOption('enabled');
         $admin = $input->getOption('admin');
         $superAdmin = $input->getOption('super-admin');
+        $skipExisting = $input->getOption('skip-existing');
 
         if ($superAdmin) {
             $admin = true;
         }
 
-        $this->userManipulator->create($username, $email, $password, $roles, $enabled, $admin, $superAdmin);
+        try {
+            $this->userManipulator->create($username, $email, $password, $roles, $enabled, $admin, $superAdmin);
+        } catch (UniqueConstraintViolationException $e) {
+            if (!$skipExisting) {
+                $output->writeln(sprintf('<error>User %s exists</error>', $username));
+                return 1;
+            } else {
+                $output->writeln(sprintf('<info>User %s exists, ignoring</info>', $username));
+            }
+        }
+
+        return 0;
     }
 }
