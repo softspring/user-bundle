@@ -45,5 +45,7 @@ class InviteUserCommand extends Command
         $roles = $input->getOption('role');
 
         $this->userInvitationManipulator->invite($email, $username, $roles);
+        
+        return 0;
     }
 }
