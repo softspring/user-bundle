@@ -2,7 +2,11 @@
 {% extends '@SfsUser/admin_layout.html.twig' %}
 
 {% block content %}
-    <h1 class="h3 mb-4">{{ administrator.name }} {{ administrator.surname }}</h1>
+    {% if sfs_user_is_name_surname() %}
+        <h1 class="h3 mb-4">{{ administrator.name }} {{ administrator.surname }}</h1>
+    {% else %}
+        <h1 class="h3 mb-4">{{ administrator.username }}</h1>
+    {% endif %}
 
     <div class="text-right">
         {% if is_granted('ROLE_ADMIN_ADMINISTRATORS_DEMOTE', administrator) %}
@@ -15,8 +19,11 @@
 {#        <a href="#" class="btn btn-outline-secondary disabled">Delete</a>#}
     </div>
 
+    {% if sfs_user_is_name_surname() %}
     <p><strong>name:</strong> {{ administrator.name }}</p>
     <p><strong>surname:</strong> {{ administrator.surname }}</p>
+    {% endif %}
+
     <p><strong>username:</strong> {{ administrator.username }}</p>
     <p><strong>email:</strong> {{ administrator.email }}</p>
     <p><strong>lastLogin:</strong> {{ administrator.lastLogin ? administrator.lastLogin|date('H:i d-m-Y') : 'not yet' }}</p>

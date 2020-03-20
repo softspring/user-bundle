@@ -2,7 +2,11 @@
 {% extends '@SfsUser/admin_layout.html.twig' %}
 
 {% block content %}
-    <h1 class="h3 mb-4">{{ user.name }} {{ user.surname }}</h1>
+    {% if sfs_user_is_name_surname() %}
+        <h1 class="h3 mb-4">{{ user.name }} {{ user.surname }}</h1>
+    {% else %}
+        <h1 class="h3 mb-4">{{ user.username }}</h1>
+    {% endif %}
 
     <div class="text-right">
         {% if is_granted('ROLE_ADMIN_USERS_PROMOTE', user) %}
@@ -25,8 +29,11 @@
         {% endif %}
     </div>
 
+    {% if sfs_user_is_name_surname() %}
     <p><strong>name:</strong> {{ user.name }}</p>
     <p><strong>surname:</strong> {{ user.surname }}</p>
+    {% endif %}
+
     <p><strong>username:</strong> {{ user.username }}</p>
     <p><strong>email:</strong> {{ user.email }}</p>
     <p><strong>lastLogin:</strong> {{ user.lastLogin ? user.lastLogin|date('H:i d-m-Y') : 'not yet' }}</p>
