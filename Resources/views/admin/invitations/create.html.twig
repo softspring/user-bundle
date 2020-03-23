@@ -8,6 +8,7 @@
     {{ form_start(form) }}
     {{ form_rest(form) }}
     <div class="d-flex justify-content-end align-items-center">
+        <a href="{{ url('sfs_user_admin_invitations_list') }}" class="btn btn-outline-secondary">{{ 'admin_invitations.create.actions.cancel.button'|trans }}</a>
         <input type="submit" value="{{ 'admin_invitations.create.actions.create.button'|trans }}" class="btn btn-primary ml-3" />
     </div>
     {{ form_end(form) }}

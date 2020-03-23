@@ -196,8 +196,8 @@ admin_invitations:
                 link: "Invite"
     create:
         actions:
-            create:
-                button: "Invite"
+            create.button: "Invite"
+            cancel.button: "Cancel"
     form:
         name.label: "Name"
         surname.label: "Surname"
