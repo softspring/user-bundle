@@ -4,14 +4,17 @@ namespace Softspring\UserBundle\Manager;
 
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
+use Softspring\CrudlBundle\Manager\CrudlEntityManagerTrait;
 use Softspring\UserBundle\Model\ConfirmableInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Model\UserInvitationInterface;
+use Softspring\UserBundle\Util\TokenGeneratorInterface;
 
 class UserInvitationManager implements UserInvitationManagerInterface
 {
+    use CrudlEntityManagerTrait;
+
     /**
      * @var EntityManagerInterface
      */
@@ -23,43 +26,46 @@ class UserInvitationManager implements UserInvitationManagerInterface
     protected $userManager;
 
     /**
-     * UserInvitationManager constructor.
-     * @param EntityManagerInterface $em
-     * @param UserManagerInterface $userManager
+     * @var TokenGeneratorInterface
      */
-    public function __construct(EntityManagerInterface $em, UserManagerInterface $userManager)
+    protected $tokenGenerator;
+
+    /**
+     * UserInvitationManager constructor.
+     *
+     * @param EntityManagerInterface  $em
+     * @param UserManagerInterface    $userManager
+     * @param TokenGeneratorInterface $tokenGenerator
+     */
+    public function __construct(EntityManagerInterface $em, UserManagerInterface $userManager, TokenGeneratorInterface $tokenGenerator)
     {
         $this->em = $em;
         $this->userManager = $userManager;
+        $this->tokenGenerator = $tokenGenerator;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getClass(): string
+    public function getTargetClass(): string
     {
-        $metadata = $this->em->getClassMetadata(UserInvitationInterface::class);
-        return $metadata->getName();
+        return UserInvitationInterface::class;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getRepository(): EntityRepository
+    public function createEntity()
     {
-        /** @var EntityRepository $repo */
-        $repo = $this->em->getRepository(UserInvitationInterface::class);
+        $class = $this->getEntityClass();
+        $entity = new $class;
 
-        return $repo;
+        /** @var UserInvitationInterface $entity */
+        $entity->setInvitationToken($this->tokenGenerator->generateToken());
+
+        return $entity;
     }
 
     /**
-     * @inheritdoc
+     * @deprecated
      */
     public function create(): UserInvitationInterface
     {
-        $className = $this->getClass();
-        return new $className();
+        return $this->createEntity();
     }
 
     /**
@@ -88,12 +94,11 @@ class UserInvitationManager implements UserInvitationManagerInterface
     }
 
     /**
-     * @param UserInvitationInterface $userInvitation
+     * @deprecated
      */
     public function save(UserInvitationInterface $userInvitation): void
     {
-        $this->em->persist($userInvitation);
-        $this->em->flush();
+        $this->saveEntity($userInvitation);
     }
 
     /**

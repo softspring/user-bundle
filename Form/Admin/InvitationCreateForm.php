@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class InvitationForm extends AbstractType implements InvitationFormInterface
+class InvitationCreateForm extends AbstractType implements InvitationCreateFormInterface
 {
     /**
      * @inheritdoc

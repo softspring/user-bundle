@@ -47,6 +47,7 @@ class SfsUserExtension extends Extension implements PrependExtensionInterface
 
         $loader->load('services/controller/admin_administrators.yaml');
         $loader->load('services/controller/admin_users.yaml');
+        $loader->load('services/controller/admin_invitations.yaml');
 
         $oauthServicesConfig = $config['oauth'] ?? [];
         $container->setParameter('sfs_user.oauth.services', $oauthServicesConfig);

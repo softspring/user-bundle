@@ -112,7 +112,7 @@ class Configuration implements ConfigurationInterface
                     ->canBeEnabled()
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->booleanNode('enabled')->defaultTrue()->end()
+                        ->booleanNode('enabled')->defaultFalse()->end()
                         ->scalarNode('switch_role')->defaultValue('ROLE_ALLOWED_TO_SWITCH')->end()
                         ->scalarNode('switch_route')->defaultValue('configure_switch_route')->end()
                         ->arrayNode('switch_route_params')->treatNullLike([])->scalarPrototype()->end()->end()
