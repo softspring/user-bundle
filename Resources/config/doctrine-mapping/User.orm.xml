@@ -6,16 +6,9 @@
 
     <mapped-superclass name="Softspring\UserBundle\Model\User" table="user">
         <field name="username" column="username" type="string" nullable="false" length="180" unique="true" />
-        <field name="email" column="email" type="string" nullable="false" length="180" unique="true" />
 
         <field name="password" column="password_encoded" type="string" nullable="true" />
         <field name="salt" column="salt" type="string" nullable="true" />
-
-        <field name="enabled" column="enabled" type="boolean">
-            <options>
-                <option name="default">0</option>
-            </options>
-        </field>
 
         <field name="admin" column="is_admin" type="boolean">
             <options>

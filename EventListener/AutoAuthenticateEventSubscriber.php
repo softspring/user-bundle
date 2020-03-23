@@ -4,6 +4,7 @@ namespace Softspring\UserBundle\EventListener;
 
 use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Event\UserEvent;
+use Softspring\UserBundle\Model\EnablableInterface;
 use Softspring\UserBundle\Security\LoginManager;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -46,12 +47,14 @@ class AutoAuthenticateEventSubscriber implements EventSubscriberInterface
      */
     public function authenticate(GetResponseUserEvent $event, string $eventName, EventDispatcherInterface $eventDispatcher)
     {
-        if (!$event->getUser()->isEnabled()) {
+        $user = $event->getUser();
+
+        if ($user instanceof EnablableInterface && !$user->isEnabled()) {
             return;
         }
 
-        $this->loginManager->loginUser($event->getRequest(), $event->getUser(), $event->getResponse());
+        $this->loginManager->loginUser($event->getRequest(), $user, $event->getResponse());
 
-        $eventDispatcher->dispatch(new UserEvent($event->getUser(), $event->getRequest()), SfsUserEvents::LOGIN_IMPLICIT);
+        $eventDispatcher->dispatch(new UserEvent($user, $event->getRequest()), SfsUserEvents::LOGIN_IMPLICIT);
     }
 }

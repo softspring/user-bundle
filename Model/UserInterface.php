@@ -17,26 +17,6 @@ interface UserInterface extends SymfonyUserInterface, \Serializable
     public function getId();
 
     /**
-     * @return string|null
-     */
-    public function getEmail(): ?string;
-
-    /**
-     * @param string|null $email
-     */
-    public function setEmail(?string $email): void;
-
-    /**
-     * @return bool
-     */
-    public function isEnabled(): bool;
-
-    /**
-     * @param bool $enabled
-     */
-    public function setEnabled(bool $enabled): void;
-
-    /**
      * @return bool
      */
     public function isAdmin(): bool;
