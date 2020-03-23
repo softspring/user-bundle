@@ -2,7 +2,10 @@
 
 namespace Softspring\UserBundle\Form;
 
+use Softspring\UserBundle\Manager\UserManagerInterface;
+use Softspring\UserBundle\Model\NameSurnameInterface;
 use Softspring\UserBundle\Model\UserInterface;
+use Softspring\UserBundle\Model\UserWithEmailInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -13,6 +16,21 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AcceptInvitationForm extends AbstractType implements AcceptInvitationFormInterface
 {
+    /**
+     * @var UserManagerInterface
+     */
+    protected $userManager;
+
+    /**
+     * RegisterForm constructor.
+     *
+     * @param UserManagerInterface $userManager
+     */
+    public function __construct(UserManagerInterface $userManager)
+    {
+        $this->userManager = $userManager;
+    }
+
     /**
      * @inheritdoc
      */
@@ -32,10 +50,19 @@ class AcceptInvitationForm extends AbstractType implements AcceptInvitationFormI
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('email', EmailType::class);
+        $reflection = $this->userManager->getEntityClassReflection();
+
+        if ($reflection->implementsInterface(UserWithEmailInterface::class)) {
+            $builder->add('email', EmailType::class);
+        }
+
         $builder->add('username');
-        $builder->add('name');
-        $builder->add('surname');
+
+        if ($reflection->implementsInterface(NameSurnameInterface::class)) {
+            $builder->add('name');
+            $builder->add('surname');
+        }
+
         $builder->add('plainPassword', RepeatedType::class, [
             'type' => PasswordType::class,
             'options' => [

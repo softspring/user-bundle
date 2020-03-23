@@ -20,16 +20,6 @@ abstract class User implements UserInterface
     /**
      * @var string|null
      */
-    protected $email;
-
-    /**
-     * @var bool
-     */
-    protected $enabled = false;
-
-    /**
-     * @var string|null
-     */
     protected $salt;
 
     /**
@@ -78,14 +68,22 @@ abstract class User implements UserInterface
      */
     public function serialize()
     {
-        return serialize([
+        $data = [
             $this->password,
             $this->salt,
             $this->username,
-            $this->enabled,
             $this->id,
-            $this->email,
-        ]);
+        ];
+
+        if ($this instanceof EnablableInterface) {
+            $data[] = $this->isEnabled();
+        }
+
+        if ($this instanceof UserWithEmailInterface) {
+            $data[] = $this->getEmail();
+        }
+
+        return serialize($data);
     }
 
     /**
@@ -93,14 +91,24 @@ abstract class User implements UserInterface
      */
     public function unserialize($serialized)
     {
+        $data = unserialize($serialized);
+
         list(
             $this->password,
             $this->salt,
             $this->username,
-            $this->enabled,
             $this->id,
-            $this->email,
-        ) = unserialize($serialized);
+        ) = $data;
+
+        $data = array_slice($data, 4);
+
+        if ($this instanceof EnablableInterface) {
+            $this->setEnabled(array_unshift($data));
+        }
+
+        if ($this instanceof UserWithEmailInterface) {
+            $this->setEmail(array_unshift($data));
+        }
     }
 
     /**
@@ -125,38 +133,6 @@ abstract class User implements UserInterface
     public function setUsername(?string $username): void
     {
         $this->username = $username;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param string|null $email
-     */
-    public function setEmail(?string $email): void
-    {
-        $this->email = $email;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isEnabled(): bool
-    {
-        return $this->enabled;
-    }
-
-    /**
-     * @param bool $enabled
-     */
-    public function setEnabled(bool $enabled): void
-    {
-        $this->enabled = $enabled;
     }
 
     /**

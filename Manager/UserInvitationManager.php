@@ -9,6 +9,7 @@ use Softspring\UserBundle\Model\ConfirmableInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Model\UserInvitationInterface;
+use Softspring\UserBundle\Model\UserWithEmailInterface;
 use Softspring\UserBundle\Util\TokenGeneratorInterface;
 
 class UserInvitationManager implements UserInvitationManagerInterface
@@ -77,7 +78,10 @@ class UserInvitationManager implements UserInvitationManagerInterface
         $user = $this->userManager->createEntity();
 
         $user->setUsername($invitation->getUsername());
-        $user->setEmail($invitation->getEmail());
+
+        if ($user instanceof UserWithEmailInterface) {
+            $user->setEmail($invitation->getEmail());
+        }
 
         if ($user instanceof NameSurnameInterface) {
             $user->setName($invitation->getName());
