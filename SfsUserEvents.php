@@ -322,6 +322,32 @@ class SfsUserEvents
     /**
      * @Event("Softspring\CoreBundle\Event\GetResponseRequestEvent")
      */
+    const ADMIN_INVITATIONS_LIST_INITIALIZE = 'sfs_user.admin.invitations.list_initialize';
+
+    /**
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
+     */
+    const ADMIN_INVITATIONS_LIST_VIEW = 'sfs_user.admin.invitations.list_view';
+
+    /**
+     * @Event("Softspring\CoreBundle\Event\GetResponseRequestEvent")
+     */
+    const ADMIN_INVITATIONS_DETAILS_INITIALIZE = 'sfs_user.admin.invitations.details_initialize';
+
+    /**
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
+     */
+    const ADMIN_INVITATIONS_DETAILS_VIEW = 'sfs_user.admin.invitations.details_view';
+
+    const ADMIN_INVITATIONS_CREATE_INITIALIZE = 'sfs_user.admin.invitations.create_initialize';
+    const ADMIN_INVITATIONS_CREATE_FORM_VALID = 'sfs_user.admin.invitations.create_form_valid';
+    const ADMIN_INVITATIONS_CREATE_SUCCESS = 'sfs_user.admin.invitations.create_success';
+    const ADMIN_INVITATIONS_CREATE_FORM_INVALID = 'sfs_user.admin.invitations.create_form_invalid';
+    const ADMIN_INVITATIONS_CREATE_VIEW = 'sfs_user.admin.invitations.create_view';
+
+    /**
+     * @Event("Softspring\CoreBundle\Event\GetResponseRequestEvent")
+     */
     const ADMIN_ACCESS_HISTORY_LIST_INITIALIZE = 'sfs_user.admin.access_history.list_initialize';
 
     /**

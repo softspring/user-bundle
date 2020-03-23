@@ -2,24 +2,14 @@
 
 namespace Softspring\UserBundle\Manager;
 
-use Doctrine\ORM\EntityRepository;
+use Softspring\CrudlBundle\Manager\CrudlEntityManagerInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Model\UserInvitationInterface;
 
-interface UserInvitationManagerInterface
+interface UserInvitationManagerInterface extends CrudlEntityManagerInterface
 {
     /**
-     * @return string
-     */
-    public function getClass(): string;
-
-    /**
-     * @return EntityRepository
-     */
-    public function getRepository(): EntityRepository;
-
-    /**
-     * @return UserInvitationInterface
+     * @deprecated
      */
     public function create(): UserInvitationInterface;
 
@@ -31,7 +21,7 @@ interface UserInvitationManagerInterface
     public function createUser(UserInvitationInterface $invitation): UserInterface;
 
     /**
-     * @param UserInvitationInterface $invitation
+     * @deprecated
      */
     public function save(UserInvitationInterface $invitation): void;
 

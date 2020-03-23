@@ -10,8 +10,10 @@
     <table class="table">
         <thead>
         <tr>
-            <th scope="col">{{ 'admin_invitations.list.fields.name.header'|trans }}</th>
-            <th scope="col">{{ 'admin_invitations.list.fields.surname.header'|trans }}</th>
+            {% if sfs_user_is_name_surname() %}
+                <th scope="col">{{ 'admin_invitations.list.fields.name.header'|trans }}</th>
+                <th scope="col">{{ 'admin_invitations.list.fields.surname.header'|trans }}</th>
+            {% endif %}
             <th scope="col">{{ 'admin_invitations.list.fields.username.header'|trans }}</th>
             <th scope="col">{{ 'admin_invitations.list.fields.email.header'|trans }}</th>
             <th scope="col">{{ 'admin_invitations.list.fields.acceptedAt.header'|trans }}</th>
@@ -21,10 +23,12 @@
         </thead>
 
         <tbody>
-        {% for invitation in invitations %}
+        {% for invitation in entities %}
             <tr>
-                <td>{{ invitation.name }}</td>
-                <td>{{ invitation.surname }}</td>
+                {% if sfs_user_is_name_surname() %}
+                    <td>{{ invitation.name }}</td>
+                    <td>{{ invitation.surname }}</td>
+                {% endif %}
                 <td>{{ invitation.username }}</td>
                 <td>{{ invitation.email }}</td>
                 <td>{{ invitation.acceptedAt ? invitation.acceptedAt|date('H:i d-m-Y') : 'not yet' }}</td>

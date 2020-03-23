@@ -5,10 +5,10 @@
     <div class="d-flex align-items-center justify-content-between mb-4">
         <h1 class="h3">Create Invitation</h1>
     </div>
-    {{ form_start(create_form) }}
-    {{ form_rest(create_form) }}
+    {{ form_start(form) }}
+    {{ form_rest(form) }}
     <div class="d-flex justify-content-end align-items-center">
         <input type="submit" value="{{ 'admin_invitations.create.actions.create.button'|trans }}" class="btn btn-primary ml-3" />
     </div>
-    {{ form_end(create_form) }}
+    {{ form_end(form) }}
 {% endblock content %}

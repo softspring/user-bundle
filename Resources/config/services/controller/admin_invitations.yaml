@@ -1,0 +1,43 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Softspring\UserBundle\Form\Admin\:
+        resource: '../../../../Form/Admin/Invitation*'
+
+    Softspring\UserBundle\EventListener\Admin\:
+        resource: '../../../../EventListener/Admin/Invitation*'
+
+    sfs_user.admin.invitation.controller:
+        class: Softspring\CrudlBundle\Controller\CrudlController
+        public: true
+        calls:
+            - { method: setContainer, arguments: ['@service_container'] }
+        arguments:
+            $manager: '@Softspring\UserBundle\Manager\UserInvitationManagerInterface'
+            $listFilterForm: '@Softspring\UserBundle\Form\Admin\AdministratorListFilterFormInterface'
+            $createForm: '@Softspring\UserBundle\Form\Admin\InvitationCreateFormInterface'
+            $config:
+                entity_attribute: 'invitation'
+                list:
+                    is_granted: 'ROLE_ADMIN_INVITATIONS_LIST'
+                    initialize_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_INVITATIONS_LIST_INITIALIZE
+                    view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_INVITATIONS_LIST_VIEW
+                    view: '@@SfsUser/admin/invitations/list.html.twig'
+                    view_page: '@@SfsUser/admin/invitations/list-page.html.twig'
+                create:
+                    initialize_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_INVITATIONS_CREATE_INITIALIZE
+                    form_valid_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_INVITATIONS_CREATE_FORM_VALID
+                    success_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_INVITATIONS_CREATE_SUCCESS
+                    form_invalid_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_INVITATIONS_CREATE_FORM_INVALID
+                    view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_INVITATIONS_CREATE_VIEW
+                    success_redirect_to: 'sfs_user_admin_invitations_list'
+                    view: '@@SfsUser/admin/invitations/create.html.twig'
+                read:
+                    is_granted: 'ROLE_ADMIN_INVITATIONS_DETAILS'
+                    param_converter_key: 'id'
+                    initialize_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_INVITATIONS_DETAILS_INITIALIZE
+                    view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_INVITATIONS_DETAILS_VIEW
+                    view: '@@SfsUser/admin/invitations/details.html.twig'

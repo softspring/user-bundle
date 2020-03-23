@@ -2,7 +2,11 @@
 {% extends '@SfsUser/admin_layout.html.twig' %}
 
 {% block content %}
-    <h2>{{ user.name }}</h2>
+    {% if sfs_user_is_name_surname() %}
+        <h1 class="h3 mb-4">{{ user.name }} {{ user.surname }}</h1>
+    {% else %}
+        <h1 class="h3 mb-4">{{ user.username }}</h1>
+    {% endif %}
 
     {{ form_start(form) }}
     {{ form_rest(form) }}

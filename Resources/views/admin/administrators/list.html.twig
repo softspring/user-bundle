@@ -1,7 +1,7 @@
 {% trans_default_domain 'sfs_user' %}
 {% extends '@SfsUser/admin_layout.html.twig' %}
 
-{#{% form_theme filterForm 'form/form_app_horizontal.html.twig' %}#}
+{% form_theme filterForm 'bootstrap_4_horizontal_layout.html.twig' %}
 
 {% block content %}
     <div class="d-flex align-items-center justify-content-between mb-4">
@@ -15,6 +15,7 @@
         {% if filterForm.surname_like is defined %}<div class="col">{{ form_row(filterForm.surname_like) }}</div>{% endif %}
         {% if filterForm.surname is defined %}<div class="col">{{ form_row(filterForm.surname) }}</div>{% endif %}
         {% if filterForm.email_like is defined %}<div class="col">{{ form_row(filterForm.email_like) }}</div>{% endif %}
+        {% if filterForm.email is defined %}<div class="col">{{ form_row(filterForm.email) }}</div>{% endif %}
         <div class="col">{{ form_row(filterForm.search) }}</div>
     </div>
     {{ form_widget(filterForm) }}

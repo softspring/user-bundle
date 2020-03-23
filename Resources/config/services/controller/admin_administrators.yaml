@@ -12,6 +12,9 @@ services:
     Softspring\UserBundle\EventListener\Admin\:
         resource: '../../../../EventListener/Admin/Admin*'
 
+    Softspring\UserBundle\Controller\Admin\AdministratorsController:
+        public: true
+
     sfs_user.admin.administrator.controller:
         class: Softspring\CrudlBundle\Controller\CrudlController
         public: true
