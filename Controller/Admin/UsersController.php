@@ -57,4 +57,13 @@ class UsersController extends AbstractController
             return $this->redirectToRoute('sfs_user_admin_users_list');
         }
     }
+
+    public function usersCountWidget(): Response
+    {
+        return $this->render('@SfsUser/admin/users/widget-users-count.html.twig', [
+            'users' => $this->userManager->getRepository()->count(['admin'=>0]),
+            'administrators' => $this->userManager->getRepository()->count(['admin'=>1]),
+            'total' => $this->userManager->getRepository()->count([]),
+        ]);
+    }
 }
