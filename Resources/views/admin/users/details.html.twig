@@ -58,8 +58,13 @@
                     <ul>
                         {% for relation in user.relations %}
                             <li>
-                                {{ relation.account.name }}
-                                {% if relation.grantedBy != relation.user %}
+                                {% if route_defined('sfs_account_admin_accounts_details') %}
+                                    <a href="{{ url('sfs_account_admin_accounts_details', {'account':relation.account}) }}">{{ relation.account.name }}</a>
+                                {% else %}
+                                    {{ relation.account.name }}
+                                {% endif %}
+
+                                {% if relation.grantedBy is defined and relation.grantedBy != relation.user %}
                                     (granted by {{ relation.grantedBy.username }})
                                 {% endif %}
                             </li>
