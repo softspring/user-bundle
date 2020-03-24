@@ -13,6 +13,7 @@
         <h1 class="h3">Users</h1>
     </div>
 
+    {% if entities|length %}
     {{ form_start(filterForm) }}
     <div class="row">
         {% if filterForm.name_like is defined %}<div class="col">{{ form_row(filterForm.name_like) }}</div>{% endif %}
@@ -26,10 +27,11 @@
     {{ form_widget(filterForm) }}
     {{ form_rest(filterForm) }}
     {{ form_end(filterForm) }}
+    {% endif %}
 
-    <table class="table">
-        <thead>
-        <tr>
+    {% embed '@SfsAdmin/components/table.html.twig' with {'collection':entities} %}
+        {% trans_default_domain 'sfs_user' %}
+        {% block ths %}
             {% if sfs_user_is_name_surname() %}
                 <th scope="col">{{ 'admin_users.list.fields.name.header'|trans }}</th>
                 <th scope="col">{{ 'admin_users.list.fields.surname.header'|trans }}</th>
@@ -41,27 +43,28 @@
             <th scope="col">{{ 'admin_users.list.fields.lastLogin.header'|trans }}</th>
             <th scope="col">{{ 'admin_users.list.fields.role.header'|trans }}</th>
             <th>&nbsp;</th>
-        </tr>
-        </thead>
+        {% endblock ths %}
 
-        <tbody>
+        {% block tbody %}
             {% include '@SfsUser/admin/users/list-page.html.twig' %}
-        </tbody>
+        {% endblock tbody %}
 
-        {% if entities.pages|default(false) %}
-            <tfoot>
-            <tr>
-                <td colspan="20">
-                    {% if entities.prevPage %}
-                        <a href="{{ url('sfs_user_admin_users_list', app.request.query.all|merge({ page: entities.prevPage })) }}" title="Prev page"><span class="mdi mdi-24px mdi-chevron-left"></span></a>
-                    {% endif %}
+        {% block tfooter %}
+            {% if entities.pages|default(false) %}
+                <tfoot>
+                <tr>
+                    <td colspan="20">
+                        {% if entities.prevPage %}
+                            <a href="{{ url('sfs_user_admin_users_list', app.request.query.all|merge({ page: entities.prevPage })) }}" title="Prev page"><span class="mdi mdi-24px mdi-chevron-left"></span></a>
+                        {% endif %}
 
-                    {% if entities.nextPage %}
-                        <a class="float-right" href="{{ url('sfs_user_admin_users_list', app.request.query.all|merge({ page: entities.nextPage })) }}" title="Next page"><span class="mdi mdi-24px mdi-chevron-right"></span></a>
-                    {% endif %}
-                </td>
-            </tr>
-            </tfoot>
-        {% endif %}
-    </table>
+                        {% if entities.nextPage %}
+                            <a class="float-right" href="{{ url('sfs_user_admin_users_list', app.request.query.all|merge({ page: entities.nextPage })) }}" title="Next page"><span class="mdi mdi-24px mdi-chevron-right"></span></a>
+                        {% endif %}
+                    </td>
+                </tr>
+                </tfoot>
+            {% endif %}
+        {% endblock tfooter %}
+    {% endembed %}
 {% endblock content %}
