@@ -10,6 +10,9 @@ services:
     Softspring\UserBundle\EventListener\Admin\:
         resource: '../../../../EventListener/Admin/Invitation*'
 
+    Softspring\UserBundle\Controller\Admin\InvitationsController:
+        public: true
+
     sfs_user.admin.invitation.controller:
         class: Softspring\CrudlBundle\Controller\CrudlController
         public: true
