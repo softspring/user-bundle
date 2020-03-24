@@ -17,7 +17,7 @@ class InvitationControllerListener implements EventSubscriberInterface
         ];
     }
 
-    public function onInvitationLaunchEvent(GetResponseEntityEvent $event, EventDispatcherInterface $dispatcher)
+    public function onInvitationLaunchEvent(GetResponseEntityEvent $event, string $eventName, EventDispatcherInterface $dispatcher): void
     {
         $dispatcher->dispatch(new UserInvitationEvent($event->getEntity(), $event->getRequest()), SfsUserEvents::USER_INVITED);
     }
