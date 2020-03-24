@@ -1,6 +1,12 @@
 {% trans_default_domain 'sfs_user' %}
 {% extends '@SfsUser/admin_layout.html.twig' %}
 
+{% block breadcrums_content %}
+    {{ parent() }}
+    <li class="breadcrumb-item"><a href="{{ url('sfs_user_admin_users_list') }}">Users</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ sfs_user_is_name_surname() ? user.name~' '~user.surname : user.username }}</li>
+{% endblock breadcrums_content %}
+
 {% block content %}
     {% if sfs_user_is_name_surname() %}
         <h1 class="h3 mb-4">{{ user.name }} {{ user.surname }}</h1>
@@ -25,7 +31,8 @@
         {% endif %}
 
         {% if switch_enabled and is_granted(switch_role) %}
-            <a href="{{ url(switch_route, switch_route_params) }}{{ switch_route_params|length ? '&' : '?' }}{{ switch_parameter }}={{ user.username }}" class="ml-2 text-nowrap">view as {{ user.username }} <span class="mdi mdi-18px mdi-account-switch align-middle"></span></a>
+            <a href="{{ url(switch_route, switch_route_params) }}{{ switch_route_params|length ? '&' : '?' }}{{ switch_parameter }}={{ user.username }}"
+               class="btn btn-outline-secondary">view as {{ user.username }}</a>
         {% endif %}
     </div>
 

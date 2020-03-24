@@ -1,15 +1,21 @@
 {% trans_default_domain 'sfs_user' %}
 {% extends '@SfsUser/admin_layout.html.twig' %}
 
+{% block breadcrums_content %}
+    {{ parent() }}
+    <li class="breadcrumb-item">Users</li>
+    <li class="breadcrumb-item active" aria-current="page">Invitations</li>
+{% endblock breadcrums_content %}
+
 {% block content %}
     <div class="d-flex align-items-center justify-content-between mb-4">
         <h1 class="h3">Invitations</h1>
-        <a href="{{ url('sfs_user_admin_invitations_invite') }}" class="btn btn-outline-secondary">{{ 'admin_invitations.list.actions.invite.link'|trans }}</a>
+        <a href="{{ url('sfs_user_admin_invitations_invite') }}" class="btn btn-primary">{{ 'admin_invitations.list.actions.invite.link'|trans }}</a>
     </div>
 
-    <table class="table">
-        <thead>
-        <tr>
+    {% embed '@SfsAdmin/components/table.html.twig' with {'collection':entities} %}
+        {% trans_default_domain 'sfs_user' %}
+        {% block ths %}
             {% if sfs_user_is_name_surname() %}
                 <th scope="col">{{ 'admin_invitations.list.fields.name.header'|trans }}</th>
                 <th scope="col">{{ 'admin_invitations.list.fields.surname.header'|trans }}</th>
@@ -19,25 +25,24 @@
             <th scope="col">{{ 'admin_invitations.list.fields.acceptedAt.header'|trans }}</th>
             <th scope="col">{{ 'admin_invitations.list.fields.role.header'|trans }}</th>
             <th>&nbsp;</th>
-        </tr>
-        </thead>
+        {% endblock ths %}
 
-        <tbody>
-        {% for invitation in entities %}
-            <tr>
-                {% if sfs_user_is_name_surname() %}
-                    <td>{{ invitation.name }}</td>
-                    <td>{{ invitation.surname }}</td>
-                {% endif %}
-                <td>{{ invitation.username }}</td>
-                <td>{{ invitation.email }}</td>
-                <td>{{ invitation.acceptedAt ? invitation.acceptedAt|date('H:i d-m-Y') : 'not yet' }}</td>
-                <td>{{ invitation.roles|join(', ') }}</td>
-                <td>
-                    <a href="{{ url('sfs_user_admin_invitations_details', {'invitation': invitation}) }}" class="text-nowrap">details <span class="mdi mdi-18px mdi-eye-outline align-middle"></span></a>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        {% block tbody %}
+            {% for invitation in entities %}
+                <tr>
+                    {% if sfs_user_is_name_surname() %}
+                        <td>{{ invitation.name }}</td>
+                        <td>{{ invitation.surname }}</td>
+                    {% endif %}
+                    <td>{{ invitation.username }}</td>
+                    <td>{{ invitation.email }}</td>
+                    <td>{{ invitation.acceptedAt ? invitation.acceptedAt|date('H:i d-m-Y') : 'not yet' }}</td>
+                    <td>{{ invitation.roles|join(', ') }}</td>
+                    <td>
+                        <a href="{{ url('sfs_user_admin_invitations_details', {'invitation': invitation}) }}" class="text-nowrap">details <span class="mdi mdi-18px mdi-eye-outline align-middle"></span></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endblock tbody %}
+    {% endembed %}
 {% endblock content %}

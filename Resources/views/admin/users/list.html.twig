@@ -3,6 +3,11 @@
 
 {% form_theme filterForm 'bootstrap_4_horizontal_layout.html.twig' %}
 
+{% block breadcrums_content %}
+    {{ parent() }}
+    <li class="breadcrumb-item active" aria-current="page">Users</li>
+{% endblock breadcrums_content %}
+
 {% block content %}
     <div class="d-flex align-items-center justify-content-between mb-4">
         <h1 class="h3">Users</h1>
