@@ -1,7 +1,13 @@
 {% trans_default_domain 'sfs_user' %}
 {% extends '@SfsUser/admin_layout.html.twig' %}
 
-{% form_theme filterForm 'form/form_app_horizontal.html.twig' %}
+{#{% form_theme filterForm 'form/form_app_horizontal.html.twig' %}#}
+
+{% block breadcrums_content %}
+    {{ parent() }}
+    <li class="breadcrumb-item">Users</li>
+    <li class="breadcrumb-item active" aria-current="page">Access history</li>
+{% endblock breadcrums_content %}
 
 {% block content %}
     <div class="d-flex align-items-center justify-content-between mb-4">

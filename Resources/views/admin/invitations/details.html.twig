@@ -1,6 +1,13 @@
 {% trans_default_domain 'sfs_user' %}
 {% extends '@SfsUser/admin_layout.html.twig' %}
 
+{% block breadcrums_content %}
+    {{ parent() }}
+    <li class="breadcrumb-item">Users</li>
+    <li class="breadcrumb-item"><a href="{{ url('sfs_user_admin_invitations_list') }}">Invitations</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ invitation.name }} {{ invitation.surname }}</li>
+{% endblock breadcrums_content %}
+
 {% block content %}
     <h1 class="h3 mb-4">{{ invitation.name }} {{ invitation.surname }}</h1>
 
