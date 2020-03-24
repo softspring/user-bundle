@@ -44,9 +44,9 @@
                         <h4>Accounts</h4>
                     </div>
                     <div class="card-body">
-                        {% if user.relations.count %}
+                        {% if administrator.relations.count %}
                             <ul>
-                                {% for relation in user.relations %}
+                                {% for relation in administrator.relations %}
                                     <li>
                                         {{ relation.account.name }}
                                         {% if relation.grantedBy != relation.user %}

@@ -2,11 +2,13 @@
 {% for user in entities %}
     <tr>
         {% if sfs_user_is_name_surname() %}
-        <td>{{ user.name }}</td>
-        <td>{{ user.surname }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.surname }}</td>
         {% endif %}
         <td>{{ user.username }}</td>
-        <td>{{ user.email }}</td>
+        {% if sfs_user_is_emailed() %}
+            <td>{{ user.email }}</td>
+        {% endif %}
         <td>{{ user.lastLogin ? user.lastLogin|date('H:i d-m-Y') : 'not yet' }}</td>
         <td>{{ user.roles|join(', ') }}</td>
         <td>

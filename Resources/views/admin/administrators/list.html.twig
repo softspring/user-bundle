@@ -32,11 +32,13 @@
         <thead>
         <tr>
             {% if sfs_user_is_name_surname() %}
-            <th scope="col">{{ 'admin_administrators.list.fields.name.header'|trans }}</th>
-            <th scope="col">{{ 'admin_administrators.list.fields.surname.header'|trans }}</th>
+                <th scope="col">{{ 'admin_administrators.list.fields.name.header'|trans }}</th>
+                <th scope="col">{{ 'admin_administrators.list.fields.surname.header'|trans }}</th>
             {% endif %}
             <th scope="col">{{ 'admin_administrators.list.fields.username.header'|trans }}</th>
-            <th scope="col">{{ 'admin_administrators.list.fields.email.header'|trans }}</th>
+            {% if sfs_user_is_emailed() %}
+                <th scope="col">{{ 'admin_administrators.list.fields.email.header'|trans }}</th>
+            {% endif %}
             <th scope="col">{{ 'admin_administrators.list.fields.lastLogin.header'|trans }}</th>
             <th scope="col">{{ 'admin_administrators.list.fields.role.header'|trans }}</th>
             <th>&nbsp;</th>

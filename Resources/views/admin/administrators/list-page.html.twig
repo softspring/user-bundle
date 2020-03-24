@@ -6,7 +6,9 @@
             <td>{{ administrator.surname }}</td>
         {% endif %}
         <td>{{ administrator.username }}</td>
-        <td>{{ administrator.email }}</td>
+        {% if sfs_user_is_emailed() %}
+            <td>{{ administrator.email }}</td>
+        {% endif %}
         <td>{{ administrator.lastLogin ? administrator.lastLogin|date('H:i d-m-Y') : 'not yet' }}</td>
         <td>{{ administrator.roles|join(', ') }}</td>
         <td>
