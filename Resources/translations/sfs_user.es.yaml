@@ -192,12 +192,12 @@ admin_invitations:
             acceptedAt.header: "Aceptado"
             role.header: "Rol"
         actions:
-            create.button: "Invitar"
-            cancel.button: "Cancelar"
+            invite:
+                link: "Invitar"
     create:
         actions:
-            create:
-                button: "Invitar"
+            create.button: "Invitar"
+            cancel.button: "Cancelar"
     form:
         name.label: "Nombre"
         surname.label: "Apellidos"
