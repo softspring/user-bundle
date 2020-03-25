@@ -116,6 +116,7 @@ admin_users:
             surname.header: "Surname"
             username.header: "Username"
             email.header: "Email"
+            confirmed.header: "Confirmed"
             lastLogin.header: "Last login"
             role.header: "Role"
         filter_form:

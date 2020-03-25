@@ -34,6 +34,14 @@
             <a href="{{ url(switch_route, switch_route_params) }}{{ switch_route_params|length ? '&' : '?' }}{{ switch_parameter }}={{ user.username }}"
                class="btn btn-outline-secondary">view as {{ user.username }}</a>
         {% endif %}
+
+        {% if sfs_user_is_confirmable() %}
+            {% if user.confirmed %}
+                <a href="#" class="btn btn-outline-secondary disabled">Unconfirm</a>
+            {% else %}
+                <a href="#" class="btn btn-outline-secondary disabled">Confirm</a>
+            {% endif %}
+        {% endif %}
     </div>
 
     {% if sfs_user_is_name_surname() %}
@@ -42,7 +50,12 @@
     {% endif %}
 
     <p><strong>username:</strong> {{ user.username }}</p>
-    <p><strong>email:</strong> {{ user.email }}</p>
+    {% if sfs_user_is_emailed() %}
+        <p><strong>email:</strong> {{ user.email }}</p>
+    {% endif %}
+    {% if sfs_user_is_confirmable() %}
+        <p><strong>confirmed:</strong> {{ user.confirmed ? 'yes' : 'no' }}</p>
+    {% endif %}
     <p><strong>lastLogin:</strong> {{ user.lastLogin ? user.lastLogin|date('H:i d-m-Y') : 'not yet' }}</p>
     <p><strong>role:</strong> {{ user.roles|join(', ') }}</p>
 

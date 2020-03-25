@@ -9,6 +9,9 @@
         {% if sfs_user_is_emailed() %}
             <td>{{ user.email }}</td>
         {% endif %}
+        {% if sfs_user_is_confirmable() %}
+            <td>{{ user.confirmed ? 'yes' : 'no' }}</td>
+        {% endif %}
         <td>{{ user.lastLogin ? user.lastLogin|date('H:i d-m-Y') : 'not yet' }}</td>
         <td>{{ user.roles|join(', ') }}</td>
         <td>

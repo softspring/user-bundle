@@ -3,6 +3,7 @@
 namespace Softspring\UserBundle\Twig\Extension;
 
 use Softspring\UserBundle\Manager\UserManagerInterface;
+use Softspring\UserBundle\Model\ConfirmableInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;
 use Softspring\UserBundle\Model\UserWithEmailInterface;
 use Twig\Extension\AbstractExtension;
@@ -32,6 +33,7 @@ class ModelExtension extends AbstractExtension
     {
         return [
             new TwigFunction('sfs_user_is_name_surname', [$this, 'userIsNameSurnameInterface']),
+            new TwigFunction('sfs_user_is_confirmable', [$this, 'userIsConfirmableInterface']),
             new TwigFunction('sfs_user_is_emailed', [$this, 'userWithEmailInterface']),
         ];
     }
@@ -46,6 +48,18 @@ class ModelExtension extends AbstractExtension
         }
 
         return $this->userManager->getEntityClassReflection()->implementsInterface(NameSurnameInterface::class);
+    }
+
+    /**
+     * @return bool
+     */
+    public function userIsConfirmableInterface(): bool
+    {
+        if (!$this->userManager instanceof UserManagerInterface) {
+            return false;
+        }
+
+        return $this->userManager->getEntityClassReflection()->implementsInterface(ConfirmableInterface::class);
     }
 
     /**

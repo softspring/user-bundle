@@ -40,6 +40,9 @@
             {% if sfs_user_is_emailed() %}
                 <th scope="col">{{ 'admin_users.list.fields.email.header'|trans }}</th>
             {% endif %}
+            {% if sfs_user_is_confirmable() %}
+                <th scope="col">{{ 'admin_users.list.fields.confirmed.header'|trans }}</th>
+            {% endif %}
             <th scope="col">{{ 'admin_users.list.fields.lastLogin.header'|trans }}</th>
             <th scope="col">{{ 'admin_users.list.fields.role.header'|trans }}</th>
             <th>&nbsp;</th>
