@@ -86,18 +86,10 @@ invite:
     accept:
         email:
             subject: "Welcome %name%!"
-            message: |
-                Welcome %name%:
-
-                You have been invited to join our app.
-
-                Go to %acceptUrl% to accept the invitation.
-
-                Regards.
             html: |
                 <p>Welcome %name%:</p>
                 <p>You have been invited to join our app.</p>
-                <p><a href="%acceptUrl%">Click here</a> to accept the invitation.</p>
+                <p><a href="%accept_url%">Click here</a> to accept the invitation.</p>
                 <p>Regards.</p>
 
 preferences:

@@ -4,7 +4,8 @@
 {% block breadcrums_content %}
     {{ parent() }}
     <li class="breadcrumb-item"><a href="{{ url('sfs_user_admin_users_list') }}">Users</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Edit {{ sfs_user_is_name_surname() ? user.name~' '~user.surname : user.username }}</li>
+    <li class="breadcrumb-item"><a href="{{ url('sfs_user_admin_users_details', {'user':user}) }}">{{ sfs_user_is_name_surname() ? user.name~' '~user.surname : user.username }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Edit</li>
 {% endblock breadcrums_content %}
 
 {% block content %}

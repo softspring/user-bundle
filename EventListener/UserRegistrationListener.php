@@ -3,7 +3,7 @@
 namespace Softspring\UserBundle\EventListener;
 
 use Softspring\UserBundle\Event\GetResponseUserEvent;
-use Softspring\UserBundle\Mailer\MailerInterface;
+use Softspring\UserBundle\Mailer\UserMailerInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\ConfirmableInterface;
 use Softspring\UserBundle\SfsUserEvents;
@@ -18,7 +18,7 @@ class UserRegistrationListener implements EventSubscriberInterface
     protected $userManager;
 
     /**
-     * @var MailerInterface
+     * @var UserMailerInterface
      */
     protected $mailer;
 
@@ -31,10 +31,10 @@ class UserRegistrationListener implements EventSubscriberInterface
      * UserRegistrationListener constructor.
      *
      * @param UserManagerInterface $userManager
-     * @param MailerInterface      $mailer
+     * @param UserMailerInterface  $mailer
      * @param TokenGenerator       $tokenGenerator
      */
-    public function __construct(UserManagerInterface $userManager, MailerInterface $mailer, TokenGenerator $tokenGenerator)
+    public function __construct(UserManagerInterface $userManager, UserMailerInterface $mailer, TokenGenerator $tokenGenerator)
     {
         $this->userManager = $userManager;
         $this->mailer = $mailer;

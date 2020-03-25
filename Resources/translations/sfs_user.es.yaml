@@ -86,18 +86,10 @@ invite:
     accept:
         email:
             subject: "Bienvenid@ %name%!"
-            message: |
-                Bienvenid@ %name%:
-
-                Has sido invitad@ a unirte a nuestra aplicación.
-
-                Ve a %acceptUrl% para aceptar la invitación.
-
-                Saludos.
             html: |
                 <p>Bienvenid@ %name%:</p>
                 <p>Has sido invitad@ a unirte a nuestra aplicación.</p>
-                <p><a href="%acceptUrl%">Pincha aquí</a> para aceptar la invitación.</p>
+                <p><a href="%accept_url%">Pincha aquí</a> para aceptar la invitación.</p>
                 <p>Saludos.</p>
 
 preferences:
