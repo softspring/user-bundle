@@ -9,6 +9,7 @@ use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Form\AcceptInvitationFormInterface;
 use Softspring\UserBundle\Manager\UserInvitationManagerInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
+use Softspring\UserBundle\Model\EnablableInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -78,7 +79,10 @@ class InviteController extends AbstractController
 
                 $invitation->setUser($user);
                 $invitation->setAcceptedAt(new \DateTime('now'));
-                $user->setEnabled(true);
+
+                if ($user instanceof EnablableInterface) {
+                    $user->setEnabled(true);
+                }
 
                 $this->userManager->saveEntity($user);
                 $this->invitationManager->save($invitation);
