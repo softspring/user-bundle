@@ -40,6 +40,7 @@
                 <a href="#" class="btn btn-outline-secondary disabled">Unconfirm</a>
             {% else %}
                 <a href="#" class="btn btn-outline-secondary disabled">Confirm</a>
+                <a href="{{ url('sfs_user_admin_users_resend', {'user':user}) }}" class="btn btn-outline-secondary">Resend confirmation</a>
             {% endif %}
         {% endif %}
     </div>

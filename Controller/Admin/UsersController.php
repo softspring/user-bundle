@@ -4,7 +4,9 @@ namespace Softspring\UserBundle\Controller\Admin;
 
 use Softspring\CoreBundle\Controller\AbstractController;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
+use Softspring\UserBundle\Mailer\UserMailerInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
+use Softspring\UserBundle\Model\ConfirmableInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,13 +19,20 @@ class UsersController extends AbstractController
     protected $userManager;
 
     /**
+     * @var UserMailerInterface
+     */
+    protected $userMailer;
+
+    /**
      * UsersController constructor.
      *
      * @param UserManagerInterface $userManager
+     * @param UserMailerInterface  $userMailer
      */
-    public function __construct(UserManagerInterface $userManager)
+    public function __construct(UserManagerInterface $userManager, UserMailerInterface $userMailer)
     {
         $this->userManager = $userManager;
+        $this->userMailer = $userMailer;
     }
 
     /**
@@ -65,5 +74,17 @@ class UsersController extends AbstractController
             'administrators' => $this->userManager->getRepository()->count(['admin'=>1]),
             'total' => $this->userManager->getRepository()->count([]),
         ]);
+    }
+
+    public function resendEmail(string $user): Response
+    {
+        /** @var ConfirmableInterface $user */
+        $user = $this->userManager->findUserBy(['id' => $user]);
+
+        if (!$user->isConfirmed()) {
+            $this->userMailer->sendRegisterConfirmationEmail($user);
+        }
+
+        return $this->redirectToRoute('sfs_user_admin_users_details', ['user' => $user]);
     }
 }

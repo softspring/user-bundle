@@ -39,6 +39,6 @@ class ConfirmationEmail extends TranslatableEmail
 
         $this->htmlTemplate('@SfsUser/register/confirmation-email.html.twig');
 
-        $this->subject('confirmation.email.subject', 'sfs_user');
+        $this->subject('register.confirm.email.subject', 'sfs_user');
     }
 }

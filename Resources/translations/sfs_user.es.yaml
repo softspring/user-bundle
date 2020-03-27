@@ -22,18 +22,10 @@ register:
     confirm:
         email:
             subject: "Bienvenid@ %name%!"
-            message: |
-                Bienvenid@ %name%:
-
-                Tu registro en nuestra aplicación se ha realizado correctamente.
-
-                Ve a %confirmationUrl% para confirmar tu email.
-
-                Saludos.
             html: |
                 <p>Bienvenid@ %name%:</p>
                 <p>Tu registro en nuestra aplicación se ha realizado correctamente.</p>
-                <p><a href="%confirmationUrl%">Pincha aquí</a> para confirmar tu email.</p>
+                <p><a href="%confirmation_url%">Pincha aquí</a> para confirmar tu email.</p>
                 <p>Saludos.</p>
 
 reset_password:
