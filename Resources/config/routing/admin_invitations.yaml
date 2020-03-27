@@ -10,6 +10,10 @@ sfs_user_admin_invitations_details:
     controller: sfs_user.admin.invitation.controller::read
     path: /{invitation}/details
 
+sfs_user_admin_invitations_resend:
+    controller: Softspring\UserBundle\Controller\Admin\InvitationsController::resendEmail
+    path: /{invitation}/resend
+
 sfs_user_admin_invitations_count_widget:
     controller: Softspring\UserBundle\Controller\Admin\InvitationsController::pendingCountWidget
     path: /_widget/pending-count
