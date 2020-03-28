@@ -354,4 +354,25 @@ class SfsUserEvents
      * @Event("Softspring\CoreBundle\Event\ViewEvent")
      */
     const ADMIN_ACCESS_HISTORY_LIST_VIEW = 'sfs_user.admin.access_history.list_view';
+
+    /**
+     * @Event("Softspring\UserBundle\Event\GetResponseUserEvent")
+     */
+    const ADMIN_USERS_RESEND_CONFIRMATION_INITIALIZE = 'sfs_user.admin.users.resend_confirmation_initialize';
+
+    /**
+     * @Event("Softspring\UserBundle\Event\GetResponseUserEvent")
+     */
+    const ADMIN_USERS_RESEND_CONFIRMATION_SUCCESS = 'sfs_user.admin.users.resend_confirmation_success';
+
+    /**
+     * @Event("Softspring\UserBundle\Event\GetResponseUserEvent")
+     */
+    const ADMIN_USERS_RESEND_CONFIRMATION_ERROR = 'sfs_user.admin.users.resend_confirmation_error';
+
+    /**
+     * @Event("Softspring\UserBundle\Event\GetResponseUserEvent")
+     */
+    const ADMIN_USERS_RESEND_CONFIRMATION_ALREADY_CONFIRMED = 'sfs_user.admin.users.resend_confirmation_already_confirmed';
+
 }

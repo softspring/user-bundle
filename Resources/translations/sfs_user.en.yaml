@@ -138,6 +138,11 @@ admin_users:
             surname.label: "Surname"
             username.label: "Username"
             email.label: "Email"
+    resend_confirmation:
+        messages:
+            success: "The confirmation email has been sent to %email%"
+            error: "An error has occurred sending the confirmation email, try it again. If the problem persist contact to support."
+            already_confirmed: "The email has not been send, user %username% is already confirmed"
 
 admin_administrators:
     list:

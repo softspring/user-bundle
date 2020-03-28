@@ -7,9 +7,11 @@ use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Mailer\UserMailerInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\ConfirmableInterface;
+use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
 class UsersController extends AbstractController
 {
@@ -76,13 +78,31 @@ class UsersController extends AbstractController
         ]);
     }
 
-    public function resendEmail(string $user): Response
+    public function resendEmail(string $user, Request $request): Response
     {
-        /** @var ConfirmableInterface $user */
+        /** @var ConfirmableInterface|UserInterface $user */
         $user = $this->userManager->findUserBy(['id' => $user]);
 
+        if ($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_USERS_RESEND_CONFIRMATION_INITIALIZE, new GetResponseUserEvent($user, $request))) {
+            return $response;
+        }
+
         if (!$user->isConfirmed()) {
-            $this->userMailer->sendRegisterConfirmationEmail($user);
+            try {
+                $this->userMailer->sendRegisterConfirmationEmail($user);
+
+                if ($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_USERS_RESEND_CONFIRMATION_SUCCESS, new GetResponseUserEvent($user, $request))) {
+                    return $response;
+                }
+            } catch (TransportExceptionInterface $e) {
+                if ($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_USERS_RESEND_CONFIRMATION_ERROR, new GetResponseUserEvent($user, $request))) {
+                    return $response;
+                }
+            }
+        } else {
+            if ($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_USERS_RESEND_CONFIRMATION_ALREADY_CONFIRMED, new GetResponseUserEvent($user, $request))) {
+                return $response;
+            }
         }
 
         return $this->redirectToRoute('sfs_user_admin_users_details', ['user' => $user]);

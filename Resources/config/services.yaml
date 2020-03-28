@@ -22,6 +22,7 @@ services:
         exclude:  '../../Controller/Admin/*'
         public: true
 
+    Softspring\UserBundle\EventListener\Admin\FlashMessagesListener: ~
     Softspring\UserBundle\EventListener\AutoAuthenticateEventSubscriber: ~
     Softspring\UserBundle\EventListener\ImpersonateBarListener: ~
     Softspring\UserBundle\EventListener\EmailInvitationListener: ~
