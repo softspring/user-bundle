@@ -33,6 +33,9 @@
             <th scope="col">{{ 'admin_access_history.list.fields.loginAt.header'|trans }}</th>
             <th scope="col">{{ 'admin_access_history.list.fields.user.header'|trans }}</th>
             <th scope="col">{{ 'admin_access_history.list.fields.ip.header'|trans }}</th>
+            {% if sfs_user_access_is_location() %}
+                <th scope="col">{{ 'admin_access_history.list.fields.location.header'|trans }}</th>
+            {% endif %}
             <th scope="col">{{ 'admin_access_history.list.fields.userAgent.header'|trans }}</th>
             <th>&nbsp;</th>
         </tr>

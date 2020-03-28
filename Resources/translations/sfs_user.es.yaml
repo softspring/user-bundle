@@ -168,6 +168,7 @@ admin_access_history:
             loginAt.header: "Hora de login"
             user.header: "Usuario"
             ip.header: "IP"
+            location.header: "Localización"
             userAgent.header: "User agent"
         filter_form:
             search.label: "Search"
