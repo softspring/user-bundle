@@ -55,7 +55,15 @@
         <p><strong>email:</strong> {{ user.email }}</p>
     {% endif %}
     {% if sfs_user_is_confirmable() %}
-        <p><strong>confirmed:</strong> {{ user.confirmed ? 'yes' : 'no' }}</p>
+        <p>
+            <strong>confirmed:</strong>
+            {% if user.confirmed %}
+                <span class="mdi mdi-18px mdi-check align-middle text-success"></span>
+                at {{ user.confirmedAt|date('H:i d-m-Y') }}
+            {% else %}
+                <span class="mdi mdi-18px mdi-close align-middle text-danger"></span>
+            {% endif %}
+        </p>
     {% endif %}
     <p><strong>lastLogin:</strong> {{ user.lastLogin ? user.lastLogin|date('H:i d-m-Y') : 'not yet' }}</p>
     <p><strong>role:</strong> {{ user.roles|join(', ') }}</p>

@@ -10,7 +10,13 @@
             <td>{{ user.email }}</td>
         {% endif %}
         {% if sfs_user_is_confirmable() %}
-            <td>{{ user.confirmed ? 'yes' : 'no' }}</td>
+            <td class="text-center">
+                {% if user.confirmed %}
+                <span class="mdi mdi-18px mdi-check align-middle text-success"></span>
+                {% else %}
+                <span class="mdi mdi-18px mdi-close align-middle text-danger"></span>
+                {% endif %}
+            </td>
         {% endif %}
         <td>{{ user.lastLogin ? user.lastLogin|date('H:i d-m-Y') : 'not yet' }}</td>
         <td>{{ user.roles|join(', ') }}</td>
