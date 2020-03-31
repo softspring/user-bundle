@@ -16,7 +16,7 @@
     {% embed '@SfsAdmin/components/table.html.twig' with {'collection':entities} %}
         {% trans_default_domain 'sfs_user' %}
         {% block ths %}
-            {% if sfs_user_is_name_surname() %}
+            {% if sfs_user_is('nameSurname') %}
                 <th scope="col">{{ 'admin_invitations.list.fields.name.header'|trans }}</th>
                 <th scope="col">{{ 'admin_invitations.list.fields.surname.header'|trans }}</th>
             {% endif %}
@@ -30,7 +30,7 @@
         {% block tbody %}
             {% for invitation in entities %}
                 <tr>
-                    {% if sfs_user_is_name_surname() %}
+                    {% if sfs_user_is('nameSurname') %}
                         <td>{{ invitation.name }}</td>
                         <td>{{ invitation.surname }}</td>
                     {% endif %}

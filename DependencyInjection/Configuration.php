@@ -2,9 +2,6 @@
 
 namespace Softspring\UserBundle\DependencyInjection;
 
-use Softspring\UserBundle\Form\ChangeEmailForm;
-use Softspring\UserBundle\Form\ChangePasswordForm;
-use Softspring\UserBundle\Form\ChangeUsernameForm;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -71,40 +68,6 @@ class Configuration implements ConfigurationInterface
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->integerNode('token_ttl')->defaultValue(3600*24)->end()
-                    ->end()
-                ->end()
-
-                ->arrayNode('change_email')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->scalarNode('form')->defaultValue(ChangeEmailForm::class)->end()
-                        ->arrayNode('validation_groups')->treatNullLike(['ChangeEmail', 'Default'])->scalarPrototype()->end()->end()
-                        ->scalarNode('template')->defaultValue('@SfsUser/change_email/change_email.html.twig')->end()
-                        ->arrayNode('success')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('route')->defaultValue('sfs_user_change_email_success')->end()
-                                ->arrayNode('route_params')->treatNullLike([])->scalarPrototype()->end()->end()
-                                ->scalarNode('template')->defaultValue('@SfsUser/change_email/success.html.twig')->end()
-                            ->end()
-                        ->end()
-                    ->end()
-                ->end()
-
-                ->arrayNode('change_username')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->scalarNode('form')->defaultValue(ChangeUsernameForm::class)->end()
-                        ->arrayNode('validation_groups')->treatNullLike(['ChangeUsername', 'Default'])->scalarPrototype()->end()->end()
-                        ->scalarNode('template')->defaultValue('@SfsUser/change_username/change_username.html.twig')->end()
-                        ->arrayNode('success')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('route')->defaultValue('sfs_user_change_username_success')->end()
-                                ->arrayNode('route_params')->treatNullLike([])->scalarPrototype()->end()->end()
-                                ->scalarNode('template')->defaultValue('@SfsUser/change_username/success.html.twig')->end()
-                            ->end()
-                        ->end()
                     ->end()
                 ->end()
 

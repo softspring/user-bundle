@@ -50,7 +50,7 @@ class SfsUserEvents
     const INVITATION_ACCEPT = 'sfs_user.invitation.accept' ;
 
     /**
-     * @Event("Softspring\UserBundle\Event\FormEvent")
+     * @Event("Softspring\CoreBundle\Event\FormEvent")
      */
     const INVITATION_FORM_VALID = 'sfs_user.invitation.form_valid' ;
 
@@ -170,12 +170,12 @@ class SfsUserEvents
     const RESET_REQUEST_FORM_INVALID = 'sfs_user.reset_request.form_invalid';
 
     /**
-     * @Event("Softspring\UserBundle\Event\ViewEvent")
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
      */
     const RESET_REQUEST_VIEW = 'sfs_user.reset_request.view';
 
     /**
-     * @Event("Softspring\UserBundle\Event\ViewEvent")
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
      */
     const RESET_REQUESTED_VIEW = 'sfs_user.reset_done.view';
 
@@ -200,12 +200,12 @@ class SfsUserEvents
     const RESET_FORM_INVALID = 'sfs_user.reset.form_invalid';
 
     /**
-     * @Event("Softspring\UserBundle\Event\ViewEvent")
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
      */
     const RESET_VIEW = 'sfs_user.reset.view';
 
     /**
-     * @Event("Softspring\UserBundle\Event\ViewEvent")
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
      */
     const RESET_SUCCESS_VIEW = 'sfs_user.reset_success.view';
 

@@ -1,15 +1,15 @@
 {% trans_default_domain 'sfs_user' %}
 {% for user in entities %}
     <tr>
-        {% if sfs_user_is_name_surname() %}
+        {% if sfs_user_is('nameSurname') %}
             <td>{{ user.name }}</td>
             <td>{{ user.surname }}</td>
         {% endif %}
         <td>{{ user.username }}</td>
-        {% if sfs_user_is_emailed() %}
+        {% if sfs_user_is('email') %}
             <td>{{ user.email }}</td>
         {% endif %}
-        {% if sfs_user_is_confirmable() %}
+        {% if sfs_user_is('confirmable') %}
             <td class="text-center">
                 {% if user.confirmed %}
                 <span class="mdi mdi-18px mdi-check align-middle text-success"></span>

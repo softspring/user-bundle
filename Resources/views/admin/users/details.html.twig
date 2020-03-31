@@ -4,11 +4,11 @@
 {% block breadcrums_content %}
     {{ parent() }}
     <li class="breadcrumb-item"><a href="{{ url('sfs_user_admin_users_list') }}">Users</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{ sfs_user_is_name_surname() ? user.name~' '~user.surname : user.username }}</li>
+    <li class="breadcrumb-item active" aria-current="page">{{ sfs_user_is('nameSurname') ? user.name~' '~user.surname : user.username }}</li>
 {% endblock breadcrums_content %}
 
 {% block content %}
-    {% if sfs_user_is_name_surname() %}
+    {% if sfs_user_is('nameSurname') %}
         <h1 class="h3 mb-4">{{ user.name }} {{ user.surname }}</h1>
     {% else %}
         <h1 class="h3 mb-4">{{ user.username }}</h1>
@@ -53,16 +53,16 @@
         </div>
     </div>
 
-    {% if sfs_user_is_name_surname() %}
+    {% if sfs_user_is('nameSurname') %}
     <p><strong>name:</strong> {{ user.name }}</p>
     <p><strong>surname:</strong> {{ user.surname }}</p>
     {% endif %}
 
     <p><strong>username:</strong> {{ user.username }}</p>
-    {% if sfs_user_is_emailed() %}
+    {% if sfs_user_is('email') %}
         <p><strong>email:</strong> {{ user.email }}</p>
     {% endif %}
-    {% if sfs_user_is_confirmable() %}
+    {% if sfs_user_is('confirmable') %}
         <p>
             <strong>confirmed:</strong>
             {% if user.confirmed %}

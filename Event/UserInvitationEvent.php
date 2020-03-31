@@ -2,21 +2,16 @@
 
 namespace Softspring\UserBundle\Event;
 
+use Softspring\CoreBundle\Event\RequestEvent;
 use Softspring\UserBundle\Model\UserInvitationInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Contracts\EventDispatcher\Event;
 
-class UserInvitationEvent extends Event
+class UserInvitationEvent extends RequestEvent
 {
     /**
      * @var UserInvitationInterface
      */
     protected $invitation;
-
-    /**
-     * @var Request|null
-     */
-    protected $request;
 
     /**
      * UserInvitationEvent constructor.
@@ -26,8 +21,8 @@ class UserInvitationEvent extends Event
      */
     public function __construct(UserInvitationInterface $invitation, ?Request $request)
     {
+        parent::__construct($request);
         $this->invitation = $invitation;
-        $this->request = $request;
     }
 
     /**
@@ -36,13 +31,5 @@ class UserInvitationEvent extends Event
     public function getInvitation(): UserInvitationInterface
     {
         return $this->invitation;
-    }
-
-    /**
-     * @return Request|null
-     */
-    public function getRequest(): ?Request
-    {
-        return $this->request;
     }
 }

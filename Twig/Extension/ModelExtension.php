@@ -4,11 +4,6 @@ namespace Softspring\UserBundle\Twig\Extension;
 
 use Softspring\UserBundle\Manager\UserAccessManagerInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
-use Softspring\UserBundle\Model\ConfirmableInterface;
-use Softspring\UserBundle\Model\NameSurnameInterface;
-use Softspring\UserBundle\Model\UserAccessLatLongInterface;
-use Softspring\UserBundle\Model\UserAccessLocationInterface;
-use Softspring\UserBundle\Model\UserWithEmailInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -42,71 +37,48 @@ class ModelExtension extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new TwigFunction('sfs_user_is_name_surname', [$this, 'userIsNameSurnameInterface']),
-            new TwigFunction('sfs_user_is_confirmable', [$this, 'userIsConfirmableInterface']),
-            new TwigFunction('sfs_user_is_emailed', [$this, 'userWithEmailInterface']),
-            new TwigFunction('sfs_user_access_is_location', [$this, 'userAccessLocationInterface']),
-            new TwigFunction('sfs_user_access_is_latlong', [$this, 'userAccessLatLongInterface']),
+            new TwigFunction('sfs_user_is', [$this, 'userCheckInterface']),
+            new TwigFunction('sfs_user_access_is', [$this, 'userAccessCheckInterface']),
         ];
     }
 
-    /**
-     * @return bool
-     */
-    public function userIsNameSurnameInterface(): bool
+    public function userCheckInterface(string $interface): bool
     {
         if (!$this->userManager instanceof UserManagerInterface) {
             return false;
         }
 
-        return $this->userManager->getEntityClassReflection()->implementsInterface(NameSurnameInterface::class);
+        return $this->checkImplements($this->userManager->getEntityClassReflection(), $interface);
     }
 
-    /**
-     * @return bool
-     */
-    public function userIsConfirmableInterface(): bool
-    {
-        if (!$this->userManager instanceof UserManagerInterface) {
-            return false;
-        }
-
-        return $this->userManager->getEntityClassReflection()->implementsInterface(ConfirmableInterface::class);
-    }
-
-    /**
-     * @return bool
-     */
-    public function userWithEmailInterface(): bool
-    {
-        if (!$this->userManager instanceof UserManagerInterface) {
-            return false;
-        }
-
-        return $this->userManager->getEntityClassReflection()->implementsInterface(UserWithEmailInterface::class);
-    }
-
-    /**
-     * @return bool
-     */
-    public function userAccessLocationInterface(): bool
+    public function userAccessCheckInterface(string $interface): bool
     {
         if (!$this->accessManager instanceof UserAccessManagerInterface) {
             return false;
         }
 
-        return $this->accessManager->getEntityClassReflection()->implementsInterface(UserAccessLocationInterface::class);
+        return $this->checkImplements($this->accessManager->getEntityClassReflection(), $interface);
     }
 
-    /**
-     * @return bool
-     */
-    public function userAccessLatLongInterface(): bool
+    protected function checkImplements(\ReflectionClass $reflectionClass, string $interface): bool
     {
-        if (!$this->accessManager instanceof UserAccessManagerInterface) {
-            return false;
+        $interface = ucfirst($interface);
+
+        $options = [
+            "Softspring\\UserBundle\\Model\\{$interface}Interface", // if string is "NameSurname" (partial model name)
+            "Softspring\\UserBundle\\Model\\User{$interface}Interface",
+            "Softspring\\UserBundle\\Model\\UserWith{$interface}Interface",
+            "Softspring\\UserBundle\\Model\\UserAccess{$interface}Interface",
+            "Softspring\\UserBundle\\Model\\{$interface}", // if string is "NameSurnameInterface" (model name)
+            $interface, // if string is "Softspring\\UserBundle\\Model\\NameSurnameInterface" (fully qualified name)
+        ];
+
+        foreach ($options as $option) {
+            if (interface_exists($option) && $reflectionClass->implementsInterface($option)) {
+                return true;
+            }
         }
 
-        return $this->accessManager->getEntityClassReflection()->implementsInterface(UserAccessLatLongInterface::class);
+        return false;
     }
 }

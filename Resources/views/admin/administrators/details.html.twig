@@ -5,11 +5,11 @@
     {{ parent() }}
     <li class="breadcrumb-item">Users</li>
     <li class="breadcrumb-item"><a href="{{ url('sfs_user_admin_administrators_list') }}">Administrators</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{ sfs_user_is_name_surname() ? administrator.name~' '~administrator.surname : administrator.username }}</li>
+    <li class="breadcrumb-item active" aria-current="page">{{ sfs_user_is('nameSurname') ? administrator.name~' '~administrator.surname : administrator.username }}</li>
 {% endblock breadcrums_content %}
 
 {% block content %}
-    {% if sfs_user_is_name_surname() %}
+    {% if sfs_user_is('nameSurname') %}
         <h1 class="h3 mb-4">{{ administrator.name }} {{ administrator.surname }}</h1>
     {% else %}
         <h1 class="h3 mb-4">{{ administrator.username }}</h1>
@@ -26,7 +26,7 @@
 {#        <a href="#" class="btn btn-outline-secondary disabled">Delete</a>#}
     </div>
 
-    {% if sfs_user_is_name_surname() %}
+    {% if sfs_user_is('nameSurname') %}
     <p><strong>name:</strong> {{ administrator.name }}</p>
     <p><strong>surname:</strong> {{ administrator.surname }}</p>
     {% endif %}

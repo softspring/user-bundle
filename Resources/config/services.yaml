@@ -4,8 +4,8 @@ services:
         autoconfigure: true
         public: false
         bind:
-            $changeEmailConfig: []
-            $changeUsernameConfig: []
+#            $changeEmailConfig: []
+#            $changeUsernameConfig: []
             $firewallMap: '@security.firewall.map'
             $impersonateBarConfig: '%sfs_user.impersonate_bar%'
             $em: '@sfs_user.entity_manager'
@@ -32,7 +32,7 @@ services:
 
     Softspring\UserBundle\Form\:
         resource: '../../Form/*'
-        exclude:  '../../Form/Admin/*'
+        exclude:  '../../Form/(Admin,Settings)/*'
 
     Softspring\UserBundle\Mailer\UserMailerInterface:
         class: Softspring\UserBundle\Mailer\UserMailer

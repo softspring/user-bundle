@@ -1,12 +1,12 @@
 {% trans_default_domain 'sfs_user' %}
 {% for administrator in entities %}
     <tr>
-        {% if sfs_user_is_name_surname() %}
+        {% if sfs_user_is('nameSurname') %}
             <td>{{ administrator.name }}</td>
             <td>{{ administrator.surname }}</td>
         {% endif %}
         <td>{{ administrator.username }}</td>
-        {% if sfs_user_is_emailed() %}
+        {% if sfs_user_is('email') %}
             <td>{{ administrator.email }}</td>
         {% endif %}
         <td>{{ administrator.lastLogin ? administrator.lastLogin|date('H:i d-m-Y') : 'not yet' }}</td>

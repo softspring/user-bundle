@@ -5,6 +5,7 @@ namespace Softspring\UserBundle\Controller\Settings;
 use Softspring\CoreBundle\Controller\AbstractController;
 use Softspring\CoreBundle\Event\GetResponseFormEvent;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
+use Softspring\UserBundle\Form\Settings\ChangeEmailFormInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\SfsUserEvents;
@@ -19,20 +20,20 @@ class ChangeEmailController extends AbstractController
     protected $userManager;
 
     /**
-     * @var array
+     * @var ChangeEmailFormInterface
      */
-    protected $changeEmailConfig;
+    protected $changeEmailForm;
 
     /**
      * ChangeEmailController constructor.
      *
-     * @param UserManagerInterface $userManager
-     * @param array                $changeEmailConfig
+     * @param UserManagerInterface     $userManager
+     * @param ChangeEmailFormInterface $changeEmailForm
      */
-    public function __construct(UserManagerInterface $userManager, array $changeEmailConfig)
+    public function __construct(UserManagerInterface $userManager, ChangeEmailFormInterface $changeEmailForm)
     {
         $this->userManager = $userManager;
-        $this->changeEmailConfig = $changeEmailConfig;
+        $this->changeEmailForm = $changeEmailForm;
     }
 
     public function changeEmail(Request $request): Response
@@ -40,7 +41,7 @@ class ChangeEmailController extends AbstractController
         /** @var UserInterface $user */
         $user = $this->getUser();
 
-        $form = $this->createForm($this->getParameter('sfs_user.change_email.form'), $user, [
+        $form = $this->createForm(get_class($this->changeEmailForm), $user, [
             'method' => 'POST',
         ])->handleRequest($request);
 
@@ -64,8 +65,8 @@ class ChangeEmailController extends AbstractController
             }
         }
 
-        return $this->render($this->getParameter('sfs_user.change_email.template'), [
-            'change_email_form' => $form->createView(),
+        return $this->render('@SfsUser/change_email/change_email.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 }

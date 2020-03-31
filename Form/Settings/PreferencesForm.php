@@ -1,6 +1,6 @@
 <?php
 
-namespace Softspring\UserBundle\Form;
+namespace Softspring\UserBundle\Form\Settings;
 
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;

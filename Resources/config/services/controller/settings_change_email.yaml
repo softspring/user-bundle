@@ -1,0 +1,16 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Softspring\UserBundle\Form\Settings\ChangeEmailFormInterface:
+        class: Softspring\UserBundle\Form\Settings\ChangeEmailForm
+
+    Softspring\UserBundle\Controller\Settings\ChangeEmailController:
+        public: true
+        calls:
+            - { method: setContainer, arguments: ['@service_container'] }
+        arguments:
+            $userManager: '@Softspring\UserBundle\Manager\UserManagerInterface'
+            $changeEmailForm: '@Softspring\UserBundle\Form\Settings\ChangeEmailFormInterface'

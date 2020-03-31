@@ -5,6 +5,7 @@ namespace Softspring\UserBundle\Controller\Settings;
 use Softspring\CoreBundle\Controller\AbstractController;
 use Softspring\CoreBundle\Event\GetResponseFormEvent;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
+use Softspring\UserBundle\Form\Settings\ChangeUsernameFormInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\SfsUserEvents;
@@ -19,20 +20,20 @@ class ChangeUsernameController extends AbstractController
     protected $userManager;
 
     /**
-     * @var array
+     * @var ChangeUsernameFormInterface
      */
-    protected $changeUsernameConfig;
+    protected $changeUsernameForm;
 
     /**
      * ChangeUsernameController constructor.
      *
-     * @param UserManagerInterface $userManager
-     * @param array                $changeUsernameConfig
+     * @param UserManagerInterface        $userManager
+     * @param ChangeUsernameFormInterface $changeUsernameForm
      */
-    public function __construct(UserManagerInterface $userManager, array $changeUsernameConfig)
+    public function __construct(UserManagerInterface $userManager, ChangeUsernameFormInterface $changeUsernameForm)
     {
         $this->userManager = $userManager;
-        $this->changeUsernameConfig = $changeUsernameConfig;
+        $this->changeUsernameForm = $changeUsernameForm;
     }
 
     public function changeUsername(Request $request): Response
@@ -40,7 +41,7 @@ class ChangeUsernameController extends AbstractController
         /** @var UserInterface $user */
         $user = $this->getUser();
 
-        $form = $this->createForm($this->getParameter('sfs_user.change_username.form'), $user, [
+        $form = $this->createForm(get_class($this->changeUsernameForm), $user, [
             'method' => 'POST',
         ])->handleRequest($request);
 
@@ -64,7 +65,7 @@ class ChangeUsernameController extends AbstractController
             }
         }
 
-        return $this->render($this->getParameter('sfs_user.change_username.template'), [
+        return $this->render('@SfsUser/change_username/change_username.html.twig', [
             'change_username_form' => $form->createView(),
         ]);
     }

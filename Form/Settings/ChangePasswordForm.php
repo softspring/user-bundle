@@ -1,6 +1,6 @@
 <?php
 
-namespace Softspring\UserBundle\Form;
+namespace Softspring\UserBundle\Form\Settings;
 
 use Softspring\UserBundle\Model\UserInterface;
 use Symfony\Component\Form\AbstractType;
