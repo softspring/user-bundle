@@ -43,15 +43,9 @@ reset_password:
             Si no recibes el correo, por favor, revisa tu carpeta de spam o vuelve a solicitar el reestablecimiento.
     email:
         subject: "Cambio de contraseña"
-        message: |
-            Hola %name%:
-
-            Para resetear tu contraseña sigue el siguiente enlace: %resetUrl%
-
-            Saludos.
         html: |
             <p>Hola %name%:</p>
-            <p><a href="%resetUrl%">Pincha aquí</a> para cambiar tu contraseña.</p>
+            <p><a href="%reset_url%">Pincha aquí</a> para cambiar tu contraseña.</p>
             <p>Saludos.</p>
     reset:
         form:

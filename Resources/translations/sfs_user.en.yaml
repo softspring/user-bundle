@@ -42,16 +42,10 @@ reset_password:
 
             If you don't receive the email, please, check your spam folder or try to request the resseting again.
     email:
-        subject: "Cambio de contraseña"
-        message: |
-            Hello %name%:
-
-            To reset your password follow this link: %resetUrl%
-
-            Regards.
+        subject: "Password resetting"
         html: |
             <p>Hello %name%:</p>
-            <p><a href="%resetUrl%">Click here</a> to reset your password.</p>
+            <p><a href="%reset_url%">Click here</a> to reset your password.</p>
             <p>Regards.</p>
     reset:
         form:

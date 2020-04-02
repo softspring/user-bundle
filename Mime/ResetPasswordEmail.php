@@ -39,6 +39,6 @@ class ResetPasswordEmail extends TranslatableEmail
 
         $this->htmlTemplate('@SfsUser/reset_password/request-email.html.twig');
 
-        $this->subject('reset_password.request.email.subject', 'sfs_user');
+        $this->subject('reset_password.email.subject', 'sfs_user');
     }
 }

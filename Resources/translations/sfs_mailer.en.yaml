@@ -1,3 +1,12 @@
-sfs_user.reset_password: "Reset password"
-sfs_user.register_confirm: "Register and confirmation"
-sfs_user.invite: "Invitation"
+sfs_user.reset_password:
+    name: "Reset password"
+    description:  "User password resetting request"
+
+sfs_user.register_confirm:
+    name: "Register and confirmation"
+    description:  "User register confirmation"
+
+sfs_user.invite:
+    name: "Invitation"
+    description:  "Invitation email for a user"
+

@@ -2,12 +2,17 @@
 
 namespace Softspring\UserBundle\Mailer\Loader;
 
-use Softspring\MailerBundle\Model\Template;
+use Softspring\MailerBundle\Template\Template;
 use Softspring\MailerBundle\Template\Loader\TemplateLoaderInterface;
 use Softspring\MailerBundle\Template\TemplateCollection;
 use Softspring\UserBundle\Manager\UserManagerInterface;
+use Softspring\UserBundle\Mime\ConfirmationEmail;
+use Softspring\UserBundle\Mime\Example\ConfirmationEmailExample;
+use Softspring\UserBundle\Mime\Example\InvitationEmailExample;
 use Softspring\UserBundle\Mime\Example\ResetPasswordEmailExample;
+use Softspring\UserBundle\Mime\InvitationEmail;
 use Softspring\UserBundle\Mime\ResetPasswordEmail;
+use Softspring\UserBundle\Model\ConfirmableInterface;
 
 class MailTemplateLoader implements TemplateLoaderInterface
 {
@@ -42,52 +47,25 @@ class MailTemplateLoader implements TemplateLoaderInterface
 
         $template = new Template();
         $template->setId('sfs_user.reset_password');
-        $template->setName('User password resetting request');
         $template->setClass(ResetPasswordEmail::class);
-//        $template->setExample(new ResetPasswordEmailExample());
-
-//        $template->setTwigTemplate('@SfsUser/reset_password/resetting.email.twig');
-//        $template->setExampleContext([
-//            'user_name' => 'Mathew',
-//            'user_surname' => 'Smith',
-//            'user_username' => 'mathewsmith',
-//            'user_email' => 'mathewsmith@example.local',
-//            'resetUrl' => '#',
-//        ]);
-        // TODO SET FROM EMAIL AND NAME (WITH DEFAULT FALLBACK)
+        $template->setExample(new ResetPasswordEmailExample());
         $collection->addTemplate($template);
 
-//        if ($this->userManager->getEntityClassReflection()->implementsInterface(ConfirmableInterface::class)) {
-//            $template = new Template();
-//            $template->setId('sfs_user.register_confirm');
-//            $template->setName('User register confirmation');
-////            $template->setTwigTemplate('@SfsUser/register/confirm.email.twig');
-////            $template->setExampleContext([
-////                'user_name' => 'Mathew',
-////                'user_surname' => 'Smith',
-////                'user_username' => 'mathewsmith',
-////                'user_email' => 'mathewsmith@example.local',
-////                'confirmationUrl' => '#',
-////            ]);
-////            // TODO SET FROM EMAIL AND NAME (WITH DEFAULT FALLBACK)
-//            $collection->addTemplate($template);
-//        }
-//
-//        if (!empty($this->inviteClass)) {
-//            $template = new Template();
-//            $template->setId('sfs_user.invite');
-//            $template->setName('Invitation for a user');
-////            $template->setTwigTemplate('@SfsUser/invite/invite.email.twig');
-////            $template->setExampleContext([
-////                'user_name' => 'Mathew',
-////                'user_surname' => 'Smith',
-////                'user_username' => 'mathewsmith',
-////                'user_email' => 'mathewsmith@example.local',
-////                'acceptUrl' => '#',
-////            ]);
-//            // TODO SET FROM EMAIL AND NAME (WITH DEFAULT FALLBACK)
-//            $collection->addTemplate($template);
-//        }
+        if ($this->userManager->getEntityClassReflection()->implementsInterface(ConfirmableInterface::class)) {
+            $template = new Template();
+            $template->setId('sfs_user.register_confirm');
+            $template->setClass(ConfirmationEmail::class);
+            $template->setExample(new ConfirmationEmailExample());
+            $collection->addTemplate($template);
+        }
+
+        if (!empty($this->inviteClass)) {
+            $template = new Template();
+            $template->setId('sfs_user.invite');
+            $template->setClass(InvitationEmail::class);
+            $template->setExample(new InvitationEmailExample());
+            $collection->addTemplate($template);
+        }
 
         return $collection;
     }

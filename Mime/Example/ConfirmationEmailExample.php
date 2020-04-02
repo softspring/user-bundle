@@ -4,16 +4,16 @@ namespace Softspring\UserBundle\Mime\Example;
 
 use Softspring\MailerBundle\Mime\Example\ExampleInterface;
 use Softspring\MailerBundle\Mime\TranslatableEmail;
-use Softspring\UserBundle\Mime\Example\Form\ResetPasswordEmailForm;
+use Softspring\UserBundle\Mime\ConfirmationEmail;
+use Softspring\UserBundle\Mime\Example\Form\ConfirmationEmailForm;
 use Softspring\UserBundle\Mime\Example\Model\ExampleUser;
-use Softspring\UserBundle\Mime\ResetPasswordEmail;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class ResetPasswordEmailExample implements ExampleInterface
+class ConfirmationEmailExample implements ExampleInterface
 {
     public function getFormType(): string
     {
-        return ResetPasswordEmailForm::class;
+        return ConfirmationEmailForm::class;
     }
 
     public function getEmptyData(): array
@@ -34,8 +34,8 @@ class ResetPasswordEmailExample implements ExampleInterface
         $user->setUsername($formData['username']);
         $user->setEmail($formData['email']);
 
-        $resetUrl = '#reset-url';
+        $confirmationUrl = '#confirmation-url';
 
-        return new ResetPasswordEmail($user, $resetUrl, $translator, $locale);
+        return new ConfirmationEmail($user, $confirmationUrl, $translator, $locale);
     }
 }
