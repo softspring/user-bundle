@@ -27,5 +27,7 @@
 
     {% if invitation.user %}
         <p><strong>user:</strong> <a href="{{ url('sfs_user_admin_users_details', {'user':invitation.user}) }}">{{ invitation.user.username }}</a></p>
+    {% elseif invitation.acceptedAt %}
+        <p><strong>user:</strong> <em>user is deleted</em></p>
     {% endif %}
 {% endblock content %}
