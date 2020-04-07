@@ -4,7 +4,9 @@ namespace Softspring\UserBundle\Manipulator;
 
 use Softspring\UserBundle\Event\UserEvent;
 use Softspring\UserBundle\Manager\UserManagerInterface;
+use Softspring\UserBundle\Model\EnablableInterface;
 use Softspring\UserBundle\Model\UserInterface;
+use Softspring\UserBundle\Model\UserWithEmailInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -57,10 +59,18 @@ class UserManipulator
         $user = $this->userManager->createEntity();
 
         $user->setUsername($username);
-        $user->setEmail($email);
+
+        if ($user instanceof UserWithEmailInterface) {
+            $user->setEmail($email);
+        }
+
         $user->setPlainPassword($plainPassword);
         $user->setRoles($roles);
-        $user->setEnabled($enabled);
+
+        if ($user instanceof EnablableInterface) {
+            $user->setEnabled($enabled);
+        }
+
         $user->setAdmin($admin);
         $user->setSuperAdmin($superAdmin);
 
