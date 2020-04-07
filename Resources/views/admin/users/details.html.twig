@@ -67,13 +67,20 @@
             <strong>confirmed:</strong>
             {% if user.confirmed %}
                 <span class="mdi mdi-18px mdi-check align-middle text-success"></span>
-                at {{ user.confirmedAt|date('H:i d-m-Y') }}
+                at
+                <span title="{{ user.confirmedAt|date('H:i:s d-m-Y', 'UTC') }} UTC">{{ user.confirmedAt|date('H:i:s d-m-Y', 'Europe/Madrid') }}</span>
             {% else %}
                 <span class="mdi mdi-18px mdi-close align-middle text-danger"></span>
             {% endif %}
         </p>
     {% endif %}
-    <p><strong>lastLogin:</strong> {{ user.lastLogin ? user.lastLogin|date('H:i d-m-Y') : 'not yet' }}</p>
+    <p><strong>lastLogin:</strong>
+        {% if user.lastLogin %}
+        <span title="{{ user.lastLogin|date('H:i:s d-m-Y', 'UTC') }} UTC">{{ user.lastLogin|date('H:i:s d-m-Y', 'Europe/Madrid') }}</span>
+        {% else %}
+        not yet
+        {% endif %}
+    </p>
     <p><strong>role:</strong> {{ user.roles|join(', ') }}</p>
 
     <div class="row">

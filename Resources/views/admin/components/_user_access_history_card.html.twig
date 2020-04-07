@@ -1,3 +1,5 @@
+{% trans_default_domain 'sfs_user' %}
+
 <div class="card">
     <div class="card-header">
         <h4>Latest access</h4>
@@ -11,16 +13,22 @@
                 <tr>
                     <th>Login at</th>
                     <th>IP</th>
-                    <th>User agent</th>
+{#                    <th>User agent</th>#}
+                    {% if sfs_user_access_is('location') %}
+                        <th scope="col">{{ 'admin_access_history.list.fields.location.header'|trans }}</th>
+                    {% endif %}
                 </tr>
                 </thead>
 
                 <tbody>
                 {% for access in user_access_history %}
                     <tr>
-                        <td>{{ access.loginAt|date('H:i:s d-m-Y') }}</td>
+                        <td><span title="{{ access.loginAt|date('H:i:s d-m-Y', 'UTC') }} UTC">{{ access.loginAt|date('H:i:s d-m-Y', 'Europe/Madrid') }}</span></td>
                         <td>{{ access.ip }}</td>
-                        <td>{{ access.userAgent }}</td>
+{#                        <td>{{ access.userAgent }}</td>#}
+                        {% if sfs_user_access_is('location') %}
+                            <td>{{ access.city }} {% if access.country %}({{ access.country }}){% endif %}</td>
+                        {% endif %}
                     </tr>
                 {% endfor %}
                 </tbody>
