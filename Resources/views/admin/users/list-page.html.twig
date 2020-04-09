@@ -19,11 +19,7 @@
             </td>
         {% endif %}
         <td>
-            {% if user.lastLogin %}
-                <span title="{{ user.lastLogin|date('H:i:s d-m-Y', 'UTC') }} UTC">{{ user.lastLogin|date('H:i:s d-m-Y', 'Europe/Madrid') }}</span>
-            {% else %}
-                not yet
-            {% endif %}
+            {{ user.lastLogin ? user.lastLogin|dateSpan('H:i:s d-m-Y') : 'not yet' }}
         </td>
         <td>
             {% if is_granted('ROLE_ADMIN_USERS_DETAILS', user) %}
