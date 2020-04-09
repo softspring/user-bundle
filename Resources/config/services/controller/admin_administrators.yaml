@@ -15,6 +15,8 @@ services:
     Softspring\UserBundle\Controller\Admin\AdministratorsController:
         public: true
 
+    Softspring\UserBundle\Security\Authorization\Voter\AdminAdministratorsActionsVoter: ~
+
     sfs_user.admin.administrator.controller:
         class: Softspring\CrudlBundle\Controller\CrudlController
         public: true
@@ -24,8 +26,8 @@ services:
             $manager: '@Softspring\UserBundle\Manager\UserManagerInterface'
             $listFilterForm: '@Softspring\UserBundle\Form\Admin\AdministratorListFilterFormInterface'
 #            $createForm: '@Softspring\UserBundle\Form\Admin\UserCreateFormInterface'
-#            $updateForm: '@Softspring\UserBundle\Form\Admin\UserUpdateFormInterface'
-#            $deleteForm: '@Softspring\UserBundle\Form\Admin\UserDeleteFormInterface'
+            $updateForm: '@Softspring\UserBundle\Form\Admin\UserUpdateFormInterface'
+            $deleteForm: '@Softspring\UserBundle\Form\Admin\UserDeleteFormInterface'
             $config:
                 entity_attribute: 'administrator'
                 list:
@@ -40,27 +42,27 @@ services:
 #                    success_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_CREATE_SUCCESS
 #                    form_invalid_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_CREATE_FORM_INVALID
 #                    view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_CREATE_VIEW
-#                    success_redirect_to: 'sfs_user_admin_users_list'
+#                    success_redirect_to: 'sfs_user_admin_administrators_list'
 #                    view: '@@SfsUser/admin/administrators/create.html.twig'
-#                update:
-#                    param_converter_key: 'id'
-#                    initialize_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_UPDATE_INITIALIZE
-#                    form_valid_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_UPDATE_FORM_VALID
-#                    success_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_UPDATE_SUCCESS
-#                    form_invalid_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_UPDATE_FORM_INVALID
-#                    view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_UPDATE_VIEW
-#                    success_redirect_to: 'sfs_user_admin_users_list'
-#                    view: '@@SfsUser/admin/administrators/update.html.twig'
-#                delete:
-#                    is_granted: 'ROLE_ADMIN_ADMINISTRATORS_DELETE'
-#                    param_converter_key: 'id'
-#                    initialize_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_DELETE_INITIALIZE
-#                    form_valid_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_DELETE_FORM_VALID
-#                    success_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_DELETE_SUCCESS
-#                    form_invalid_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_DELETE_FORM_INVALID
-#                    view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_DELETE_VIEW
-#                    success_redirect_to: 'sfs_user_admin_users_list'
-#                    view: '@@SfsUser/admin/administrators/delete.html.twig'
+                update:
+                    param_converter_key: 'id'
+                    initialize_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_UPDATE_INITIALIZE
+                    form_valid_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_UPDATE_FORM_VALID
+                    success_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_UPDATE_SUCCESS
+                    form_invalid_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_UPDATE_FORM_INVALID
+                    view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_UPDATE_VIEW
+                    success_redirect_to: 'sfs_user_admin_administrators_list'
+                    view: '@@SfsUser/admin/administrators/update.html.twig'
+                delete:
+                    is_granted: 'ROLE_ADMIN_ADMINISTRATORS_DELETE'
+                    param_converter_key: 'id'
+                    initialize_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_DELETE_INITIALIZE
+                    form_valid_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_DELETE_FORM_VALID
+                    success_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_DELETE_SUCCESS
+                    form_invalid_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_DELETE_FORM_INVALID
+                    view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_DELETE_VIEW
+                    success_redirect_to: 'sfs_user_admin_administrators_list'
+                    view: '@@SfsUser/admin/administrators/delete.html.twig'
                 read:
                     is_granted: 'ROLE_ADMIN_ADMINISTRATORS_DETAILS'
                     param_converter_key: 'id'

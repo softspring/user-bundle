@@ -1,0 +1,25 @@
+{% trans_default_domain 'sfs_user' %}
+{% extends '@SfsUser/admin_layout.html.twig' %}
+
+{% block breadcrums_content %}
+    {{ parent() }}
+    <li class="breadcrumb-item"><a href="{{ url('sfs_user_admin_administrators_list') }}">Administrators</a></li>
+    <li class="breadcrumb-item"><a href="{{ url('sfs_user_admin_administrators_details', {'administrator':administrator}) }}">{{ sfs_user_is('nameSurname') ? administrator.name~' '~administrator.surname : administrator.username }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Edit</li>
+{% endblock breadcrums_content %}
+
+{% block content %}
+    {% if sfs_user_is('nameSurname') %}
+        <h1 class="h3 mb-4">{{ administrator.name }} {{ administrator.surname }}</h1>
+    {% else %}
+        <h1 class="h3 mb-4">{{ administrator.username }}</h1>
+    {% endif %}
+
+    {{ form_start(form) }}
+    {{ form_rest(form) }}
+    <a href="{{ url('sfs_user_admin_administrators_details', {'administrator':administrator}) }}" class="btn btn-outline-secondary">{{ 'admin_administrators.update.actions.cancel'|trans }}</a>
+    <input type="submit" value="{{ 'admin_administrators.update.actions.update.button'|trans }}" class="btn btn-primary" />
+    {{ form_end(form) }}
+
+
+{% endblock content %}

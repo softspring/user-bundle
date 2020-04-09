@@ -16,14 +16,47 @@
     {% endif %}
 
     <div class="text-right">
-        {% if is_granted('ROLE_ADMIN_ADMINISTRATORS_DEMOTE', administrator) %}
-            <a href="{{ url('sfs_user_admin_administrators_demote_admin', {'administrator':administrator}) }}" class="btn btn-outline-secondary">Demote Admin</a>
+        {% if is_granted('ROLE_ADMIN_ADMINISTRATORS_UPDATE', administrator) %}
+            <a href="{{ url('sfs_user_admin_administrators_update', {'administrator': administrator}) }}" class="btn btn-outline-secondary">Edit</a>
+        {% else %}
+            <a href="#" class="btn btn-outline-secondary disabled">Edit</a>
         {% endif %}
 
-{#        <a href="#" class="btn btn-outline-secondary disabled">Edit</a>#}
-{#        <a href="#" class="btn btn-outline-secondary disabled">Reset password</a>#}
-{#        <a href="#" class="btn btn-outline-secondary disabled">Manual password</a>#}
-{#        <a href="#" class="btn btn-outline-secondary disabled">Delete</a>#}
+{#        {% if switch_enabled and is_granted(switch_role) %}#}
+{#            <a href="{{ url(switch_route, switch_route_params) }}{{ switch_route_params|length ? '&' : '?' }}{{ switch_parameter }}={{ administrator.username }}"#}
+{#               class="btn btn-outline-secondary">view as {{ administrator.username }}</a>#}
+{#        {% endif %}#}
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                More
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                {% if is_granted('ROLE_ADMIN_ADMINISTRATORS_DEMOTE', administrator) %}
+                    <a href="{{ url('sfs_user_admin_administrators_demote_admin', {'administrator':administrator}) }}" class="dropdown-item">Demote Admin</a>
+                {% else %}
+                    <a href="#" class="dropdown-item disabled">Demote Admin</a>
+                {% endif %}
+
+                <a href="#" class="dropdown-item disabled">Reset password</a>
+                {#        <a href="#" class="dropdown-item disabled">Manual password</a>#}
+
+                {% if is_granted('ROLE_ADMIN_ADMINISTRATORS_DELETE', administrator) %}
+                    <a href="{{ url('sfs_user_admin_administrators_delete', {'administrator':administrator}) }}" class="dropdown-item">Delete</a>
+                {% else %}
+                    <a href="#" class="dropdown-item disabled">Delete</a>
+                {% endif %}
+
+{#                {% if sfs_user_is('confirmable') %}#}
+{#                    {% if administrator.confirmed %}#}
+{#                        <a href="#" class="dropdown-item disabled">Unconfirm</a>#}
+{#                    {% else %}#}
+{#                        <a href="#" class="dropdown-item disabled">Confirm</a>#}
+{#                        <a href="{{ url('sfs_user_admin_administrators_resend', {'administrator':administrator}) }}" class="dropdown-item">Resend confirmation</a>#}
+{#                    {% endif %}#}
+{#                {% endif %}#}
+            </div>
+        </div>
     </div>
 
     {% if sfs_user_is('nameSurname') %}
