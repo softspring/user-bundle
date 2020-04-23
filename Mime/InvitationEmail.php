@@ -35,7 +35,7 @@ class InvitationEmail extends TranslatableEmail
             '%accept_url%' => $acceptUrl,
         ]);
 
-        $this->htmlTemplate('@SfsUser/invite/invite-email.html.twig');
+        $this->htmlTemplate('@SfsUser/invite/invite.email.twig');
 
         $this->subject('invite.accept.email.subject', 'sfs_user');
     }

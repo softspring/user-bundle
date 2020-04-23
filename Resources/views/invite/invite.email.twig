@@ -1,8 +1,8 @@
 {% trans_default_domain 'sfs_user' %}
-{% extends '@SfsMailer/email_base.html.twig' %}
+{% extends '@SfsMailer/base.email.twig' %}
 
 {% block content %}
     {% autoescape false %}
-        {{ 'reset_password.email.html'|trans(__translation_params) }}
+        {{ 'invite.accept.email.html'|trans(__translation_params) }}
     {% endautoescape %}
 {% endblock content %}
