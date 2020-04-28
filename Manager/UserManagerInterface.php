@@ -43,4 +43,19 @@ interface UserManagerInterface extends CrudlEntityManagerInterface
      * @return UserInterface|ConfirmableInterface|null
      */
     public function findUserByConfirmationToken($token);
+
+    /**
+     * @return UserInterface
+     */
+    public function createEntity();
+
+    /**
+     * @param UserInterface $entity
+     */
+    public function saveEntity($entity): void;
+
+    /**
+     * @param UserInterface $entity
+     */
+    public function deleteEntity($entity): void;
 }
