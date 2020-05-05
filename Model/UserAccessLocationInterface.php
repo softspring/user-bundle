@@ -17,6 +17,16 @@ interface UserAccessLocationInterface
     /**
      * @return string|null
      */
+    public function getRegion(): ?string;
+
+    /**
+     * @param string|null $region
+     */
+    public function setRegion(?string $region): void;
+
+    /**
+     * @return string|null
+     */
     public function getCountry(): ?string;
 
     /**
