@@ -106,9 +106,6 @@ admin_users:
             lastLogin.header: "Last login"
             role.header: "Role"
         filter_form:
-            name_like.label: "Name"
-            surname_like.label: "Surname"
-            email_like.label: "Email"
             name.label: "Name"
             surname.label: "Surname"
             email.label: "Email"
@@ -148,9 +145,6 @@ admin_administrators:
             lastLogin.header: "Last login"
             role.header: "Role"
         filter_form:
-            name_like.label: "Name"
-            surname_like.label: "Surname"
-            email_like.label: "Email"
             name.label: "Name"
             surname.label: "Surname"
             email.label: "Email"
