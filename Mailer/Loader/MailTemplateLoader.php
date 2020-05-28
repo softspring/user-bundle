@@ -48,14 +48,14 @@ class MailTemplateLoader implements TemplateLoaderInterface
         $template = new Template();
         $template->setId('sfs_user.reset_password');
         $template->setClass(ResetPasswordEmail::class);
-        $template->setExample(new ResetPasswordEmailExample());
+        $template->setPreview(true);
         $collection->addTemplate($template);
 
         if ($this->userManager->getEntityClassReflection()->implementsInterface(ConfirmableInterface::class)) {
             $template = new Template();
             $template->setId('sfs_user.register_confirm');
             $template->setClass(ConfirmationEmail::class);
-            $template->setExample(new ConfirmationEmailExample());
+            $template->setPreview(true);
             $collection->addTemplate($template);
         }
 
@@ -63,7 +63,7 @@ class MailTemplateLoader implements TemplateLoaderInterface
             $template = new Template();
             $template->setId('sfs_user.invite');
             $template->setClass(InvitationEmail::class);
-            $template->setExample(new InvitationEmailExample());
+            $template->setPreview(true);
             $collection->addTemplate($template);
         }
 

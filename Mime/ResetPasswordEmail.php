@@ -3,6 +3,7 @@
 namespace Softspring\UserBundle\Mime;
 
 use Softspring\MailerBundle\Mime\TranslatableEmail;
+use Softspring\UserBundle\Mime\Example\Model\ExampleUser;
 use Softspring\UserBundle\Model\NameSurnameInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Model\UserWithEmailInterface;
@@ -12,6 +13,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ResetPasswordEmail extends TranslatableEmail
 {
+    public static function generateExample(TranslatorInterface $translator, ?string $locale = null): TranslatableEmail
+    {
+        $user = new ExampleUser();
+        $user->setName('Mery');
+        $user->setSurname('McCarty');
+        $resetUrl = '#reset-url';
+        return new self($user, $resetUrl, $translator, $locale);
+    }
+
     /**
      * ConfirmationEmail constructor.
      *
