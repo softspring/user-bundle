@@ -16,11 +16,8 @@
 
     {{ form_start(filterForm) }}
     <div class="row">
-        {% if filterForm.name_like is defined %}<div class="col">{{ form_row(filterForm.name_like) }}</div>{% endif %}
         {% if filterForm.name is defined %}<div class="col">{{ form_row(filterForm.name) }}</div>{% endif %}
-        {% if filterForm.surname_like is defined %}<div class="col">{{ form_row(filterForm.surname_like) }}</div>{% endif %}
         {% if filterForm.surname is defined %}<div class="col">{{ form_row(filterForm.surname) }}</div>{% endif %}
-        {% if filterForm.email_like is defined %}<div class="col">{{ form_row(filterForm.email_like) }}</div>{% endif %}
         {% if filterForm.email is defined %}<div class="col">{{ form_row(filterForm.email) }}</div>{% endif %}
         <div class="col">{{ form_row(filterForm.search) }}</div>
     </div>

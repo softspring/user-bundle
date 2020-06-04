@@ -42,6 +42,7 @@ class UserAccessManipulator
                 // HTTP_X_APPENGINE_CITY
                 // HTTP_X_APPENGINE_COUNTRY
                 $userAccess->setCity($request->server->get('HTTP_X_APPENGINE_CITY'));
+                $userAccess->setRegion($request->server->get('HTTP_X_APPENGINE_REGION'));
                 $userAccess->setCountry($request->server->get('HTTP_X_APPENGINE_COUNTRY'));
             }
         }

@@ -7,6 +7,7 @@ use Softspring\CrudlBundle\Form\EntityListFilterForm;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -48,22 +49,20 @@ class UserListFilterForm extends EntityListFilterForm implements UserListFilterF
         parent::buildForm($builder, $options);
 
         $named = $this->userManager->getEntityClassReflection()->implementsInterface(NameSurnameInterface::class);
+        $isFilterRepo = $this->userManager->getRepository() instanceof FilterRepositoryInterface;
 
-        if ($this->userManager->getRepository() instanceof FilterRepositoryInterface) {
-            if ($named) {
-                $builder->add('name_like');
-                $builder->add('surname_like');
-            }
-
-            $builder->add('email_like');
-        } else {
-            if ($named) {
-                $builder->add('name');
-                $builder->add('surname');
-            }
-
-            $builder->add('email');
+        if ($named) {
+            $builder->add('name', TextType::class, [
+                'property_path' => $isFilterRepo ? '[name_like]' : '[name]',
+            ]);
+            $builder->add('surname', TextType::class, [
+                'property_path' => $isFilterRepo ? '[surname_like]' : '[surname]',
+            ]);
         }
+
+        $builder->add('email', TextType::class, [
+            'property_path' => $isFilterRepo ? '[email_like]' : '[email]',
+        ]);
 
         $builder->add('search', SubmitType::class);
     }

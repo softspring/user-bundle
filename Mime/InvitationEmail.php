@@ -3,6 +3,7 @@
 namespace Softspring\UserBundle\Mime;
 
 use Softspring\MailerBundle\Mime\TranslatableEmail;
+use Softspring\UserBundle\Mime\Example\Model\ExampleInvitation;
 use Softspring\UserBundle\Model\UserInvitationInterface;
 use Symfony\Component\Mime\Header\Headers;
 use Symfony\Component\Mime\Part\AbstractPart;
@@ -10,6 +11,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class InvitationEmail extends TranslatableEmail
 {
+    public static function generateExample(TranslatorInterface $translator, ?string $locale = null): TranslatableEmail
+    {
+        $user = new ExampleInvitation();
+        $user->setName('Mery');
+        $user->setSurname('McCarty');
+        $acceptUrl = '#accept-url';
+        return new self($user, $acceptUrl, $translator, $locale);
+    }
+
     /**
      * InvitationEmail constructor.
      *
@@ -35,7 +45,7 @@ class InvitationEmail extends TranslatableEmail
             '%accept_url%' => $acceptUrl,
         ]);
 
-        $this->htmlTemplate('@SfsUser/invite/invite-email.html.twig');
+        $this->htmlTemplate('@SfsUser/invite/invite.email.twig');
 
         $this->subject('invite.accept.email.subject', 'sfs_user');
     }
