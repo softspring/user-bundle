@@ -155,6 +155,10 @@ admin_administrators:
             surname.label: "Surname"
             email.label: "Email"
             search.label: "Search"
+    update:
+        actions:
+            update.button: "Update"
+            cancel.button: "Cancel"
 
 admin_access_history:
     list:

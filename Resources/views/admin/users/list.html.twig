@@ -29,7 +29,7 @@
     {{ form_end(filterForm) }}
     {% endif %}
 
-    {% embed '@SfsAdmin/components/table.html.twig' with {'collection':entities} %}
+    {% embed '@SfsAdmin/components/table.html.twig' with {'collection':entities, 'pagination_route': 'sfs_user_admin_users_list'} %}
         {% trans_default_domain 'sfs_user' %}
         {% block ths %}
             {% if sfs_user_is('nameSurname') %}
@@ -51,22 +51,5 @@
             {% include '@SfsUser/admin/users/list-page.html.twig' %}
         {% endblock tbody %}
 
-        {% block tfooter %}
-            {% if entities.pages|default(false) %}
-                <tfoot>
-                <tr>
-                    <td colspan="20">
-                        {% if entities.prevPage %}
-                            <a href="{{ url('sfs_user_admin_users_list', app.request.query.all|merge({ page: entities.prevPage })) }}" title="Prev page"><span class="mdi mdi-24px mdi-chevron-left"></span></a>
-                        {% endif %}
-
-                        {% if entities.nextPage %}
-                            <a class="float-right" href="{{ url('sfs_user_admin_users_list', app.request.query.all|merge({ page: entities.nextPage })) }}" title="Next page"><span class="mdi mdi-24px mdi-chevron-right"></span></a>
-                        {% endif %}
-                    </td>
-                </tr>
-                </tfoot>
-            {% endif %}
-        {% endblock tfooter %}
     {% endembed %}
 {% endblock content %}

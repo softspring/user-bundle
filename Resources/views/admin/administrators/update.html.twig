@@ -17,7 +17,7 @@
 
     {{ form_start(form) }}
     {{ form_rest(form) }}
-    <a href="{{ url('sfs_user_admin_administrators_details', {'administrator':administrator}) }}" class="btn btn-outline-secondary">{{ 'admin_administrators.update.actions.cancel'|trans }}</a>
+    <a href="{{ url('sfs_user_admin_administrators_details', {'administrator':administrator}) }}" class="btn btn-outline-secondary">{{ 'admin_administrators.update.actions.cancel.button'|trans }}</a>
     <input type="submit" value="{{ 'admin_administrators.update.actions.update.button'|trans }}" class="btn btn-primary" />
     {{ form_end(form) }}
 
