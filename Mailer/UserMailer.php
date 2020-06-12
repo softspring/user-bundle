@@ -9,6 +9,7 @@ use Softspring\UserBundle\Mime\ResetPasswordEmail;
 use Softspring\UserBundle\Model\ConfirmableInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;
 use Softspring\UserBundle\Model\PasswordRequestInterface;
+use Softspring\UserBundle\Model\UserHasLocalePreferenceInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Model\UserInvitationInterface;
 use Softspring\UserBundle\Model\UserWithEmailInterface;
@@ -63,6 +64,8 @@ class UserMailer implements UserMailerInterface
 
         $toName = $user instanceof NameSurnameInterface ? implode(' ', [$user->getName(), $user->getSurname()]) : '';
 
+        $locale = $user && $user instanceof UserHasLocalePreferenceInterface ? $user->getLocale() : $locale;
+
         $confirmationUrl = $this->urlGenerator->generate('sfs_user_register_confirm', [
             'user' => $user->getId(),
             'token' => $user->getConfirmationToken(),
@@ -111,6 +114,8 @@ class UserMailer implements UserMailerInterface
             'user' => $user->getId(),
             'token' => $user->getPasswordRequestToken(),
         ], UrlGeneratorInterface::ABSOLUTE_URL);
+
+        $locale = $user && $user instanceof UserHasLocalePreferenceInterface ? $user->getLocale() : $locale;
 
         $email = (new ResetPasswordEmail($user, $resetUrl, $this->translator, $locale))
             ->from('development@softspring.eu')
