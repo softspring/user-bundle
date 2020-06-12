@@ -85,6 +85,7 @@ preferences:
     form:
         name.label: "Name"
         surname.label: "Surname"
+        locale.label: "Preferred language"
 
 change_password:
     form:
