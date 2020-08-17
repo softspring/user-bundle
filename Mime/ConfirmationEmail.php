@@ -36,8 +36,8 @@ class ConfirmationEmail extends TranslatableEmail
     {
         parent::__construct($translator, $locale, $headers, $body);
 
-        $this->context['user'] = $user;
-        $this->context['confirmationUrl'] = $confirmationUrl;
+        $this->setContextParam('user', $user);
+        $this->setContextParam('confirmationUrl', $confirmationUrl);
 
         $this->setTranslationParams([
             '%name%' => $user instanceof NameSurnameInterface ? $user->getName() : '',

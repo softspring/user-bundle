@@ -36,8 +36,8 @@ class ResetPasswordEmail extends TranslatableEmail
     {
         parent::__construct($translator, $locale, $headers, $body);
 
-        $this->context['user'] = $user;
-        $this->context['resetUrl'] = $resetUrl;
+        $this->setContextParam('user', $user);
+        $this->setContextParam('resetUrl', $resetUrl);
 
         $this->setTranslationParams([
             '%name%' => $user instanceof NameSurnameInterface ? $user->getName() : '',

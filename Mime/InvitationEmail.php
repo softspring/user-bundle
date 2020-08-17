@@ -34,8 +34,8 @@ class InvitationEmail extends TranslatableEmail
     {
         parent::__construct($translator, $locale, $headers, $body);
 
-        $this->context['invitation'] = $invitation;
-        $this->context['acceptUrl'] = $acceptUrl;
+        $this->setContextParam('invitation', $invitation);
+        $this->setContextParam('acceptUrl', $acceptUrl);
 
         $this->setTranslationParams([
             '%name%' => $invitation->getName(),
