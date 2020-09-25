@@ -33,7 +33,7 @@ services:
 
     Softspring\UserBundle\Form\:
         resource: '../../Form/*'
-        exclude:  '../../Form/(Admin,Settings)/*'
+        exclude:  '../../Form/Admin/'
 
     Softspring\UserBundle\Mailer\UserMailerInterface:
         class: Softspring\UserBundle\Mailer\UserMailer
