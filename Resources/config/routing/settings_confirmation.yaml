@@ -1,0 +1,3 @@
+sfs_user_settings_confirmation:
+    path: /resend-confirmation-email
+    controller: Softspring\UserBundle\Controller\Settings\ConfirmationController::resendConfirmation
