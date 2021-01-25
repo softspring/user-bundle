@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -84,7 +85,11 @@ class ImpersonateBarListener implements EventSubscriberInterface
     protected function isImpersonated(): bool
     {
         try {
-            return $this->authorizationChecker->isGranted('ROLE_PREVIOUS_ADMIN');
+            if (Kernel::VERSION_ID > 50100) {
+                return $this->authorizationChecker->isGranted('IS_IMPERSONATOR');
+            } else {
+                return $this->authorizationChecker->isGranted('ROLE_PREVIOUS_ADMIN');
+            }
         } catch (AuthenticationCredentialsNotFoundException $e) {
             return false;
         }
