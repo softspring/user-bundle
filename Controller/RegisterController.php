@@ -27,15 +27,22 @@ class RegisterController extends AbstractController
     protected $registerForm;
 
     /**
+     * @var string|null
+     */
+    protected $targetPathParameter;
+
+    /**
      * RegisterController constructor.
      *
      * @param UserManagerInterface  $userManager
      * @param RegisterFormInterface $registerForm
+     * @param string|null           $targetPathParameter
      */
-    public function __construct(UserManagerInterface $userManager, RegisterFormInterface $registerForm)
+    public function __construct(UserManagerInterface $userManager, RegisterFormInterface $registerForm, ?string $targetPathParameter)
     {
         $this->userManager = $userManager;
         $this->registerForm = $registerForm;
+        $this->targetPathParameter = $targetPathParameter;
     }
 
     /**
@@ -49,6 +56,11 @@ class RegisterController extends AbstractController
 
         if ($response = $this->dispatchGetResponse(SfsUserEvents::REGISTER_INITIALIZE, new GetResponseUserEvent($user, $request))) {
             return $response;
+        }
+
+        $loginCheckParams = [];
+        if ($this->targetPathParameter && $targetPath = $request->get($this->targetPathParameter)) {
+            $loginCheckParams[$this->targetPathParameter] = $targetPath;
         }
 
         $form = $this->createForm(get_class($this->registerForm), $user, ['method' => 'POST'])->handleRequest($request);
@@ -75,6 +87,7 @@ class RegisterController extends AbstractController
 
         $viewData = new \ArrayObject([
             'register_form' => $form->createView(),
+            'register_params' => $loginCheckParams,
         ]);
 
         $this->dispatch(SfsUserEvents::REGISTER_VIEW, new ViewEvent($viewData));
