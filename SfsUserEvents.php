@@ -44,6 +44,9 @@ class SfsUserEvents
     const CONFIRMATION_SUCCESS = 'sfs_user.confirmation.success';
 
     /** @Event("Softspring\UserBundle\Event\GetResponseUserEvent") */
+    const CONFIRMATION_VALID = 'sfs_user.confirmation.valid';
+
+    /** @Event("Softspring\UserBundle\Event\GetResponseUserEvent") */
     const CONFIRMATION_FAILED = 'sfs_user.confirmation.failed';
 
     /** @Event("Softspring\CoreBundle\Event\ViewEvent") */

@@ -6,6 +6,7 @@ use Softspring\CoreBundle\Controller\AbstractController;
 use Softspring\CoreBundle\Event\GetResponseFormEvent;
 use Softspring\CoreBundle\Event\ViewEvent;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
+use Softspring\UserBundle\Event\UserEvent;
 use Softspring\UserBundle\Form\RegisterFormInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\ConfirmableInterface;
@@ -128,6 +129,10 @@ class RegisterController extends AbstractController
             }
 
             return $this->redirectToRoute('sfs_user_register');
+        }
+
+        if ($response = $this->dispatchGetResponse(SfsUserEvents::CONFIRMATION_VALID, new GetResponseUserEvent($user, $request))) {
+            return $response;
         }
 
         $user->setConfirmationToken(null);
