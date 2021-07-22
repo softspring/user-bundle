@@ -8,36 +8,9 @@ namespace Softspring\UserBundle\Model;
 abstract class User implements UserInterface
 {
     /**
-     * @var mixed
-     */
-    protected $id;
-
-    /**
      * @var string|null
      */
     protected $username;
-
-    /**
-     * @var string|null
-     */
-    protected $salt;
-
-    /**
-     * @var string|null
-     */
-    protected $password;
-
-    /**
-     * @var string|null
-     */
-    protected $plainPassword;
-
-    /**
-     * @var int|null
-     */
-    protected $lastLogin;
-
-    use Traits\AdminRolesTrait;
 
     /**
      * @inheritdoc
@@ -52,7 +25,9 @@ abstract class User implements UserInterface
      */
     public function __construct()
     {
-        $this->roles = [];
+        if ($this instanceof UserAdminRolesInterface) {
+            $this->setRoles([]);
+        }
     }
 
     /**
@@ -60,7 +35,9 @@ abstract class User implements UserInterface
      */
     public function eraseCredentials()
     {
-        $this->plainPassword = null;
+        if ($this instanceof UserPasswordInterface) {
+            $this->setPlainPassword(null);
+        }
     }
 
     /**
@@ -68,19 +45,20 @@ abstract class User implements UserInterface
      */
     public function serialize()
     {
-        $data = [
-            $this->password,
-            $this->salt,
-            $this->username,
-            $this->id,
-        ];
+        $data = [];
 
-        if ($this instanceof EnablableInterface) {
-            $data[] = $this->isEnabled();
-        }
+        foreach ($this->getSerializeFields() as $field) {
+            $fieldName = $field['name'];
 
-        if ($this instanceof UserWithEmailInterface) {
-            $data[] = $this->getEmail();
+            switch ($field['type']) {
+                case 'json':
+                    $data[] = json_encode($this->$fieldName);
+                    break;
+
+                case 'string':
+                default:
+                    $data[] = $this->$fieldName;
+            }
         }
 
         return serialize($data);
@@ -89,35 +67,56 @@ abstract class User implements UserInterface
     /**
      * @inheritdoc
      */
-    public function unserialize($serialized)
+    public function unserialize($data)
     {
-        $data = unserialize($serialized);
+        $data = unserialize($data);
 
-        list(
-            $this->password,
-            $this->salt,
-            $this->username,
-            $this->id,
-        ) = $data;
+        foreach ($this->getSerializeFields() as $field) {
+            $fieldName = $field['name'];
 
-        $data = array_slice($data, 4);
+            switch ($field['type']) {
+                case 'json':
+                    $this->$fieldName = json_decode(array_shift($data), true);
+                    break;
+
+                case 'string':
+                default:
+                    $this->$fieldName = array_shift($data);
+            }
+        }
+    }
+
+    protected function getSerializeFields(): array
+    {
+        $fields = [];
+
+        if ($this instanceof UserPasswordInterface) {
+            $fields[] = ['name' => 'password', 'type' => 'string' ];
+            $fields[] = ['name' => 'salt', 'type' => 'string' ];
+        }
+
+        $fields[] = ['name' => 'username', 'type' => 'string' ];
 
         if ($this instanceof EnablableInterface) {
-            $this->setEnabled(array_shift($data));
+            $fields[] = ['name' => 'enabled', 'type' => 'string' ];
         }
 
         if ($this instanceof UserWithEmailInterface) {
-            $this->setEmail(array_shift($data));
+            $fields[] = ['name' => 'email', 'type' => 'string' ];
         }
+
+        $reflection = new \ReflectionClass($this);
+        if ($reflection->hasProperty('id')) {
+            $fields[] = ['name' => 'id', 'type' => $reflection->getProperty('id')->getType() ?? 'string' ];
+        }
+
+        return $fields;
     }
 
     /**
      * @return mixed|null
      */
-    public function getId()
-    {
-        return $this->id;
-    }
+    abstract public function getId();
 
     /**
      * @return string|null
@@ -136,66 +135,26 @@ abstract class User implements UserInterface
     }
 
     /**
-     * @return string|null
+     * @throws \Exception
      */
-    public function getSalt(): ?string
+    public function getRoles()
     {
-        return $this->salt;
+        throw new \Exception(sprintf('Please implement %s interface', UserRolesInterface::class));
     }
 
     /**
-     * @param string|null $salt
+     * @throws \Exception
      */
-    public function setSalt(?string $salt): void
+    public function getPassword()
     {
-        $this->salt = $salt;
+        // nothing to do
     }
 
     /**
-     * @return string|null
+     * @throws \Exception
      */
-    public function getPassword(): ?string
+    public function getSalt()
     {
-        return $this->password;
-    }
-
-    /**
-     * @param string|null $password
-     */
-    public function setPassword(?string $password): void
-    {
-        $this->password = $password;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getPlainPassword(): ?string
-    {
-        return $this->plainPassword;
-    }
-
-    /**
-     * @param string|null $plainPassword
-     */
-    public function setPlainPassword(?string $plainPassword): void
-    {
-        $this->plainPassword = $plainPassword;
-    }
-
-    /**
-     * @return \DateTime|null
-     */
-    public function getLastLogin(): ?\DateTime
-    {
-        return \DateTime::createFromFormat("U", $this->lastLogin) ?: null;
-    }
-
-    /**
-     * @param \DateTime|null $lastLogin
-     */
-    public function setLastLogin(?\DateTime $lastLogin): void
-    {
-        $this->lastLogin = $lastLogin instanceof \DateTime ? $lastLogin->format('U') : null;
+        // nothing to do
     }
 }

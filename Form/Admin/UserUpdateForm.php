@@ -5,6 +5,7 @@ namespace Softspring\UserBundle\Form\Admin;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;
 use Softspring\UserBundle\Model\UserInterface;
+use Softspring\UserBundle\Model\UserWithEmailInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -46,6 +47,9 @@ class UserUpdateForm extends AbstractType implements UserUpdateFormInterface
         }
 
         $builder->add('username');
-        $builder->add('email', EmailType::class);
+
+        if ($this->userManager->getEntityClassReflection()->implementsInterface(UserWithEmailInterface::class)) {
+            $builder->add('email', EmailType::class);
+        }
     }
 }

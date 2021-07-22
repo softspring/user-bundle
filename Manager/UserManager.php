@@ -7,6 +7,7 @@ use Exception;
 use RuntimeException;
 use Softspring\CrudlBundle\Manager\CrudlEntityManagerTrait;
 use Softspring\UserBundle\Model\UserInterface;
+use Softspring\UserBundle\Model\UserPasswordInterface;
 use Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
@@ -113,6 +114,10 @@ class UserManager implements UserManagerInterface
      */
     protected function hashPassword(UserInterface $user): void
     {
+        if (!$user instanceof UserPasswordInterface) {
+            return;
+        }
+
         if (!$plainPassword = $user->getPlainPassword()) {
             return;
         }

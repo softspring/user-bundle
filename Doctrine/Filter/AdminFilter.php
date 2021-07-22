@@ -4,13 +4,13 @@ namespace Softspring\UserBundle\Doctrine\Filter;
 
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query\Filter\SQLFilter;
-use Softspring\UserBundle\Model\UserInterface;
+use Softspring\UserBundle\Model\UserAdminRolesInterface;
 
 class AdminFilter extends SQLFilter
 {
     public function addFilterConstraint(ClassMetadata $targetEntity, $targetTableAlias)
     {
-        if (!$targetEntity->getReflectionClass()->implementsInterface(UserInterface::class)) {
+        if (!$targetEntity->getReflectionClass()->implementsInterface(UserAdminRolesInterface::class)) {
             return '';
         }
 

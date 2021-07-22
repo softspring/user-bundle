@@ -74,6 +74,7 @@
             {% endif %}
         </p>
     {% endif %}
+    {% if sfs_user_is('lastLogin') %}
     <p><strong>lastLogin:</strong>
         {% if user.lastLogin %}
         <span title="{{ user.lastLogin|date('H:i:s d-m-Y', 'UTC') }} UTC">{{ user.lastLogin|date('H:i:s d-m-Y', 'Europe/Madrid') }}</span>
@@ -81,6 +82,7 @@
         not yet
         {% endif %}
     </p>
+    {% endif %}
     <p><strong>role:</strong> {{ user.roles|join(', ') }}</p>
 
     <div class="row">
