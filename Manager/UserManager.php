@@ -8,6 +8,7 @@ use RuntimeException;
 use Softspring\CrudlBundle\Manager\CrudlEntityManagerTrait;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Model\UserPasswordInterface;
+use Softspring\UserBundle\Model\UserWithEmailInterface;
 use Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
@@ -90,7 +91,7 @@ class UserManager implements UserManagerInterface
      */
     public function findUserByUsernameOrEmail(string $usernameOrEmail): ?UserInterface
     {
-        if (preg_match('/^.+@\S+\.\S+$/', $usernameOrEmail)) {
+        if ($this->getEntityClassReflection()->implementsInterface(UserWithEmailInterface::class) && preg_match('/^.+@\S+\.\S+$/', $usernameOrEmail)) {
             return $this->findUserByEmail($usernameOrEmail);
         }
 
