@@ -6,6 +6,7 @@ use Softspring\CoreBundle\Controller\AbstractController;
 use Softspring\CoreBundle\Event\GetResponseFormEvent;
 use Softspring\CoreBundle\Event\ViewEvent;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
+use Softspring\UserBundle\Event\RegisterExceptionEvent;
 use Softspring\UserBundle\Event\UserEvent;
 use Softspring\UserBundle\Form\RegisterFormInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
@@ -72,13 +73,20 @@ class RegisterController extends AbstractController
                     return $response;
                 }
 
-                $this->userManager->saveEntity($user);
+                try {
+                    $this->userManager->saveEntity($user);
 
-                if ($response = $this->dispatchGetResponse(SfsUserEvents::REGISTER_SUCCESS, new GetResponseUserEvent($user, $request))) {
-                    return $response;
+                    if ($response = $this->dispatchGetResponse(SfsUserEvents::REGISTER_SUCCESS, new GetResponseUserEvent($user, $request))) {
+                        return $response;
+                    }
+
+                    return $this->redirectToRoute('sfs_user_register_success');
+                } catch (\Exception $e) {
+                    $this->dispatch(SfsUserEvents::REGISTER_EXCEPTION, $exceptionEvent = new RegisterExceptionEvent($form, $e, $request));
+                    if ($exceptionEvent->getThrowException()) {
+                        throw $exceptionEvent->getThrowException();
+                    }
                 }
-
-                return $this->redirectToRoute('sfs_user_register_success');
             } else {
                 if ($response = $this->dispatchGetResponse(SfsUserEvents::REGISTER_FORM_INVALID, new GetResponseFormEvent($form, $request))) {
                     return $response;
