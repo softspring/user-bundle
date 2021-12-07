@@ -19,6 +19,9 @@ class SfsUserEvents
     /** @Event("Softspring\UserBundle\Event\GetResponseUserEvent") */
     const REGISTER_SUCCESS = 'sfs_user.register.success' ;
 
+    /** @Event("Softspring\UserBundle\Event\RegisterExceptionEvent") */
+    const REGISTER_EXCEPTION = 'sfs_user.register.exception' ;
+
     /** @Event("Softspring\CoreBundle\Event\GetResponseFormEvent") */
     const REGISTER_FORM_INVALID = 'sfs_user.register.form_invalid' ;
 
