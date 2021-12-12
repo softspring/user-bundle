@@ -5,7 +5,7 @@ services:
         public: false
 
     Softspring\UserBundle\Form\Admin\:
-        resource: '../../../../Form/Admin/AccessHistory*'
+        resource: '../../../src/Form/Admin/AccessHistory*'
 
     sfs_user.admin.access_history.controller:
         class: Softspring\CrudlBundle\Controller\CrudlController

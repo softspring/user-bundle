@@ -7,10 +7,10 @@ services:
             $impersonateBarConfig: '%sfs_user.impersonate_bar%'
 
     Softspring\UserBundle\Form\Admin\:
-        resource: '../../../../Form/Admin/Admin*'
+        resource: '../../../src/Form/Admin/Admin*'
 
     Softspring\UserBundle\EventListener\Admin\:
-        resource: '../../../../EventListener/Admin/Admin*'
+        resource: '../../../src/EventListener/Admin/Admin*'
 
     Softspring\UserBundle\Controller\Admin\AdministratorsController:
         public: true

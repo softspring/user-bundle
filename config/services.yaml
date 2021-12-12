@@ -16,11 +16,11 @@ services:
             $targetPathParameter: '%sfs_user.login.target_path_parameter%'
 
     Softspring\UserBundle\Command\:
-        resource: '../../Command/*'
+        resource: '../src/Command/*'
 
     Softspring\UserBundle\Controller\:
-        resource: '../../Controller/*'
-        exclude:  '../../Controller/Admin/*'
+        resource: '../src/Controller/*'
+        exclude:  '../src/Controller/Admin/*'
         public: true
 
     Softspring\UserBundle\EventListener\Admin\FlashMessagesListener: ~
@@ -32,8 +32,8 @@ services:
     Softspring\UserBundle\EventListener\UserRegistrationListener: ~
 
     Softspring\UserBundle\Form\:
-        resource: '../../Form/*'
-        exclude:  '../../Form/Admin/'
+        resource: '../src/Form/*'
+        exclude:  '../src/Form/Admin/'
 
     Softspring\UserBundle\Mailer\UserMailerInterface:
         class: Softspring\UserBundle\Mailer\UserMailer
@@ -48,17 +48,17 @@ services:
     Softspring\UserBundle\Manipulator\UserManipulator: ~
 
     Softspring\UserBundle\Provider\:
-        resource: '../../Provider/*'
+        resource: '../src/Provider/*'
 
     Softspring\UserBundle\Security\:
-        resource: '../../Security/*'
+        resource: '../src/Security/*'
 
     Softspring\UserBundle\Twig\Extension\:
-        resource: '../../Twig/Extension/*'
+        resource: '../src/Twig/Extension/*'
         tags: ['twig.extension']
 
     Softspring\UserBundle\Util\:
-        resource: '../../Util/*'
+        resource: '../src/Util/*'
 
     # tags
     Softspring\UserBundle\Mailer\Loader\MailTemplateLoader:

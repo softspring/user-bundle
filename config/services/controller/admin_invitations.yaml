@@ -5,10 +5,10 @@ services:
         public: false
 
     Softspring\UserBundle\Form\Admin\:
-        resource: '../../../../Form/Admin/Invitation*'
+        resource: '../../../src/Form/Admin/Invitation*'
 
     Softspring\UserBundle\EventListener\Admin\:
-        resource: '../../../../EventListener/Admin/Invitation*'
+        resource: '../../../src/EventListener/Admin/Invitation*'
 
     Softspring\UserBundle\Controller\Admin\InvitationsController:
         public: true
