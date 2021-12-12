@@ -6,7 +6,7 @@ This package provides a new complete user bundle out of the box (it's based on F
 [![Latest Unstable Version](https://poser.pugx.org/softspring/user-bundle/v/unstable.svg)](https://packagist.org/packages/softspring/user-bundle)
 [![License](https://poser.pugx.org/softspring/user-bundle/license.svg)](https://packagist.org/packages/softspring/user-bundle)
 [![Total Downloads](https://poser.pugx.org/softspring/user-bundle/downloads)](https://packagist.org/packages/softspring/user-bundle)
-[![Build status](https://travis-ci.com/softspring/user-bundle.svg?branch=master)](https://travis-ci.com/softspring/user-bundle)
+[![Build status](https://app.travis-ci.com/github/softspring/user-bundle.svg?branch=master)](https://app.travis-ci.com/github/softspring/user-bundle)
 
 # Installation
 
