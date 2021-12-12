@@ -37,7 +37,7 @@ class SfsUserExtension extends Extension implements PrependExtensionInterface
         $container->setParameter('sfs_user.login.target_path_parameter', $config['login']['target_path_parameter']);
 
         // load services
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../../config'));
         $loader->load('services.yaml');
 
         if ($config['history']['enabled']) {

@@ -10,6 +10,11 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class SfsUserBundle extends Bundle
 {
+    public function getPath(): string
+    {
+        return \dirname(__DIR__);
+    }
+
     /**
      * @param ContainerBuilder $container
      */
@@ -17,7 +22,7 @@ class SfsUserBundle extends Bundle
     {
         parent::build($container);
 
-        $basePath = realpath(__DIR__.'/Resources/config/doctrine-mapping/');
+        $basePath = realpath(__DIR__.'/../config/doctrine-mapping/');
 
         $this->addRegisterMappingsPass($container, [$basePath => 'Softspring\UserBundle\Model']);
 
