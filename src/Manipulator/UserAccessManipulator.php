@@ -18,17 +18,12 @@ class UserAccessManipulator
 
     /**
      * UserAccessManipulator constructor.
-     *
-     * @param UserAccessManagerInterface $userAccessManager
      */
     public function __construct(UserAccessManagerInterface $userAccessManager)
     {
         $this->userAccessManager = $userAccessManager;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function register(UserInterface $user, Request $request): UserAccessInterface
     {
         $userAccess = $this->userAccessManager->createEntity();

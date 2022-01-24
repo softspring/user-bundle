@@ -3,7 +3,7 @@
 namespace Softspring\UserBundle\Model;
 
 /**
- * Class UserAccess
+ * Class UserAccess.
  */
 abstract class UserAccess implements UserAccessInterface
 {
@@ -32,65 +32,41 @@ abstract class UserAccess implements UserAccessInterface
      */
     protected $userAgent;
 
-    /**
-     * @return UserInterface
-     */
     public function getUser(): UserInterface
     {
         return $this->user;
     }
 
-    /**
-     * @param UserInterface $user
-     */
     public function setUser(UserInterface $user): void
     {
         $this->user = $user;
     }
 
-    /**
-     * @return \DateTime|null
-     */
     public function getLoginAt(): ?\DateTime
     {
-        return \DateTime::createFromFormat("U", $this->loginAt) ?? null;
+        return \DateTime::createFromFormat('U', $this->loginAt) ?? null;
     }
 
-    /**
-     * @param \DateTime|null $loginAt
-     */
     public function setLoginAt(?\DateTime $loginAt): void
     {
-        $this->loginAt= $loginAt instanceof \DateTime ? $loginAt->format('U') : null;
+        $this->loginAt = $loginAt instanceof \DateTime ? $loginAt->format('U') : null;
     }
 
-    /**
-     * @return string
-     */
     public function getUserAgent(): string
     {
         return $this->userAgent;
     }
 
-    /**
-     * @param string $userAgent
-     */
     public function setUserAgent(string $userAgent): void
     {
         $this->userAgent = $userAgent;
     }
 
-    /**
-     * @return string
-     */
     public function getIp(): string
     {
         return $this->ip;
     }
 
-    /**
-     * @param string $ip
-     */
     public function setIp(string $ip): void
     {
         $this->ip = $ip;

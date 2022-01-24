@@ -33,10 +33,6 @@ class UserInvitationManager implements UserInvitationManagerInterface
 
     /**
      * UserInvitationManager constructor.
-     *
-     * @param EntityManagerInterface  $em
-     * @param UserManagerInterface    $userManager
-     * @param TokenGeneratorInterface $tokenGenerator
      */
     public function __construct(EntityManagerInterface $em, UserManagerInterface $userManager, TokenGeneratorInterface $tokenGenerator)
     {
@@ -53,9 +49,9 @@ class UserInvitationManager implements UserInvitationManagerInterface
     public function createEntity()
     {
         $class = $this->getEntityClass();
-        $entity = new $class;
+        $entity = new $class();
 
-        /** @var UserInvitationInterface $entity */
+        /* @var UserInvitationInterface $entity */
         $entity->setInvitationToken($this->tokenGenerator->generateToken());
 
         return $entity;
@@ -70,7 +66,7 @@ class UserInvitationManager implements UserInvitationManagerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function createUser(UserInvitationInterface $invitation): UserInterface
     {
@@ -106,7 +102,7 @@ class UserInvitationManager implements UserInvitationManagerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function findInvitationBy(array $criteria): ?UserInvitationInterface
     {
@@ -117,7 +113,7 @@ class UserInvitationManager implements UserInvitationManagerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function findInvitationByToken(string $token): ?UserInvitationInterface
     {

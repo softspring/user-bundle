@@ -27,9 +27,6 @@ class UsersController extends AbstractController
 
     /**
      * UsersController constructor.
-     *
-     * @param UserManagerInterface $userManager
-     * @param UserMailerInterface  $userMailer
      */
     public function __construct(UserManagerInterface $userManager, UserMailerInterface $userMailer)
     {
@@ -37,12 +34,6 @@ class UsersController extends AbstractController
         $this->userMailer = $userMailer;
     }
 
-    /**
-     * @param string  $user
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function promoteAdmin(string $user, Request $request): Response
     {
         $user = $this->userManager->findUserBy(['id' => $user]);
@@ -72,8 +63,8 @@ class UsersController extends AbstractController
     public function usersCountWidget(): Response
     {
         return $this->render('@SfsUser/admin/users/widget-users-count.html.twig', [
-            'users' => $this->userManager->getRepository()->count(['admin'=>0]),
-            'administrators' => $this->userManager->getRepository()->count(['admin'=>1]),
+            'users' => $this->userManager->getRepository()->count(['admin' => 0]),
+            'administrators' => $this->userManager->getRepository()->count(['admin' => 1]),
             'total' => $this->userManager->getRepository()->count([]),
         ]);
     }

@@ -14,17 +14,12 @@ class OauthLoginIntegrationController extends AbstractController
 
     /**
      * OauthLoginIntegrationController constructor.
-     *
-     * @param array $oauthServices
      */
     public function __construct(array $oauthServices)
     {
         $this->oauthServices = $oauthServices;
     }
 
-    /**
-     * @return Response
-     */
     public function facebookJs(): Response
     {
         if (empty($this->oauthServices['facebook']['application_id'])) {

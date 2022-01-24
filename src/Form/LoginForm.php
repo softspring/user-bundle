@@ -31,9 +31,6 @@ class LoginForm extends AbstractType implements LoginFormInterface
 
     /**
      * LoginForm constructor.
-     * @param CsrfTokenManagerInterface $csrfTokenManager
-     * @param FirewallMap $firewallMap
-     * @param RequestStack $requestStack
      */
     public function __construct(CsrfTokenManagerInterface $csrfTokenManager, FirewallMap $firewallMap, RequestStack $requestStack)
     {

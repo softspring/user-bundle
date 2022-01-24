@@ -4,7 +4,7 @@ namespace Softspring\UserBundle\EventListener;
 
 use Softspring\UserBundle\Event\UserEvent;
 use Softspring\UserBundle\Manager\UserManagerInterface;
-use Softspring\UserBundle\Model\UserInterface;
+use Softspring\UserBundle\Model\UserLastLoginInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
@@ -19,8 +19,6 @@ class LastLoginEventSubscriber implements EventSubscriberInterface
 
     /**
      * LastLoginEventSubscriber constructor.
-     *
-     * @param UserManagerInterface $userManager
      */
     public function __construct(UserManagerInterface $userManager)
     {
@@ -32,35 +30,33 @@ class LastLoginEventSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             SfsUserEvents::LOGIN_IMPLICIT => 'onImplicitLogin',
             SecurityEvents::INTERACTIVE_LOGIN => 'onSecurityInteractiveLogin',
-        );
+        ];
     }
 
     /**
-     * @param UserEvent $event
-     *
      * @throws \Exception
      */
     public function onImplicitLogin(UserEvent $event)
     {
         $user = $event->getUser();
 
-        $user->setLastLogin(new \DateTime());
-        $this->userManager->saveEntity($user);
+        if ($user instanceof UserLastLoginInterface) {
+            $user->setLastLogin(new \DateTime());
+            $this->userManager->saveEntity($user);
+        }
     }
 
     /**
-     * @param InteractiveLoginEvent $event
-     *
      * @throws \Exception
      */
     public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
     {
         $user = $event->getAuthenticationToken()->getUser();
 
-        if ($user instanceof UserInterface) {
+        if ($user instanceof UserLastLoginInterface) {
             $user->setLastLogin(new \DateTime());
             $this->userManager->saveEntity($user);
         }

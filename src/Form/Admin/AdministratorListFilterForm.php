@@ -21,8 +21,6 @@ class AdministratorListFilterForm extends EntityListFilterForm implements Admini
 
     /**
      * UserListFilterForm constructor.
-     *
-     * @param UserManagerInterface $userManager
      */
     public function __construct(UserManagerInterface $userManager)
     {
@@ -30,7 +28,7 @@ class AdministratorListFilterForm extends EntityListFilterForm implements Admini
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -42,7 +40,7 @@ class AdministratorListFilterForm extends EntityListFilterForm implements Admini
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -68,7 +66,7 @@ class AdministratorListFilterForm extends EntityListFilterForm implements Admini
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getRpp(Request $request): int
     {

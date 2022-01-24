@@ -31,10 +31,6 @@ class LoginController extends AbstractController
 
     /**
      * LoginController constructor.
-     *
-     * @param LoginFormInterface $loginForm
-     * @param array              $oauthServices
-     * @param string|null        $targetPathParameter
      */
     public function __construct(LoginFormInterface $loginForm, array $oauthServices, ?string $targetPathParameter)
     {
@@ -43,11 +39,6 @@ class LoginController extends AbstractController
         $this->targetPathParameter = $targetPathParameter;
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function login(Request $request): Response
     {
         /** @var $session Session */

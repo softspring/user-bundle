@@ -5,6 +5,8 @@ namespace Softspring\UserBundle\Controller\Admin;
 use Softspring\CoreBundle\Controller\AbstractController;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Manager\UserManagerInterface;
+use Softspring\UserBundle\Model\RolesAdminInterface;
+use Softspring\UserBundle\Model\User;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,22 +20,15 @@ class AdministratorsController extends AbstractController
 
     /**
      * AdministratorsController constructor.
-     *
-     * @param UserManagerInterface $userManager
      */
     public function __construct(UserManagerInterface $userManager)
     {
         $this->userManager = $userManager;
     }
 
-    /**
-     * @param string  $administrator
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function demoteAdmin(string $administrator, Request $request): Response
     {
+        /** @var User|RolesAdminInterface $administrator */
         $administrator = $this->userManager->findUserBy(['id' => $administrator]);
 
         $this->denyAccessUnlessGranted('ROLE_ADMIN_ADMINISTRATORS_DEMOTE', $administrator);
@@ -44,7 +39,7 @@ class AdministratorsController extends AbstractController
 
         if ($administrator->isAdmin()) {
             $administrator->setAdmin(false);
-            $this->getDoctrine()->getManager()->flush();
+            $this->userManager->getEntityManager()->flush();
         }
 
         if ($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_ADMINISTRATORS_DEMOTE_SUCCESS, new GetResponseUserEvent($administrator, $request))) {

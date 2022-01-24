@@ -14,6 +14,7 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class UserManager implements UserManagerInterface
 {
+    use CrudlEntityManagerTrait;
     /**
      * @var EntityManagerInterface
      */
@@ -26,17 +27,12 @@ class UserManager implements UserManagerInterface
 
     /**
      * UserManager constructor.
-     *
-     * @param EntityManagerInterface  $em
-     * @param EncoderFactoryInterface $encoderFactory
      */
     public function __construct(EntityManagerInterface $em, EncoderFactoryInterface $encoderFactory)
     {
         $this->em = $em;
         $this->encoderFactory = $encoderFactory;
     }
-
-    use CrudlEntityManagerTrait;
 
     public function getTargetClass(): string
     {
@@ -45,6 +41,7 @@ class UserManager implements UserManagerInterface
 
     /**
      * @param UserInterface $user
+     *
      * @throws Exception
      */
     public function saveEntity($user): void
@@ -60,7 +57,7 @@ class UserManager implements UserManagerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function findUserBy(array $criteria): ?UserInterface
     {
@@ -71,7 +68,7 @@ class UserManager implements UserManagerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function findUserByUsername(string $username): ?UserInterface
     {
@@ -79,7 +76,7 @@ class UserManager implements UserManagerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function findUserByEmail(string $email): ?UserInterface
     {
@@ -87,7 +84,7 @@ class UserManager implements UserManagerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function findUserByUsernameOrEmail(string $usernameOrEmail): ?UserInterface
     {
@@ -101,7 +98,7 @@ class UserManager implements UserManagerInterface
     /**
      * @param string $token
      *
-     * @return null|UserInterface
+     * @return UserInterface|null
      */
     public function findUserByConfirmationToken($token)
     {
@@ -109,8 +106,6 @@ class UserManager implements UserManagerInterface
     }
 
     /**
-     * @param UserInterface $user
-     *
      * @throws Exception
      */
     protected function hashPassword(UserInterface $user): void

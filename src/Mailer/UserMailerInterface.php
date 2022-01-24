@@ -11,10 +11,7 @@ use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 interface UserMailerInterface
 {
     /**
-     * Send an email to a user to confirm the user creation
-     *
-     * @param UserInterface $user
-     * @param string|null   $locale
+     * Send an email to a user to confirm the user creation.
      *
      * @throws TransportExceptionInterface
      * @throws InvalidUserClassException
@@ -22,20 +19,16 @@ interface UserMailerInterface
     public function sendRegisterConfirmationEmail(UserInterface $user, ?string $locale = null): void;
 
     /**
-     * Send an invitation email to a user
-     *
-     * @param UserInvitationInterface $invitation
-     * @param string|null             $locale
+     * Send an invitation email to a user.
      *
      * @throws TransportExceptionInterface
      */
     public function sendInvitationEmail(UserInvitationInterface $invitation, ?string $locale = null): void;
 
     /**
-     * Send an email to a user with the password reset link
+     * Send an email to a user with the password reset link.
      *
      * @param UserInterface|PasswordRequestInterface $user
-     * @param string|null                            $locale
      *
      * @throws TransportExceptionInterface
      * @throws InvalidUserClassException

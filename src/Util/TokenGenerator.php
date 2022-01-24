@@ -5,9 +5,9 @@ namespace Softspring\UserBundle\Util;
 class TokenGenerator implements TokenGeneratorInterface
 {
     /**
-     * Based on FOS\UserBundle\Util\TokenGenerator
+     * Based on FOS\UserBundle\Util\TokenGenerator.
      *
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function generateToken(): string
     {

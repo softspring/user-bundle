@@ -18,8 +18,6 @@ class AccessHistoryListFilterForm extends EntityListFilterForm implements Access
 
     /**
      * AccessHistoryListFilterForm constructor.
-     *
-     * @param UserAccessManagerInterface $accessManager
      */
     public function __construct(UserAccessManagerInterface $accessManager)
     {
@@ -27,7 +25,7 @@ class AccessHistoryListFilterForm extends EntityListFilterForm implements Access
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -39,7 +37,7 @@ class AccessHistoryListFilterForm extends EntityListFilterForm implements Access
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -49,7 +47,7 @@ class AccessHistoryListFilterForm extends EntityListFilterForm implements Access
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getRpp(Request $request): int
     {

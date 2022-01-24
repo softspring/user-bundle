@@ -47,13 +47,6 @@ class LoginManager
 
     /**
      * LoginManager constructor.
-     *
-     * @param FirewallMap                            $firewallMap
-     * @param TokenStorageInterface                  $tokenStorage
-     * @param UserCheckerInterface                   $userChecker
-     * @param SessionAuthenticationStrategyInterface $sessionStrategy
-     * @param RequestStack                           $requestStack
-     * @param null|RememberMeServicesInterface       $rememberMeService
      */
     public function __construct(FirewallMap $firewallMap, TokenStorageInterface $tokenStorage, UserCheckerInterface $userChecker, SessionAuthenticationStrategyInterface $sessionStrategy, RequestStack $requestStack, ?RememberMeServicesInterface $rememberMeService)
     {

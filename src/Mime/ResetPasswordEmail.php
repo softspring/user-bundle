@@ -2,7 +2,8 @@
 
 namespace Softspring\UserBundle\Mime;
 
-use Softspring\MailerBundle\Mime\TranslatableEmail;
+use Softspring\Component\MimeTranslatable\ExampleEmailInterface;
+use Softspring\Component\MimeTranslatable\TranslatableEmail;
 use Softspring\UserBundle\Mime\Example\Model\ExampleUser;
 use Softspring\UserBundle\Model\NameSurnameInterface;
 use Softspring\UserBundle\Model\UserInterface;
@@ -11,7 +12,7 @@ use Symfony\Component\Mime\Header\Headers;
 use Symfony\Component\Mime\Part\AbstractPart;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class ResetPasswordEmail extends TranslatableEmail
+class ResetPasswordEmail extends TranslatableEmail implements ExampleEmailInterface
 {
     public static function generateExample(TranslatorInterface $translator, ?string $locale = null): TranslatableEmail
     {
@@ -19,20 +20,14 @@ class ResetPasswordEmail extends TranslatableEmail
         $user->setName('Mery');
         $user->setSurname('McCarty');
         $resetUrl = '#reset-url';
+
         return new self($user, $resetUrl, $translator, $locale);
     }
 
     /**
      * ConfirmationEmail constructor.
-     *
-     * @param UserInterface       $user
-     * @param string              $resetUrl
-     * @param TranslatorInterface $translator
-     * @param string|null         $locale
-     * @param Headers|null        $headers
-     * @param AbstractPart|null   $body
      */
-    public function __construct(UserInterface $user, string $resetUrl, TranslatorInterface $translator, ?string $locale = null,  Headers $headers = null, AbstractPart $body = null)
+    public function __construct(UserInterface $user, string $resetUrl, TranslatorInterface $translator, ?string $locale = null, Headers $headers = null, AbstractPart $body = null)
     {
         parent::__construct($translator, $locale, $headers, $body);
 

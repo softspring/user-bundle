@@ -6,5 +6,4 @@ use Softspring\CrudlBundle\Form\EntityUpdateFormInterface;
 
 interface UserUpdateFormInterface extends EntityUpdateFormInterface
 {
-
 }

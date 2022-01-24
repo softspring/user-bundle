@@ -13,11 +13,6 @@ interface UserInvitationManagerInterface extends CrudlEntityManagerInterface
      */
     public function create(): UserInvitationInterface;
 
-    /**
-     * @param UserInvitationInterface $invitation
-     *
-     * @return UserInterface
-     */
     public function createUser(UserInvitationInterface $invitation): UserInterface;
 
     /**
@@ -25,18 +20,8 @@ interface UserInvitationManagerInterface extends CrudlEntityManagerInterface
      */
     public function save(UserInvitationInterface $invitation): void;
 
-    /**
-     * @param array $criteria
-     *
-     * @return UserInvitationInterface|null
-     */
     public function findInvitationBy(array $criteria): ?UserInvitationInterface;
 
-    /**
-     * @param string $token
-     *
-     * @return UserInvitationInterface|null
-     */
     public function findInvitationByToken(string $token): ?UserInvitationInterface;
 
     /**

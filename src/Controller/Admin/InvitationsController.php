@@ -21,9 +21,6 @@ class InvitationsController extends AbstractController
 
     /**
      * InvitationsController constructor.
-     *
-     * @param UserInvitationManagerInterface $invitationsManager
-     * @param UserMailerInterface            $userMailer
      */
     public function __construct(UserInvitationManagerInterface $invitationsManager, UserMailerInterface $userMailer)
     {

@@ -7,7 +7,6 @@ use Softspring\CoreBundle\Event\GetResponseFormEvent;
 use Softspring\CoreBundle\Event\ViewEvent;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Event\RegisterExceptionEvent;
-use Softspring\UserBundle\Event\UserEvent;
 use Softspring\UserBundle\Form\RegisterFormInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\ConfirmableInterface;
@@ -35,10 +34,6 @@ class RegisterController extends AbstractController
 
     /**
      * RegisterController constructor.
-     *
-     * @param UserManagerInterface  $userManager
-     * @param RegisterFormInterface $registerForm
-     * @param string|null           $targetPathParameter
      */
     public function __construct(UserManagerInterface $userManager, RegisterFormInterface $registerForm, ?string $targetPathParameter)
     {
@@ -47,11 +42,6 @@ class RegisterController extends AbstractController
         $this->targetPathParameter = $targetPathParameter;
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function register(Request $request): Response
     {
         $user = $this->userManager->createEntity();
@@ -104,11 +94,6 @@ class RegisterController extends AbstractController
         return $this->render('@SfsUser/register/register.html.twig', $viewData->getArrayCopy());
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function success(Request $request): Response
     {
         $viewData = new \ArrayObject([]);
@@ -119,11 +104,6 @@ class RegisterController extends AbstractController
     }
 
     /**
-     * @param string  $user
-     * @param string  $token
-     * @param Request $request
-     *
-     * @return Response
      * @throws \Exception
      */
     public function confirm(string $user, string $token, Request $request): Response

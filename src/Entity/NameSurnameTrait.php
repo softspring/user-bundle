@@ -18,33 +18,21 @@ trait NameSurnameTrait
      */
     protected $surname;
 
-    /**
-     * @return string|null
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * @param string|null $name
-     */
     public function setName(?string $name): void
     {
         $this->name = $name;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSurname(): ?string
     {
         return $this->surname;
     }
 
-    /**
-     * @param string|null $surname
-     */
     public function setSurname(?string $surname): void
     {
         $this->surname = $surname;

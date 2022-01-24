@@ -21,9 +21,6 @@ class PromoteUserCommand extends Command
 
     /**
      * PromoteUserCommand constructor.
-     *
-     * @param UserManagerInterface $userManager
-     * @param string|null          $name
      */
     public function __construct(UserManagerInterface $userManager, string $name = null)
     {
@@ -47,6 +44,7 @@ class PromoteUserCommand extends Command
 
         if (!$user) {
             $output->writeln(sprintf('User %s not found', $username));
+
             return 1;
         }
 

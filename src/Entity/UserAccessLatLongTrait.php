@@ -18,33 +18,21 @@ trait UserAccessLatLongTrait
      */
     protected $long;
 
-    /**
-     * @return float|null
-     */
     public function getLat(): ?float
     {
         return $this->lat;
     }
 
-    /**
-     * @param float|null $lat
-     */
     public function setLat(?float $lat): void
     {
         $this->lat = $lat;
     }
 
-    /**
-     * @return float|null
-     */
     public function getLong(): ?float
     {
         return $this->long;
     }
 
-    /**
-     * @param float|null $long
-     */
     public function setLong(?float $long): void
     {
         $this->long = $long;

@@ -26,9 +26,6 @@ class ChangeEmailController extends AbstractController
 
     /**
      * ChangeEmailController constructor.
-     *
-     * @param UserManagerInterface     $userManager
-     * @param ChangeEmailFormInterface $changeEmailForm
      */
     public function __construct(UserManagerInterface $userManager, ChangeEmailFormInterface $changeEmailForm)
     {

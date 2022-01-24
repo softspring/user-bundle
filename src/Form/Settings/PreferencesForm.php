@@ -7,9 +7,9 @@ use Softspring\UserBundle\Model\NameSurnameInterface;
 use Softspring\UserBundle\Model\UserHasLocalePreferenceInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type as Types;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type as Types;
 
 class PreferencesForm extends AbstractType implements PreferencesFormInterface
 {
@@ -25,9 +25,6 @@ class PreferencesForm extends AbstractType implements PreferencesFormInterface
 
     /**
      * PreferencesForm constructor.
-     *
-     * @param UserManagerInterface $userManager
-     * @param array                $locales
      */
     public function __construct(UserManagerInterface $userManager, array $locales)
     {

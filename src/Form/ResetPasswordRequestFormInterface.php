@@ -6,5 +6,4 @@ use Symfony\Component\Form\FormTypeInterface;
 
 interface ResetPasswordRequestFormInterface extends FormTypeInterface
 {
-
 }

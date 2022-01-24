@@ -28,10 +28,6 @@ class UserControllerListener implements EventSubscriberInterface
 
     /**
      * UserControllerListener constructor.
-     *
-     * @param EntityManagerInterface $em
-     * @param array                  $impersonateBarConfig
-     * @param UserAccessManagerInterface|null $accessManager
      */
     public function __construct(EntityManagerInterface $em, array $impersonateBarConfig, ?UserAccessManagerInterface $accessManager)
     {
@@ -41,7 +37,7 @@ class UserControllerListener implements EventSubscriberInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public static function getSubscribedEvents()
     {

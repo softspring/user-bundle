@@ -28,10 +28,6 @@ class AdministratorControllerListener implements EventSubscriberInterface
 
     /**
      * AdministratorControllerListener constructor.
-     *
-     * @param EntityManagerInterface $em
-     * @param array                  $impersonateBarConfig
-     * @param UserAccessManagerInterface|null $accessManager
      */
     public function __construct(EntityManagerInterface $em, array $impersonateBarConfig, ?UserAccessManagerInterface $accessManager)
     {
@@ -41,7 +37,7 @@ class AdministratorControllerListener implements EventSubscriberInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public static function getSubscribedEvents()
     {
@@ -63,7 +59,6 @@ class AdministratorControllerListener implements EventSubscriberInterface
         $this->em->getConfiguration()->addFilter('administrator', AdminFilter::class);
         $this->em->getFilters()->enable('administrator');
     }
-
 
     public function onDetailsViewAddMultiAccountedDetails(ViewEvent $event)
     {

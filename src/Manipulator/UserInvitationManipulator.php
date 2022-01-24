@@ -34,11 +34,6 @@ class UserInvitationManipulator
 
     /**
      * UserInvitationManipulator constructor.
-     *
-     * @param UserInvitationManagerInterface $userInvitationManager
-     * @param EventDispatcherInterface       $eventDispatcher
-     * @param RequestStack                   $requestStack
-     * @param TokenGeneratorInterface        $tokenGenerator
      */
     public function __construct(UserInvitationManagerInterface $userInvitationManager, EventDispatcherInterface $eventDispatcher, RequestStack $requestStack, TokenGeneratorInterface $tokenGenerator)
     {
@@ -48,13 +43,6 @@ class UserInvitationManipulator
         $this->tokenGenerator = $tokenGenerator;
     }
 
-    /**
-     * @param string      $email
-     * @param string|null $username
-     * @param array       $roles
-     *
-     * @return UserInvitationInterface
-     */
     public function invite(string $email, ?string $username = null, array $roles = []): UserInvitationInterface
     {
         $invitation = $this->userInvitationManager->create();

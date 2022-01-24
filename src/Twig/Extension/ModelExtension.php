@@ -3,42 +3,38 @@
 namespace Softspring\UserBundle\Twig\Extension;
 
 use Softspring\UserBundle\Manager\UserAccessManagerInterface;
+use Softspring\UserBundle\Manager\UserInvitationManagerInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
+use Softspring\UserBundle\Model\UserInvitationInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class ModelExtension extends AbstractExtension
 {
-    /**
-     * @var UserManagerInterface|null
-     */
-    protected $userManager;
+    protected ?UserManagerInterface $userManager;
+
+    protected ?UserAccessManagerInterface $accessManager;
+
+    protected ?UserInvitationManagerInterface $invitationManager;
 
     /**
-     * @var UserAccessManagerInterface|null
+     * @param UserManagerInterface|null           $userManager
+     * @param UserAccessManagerInterface|null     $accessManager
+     * @param UserInvitationManagerInterface|null $invitationManager
      */
-    protected $accessManager;
-
-    /**
-     * ModelExtension constructor.
-     *
-     * @param UserManagerInterface|null       $userManager
-     * @param UserAccessManagerInterface|null $accessManager
-     */
-    public function __construct(?UserManagerInterface $userManager, ?UserAccessManagerInterface $accessManager)
+    public function __construct(?UserManagerInterface $userManager, ?UserAccessManagerInterface $accessManager, ?UserInvitationManagerInterface $invitationManager)
     {
         $this->userManager = $userManager;
         $this->accessManager = $accessManager;
+        $this->invitationManager = $invitationManager;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getFunctions()
     {
         return [
             new TwigFunction('sfs_user_is', [$this, 'userCheckInterface']),
             new TwigFunction('sfs_user_access_is', [$this, 'userAccessCheckInterface']),
+            new TwigFunction('sfs_invitation_is', [$this, 'userInvitationInterface']),
         ];
     }
 
@@ -58,6 +54,15 @@ class ModelExtension extends AbstractExtension
         }
 
         return $this->checkImplements($this->accessManager->getEntityClassReflection(), $interface);
+    }
+
+    public function userInvitationInterface(string $interface): bool
+    {
+        if (!$this->invitationManager instanceof UserInvitationInterface) {
+            return false;
+        }
+
+        return $this->checkImplements($this->invitationManager->getEntityClassReflection(), $interface);
     }
 
     protected function checkImplements(\ReflectionClass $reflectionClass, string $interface): bool

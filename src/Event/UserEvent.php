@@ -15,9 +15,6 @@ class UserEvent extends RequestEvent
 
     /**
      * UserEvent constructor.
-     *
-     * @param UserInterface $user
-     * @param Request|null  $request
      */
     public function __construct(UserInterface $user, ?Request $request)
     {
@@ -25,9 +22,6 @@ class UserEvent extends RequestEvent
         $this->user = $user;
     }
 
-    /**
-     * @return UserInterface
-     */
     public function getUser(): UserInterface
     {
         return $this->user;

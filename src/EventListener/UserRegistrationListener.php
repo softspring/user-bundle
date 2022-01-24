@@ -29,10 +29,6 @@ class UserRegistrationListener implements EventSubscriberInterface
 
     /**
      * UserRegistrationListener constructor.
-     *
-     * @param UserManagerInterface $userManager
-     * @param UserMailerInterface  $mailer
-     * @param TokenGenerator       $tokenGenerator
      */
     public function __construct(UserManagerInterface $userManager, UserMailerInterface $mailer, TokenGenerator $tokenGenerator)
     {
@@ -42,7 +38,7 @@ class UserRegistrationListener implements EventSubscriberInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public static function getSubscribedEvents()
     {

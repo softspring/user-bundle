@@ -5,9 +5,9 @@ namespace Softspring\UserBundle\Controller\Settings;
 use Softspring\CoreBundle\Controller\AbstractController;
 use Softspring\CoreBundle\Event\GetResponseFormEvent;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
+use Softspring\UserBundle\Form\Settings\ChangePasswordFormInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\UserInterface;
-use Softspring\UserBundle\Form\Settings\ChangePasswordFormInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,9 +26,6 @@ class ChangePasswordController extends AbstractController
 
     /**
      * ChangePasswordController constructor.
-     *
-     * @param UserManagerInterface        $userManager
-     * @param ChangePasswordFormInterface $changePasswordForm
      */
     public function __construct(UserManagerInterface $userManager, ChangePasswordFormInterface $changePasswordForm)
     {

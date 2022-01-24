@@ -25,25 +25,16 @@ class RegisterExceptionEvent extends GetResponseFormEvent
         $this->throwException = $exception;
     }
 
-    /**
-     * @return \Exception
-     */
     public function getException(): \Exception
     {
         return $this->exception;
     }
 
-    /**
-     * @return \Exception|null
-     */
     public function getThrowException(): ?\Exception
     {
         return $this->throwException;
     }
 
-    /**
-     * @param \Exception|null $throwException
-     */
     public function setThrowException(?\Exception $throwException): void
     {
         $this->throwException = $throwException;

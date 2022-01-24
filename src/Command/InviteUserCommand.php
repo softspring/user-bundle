@@ -20,9 +20,6 @@ class InviteUserCommand extends Command
 
     /**
      * CreateUserCommand constructor.
-     *
-     * @param UserInvitationManipulator $userInvitationManipulator
-     * @param string|null     $name
      */
     public function __construct(UserInvitationManipulator $userInvitationManipulator, string $name = null)
     {
@@ -45,7 +42,7 @@ class InviteUserCommand extends Command
         $roles = $input->getOption('role');
 
         $this->userInvitationManipulator->invite($email, $username, $roles);
-        
+
         return 0;
     }
 }

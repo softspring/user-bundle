@@ -5,7 +5,7 @@ namespace Softspring\UserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Trait EnabledTrait
+ * Trait EnabledTrait.
  */
 trait EnabledTrait
 {
@@ -15,17 +15,11 @@ trait EnabledTrait
      */
     protected $enabled = false;
 
-    /**
-     * @return bool
-     */
     public function isEnabled(): bool
     {
         return $this->enabled;
     }
 
-    /**
-     * @param bool $enabled
-     */
     public function setEnabled(bool $enabled): void
     {
         $this->enabled = $enabled;

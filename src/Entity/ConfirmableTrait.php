@@ -18,43 +18,28 @@ trait ConfirmableTrait
      */
     protected $confirmedAt;
 
-    /**
-     * @return string|null
-     */
     public function getConfirmationToken(): ?string
     {
         return $this->confirmationToken;
     }
 
-    /**
-     * @param string|null $confirmationToken
-     */
     public function setConfirmationToken(?string $confirmationToken): void
     {
         $this->confirmationToken = $confirmationToken;
     }
 
-    /**
-     * @return \DateTime|null
-     */
     public function getConfirmedAt(): ?\DateTime
     {
-        return \DateTime::createFromFormat("U", $this->confirmedAt) ?: null;
+        return \DateTime::createFromFormat('U', $this->confirmedAt) ?: null;
     }
 
-    /**
-     * @param \DateTime|null $confirmedAt
-     */
     public function setConfirmedAt(?\DateTime $confirmedAt): void
     {
         $this->confirmedAt = $confirmedAt instanceof \DateTime ? $confirmedAt->format('U') : null;
     }
 
-    /**
-     * @return bool
-     */
     public function isConfirmed(): bool
     {
-        return !! $this->confirmedAt;
+        return (bool) $this->confirmedAt;
     }
 }

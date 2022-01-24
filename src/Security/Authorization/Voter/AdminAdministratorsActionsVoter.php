@@ -11,6 +11,7 @@ class AdminAdministratorsActionsVoter implements VoterInterface
 {
     /**
      * @param mixed $administrator
+     *
      * @return bool
      */
     public function supportsObject($administrator)
@@ -23,9 +24,8 @@ class AdminAdministratorsActionsVoter implements VoterInterface
     }
 
     /**
-     * @param TokenInterface   $token
      * @param UserInterface $administrator
-     * @param array            $attributes
+     *
      * @return int
      */
     public function vote(TokenInterface $token, $administrator, array $attributes)
@@ -33,7 +33,7 @@ class AdminAdministratorsActionsVoter implements VoterInterface
         $role = $attributes[0] ?? '';
 
         // check role
-        if (substr($role, 0, 26) !== 'ROLE_ADMIN_ADMINISTRATORS_') {
+        if ('ROLE_ADMIN_ADMINISTRATORS_' !== substr($role, 0, 26)) {
             return VoterInterface::ACCESS_ABSTAIN;
         }
 
@@ -44,7 +44,7 @@ class AdminAdministratorsActionsVoter implements VoterInterface
 
         $currentLoggedInUser = $token->getUser();
 
-        if (! $currentLoggedInUser instanceof UserInterface) {
+        if (!$currentLoggedInUser instanceof UserInterface) {
             throw new InvalidArgumentException('Invalid user class');
         }
 

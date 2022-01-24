@@ -24,9 +24,6 @@ class ConfirmationController extends AbstractController
 
     /**
      * ConfirmationController constructor.
-     *
-     * @param UserManagerInterface $userManager
-     * @param UserMailerInterface  $userMailer
      */
     public function __construct(UserManagerInterface $userManager, UserMailerInterface $userMailer)
     {

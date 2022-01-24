@@ -65,8 +65,12 @@
     {% endif %}
 
     <p><strong>username:</strong> {{ administrator.username }}</p>
+    {% if sfs_user_is('email') %}
     <p><strong>email:</strong> {{ administrator.email }}</p>
+    {% endif %}
+    {% if sfs_user_is('lastLogin') %}
     <p><strong>lastLogin:</strong> {{ administrator.lastLogin ? administrator.lastLogin|date('H:i d-m-Y') : 'not yet' }}</p>
+    {% endif %}
     <p><strong>role:</strong> {{ administrator.roles|join(', ') }}</p>
 
     <div class="row">

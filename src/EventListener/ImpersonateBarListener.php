@@ -38,10 +38,6 @@ class ImpersonateBarListener implements EventSubscriberInterface
 
     /**
      * ImpersonateBarListener constructor.
-     * @param AuthorizationCheckerInterface $authorizationChecker
-     * @param Environment $twig
-     * @param UrlGeneratorInterface $urlGenerator
-     * @param array $impersonateBarConfig
      */
     public function __construct(AuthorizationCheckerInterface $authorizationChecker, Environment $twig, UrlGeneratorInterface $urlGenerator, array $impersonateBarConfig)
     {
@@ -63,7 +59,7 @@ class ImpersonateBarListener implements EventSubscriberInterface
 
     /**
      * @param FilterResponseEvent|ResponseEvent $event
-     * Note: in SF4 FilterResponseEvent, in SF5 ResponseEvent
+     *                                                 Note: in SF4 FilterResponseEvent, in SF5 ResponseEvent
      */
     public function onKernelResponse($event): void
     {
@@ -79,9 +75,6 @@ class ImpersonateBarListener implements EventSubscriberInterface
         }
     }
 
-    /**
-     * @return bool
-     */
     protected function isImpersonated(): bool
     {
         try {
@@ -96,8 +89,6 @@ class ImpersonateBarListener implements EventSubscriberInterface
     }
 
     /**
-     * @param Response $response
-     * @param Request $request
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
@@ -114,7 +105,6 @@ class ImpersonateBarListener implements EventSubscriberInterface
     }
 
     /**
-     * @return string
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError

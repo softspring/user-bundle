@@ -21,9 +21,6 @@ class CreateUserCommand extends Command
 
     /**
      * CreateUserCommand constructor.
-     *
-     * @param UserManipulator $userManipulator
-     * @param string|null     $name
      */
     public function __construct(UserManipulator $userManipulator, string $name = null)
     {
@@ -64,6 +61,7 @@ class CreateUserCommand extends Command
         } catch (UniqueConstraintViolationException $e) {
             if (!$skipExisting) {
                 $output->writeln(sprintf('<error>User %s exists</error>', $username));
+
                 return 1;
             } else {
                 $output->writeln(sprintf('<info>User %s exists, ignoring</info>', $username));

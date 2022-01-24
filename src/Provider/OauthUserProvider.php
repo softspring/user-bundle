@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 /**
- * Class OauthUserProvider
+ * Class OauthUserProvider.
  *
  * @see HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider
  */
@@ -32,9 +32,9 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
     /**
      * @var array
      */
-    protected $properties = array(
+    protected $properties = [
         'identifier' => 'id',
-    );
+    ];
 
     /**
      * @var PropertyAccessor
@@ -48,10 +48,6 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
 
     /**
      * OauthUserProvider constructor.
-     *
-     * @param UserManagerInterface $userManager
-     * @param array                $properties
-     * @param array                $oauthServices
      */
     public function __construct(UserManagerInterface $userManager, array $properties, array $oauthServices)
     {
@@ -76,18 +72,20 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
     {
         $username = $response->getUsername(); // provides id (identifier)
 
-        $user = $this->userManager->findUserBy(array($this->getProperty($response) => $username));
+        $user = $this->userManager->findUserBy([$this->getProperty($response) => $username]);
         if (null === $user || null === $username) {
             $user = $this->userManager->findUserByEmail($response->getEmail());
             if ($user) {
                 $this->linkUser($user, $response);
                 $this->userManager->saveEntity($user);
+
                 return $user;
             }
 
             if ($this->oauthServices[$response->getResourceOwner()->getName()]['login_create']) {
                 $user = $this->createUser($response);
                 $this->userManager->saveEntity($user);
+
                 return $user;
             }
 
@@ -109,7 +107,7 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
         $property = $this->getProperty($response);
         $username = $response->getUsername();
 
-        if (null !== $previousUser = $this->userManager->findUserBy(array($property => $username))) {
+        if (null !== $previousUser = $this->userManager->findUserBy([$property => $username])) {
             $this->disconnect($previousUser, $response);
         }
 
@@ -126,7 +124,6 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
      * Disconnects a user.
      *
      * @param UserInterface|SoftspringUserInterface $user
-     * @param UserResponseInterface                 $response
      */
     public function disconnect(UserInterface $user, UserResponseInterface $response)
     {
@@ -147,7 +144,7 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
         }
 
         $userId = $this->accessor->getValue($user, $identifier);
-        if (null === $user = $this->userManager->findUserBy(array($identifier => $userId))) {
+        if (null === $user = $this->userManager->findUserBy([$identifier => $userId])) {
             throw new UsernameNotFoundException(sprintf('User with ID "%d" could not be reloaded.', $userId));
         }
 
@@ -167,8 +164,6 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
     /**
      * Gets the property for the response.
      *
-     * @param UserResponseInterface $response
-     *
      * @return string
      *
      * @throws \RuntimeException
@@ -184,11 +179,7 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
         return $this->properties[$resourceOwnerName];
     }
 
-
     /**
-     * @param UserResponseInterface $response
-     *
-     * @return SoftspringUserInterface
      * @throws \Exception
      */
     protected function createUser(UserResponseInterface $response): SoftspringUserInterface

@@ -20,8 +20,6 @@ class UserAccessEventSubscriber implements EventSubscriberInterface
 
     /**
      * UserAccessEventSubscriber constructor.
-     *
-     * @param UserAccessManipulator $userAccessManipulator
      */
     public function __construct(UserAccessManipulator $userAccessManipulator)
     {
@@ -33,15 +31,13 @@ class UserAccessEventSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             SfsUserEvents::LOGIN_IMPLICIT => 'onImplicitLogin',
             SecurityEvents::INTERACTIVE_LOGIN => 'onSecurityInteractiveLogin',
-        );
+        ];
     }
 
     /**
-     * @param UserEvent $event
-     *
      * @throws \Exception
      */
     public function onImplicitLogin(UserEvent $event)
@@ -55,8 +51,6 @@ class UserAccessEventSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param InteractiveLoginEvent $event
-     *
      * @throws \Exception
      */
     public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)

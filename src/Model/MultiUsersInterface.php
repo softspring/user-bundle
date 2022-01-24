@@ -11,13 +11,7 @@ interface MultiUsersInterface
      */
     public function getUsers(): Collection;
 
-    /**
-     * @param UserInterface $user
-     */
     public function addUser(UserInterface $user): void;
 
-    /**
-     * @param UserInterface $user
-     */
     public function removeUser(UserInterface $user): void;
 }

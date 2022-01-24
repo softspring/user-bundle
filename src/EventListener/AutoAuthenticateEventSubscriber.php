@@ -19,8 +19,6 @@ class AutoAuthenticateEventSubscriber implements EventSubscriberInterface
 
     /**
      * AuthenticateEventSubscriber constructor.
-     *
-     * @param LoginManager $loginManager
      */
     public function __construct(LoginManager $loginManager)
     {
@@ -28,7 +26,7 @@ class AutoAuthenticateEventSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {
@@ -40,11 +38,6 @@ class AutoAuthenticateEventSubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param GetResponseUserEvent     $event
-     * @param string                   $eventName
-     * @param EventDispatcherInterface $eventDispatcher
-     */
     public function authenticate(GetResponseUserEvent $event, string $eventName, EventDispatcherInterface $eventDispatcher)
     {
         $user = $event->getUser();

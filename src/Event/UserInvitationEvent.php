@@ -15,9 +15,6 @@ class UserInvitationEvent extends RequestEvent
 
     /**
      * UserInvitationEvent constructor.
-     *
-     * @param UserInvitationInterface $invitation
-     * @param Request|null            $request
      */
     public function __construct(UserInvitationInterface $invitation, ?Request $request)
     {
@@ -25,9 +22,6 @@ class UserInvitationEvent extends RequestEvent
         $this->invitation = $invitation;
     }
 
-    /**
-     * @return UserInvitationInterface
-     */
     public function getInvitation(): UserInvitationInterface
     {
         return $this->invitation;

@@ -3,18 +3,12 @@
 namespace Softspring\UserBundle\Model;
 
 /**
- * Class User
+ * Class User.
  */
 abstract class User implements UserInterface
 {
-    /**
-     * @var string|null
-     */
-    protected $username;
+    protected ?string $username;
 
-    /**
-     * @inheritdoc
-     */
     public function __toString(): string
     {
         return "{$this->getId()}";
@@ -25,14 +19,11 @@ abstract class User implements UserInterface
      */
     public function __construct()
     {
-        if ($this instanceof UserAdminRolesInterface) {
+        if ($this instanceof RolesInterface || $this instanceof RolesAdminInterface || $this instanceof RolesFullInterface) {
             $this->setRoles([]);
         }
     }
 
-    /**
-     * @inheritdoc
-     */
     public function eraseCredentials()
     {
         if ($this instanceof UserPasswordInterface) {
@@ -40,9 +31,6 @@ abstract class User implements UserInterface
         }
     }
 
-    /**
-     * @inheritdoc
-     */
     public function serialize()
     {
         $data = [];
@@ -65,7 +53,7 @@ abstract class User implements UserInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function unserialize($data)
     {
@@ -91,23 +79,23 @@ abstract class User implements UserInterface
         $fields = [];
 
         if ($this instanceof UserPasswordInterface) {
-            $fields[] = ['name' => 'password', 'type' => 'string' ];
-            $fields[] = ['name' => 'salt', 'type' => 'string' ];
+            $fields[] = ['name' => 'password', 'type' => 'string'];
+            $fields[] = ['name' => 'salt', 'type' => 'string'];
         }
 
-        $fields[] = ['name' => 'username', 'type' => 'string' ];
+        $fields[] = ['name' => 'username', 'type' => 'string'];
 
         if ($this instanceof EnablableInterface) {
-            $fields[] = ['name' => 'enabled', 'type' => 'string' ];
+            $fields[] = ['name' => 'enabled', 'type' => 'string'];
         }
 
         if ($this instanceof UserWithEmailInterface) {
-            $fields[] = ['name' => 'email', 'type' => 'string' ];
+            $fields[] = ['name' => 'email', 'type' => 'string'];
         }
 
         $reflection = new \ReflectionClass($this);
         if ($reflection->hasProperty('id')) {
-            $fields[] = ['name' => 'id', 'type' => $reflection->getProperty('id')->getType() ?? 'string' ];
+            $fields[] = ['name' => 'id', 'type' => $reflection->getProperty('id')->getType() ?? 'string'];
         }
 
         return $fields;
@@ -119,7 +107,7 @@ abstract class User implements UserInterface
     abstract public function getId();
 
     /**
-     * @return string|null
+     * @deprecated use getUserIdentifier
      */
     public function getUsername(): ?string
     {
@@ -127,34 +115,36 @@ abstract class User implements UserInterface
     }
 
     /**
-     * @param string|null $username
+     * @deprecated
      */
     public function setUsername(?string $username): void
     {
         $this->username = $username;
     }
 
-    /**
-     * @throws \Exception
-     */
+    public function getUserIdentifier(): string
+    {
+        return $this->getUsername();
+    }
+
     public function getRoles()
     {
-        throw new \Exception(sprintf('Please implement %s interface', UserRolesInterface::class));
+        return ['ROLE_USER'];
     }
 
     /**
      * @throws \Exception
      */
-    public function getPassword()
+    public function getPassword(): ?string
     {
-        // nothing to do
+        return null;
     }
 
     /**
      * @throws \Exception
      */
-    public function getSalt()
+    public function getSalt(): ?string
     {
-        // nothing to do
+        return null;
     }
 }

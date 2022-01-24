@@ -67,7 +67,7 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('reset_password')
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->integerNode('token_ttl')->defaultValue(3600*24)->end()
+                        ->integerNode('token_ttl')->defaultValue(3600 * 24)->end()
                     ->end()
                 ->end()
 

@@ -9,7 +9,7 @@
         "symfony/translation": "^4.4 || ^5.3 || ^6.0",
         "softspring/core-bundle": "^4.0",
         "softspring/crudl-bundle": "^4.0",
-        "softspring/mailer-bundle": "^4.0"
+        "softspring/mime-translatable": "^4.0"
     },
     "require-dev": {
         "symfony/config": "^4.4 || ^5.3 || ^6.0",
@@ -20,11 +20,13 @@
         "symfony/http-foundation": "^4.4 || ^5.3 || ^6.0.7",
         "symfony/security-bundle": "^4.4 || ^5.3 || ^6.0",
         "symfony/validator": "^4.4 || ^5.3 || ^6.0",
-        "symfony/yaml": "^4.4 || ^5.3 || ^6.0"
+        "symfony/yaml": "^4.4 || ^5.3 || ^6.0",
+        "friendsofphp/php-cs-fixer": "9999999-dev"
     },
     "suggest": {
         "softspring/admin-bundle": "Use softspring admin templates",
         "softspring/crudl-bundle": "Use softspring crud+list features",
+        "softspring/mailer-bundle": "Integrates with softspring's mailer bundle",
         "hwi/oauth-bundle": "Integrate oauth clients"
     },
     "autoload": {

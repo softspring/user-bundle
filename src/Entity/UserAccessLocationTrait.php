@@ -24,49 +24,31 @@ trait UserAccessLocationTrait
      */
     protected $country;
 
-    /**
-     * @return string|null
-     */
     public function getCity(): ?string
     {
         return $this->city;
     }
 
-    /**
-     * @param string|null $city
-     */
     public function setCity(?string $city): void
     {
         $this->city = $city;
     }
 
-    /**
-     * @return string|null
-     */
     public function getRegion(): ?string
     {
         return $this->region;
     }
 
-    /**
-     * @param string|null $region
-     */
     public function setRegion(?string $region): void
     {
         $this->region = $region;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCountry(): ?string
     {
         return $this->country;
     }
 
-    /**
-     * @param string|null $country
-     */
     public function setCountry(?string $country): void
     {
         $this->country = $country;

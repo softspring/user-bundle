@@ -23,9 +23,6 @@ class FlashMessagesListener implements EventSubscriberInterface
 
     /**
      * FlashMessagesListener constructor.
-     *
-     * @param FlashBagInterface   $flashBag
-     * @param TranslatorInterface $translator
      */
     public function __construct(FlashBagInterface $flashBag, TranslatorInterface $translator)
     {

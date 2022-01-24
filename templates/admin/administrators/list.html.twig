@@ -36,7 +36,9 @@
             {% if sfs_user_is('email') %}
                 <th scope="col">{{ 'admin_administrators.list.fields.email.header'|trans }}</th>
             {% endif %}
+            {% if sfs_user_is('lastLogin') %}
             <th scope="col">{{ 'admin_administrators.list.fields.lastLogin.header'|trans }}</th>
+            {% endif %}
             <th scope="col">{{ 'admin_administrators.list.fields.role.header'|trans }}</th>
             <th>&nbsp;</th>
         </tr>

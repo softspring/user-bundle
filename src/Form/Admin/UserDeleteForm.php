@@ -18,7 +18,7 @@ class UserDeleteForm extends AbstractType implements UserDeleteFormInterface
             'data_class' => UserInterface::class,
             'translation_domain' => 'sfs_user',
             'label_format' => 'admin_users.delete.form.%name%.label',
-            'validation_groups'=> ['delete'],
+            'validation_groups' => ['delete'],
         ]);
 
 //        $resolver->setDefined('user');

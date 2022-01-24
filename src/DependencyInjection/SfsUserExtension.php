@@ -2,6 +2,7 @@
 
 namespace Softspring\UserBundle\DependencyInjection;
 
+use Softspring\MailerBundle\Template\Loader\TemplateLoaderInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\Definition\Processor;
@@ -14,7 +15,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 class SfsUserExtension extends Extension implements PrependExtensionInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -66,6 +67,10 @@ class SfsUserExtension extends Extension implements PrependExtensionInterface
             }
 
             $loader->load('services/oauth.yaml');
+        }
+
+        if (interface_exists(TemplateLoaderInterface::class)) {
+            $loader->load('services/mailer_loader.yaml');
         }
     }
 

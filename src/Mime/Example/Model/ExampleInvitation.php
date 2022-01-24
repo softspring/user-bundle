@@ -6,5 +6,4 @@ use Softspring\UserBundle\Model\UserInvitation;
 
 class ExampleInvitation extends UserInvitation
 {
-
 }

@@ -26,9 +26,6 @@ class ChangeUsernameController extends AbstractController
 
     /**
      * ChangeUsernameController constructor.
-     *
-     * @param UserManagerInterface        $userManager
-     * @param ChangeUsernameFormInterface $changeUsernameForm
      */
     public function __construct(UserManagerInterface $userManager, ChangeUsernameFormInterface $changeUsernameForm)
     {

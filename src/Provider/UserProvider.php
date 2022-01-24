@@ -2,8 +2,8 @@
 
 namespace Softspring\UserBundle\Provider;
 
-use Softspring\UserBundle\Model\UserInterface as SfsUserInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
+use Softspring\UserBundle\Model\UserInterface as SfsUserInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
@@ -18,8 +18,6 @@ class UserProvider implements UserProviderInterface
 
     /**
      * UserProvider constructor.
-     *
-     * @param UserManagerInterface $userManager
      */
     public function __construct(UserManagerInterface $userManager)
     {
@@ -27,7 +25,7 @@ class UserProvider implements UserProviderInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function loadUserByUsername($username)
     {
@@ -41,7 +39,7 @@ class UserProvider implements UserProviderInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function refreshUser(SymfonyUserInterface $user)
     {
@@ -61,7 +59,7 @@ class UserProvider implements UserProviderInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function supportsClass($class)
     {
@@ -69,7 +67,7 @@ class UserProvider implements UserProviderInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function getUser(string $usernameOrEmail)
     {

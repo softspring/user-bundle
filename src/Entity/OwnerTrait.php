@@ -14,17 +14,11 @@ trait OwnerTrait
      */
     protected $owner;
 
-    /**
-     * @return UserInterface|null
-     */
     public function getOwner(): ?UserInterface
     {
         return $this->owner;
     }
 
-    /**
-     * @param UserInterface|null $owner
-     */
     public function setOwner(?UserInterface $owner): void
     {
         $this->owner = $owner;

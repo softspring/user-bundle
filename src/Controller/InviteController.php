@@ -33,10 +33,6 @@ class InviteController extends AbstractController
 
     /**
      * InviteController constructor.
-     *
-     * @param UserManagerInterface           $userManager
-     * @param UserInvitationManagerInterface $invitationManager
-     * @param AcceptInvitationFormInterface  $acceptForm
      */
     public function __construct(UserManagerInterface $userManager, UserInvitationManagerInterface $invitationManager, AcceptInvitationFormInterface $acceptForm)
     {
@@ -46,10 +42,6 @@ class InviteController extends AbstractController
     }
 
     /**
-     * @param string  $token
-     * @param Request $request
-     *
-     * @return Response
      * @throws \Exception
      */
     public function accept(string $token, Request $request): Response
@@ -99,20 +91,14 @@ class InviteController extends AbstractController
             }
         }
 
-        return $this->render('@SfsUser/invite/accept.html.twig', array(
+        return $this->render('@SfsUser/invite/accept.html.twig', [
             'accept_form' => $form->createView(),
-        ));
+        ]);
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function success(Request $request): Response
     {
         return $this->render('@SfsUser/invite/success.html.twig', [
-
         ]);
     }
 }

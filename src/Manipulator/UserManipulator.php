@@ -33,10 +33,6 @@ class UserManipulator
 
     /**
      * UserManipulator constructor.
-     *
-     * @param UserManagerInterface     $userManager
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param RequestStack             $requestStack
      */
     public function __construct(UserManagerInterface $userManager, EventDispatcherInterface $eventDispatcher, RequestStack $requestStack)
     {
@@ -45,17 +41,6 @@ class UserManipulator
         $this->requestStack = $requestStack;
     }
 
-    /**
-     * @param string $username
-     * @param string $email
-     * @param string $plainPassword
-     * @param array  $roles
-     * @param bool   $enabled
-     * @param bool   $admin
-     * @param bool   $superAdmin
-     *
-     * @return UserInterface
-     */
     public function create(string $username, string $email, string $plainPassword, array $roles = [], bool $enabled = false, bool $admin = false, bool $superAdmin = false): UserInterface
     {
         /** @var UserInterface $user */

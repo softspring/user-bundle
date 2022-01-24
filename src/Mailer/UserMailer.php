@@ -37,10 +37,6 @@ class UserMailer implements UserMailerInterface
 
     /**
      * UserMailer constructor.
-     *
-     * @param MailerInterface       $mailer
-     * @param UrlGeneratorInterface $urlGenerator
-     * @param TranslatorInterface   $translator
      */
     public function __construct(MailerInterface $mailer, UrlGeneratorInterface $urlGenerator, TranslatorInterface $translator)
     {
@@ -50,15 +46,15 @@ class UserMailer implements UserMailerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function sendRegisterConfirmationEmail(UserInterface $user, ?string $locale = null): void
     {
-        if (! $user instanceof ConfirmableInterface) {
+        if (!$user instanceof ConfirmableInterface) {
             throw new InvalidUserClassException(sprintf('%s must implements %s interface', get_class($user), ConfirmableInterface::class));
         }
 
-        if (! $user instanceof UserWithEmailInterface) {
+        if (!$user instanceof UserWithEmailInterface) {
             throw new InvalidUserClassException(sprintf('%s must implements %s interface', get_class($user), UserWithEmailInterface::class));
         }
 
@@ -80,7 +76,7 @@ class UserMailer implements UserMailerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function sendInvitationEmail(UserInvitationInterface $invitation, ?string $locale = null): void
     {
@@ -96,15 +92,15 @@ class UserMailer implements UserMailerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function sendResettingEmail(UserInterface $user, ?string $locale = null): void
     {
-        if (! $user instanceof PasswordRequestInterface) {
+        if (!$user instanceof PasswordRequestInterface) {
             throw new InvalidUserClassException(sprintf('%s must implements %s interface', get_class($user), PasswordRequestInterface::class));
         }
 
-        if (! $user instanceof UserWithEmailInterface) {
+        if (!$user instanceof UserWithEmailInterface) {
             throw new InvalidUserClassException(sprintf('%s must implements %s interface', get_class($user), UserWithEmailInterface::class));
         }
 

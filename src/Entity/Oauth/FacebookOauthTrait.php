@@ -12,17 +12,11 @@ trait FacebookOauthTrait
      */
     protected $facebookUserId;
 
-    /**
-     * @return string|null
-     */
     public function getFacebookUserId(): ?string
     {
         return $this->facebookUserId;
     }
 
-    /**
-     * @param string|null $facebookUserId
-     */
     public function setFacebookUserId(?string $facebookUserId): void
     {
         $this->facebookUserId = $facebookUserId;

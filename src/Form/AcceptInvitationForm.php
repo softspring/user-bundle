@@ -23,8 +23,6 @@ class AcceptInvitationForm extends AbstractType implements AcceptInvitationFormI
 
     /**
      * RegisterForm constructor.
-     *
-     * @param UserManagerInterface $userManager
      */
     public function __construct(UserManagerInterface $userManager)
     {
@@ -32,21 +30,21 @@ class AcceptInvitationForm extends AbstractType implements AcceptInvitationFormI
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => UserInterface::class,
             'csrf_token_id' => 'accept',
             'translation_domain' => 'sfs_user',
             'label_format' => 'invitation.accept.form.%name%.label',
             'validation_groups' => ['Accept', 'Default'],
-        ));
+        ]);
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -71,12 +69,12 @@ class AcceptInvitationForm extends AbstractType implements AcceptInvitationFormI
                     'autocomplete' => 'new-password',
                 ],
             ],
-            'first_options' => array('label' => 'invitation.accept.form.password.label'),
-            'second_options' => array('label' => 'invitation.accept.form.password_confirmation.label'),
+            'first_options' => ['label' => 'invitation.accept.form.password.label'],
+            'second_options' => ['label' => 'invitation.accept.form.password_confirmation.label'],
             'invalid_message' => 'sfs_user.password.mismatch',
         ]);
 
-        $builder->add('acceptConditions', CheckboxType::class,[
+        $builder->add('acceptConditions', CheckboxType::class, [
             'required' => true,
             'mapped' => false,
         ]);

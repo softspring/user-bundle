@@ -4,12 +4,12 @@ namespace Softspring\UserBundle\Controller;
 
 use Softspring\CoreBundle\Controller\AbstractController;
 use Softspring\CoreBundle\Event\GetResponseEvent;
+use Softspring\CoreBundle\Event\GetResponseFormEvent;
 use Softspring\CoreBundle\Event\ViewEvent;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Form\ResetPasswordFormInterface;
-use Softspring\UserBundle\Manager\UserManagerInterface;
-use Softspring\CoreBundle\Event\GetResponseFormEvent;
 use Softspring\UserBundle\Form\ResetPasswordRequestFormInterface;
+use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\PasswordRequestInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\SfsUserEvents;
@@ -40,11 +40,6 @@ class ResetPasswordController extends AbstractController
 
     /**
      * ResetPasswordController constructor.
-     *
-     * @param UserManagerInterface              $userManager
-     * @param ResetPasswordRequestFormInterface $resetRequestForm
-     * @param int                               $resetTokenTTL
-     * @param ResetPasswordFormInterface        $resetForm
      */
     public function __construct(UserManagerInterface $userManager, ResetPasswordRequestFormInterface $resetRequestForm, int $resetTokenTTL, ResetPasswordFormInterface $resetForm)
     {
@@ -54,10 +49,6 @@ class ResetPasswordController extends AbstractController
         $this->resetForm = $resetForm;
     }
 
-    /**
-     * @param Request $request
-     * @return Response
-     */
     public function request(Request $request): Response
     {
         if ($response = $this->dispatchGetResponse(SfsUserEvents::RESET_REQUEST_INITIALIZE, new GetResponseEvent())) {
@@ -91,15 +82,11 @@ class ResetPasswordController extends AbstractController
             'reset_form' => $form->createView(),
         ]);
 
-         $this->dispatch(SfsUserEvents::RESET_REQUEST_VIEW, new ViewEvent($viewData));
+        $this->dispatch(SfsUserEvents::RESET_REQUEST_VIEW, new ViewEvent($viewData));
 
         return $this->render('@SfsUser/reset_password/request.html.twig', $viewData->getArrayCopy());
     }
 
-    /**
-     * @param Request $request
-     * @return Response
-     */
     public function requested(Request $request): Response
     {
         $requestedEmail = $request->getSession()->get('requested_email');

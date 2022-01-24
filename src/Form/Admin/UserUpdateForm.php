@@ -20,8 +20,6 @@ class UserUpdateForm extends AbstractType implements UserUpdateFormInterface
 
     /**
      * UserListFilterForm constructor.
-     *
-     * @param UserManagerInterface $userManager
      */
     public function __construct(UserManagerInterface $userManager)
     {
