@@ -4,6 +4,7 @@
     "type": "symfony-bundle",
     "license": "MIT",
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": ">=7.4",
         "symfony/translation": "^4.4 || ^5.3 || ^6.0",

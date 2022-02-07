@@ -17,9 +17,6 @@ class InvitationCreateForm extends AbstractType implements InvitationCreateFormI
 {
     protected UserInvitationManagerInterface $invitationManager;
 
-    /**
-     * @param UserInvitationManagerInterface $invitationManager
-     */
     public function __construct(UserInvitationManagerInterface $invitationManager)
     {
         $this->invitationManager = $invitationManager;

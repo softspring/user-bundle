@@ -17,11 +17,6 @@ class ModelExtension extends AbstractExtension
 
     protected ?UserInvitationManagerInterface $invitationManager;
 
-    /**
-     * @param UserManagerInterface|null           $userManager
-     * @param UserAccessManagerInterface|null     $accessManager
-     * @param UserInvitationManagerInterface|null $invitationManager
-     */
     public function __construct(?UserManagerInterface $userManager, ?UserAccessManagerInterface $accessManager, ?UserInvitationManagerInterface $invitationManager)
     {
         $this->userManager = $userManager;
