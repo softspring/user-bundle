@@ -4,7 +4,13 @@ php:
   - 7.4
   - 8.0
 
-install: composer update --prefer-dist --no-interaction
+env:
+  matrix:
+    - PREFER_LOWEST="--prefer-lowest"
+    - PREFER_LOWEST=""
+
+before_script:
+  - composer update --prefer-dist --no-interaction $PREFER_LOWEST
 
 script:
   - composer validate
