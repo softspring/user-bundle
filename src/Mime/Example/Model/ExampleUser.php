@@ -12,4 +12,9 @@ class ExampleUser extends User implements NameSurnameInterface, UserWithEmailInt
 {
     use NameSurnameTrait;
     use EmailTrait;
+
+    public function getId()
+    {
+        // TODO: Implement getId() method.
+    }
 }

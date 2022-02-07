@@ -11,7 +11,7 @@ trait RolesTrait
 
     /**
      * @var array
-     * @ORM\Column(name="roles", type="array", nullable=false, options={"default":[]})
+     * @ORM\Column(name="roles", type="array", nullable=false)
      */
     protected $roles = [];
 }
