@@ -37,7 +37,7 @@ class AdminAdministratorsActionsVoter implements VoterInterface
             return VoterInterface::ACCESS_ABSTAIN;
         }
 
-        /// check object
+        // check object
         if (!$this->supportsObject($administrator)) {
             return VoterInterface::ACCESS_ABSTAIN;
         }
