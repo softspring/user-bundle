@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Softspring\CrudlBundle\Manager\CrudlEntityManagerTrait;
 use Softspring\UserBundle\Model\ConfirmableInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;
+use Softspring\UserBundle\Model\RolesInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Model\UserInvitationInterface;
 use Softspring\UserBundle\Model\UserWithEmailInterface;
@@ -79,12 +80,14 @@ class UserInvitationManager implements UserInvitationManagerInterface
             $user->setEmail($invitation->getEmail());
         }
 
-        if ($user instanceof NameSurnameInterface) {
+        if ($user instanceof NameSurnameInterface && $invitation instanceof NameSurnameInterface) {
             $user->setName($invitation->getName());
             $user->setSurname($invitation->getSurname());
         }
 
-        $user->setRoles($invitation->getRoles());
+        if ($invitation instanceof RolesInterface && $user instanceof RolesInterface) {
+            $user->setRoles($invitation->getRoles());
+        }
 
         if ($user instanceof ConfirmableInterface) {
             $user->setConfirmedAt(new DateTime('now'));

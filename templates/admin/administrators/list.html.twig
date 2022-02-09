@@ -19,7 +19,7 @@
         {% if filterForm.name is defined %}<div class="col">{{ form_row(filterForm.name) }}</div>{% endif %}
         {% if filterForm.surname is defined %}<div class="col">{{ form_row(filterForm.surname) }}</div>{% endif %}
         {% if filterForm.email is defined %}<div class="col">{{ form_row(filterForm.email) }}</div>{% endif %}
-        <div class="col">{{ form_row(filterForm.search) }}</div>
+        {% if filterForm.search is defined %}<div class="col">{{ form_row(filterForm.search) }}</div>{% endif %}
     </div>
     {{ form_widget(filterForm) }}
     {{ form_rest(filterForm) }}

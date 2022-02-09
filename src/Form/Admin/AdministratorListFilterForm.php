@@ -6,6 +6,7 @@ use Jhg\DoctrinePagination\ORM\FilterRepositoryInterface;
 use Softspring\CrudlBundle\Form\EntityListFilterForm;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;
+use Softspring\UserBundle\Model\UserWithEmailInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -46,23 +47,29 @@ class AdministratorListFilterForm extends EntityListFilterForm implements Admini
     {
         parent::buildForm($builder, $options);
 
-        $named = $this->userManager->getEntityClassReflection()->implementsInterface(NameSurnameInterface::class);
         $isFilterRepo = $this->userManager->getRepository() instanceof FilterRepositoryInterface;
+        $hasFields = false;
 
-        if ($named) {
+        if ($this->userManager->getEntityClassReflection()->implementsInterface(NameSurnameInterface::class)) {
             $builder->add('name', TextType::class, [
                 'property_path' => $isFilterRepo ? '[name_like]' : '[name]',
             ]);
             $builder->add('surname', TextType::class, [
                 'property_path' => $isFilterRepo ? '[surname_like]' : '[surname]',
             ]);
+            $hasFields = true;
         }
 
-        $builder->add('email', TextType::class, [
-            'property_path' => $isFilterRepo ? '[email_like]' : '[email]',
-        ]);
+        if ($this->userManager->getEntityClassReflection()->implementsInterface(UserWithEmailInterface::class)) {
+            $builder->add('email', TextType::class, [
+                'property_path' => $isFilterRepo ? '[email_like]' : '[email]',
+            ]);
+            $hasFields = true;
+        }
 
-        $builder->add('search', SubmitType::class);
+        if ($hasFields) {
+            $builder->add('search', SubmitType::class);
+        }
     }
 
     /**
