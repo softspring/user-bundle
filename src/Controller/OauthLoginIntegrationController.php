@@ -7,10 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class OauthLoginIntegrationController extends AbstractController
 {
-    /**
-     * @var array
-     */
-    protected $oauthServices;
+    protected array $oauthServices;
 
     /**
      * OauthLoginIntegrationController constructor.

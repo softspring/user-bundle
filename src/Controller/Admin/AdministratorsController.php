@@ -17,20 +17,10 @@ class AdministratorsController extends AbstractController
 {
     use DispatchGetResponseTrait;
 
-    /**
-     * @var UserManagerInterface
-     */
-    protected $userManager;
+    protected UserManagerInterface $userManager;
 
-    /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
+    protected EventDispatcherInterface $eventDispatcher;
 
-    /**
-     * @param UserManagerInterface     $userManager
-     * @param EventDispatcherInterface $eventDispatcher
-     */
     public function __construct(UserManagerInterface $userManager, EventDispatcherInterface $eventDispatcher)
     {
         $this->userManager = $userManager;

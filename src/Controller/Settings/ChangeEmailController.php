@@ -18,26 +18,12 @@ class ChangeEmailController extends AbstractController
 {
     use DispatchGetResponseTrait;
 
-    /**
-     * @var UserManagerInterface
-     */
-    protected $userManager;
+    protected UserManagerInterface $userManager;
 
-    /**
-     * @var ChangeEmailFormInterface
-     */
-    protected $changeEmailForm;
+    protected ChangeEmailFormInterface $changeEmailForm;
 
-    /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
+    protected EventDispatcherInterface $eventDispatcher;
 
-    /**
-     * @param UserManagerInterface     $userManager
-     * @param ChangeEmailFormInterface $changeEmailForm
-     * @param EventDispatcherInterface $eventDispatcher
-     */
     public function __construct(UserManagerInterface $userManager, ChangeEmailFormInterface $changeEmailForm, EventDispatcherInterface $eventDispatcher)
     {
         $this->userManager = $userManager;

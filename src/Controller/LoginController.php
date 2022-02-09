@@ -18,25 +18,13 @@ class LoginController extends AbstractController
 {
     use DispatchGetResponseTrait;
 
-    /**
-     * @var LoginFormInterface
-     */
-    protected $loginForm;
+    protected LoginFormInterface $loginForm;
 
-    /**
-     * @var array
-     */
-    protected $oauthServices;
+    protected array $oauthServices;
 
-    /**
-     * @var string|null
-     */
-    protected $targetPathParameter;
+    protected ?string $targetPathParameter;
 
-    /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
+    protected EventDispatcherInterface $eventDispatcher;
 
     /**
      * LoginController constructor.

@@ -19,26 +19,12 @@ class UsersController extends AbstractController
 {
     use DispatchGetResponseTrait;
 
-    /**
-     * @var UserManagerInterface
-     */
-    protected $userManager;
+    protected UserManagerInterface $userManager;
 
-    /**
-     * @var UserMailerInterface
-     */
-    protected $userMailer;
+    protected UserMailerInterface $userMailer;
 
-    /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
+    protected EventDispatcherInterface $eventDispatcher;
 
-    /**
-     * @param UserManagerInterface     $userManager
-     * @param UserMailerInterface      $userMailer
-     * @param EventDispatcherInterface $eventDispatcher
-     */
     public function __construct(UserManagerInterface $userManager, UserMailerInterface $userMailer, EventDispatcherInterface $eventDispatcher)
     {
         $this->userManager = $userManager;

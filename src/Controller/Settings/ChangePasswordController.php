@@ -18,26 +18,12 @@ class ChangePasswordController extends AbstractController
 {
     use DispatchGetResponseTrait;
 
-    /**
-     * @var UserManagerInterface
-     */
-    protected $userManager;
+    protected UserManagerInterface $userManager;
 
-    /**
-     * @var ChangePasswordFormInterface
-     */
-    protected $changePasswordForm;
+    protected ChangePasswordFormInterface $changePasswordForm;
 
-    /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
+    protected EventDispatcherInterface $eventDispatcher;
 
-    /**
-     * @param UserManagerInterface        $userManager
-     * @param ChangePasswordFormInterface $changePasswordForm
-     * @param EventDispatcherInterface    $eventDispatcher
-     */
     public function __construct(UserManagerInterface $userManager, ChangePasswordFormInterface $changePasswordForm, EventDispatcherInterface $eventDispatcher)
     {
         $this->userManager = $userManager;

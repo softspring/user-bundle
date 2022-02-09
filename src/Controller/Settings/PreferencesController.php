@@ -18,26 +18,12 @@ class PreferencesController extends AbstractController
 {
     use DispatchGetResponseTrait;
 
-    /**
-     * @var UserManagerInterface
-     */
-    protected $userManager;
+    protected UserManagerInterface $userManager;
 
-    /**
-     * @var PreferencesFormInterface
-     */
-    protected $preferencesForm;
+    protected PreferencesFormInterface $preferencesForm;
 
-    /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
+    protected EventDispatcherInterface $eventDispatcher;
 
-    /**
-     * @param UserManagerInterface     $userManager
-     * @param PreferencesFormInterface $preferencesForm
-     * @param EventDispatcherInterface $eventDispatcher
-     */
     public function __construct(UserManagerInterface $userManager, PreferencesFormInterface $preferencesForm, EventDispatcherInterface $eventDispatcher)
     {
         $this->userManager = $userManager;

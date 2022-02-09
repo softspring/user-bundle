@@ -13,26 +13,12 @@ class InvitationsController extends AbstractController
 {
     use DispatchGetResponseTrait;
 
-    /**
-     * @var UserInvitationManagerInterface
-     */
-    protected $invitationsManager;
+    protected UserInvitationManagerInterface $invitationsManager;
 
-    /**
-     * @var UserMailerInterface
-     */
-    protected $userMailer;
+    protected UserMailerInterface $userMailer;
 
-    /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
+    protected EventDispatcherInterface $eventDispatcher;
 
-    /**
-     * @param UserInvitationManagerInterface $invitationsManager
-     * @param UserMailerInterface            $userMailer
-     * @param EventDispatcherInterface       $eventDispatcher
-     */
     public function __construct(UserInvitationManagerInterface $invitationsManager, UserMailerInterface $userMailer, EventDispatcherInterface $eventDispatcher)
     {
         $this->invitationsManager = $invitationsManager;

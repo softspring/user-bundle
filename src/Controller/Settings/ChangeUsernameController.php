@@ -18,26 +18,12 @@ class ChangeUsernameController extends AbstractController
 {
     use DispatchGetResponseTrait;
 
-    /**
-     * @var UserManagerInterface
-     */
-    protected $userManager;
+    protected UserManagerInterface $userManager;
 
-    /**
-     * @var ChangeUsernameFormInterface
-     */
-    protected $changeUsernameForm;
+    protected ChangeUsernameFormInterface $changeUsernameForm;
 
-    /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
+    protected EventDispatcherInterface $eventDispatcher;
 
-    /**
-     * @param UserManagerInterface        $userManager
-     * @param ChangeUsernameFormInterface $changeUsernameForm
-     * @param EventDispatcherInterface    $eventDispatcher
-     */
     public function __construct(UserManagerInterface $userManager, ChangeUsernameFormInterface $changeUsernameForm, EventDispatcherInterface $eventDispatcher)
     {
         $this->userManager = $userManager;

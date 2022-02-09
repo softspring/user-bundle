@@ -20,25 +20,13 @@ class InviteController extends AbstractController
 {
     use DispatchGetResponseTrait;
 
-    /**
-     * @var UserManagerInterface
-     */
-    protected $userManager;
+    protected UserManagerInterface $userManager;
 
-    /**
-     * @var UserInvitationManagerInterface
-     */
-    protected $invitationManager;
+    protected UserInvitationManagerInterface $invitationManager;
 
-    /**
-     * @var AcceptInvitationFormInterface
-     */
-    protected $acceptForm;
+    protected AcceptInvitationFormInterface $acceptForm;
 
-    /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
+    protected EventDispatcherInterface $eventDispatcher;
 
     /**
      * InviteController constructor.

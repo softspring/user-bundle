@@ -22,30 +22,15 @@ class ResetPasswordController extends AbstractController
 {
     use DispatchGetResponseTrait;
 
-    /**
-     * @var UserManagerInterface
-     */
-    protected $userManager;
+    protected UserManagerInterface $userManager;
 
-    /**
-     * @var ResetPasswordRequestFormInterface
-     */
-    protected $resetRequestForm;
+    protected ResetPasswordRequestFormInterface $resetRequestForm;
 
-    /**
-     * @var int
-     */
-    protected $resetTokenTTL;
+    protected int $resetTokenTTL;
 
-    /**
-     * @var ResetPasswordFormInterface
-     */
-    protected $resetForm;
+    protected ResetPasswordFormInterface $resetForm;
 
-    /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
+    protected EventDispatcherInterface   $eventDispatcher;
 
     /**
      * ResetPasswordController constructor.
