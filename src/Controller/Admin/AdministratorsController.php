@@ -2,28 +2,39 @@
 
 namespace Softspring\UserBundle\Controller\Admin;
 
-use Softspring\CoreBundle\Controller\AbstractController;
+use Softspring\CoreBundle\Controller\Traits\DispatchGetResponseTrait;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\RolesAdminInterface;
 use Softspring\UserBundle\Model\User;
 use Softspring\UserBundle\SfsUserEvents;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class AdministratorsController extends AbstractController
 {
+    use DispatchGetResponseTrait;
+
     /**
      * @var UserManagerInterface
      */
     protected $userManager;
 
     /**
-     * AdministratorsController constructor.
+     * @var EventDispatcherInterface
      */
-    public function __construct(UserManagerInterface $userManager)
+    protected $eventDispatcher;
+
+    /**
+     * @param UserManagerInterface     $userManager
+     * @param EventDispatcherInterface $eventDispatcher
+     */
+    public function __construct(UserManagerInterface $userManager, EventDispatcherInterface $eventDispatcher)
     {
         $this->userManager = $userManager;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function demoteAdmin(string $administrator, Request $request): Response

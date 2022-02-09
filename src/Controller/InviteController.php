@@ -2,7 +2,8 @@
 
 namespace Softspring\UserBundle\Controller;
 
-use Softspring\CoreBundle\Controller\AbstractController;
+use Psr\EventDispatcher\EventDispatcherInterface;
+use Softspring\CoreBundle\Controller\Traits\DispatchGetResponseTrait;
 use Softspring\CoreBundle\Event\FormEvent;
 use Softspring\CoreBundle\Event\GetResponseFormEvent;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
@@ -11,11 +12,14 @@ use Softspring\UserBundle\Manager\UserInvitationManagerInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\EnablableInterface;
 use Softspring\UserBundle\SfsUserEvents;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class InviteController extends AbstractController
 {
+    use DispatchGetResponseTrait;
+
     /**
      * @var UserManagerInterface
      */
@@ -32,13 +36,19 @@ class InviteController extends AbstractController
     protected $acceptForm;
 
     /**
+     * @var EventDispatcherInterface
+     */
+    protected $eventDispatcher;
+
+    /**
      * InviteController constructor.
      */
-    public function __construct(UserManagerInterface $userManager, UserInvitationManagerInterface $invitationManager, AcceptInvitationFormInterface $acceptForm)
+    public function __construct(UserManagerInterface $userManager, UserInvitationManagerInterface $invitationManager, AcceptInvitationFormInterface $acceptForm, EventDispatcherInterface $eventDispatcher)
     {
         $this->userManager = $userManager;
         $this->invitationManager = $invitationManager;
         $this->acceptForm = $acceptForm;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**

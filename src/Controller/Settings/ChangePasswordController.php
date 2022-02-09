@@ -2,18 +2,22 @@
 
 namespace Softspring\UserBundle\Controller\Settings;
 
-use Softspring\CoreBundle\Controller\AbstractController;
+use Softspring\CoreBundle\Controller\Traits\DispatchGetResponseTrait;
 use Softspring\CoreBundle\Event\GetResponseFormEvent;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Form\Settings\ChangePasswordFormInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\SfsUserEvents;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ChangePasswordController extends AbstractController
 {
+    use DispatchGetResponseTrait;
+
     /**
      * @var UserManagerInterface
      */
@@ -25,12 +29,20 @@ class ChangePasswordController extends AbstractController
     protected $changePasswordForm;
 
     /**
-     * ChangePasswordController constructor.
+     * @var EventDispatcherInterface
      */
-    public function __construct(UserManagerInterface $userManager, ChangePasswordFormInterface $changePasswordForm)
+    protected $eventDispatcher;
+
+    /**
+     * @param UserManagerInterface        $userManager
+     * @param ChangePasswordFormInterface $changePasswordForm
+     * @param EventDispatcherInterface    $eventDispatcher
+     */
+    public function __construct(UserManagerInterface $userManager, ChangePasswordFormInterface $changePasswordForm, EventDispatcherInterface $eventDispatcher)
     {
         $this->userManager = $userManager;
         $this->changePasswordForm = $changePasswordForm;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function changePassword(Request $request): Response

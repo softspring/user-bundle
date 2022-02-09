@@ -2,7 +2,8 @@
 
 namespace Softspring\UserBundle\Controller;
 
-use Softspring\CoreBundle\Controller\AbstractController;
+use Psr\EventDispatcher\EventDispatcherInterface;
+use Softspring\CoreBundle\Controller\Traits\DispatchGetResponseTrait;
 use Softspring\CoreBundle\Event\GetResponseEvent;
 use Softspring\CoreBundle\Event\GetResponseFormEvent;
 use Softspring\CoreBundle\Event\ViewEvent;
@@ -13,11 +14,14 @@ use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\PasswordRequestInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\SfsUserEvents;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ResetPasswordController extends AbstractController
 {
+    use DispatchGetResponseTrait;
+
     /**
      * @var UserManagerInterface
      */
@@ -39,14 +43,20 @@ class ResetPasswordController extends AbstractController
     protected $resetForm;
 
     /**
+     * @var EventDispatcherInterface
+     */
+    protected $eventDispatcher;
+
+    /**
      * ResetPasswordController constructor.
      */
-    public function __construct(UserManagerInterface $userManager, ResetPasswordRequestFormInterface $resetRequestForm, int $resetTokenTTL, ResetPasswordFormInterface $resetForm)
+    public function __construct(UserManagerInterface $userManager, ResetPasswordRequestFormInterface $resetRequestForm, int $resetTokenTTL, ResetPasswordFormInterface $resetForm, EventDispatcherInterface $eventDispatcher)
     {
         $this->userManager = $userManager;
         $this->resetRequestForm = $resetRequestForm;
         $this->resetTokenTTL = $resetTokenTTL;
         $this->resetForm = $resetForm;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function request(Request $request): Response

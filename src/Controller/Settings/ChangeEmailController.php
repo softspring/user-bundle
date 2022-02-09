@@ -2,18 +2,22 @@
 
 namespace Softspring\UserBundle\Controller\Settings;
 
-use Softspring\CoreBundle\Controller\AbstractController;
+use Softspring\CoreBundle\Controller\Traits\DispatchGetResponseTrait;
 use Softspring\CoreBundle\Event\GetResponseFormEvent;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Form\Settings\ChangeEmailFormInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\SfsUserEvents;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ChangeEmailController extends AbstractController
 {
+    use DispatchGetResponseTrait;
+
     /**
      * @var UserManagerInterface
      */
@@ -25,12 +29,20 @@ class ChangeEmailController extends AbstractController
     protected $changeEmailForm;
 
     /**
-     * ChangeEmailController constructor.
+     * @var EventDispatcherInterface
      */
-    public function __construct(UserManagerInterface $userManager, ChangeEmailFormInterface $changeEmailForm)
+    protected $eventDispatcher;
+
+    /**
+     * @param UserManagerInterface     $userManager
+     * @param ChangeEmailFormInterface $changeEmailForm
+     * @param EventDispatcherInterface $eventDispatcher
+     */
+    public function __construct(UserManagerInterface $userManager, ChangeEmailFormInterface $changeEmailForm, EventDispatcherInterface $eventDispatcher)
     {
         $this->userManager = $userManager;
         $this->changeEmailForm = $changeEmailForm;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function changeEmail(Request $request): Response

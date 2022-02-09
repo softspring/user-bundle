@@ -2,7 +2,8 @@
 
 namespace Softspring\UserBundle\Controller;
 
-use Softspring\CoreBundle\Controller\AbstractController;
+use Psr\EventDispatcher\EventDispatcherInterface;
+use Softspring\CoreBundle\Controller\Traits\DispatchGetResponseTrait;
 use Softspring\CoreBundle\Event\GetResponseFormEvent;
 use Softspring\CoreBundle\Event\ViewEvent;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
@@ -12,11 +13,14 @@ use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\ConfirmableInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\SfsUserEvents;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class RegisterController extends AbstractController
 {
+    use DispatchGetResponseTrait;
+
     /**
      * @var UserManagerInterface
      */
@@ -33,13 +37,19 @@ class RegisterController extends AbstractController
     protected $targetPathParameter;
 
     /**
+     * @var EventDispatcherInterface
+     */
+    protected $eventDispatcher;
+
+    /**
      * RegisterController constructor.
      */
-    public function __construct(UserManagerInterface $userManager, RegisterFormInterface $registerForm, ?string $targetPathParameter)
+    public function __construct(UserManagerInterface $userManager, RegisterFormInterface $registerForm, ?string $targetPathParameter, EventDispatcherInterface $eventDispatcher)
     {
         $this->userManager = $userManager;
         $this->registerForm = $registerForm;
         $this->targetPathParameter = $targetPathParameter;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function register(Request $request): Response

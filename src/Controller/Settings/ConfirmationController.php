@@ -2,16 +2,20 @@
 
 namespace Softspring\UserBundle\Controller\Settings;
 
-use Softspring\CoreBundle\Controller\AbstractController;
+use Softspring\CoreBundle\Controller\Traits\DispatchGetResponseTrait;
 use Softspring\UserBundle\Mailer\UserMailerInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\ConfirmableInterface;
 use Softspring\UserBundle\Model\UserInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ConfirmationController extends AbstractController
 {
+    use DispatchGetResponseTrait;
+
     /**
      * @var UserManagerInterface
      */
@@ -23,12 +27,20 @@ class ConfirmationController extends AbstractController
     protected $userMailer;
 
     /**
-     * ConfirmationController constructor.
+     * @var EventDispatcherInterface
      */
-    public function __construct(UserManagerInterface $userManager, UserMailerInterface $userMailer)
+    protected $eventDispatcher;
+
+    /**
+     * @param UserManagerInterface     $userManager
+     * @param UserMailerInterface      $userMailer
+     * @param EventDispatcherInterface $eventDispatcher
+     */
+    public function __construct(UserManagerInterface $userManager, UserMailerInterface $userMailer, EventDispatcherInterface $eventDispatcher)
     {
         $this->userManager = $userManager;
         $this->userMailer = $userMailer;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function resendConfirmation(Request $request): Response

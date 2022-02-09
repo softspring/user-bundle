@@ -2,13 +2,17 @@
 
 namespace Softspring\UserBundle\Controller\Admin;
 
-use Softspring\CoreBundle\Controller\AbstractController;
+use Softspring\CoreBundle\Controller\Traits\DispatchGetResponseTrait;
 use Softspring\UserBundle\Mailer\UserMailerInterface;
 use Softspring\UserBundle\Manager\UserInvitationManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 class InvitationsController extends AbstractController
 {
+    use DispatchGetResponseTrait;
+
     /**
      * @var UserInvitationManagerInterface
      */
@@ -20,12 +24,20 @@ class InvitationsController extends AbstractController
     protected $userMailer;
 
     /**
-     * InvitationsController constructor.
+     * @var EventDispatcherInterface
      */
-    public function __construct(UserInvitationManagerInterface $invitationsManager, UserMailerInterface $userMailer)
+    protected $eventDispatcher;
+
+    /**
+     * @param UserInvitationManagerInterface $invitationsManager
+     * @param UserMailerInterface            $userMailer
+     * @param EventDispatcherInterface       $eventDispatcher
+     */
+    public function __construct(UserInvitationManagerInterface $invitationsManager, UserMailerInterface $userMailer, EventDispatcherInterface $eventDispatcher)
     {
         $this->invitationsManager = $invitationsManager;
         $this->userMailer = $userMailer;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function pendingCountWidget(): Response

@@ -2,10 +2,12 @@
 
 namespace Softspring\UserBundle\Controller;
 
-use Softspring\CoreBundle\Controller\AbstractController;
+use Psr\EventDispatcher\EventDispatcherInterface;
+use Softspring\CoreBundle\Controller\Traits\DispatchGetResponseTrait;
 use Softspring\CoreBundle\Event\GetResponseFormEvent;
 use Softspring\UserBundle\Form\LoginFormInterface;
 use Softspring\UserBundle\SfsUserEvents;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +16,8 @@ use Symfony\Component\Security\Core\Security;
 
 class LoginController extends AbstractController
 {
+    use DispatchGetResponseTrait;
+
     /**
      * @var LoginFormInterface
      */
@@ -30,13 +34,19 @@ class LoginController extends AbstractController
     protected $targetPathParameter;
 
     /**
+     * @var EventDispatcherInterface
+     */
+    protected $eventDispatcher;
+
+    /**
      * LoginController constructor.
      */
-    public function __construct(LoginFormInterface $loginForm, array $oauthServices, ?string $targetPathParameter)
+    public function __construct(LoginFormInterface $loginForm, array $oauthServices, ?string $targetPathParameter, EventDispatcherInterface $eventDispatcher)
     {
         $this->loginForm = $loginForm;
         $this->oauthServices = $oauthServices;
         $this->targetPathParameter = $targetPathParameter;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function login(Request $request): Response

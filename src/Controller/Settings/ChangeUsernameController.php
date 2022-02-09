@@ -2,18 +2,22 @@
 
 namespace Softspring\UserBundle\Controller\Settings;
 
-use Softspring\CoreBundle\Controller\AbstractController;
+use Softspring\CoreBundle\Controller\Traits\DispatchGetResponseTrait;
 use Softspring\CoreBundle\Event\GetResponseFormEvent;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Form\Settings\ChangeUsernameFormInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\SfsUserEvents;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ChangeUsernameController extends AbstractController
 {
+    use DispatchGetResponseTrait;
+
     /**
      * @var UserManagerInterface
      */
@@ -25,12 +29,20 @@ class ChangeUsernameController extends AbstractController
     protected $changeUsernameForm;
 
     /**
-     * ChangeUsernameController constructor.
+     * @var EventDispatcherInterface
      */
-    public function __construct(UserManagerInterface $userManager, ChangeUsernameFormInterface $changeUsernameForm)
+    protected $eventDispatcher;
+
+    /**
+     * @param UserManagerInterface        $userManager
+     * @param ChangeUsernameFormInterface $changeUsernameForm
+     * @param EventDispatcherInterface    $eventDispatcher
+     */
+    public function __construct(UserManagerInterface $userManager, ChangeUsernameFormInterface $changeUsernameForm, EventDispatcherInterface $eventDispatcher)
     {
         $this->userManager = $userManager;
         $this->changeUsernameForm = $changeUsernameForm;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function changeUsername(Request $request): Response
