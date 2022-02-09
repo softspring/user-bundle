@@ -20,6 +20,7 @@ class ResetPasswordEmail extends TranslatableEmail implements ExampleEmailInterf
         $user->setUsername('mery_mccarty');
         $user->setName('Mery');
         $user->setSurname('McCarty');
+        $user->setUsername('username');
         $resetUrl = '#reset-url';
 
         return new self($user, $resetUrl, $translator, $locale);

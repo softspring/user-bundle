@@ -5,6 +5,7 @@ namespace Softspring\UserBundle\Mime;
 use Softspring\Component\MimeTranslatable\ExampleEmailInterface;
 use Softspring\Component\MimeTranslatable\TranslatableEmail;
 use Softspring\UserBundle\Mime\Example\Model\ExampleInvitation;
+use Softspring\UserBundle\Model\NameSurnameInterface;
 use Softspring\UserBundle\Model\UserInvitationInterface;
 use Symfony\Component\Mime\Header\Headers;
 use Symfony\Component\Mime\Part\AbstractPart;
@@ -17,6 +18,8 @@ class InvitationEmail extends TranslatableEmail implements ExampleEmailInterface
         $user = new ExampleInvitation();
         $user->setName('Mery');
         $user->setSurname('McCarty');
+        $user->setUsername('username');
+        $user->setEmail('mery@example.test');
         $acceptUrl = '#accept-url';
 
         return new self($user, $acceptUrl, $translator, $locale);
@@ -33,8 +36,8 @@ class InvitationEmail extends TranslatableEmail implements ExampleEmailInterface
         $this->setContextParam('acceptUrl', $acceptUrl);
 
         $this->setTranslationParams([
-            '%name%' => $invitation->getName(),
-            '%surname%' => $invitation->getSurname(),
+            '%name%' => $invitation instanceof NameSurnameInterface ? $invitation->getName() : $invitation->getUsername(),
+            '%surname%' => $invitation instanceof NameSurnameInterface ? $invitation->getSurname() : '',
             '%username%' => $invitation->getUsername(),
             '%email%' => $invitation->getEmail(),
             '%accept_url%' => $acceptUrl,

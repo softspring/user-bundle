@@ -68,7 +68,6 @@ class UserMailer implements UserMailerInterface
         ], UrlGeneratorInterface::ABSOLUTE_URL);
 
         $email = (new ConfirmationEmail($user, $confirmationUrl, $this->translator, $locale))
-            ->from('development@softspring.eu')
             ->to(new Address($user->getEmail(), $toName))
         ;
 
@@ -80,11 +79,10 @@ class UserMailer implements UserMailerInterface
      */
     public function sendInvitationEmail(UserInvitationInterface $invitation, ?string $locale = null): void
     {
-        $toName = $invitation->getName() ? "{$invitation->getName()} {$invitation->getSurname()}" : null;
+        $toName = $invitation instanceof NameSurnameInterface ? "{$invitation->getName()} {$invitation->getSurname()}" : '';
         $acceptUrl = $this->urlGenerator->generate('sfs_user_invite_accept', ['token' => $invitation->getInvitationToken()], UrlGeneratorInterface::ABSOLUTE_URL);
 
         $email = (new InvitationEmail($invitation, $acceptUrl, $this->translator, $locale))
-            ->from('development@softspring.eu')
             ->to(new Address($invitation->getEmail(), $toName))
         ;
 
@@ -114,7 +112,6 @@ class UserMailer implements UserMailerInterface
         $locale = $user && $user instanceof UserHasLocalePreferenceInterface ? $user->getLocale() : $locale;
 
         $email = (new ResetPasswordEmail($user, $resetUrl, $this->translator, $locale))
-            ->from('development@softspring.eu')
             ->to(new Address($user->getEmail(), $toName))
         ;
 
