@@ -20,6 +20,7 @@ services:
             - { method: setContainer, arguments: ['@service_container'] }
         arguments:
             $manager: '@Softspring\UserBundle\Manager\UserInvitationManagerInterface'
+            $eventDispatcher: '@event_dispatcher'
             $listFilterForm: '@Softspring\UserBundle\Form\Admin\AdministratorListFilterFormInterface'
             $createForm: '@Softspring\UserBundle\Form\Admin\InvitationCreateFormInterface'
             $config:

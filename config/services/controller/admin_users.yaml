@@ -22,6 +22,7 @@ services:
             - { method: setContainer, arguments: ['@service_container'] }
         arguments:
             $manager: '@Softspring\UserBundle\Manager\UserManagerInterface'
+            $eventDispatcher: '@event_dispatcher'
             $listFilterForm: '@Softspring\UserBundle\Form\Admin\UserListFilterFormInterface'
             $updateForm: '@Softspring\UserBundle\Form\Admin\UserUpdateFormInterface'
             $deleteForm: '@Softspring\UserBundle\Form\Admin\UserDeleteFormInterface'
