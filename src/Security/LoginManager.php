@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
-use Symfony\Component\Security\Http\RememberMe\RememberMeServicesInterface;
 use Symfony\Component\Security\Http\Session\SessionAuthenticationStrategyInterface;
 
 class LoginManager
@@ -25,19 +24,16 @@ class LoginManager
 
     protected RequestStack $requestStack;
 
-    protected RememberMeServicesInterface $rememberMeService;
-
     /**
      * LoginManager constructor.
      */
-    public function __construct(FirewallMap $firewallMap, TokenStorageInterface $tokenStorage, UserCheckerInterface $userChecker, SessionAuthenticationStrategyInterface $sessionStrategy, RequestStack $requestStack, ?RememberMeServicesInterface $rememberMeService)
+    public function __construct(FirewallMap $firewallMap, TokenStorageInterface $tokenStorage, UserCheckerInterface $userChecker, SessionAuthenticationStrategyInterface $sessionStrategy, RequestStack $requestStack)
     {
         $this->firewallMap = $firewallMap;
         $this->tokenStorage = $tokenStorage;
         $this->userChecker = $userChecker;
         $this->sessionStrategy = $sessionStrategy;
         $this->requestStack = $requestStack;
-        $this->rememberMeService = $rememberMeService;
     }
 
     public function loginUser(Request $request, UserInterface $user, Response $response = null)
@@ -50,9 +46,9 @@ class LoginManager
         if (null !== $request) {
             $this->sessionStrategy->onAuthentication($request, $token);
 
-            if (null !== $response && null !== $this->rememberMeService) {
-                $this->rememberMeService->loginSuccess($request, $response, $token);
-            }
+//            if (null !== $response && null !== $this->rememberMeService) {
+//                 $this->rememberMeService->loginSuccess($request, $response, $token);
+//            }
         }
 
         $this->tokenStorage->setToken($token);

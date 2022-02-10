@@ -54,7 +54,7 @@ class ImpersonateBarListener implements EventSubscriberInterface
         $response = $event->getResponse();
         $request = $event->getRequest();
 
-        if (!$event->isMasterRequest() || $request->isXmlHttpRequest()) {
+        if (!$event->isMainRequest() || $request->isXmlHttpRequest()) {
             return;
         }
 

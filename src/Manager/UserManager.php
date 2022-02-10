@@ -9,8 +9,8 @@ use Softspring\CrudlBundle\Manager\CrudlEntityManagerTrait;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Model\UserPasswordInterface;
 use Softspring\UserBundle\Model\UserWithEmailInterface;
-use Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder;
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
+use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
+use Symfony\Component\Security\Core\User\LegacyPasswordAuthenticatedUserInterface;
 
 class UserManager implements UserManagerInterface
 {
@@ -18,12 +18,12 @@ class UserManager implements UserManagerInterface
 
     protected EntityManagerInterface $em;
 
-    protected EncoderFactoryInterface $encoderFactory;
+    protected PasswordHasherFactoryInterface $encoderFactory;
 
     /**
      * UserManager constructor.
      */
-    public function __construct(EntityManagerInterface $em, EncoderFactoryInterface $encoderFactory)
+    public function __construct(EntityManagerInterface $em, PasswordHasherFactoryInterface $encoderFactory)
     {
         $this->em = $em;
         $this->encoderFactory = $encoderFactory;
@@ -114,18 +114,16 @@ class UserManager implements UserManagerInterface
         }
 
         try {
-            $encoder = $this->encoderFactory->getEncoder($user);
+            $hasher = $this->encoderFactory->getPasswordHasher($user);
         } catch (RuntimeException $e) {
-            $encoder = $this->encoderFactory->getEncoder(UserInterface::class);
+            $hasher = $this->encoderFactory->getPasswordHasher(UserInterface::class);
         }
 
-        if ($encoder instanceof BCryptPasswordEncoder) {
-            $user->setSalt(null);
-        } else {
+        if ($user instanceof LegacyPasswordAuthenticatedUserInterface && $user instanceof UserPasswordInterface) {
             $user->setSalt(rtrim(str_replace('+', '.', base64_encode(random_bytes(32))), '='));
         }
 
-        $user->setPassword($encoder->encodePassword($plainPassword, $user->getSalt()));
+        $user->setPassword($hasher->hash($plainPassword, $user->getSalt()));
         $user->eraseCredentials();
     }
 }
