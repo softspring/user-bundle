@@ -8,7 +8,6 @@ use Softspring\UserBundle\Model\UserInterface;
 trait OwnerTrait
 {
     /**
-     * @var UserInterface|null
      * @ORM\ManyToOne(targetEntity="Softspring\UserBundle\Model\UserInterface", cascade={"all"})
      * @ORM\JoinColumn(name="owner_id", referencedColumnName="id", onDelete="CASCADE")
      */
