@@ -10,10 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
 trait EmailTrait
 {
     /**
-     * @var string|null
      * @ORM\Column(name="email", type="string", length=180, unique=true, nullable=false)
      */
-    protected $email;
+    protected ?string $email;
 
     public function getEmail(): ?string
     {

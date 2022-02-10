@@ -10,8 +10,7 @@ trait UserLastLoginTrait
     use UserLastLoginTraitModel;
 
     /**
-     * @var int|null
      * @ORM\Column(name="last_login", type="integer", nullable=true, options={"unsigned":true})
      */
-    protected $lastLogin;
+    protected ?int $lastLogin;
 }

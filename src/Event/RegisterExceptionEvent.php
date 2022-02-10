@@ -8,15 +8,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 class RegisterExceptionEvent extends GetResponseFormEvent
 {
-    /**
-     * @var \Exception
-     */
-    protected $exception;
+    protected \Exception $exception;
 
-    /**
-     * @var \Exception|null
-     */
-    protected $throwException;
+    protected ?\Exception $throwException;
 
     public function __construct(FormInterface $form, \Exception $exception, ?Request $request = null)
     {

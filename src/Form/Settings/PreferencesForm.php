@@ -13,15 +13,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PreferencesForm extends AbstractType implements PreferencesFormInterface
 {
-    /**
-     * @var UserManagerInterface
-     */
-    protected $userManager;
+    protected UserManagerInterface $userManager;
 
-    /**
-     * @var array
-     */
-    protected $locales;
+    protected array $locales;
 
     /**
      * PreferencesForm constructor.

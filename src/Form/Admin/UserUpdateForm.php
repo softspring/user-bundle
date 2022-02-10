@@ -13,10 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserUpdateForm extends AbstractType implements UserUpdateFormInterface
 {
-    /**
-     * @var UserManagerInterface
-     */
-    protected $userManager;
+    protected UserManagerInterface $userManager;
 
     /**
      * UserListFilterForm constructor.

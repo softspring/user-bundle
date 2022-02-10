@@ -12,20 +12,11 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class UserRegistrationListener implements EventSubscriberInterface
 {
-    /**
-     * @var UserManagerInterface
-     */
-    protected $userManager;
+    protected UserManagerInterface $userManager;
 
-    /**
-     * @var UserMailerInterface
-     */
-    protected $mailer;
+    protected UserMailerInterface $mailer;
 
-    /**
-     * @var TokenGenerator
-     */
-    protected $tokenGenerator;
+    protected TokenGenerator $tokenGenerator;
 
     /**
      * UserRegistrationListener constructor.

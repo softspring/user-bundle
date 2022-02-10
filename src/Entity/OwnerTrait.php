@@ -12,7 +12,7 @@ trait OwnerTrait
      * @ORM\ManyToOne(targetEntity="Softspring\UserBundle\Model\UserInterface", cascade={"all"})
      * @ORM\JoinColumn(name="owner_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $owner;
+    protected ?UserInterface $owner;
 
     public function getOwner(): ?UserInterface
     {

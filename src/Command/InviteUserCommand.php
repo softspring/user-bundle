@@ -13,10 +13,7 @@ class InviteUserCommand extends Command
 {
     protected static $defaultName = 'sfs:user:invite';
 
-    /**
-     * @var UserInvitationManipulator
-     */
-    protected $userInvitationManipulator;
+    protected UserInvitationManipulator $userInvitationManipulator;
 
     /**
      * CreateUserCommand constructor.

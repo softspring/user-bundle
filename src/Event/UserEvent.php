@@ -8,10 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UserEvent extends RequestEvent
 {
-    /**
-     * @var UserInterface
-     */
-    protected $user;
+    protected UserInterface $user;
 
     /**
      * UserEvent constructor.

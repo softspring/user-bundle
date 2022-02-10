@@ -7,16 +7,14 @@ use Doctrine\ORM\Mapping as ORM;
 trait UserAccessLatLongTrait
 {
     /**
-     * @var float|null
      * @ORM\Column(name="location_lat", type="decimal", precision=20, scale=16, nullable=true)
      */
-    protected $lat;
+    protected ?float $lat;
 
     /**
-     * @var float|null
      * @ORM\Column(name="location_long", type="decimal", precision=20, scale=16, nullable=true)
      */
-    protected $long;
+    protected ?float $long;
 
     public function getLat(): ?float
     {

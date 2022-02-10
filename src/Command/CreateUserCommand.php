@@ -14,10 +14,7 @@ class CreateUserCommand extends Command
 {
     protected static $defaultName = 'sfs:user:create';
 
-    /**
-     * @var UserManipulator
-     */
-    protected $userManipulator;
+    protected UserManipulator $userManipulator;
 
     /**
      * CreateUserCommand constructor.

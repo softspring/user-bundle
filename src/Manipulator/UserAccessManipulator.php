@@ -11,10 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UserAccessManipulator
 {
-    /**
-     * @var UserAccessManagerInterface
-     */
-    protected $userAccessManager;
+    protected UserAccessManagerInterface $userAccessManager;
 
     /**
      * UserAccessManipulator constructor.

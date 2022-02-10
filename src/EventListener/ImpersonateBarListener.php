@@ -16,25 +16,13 @@ use Twig\Environment;
 
 class ImpersonateBarListener implements EventSubscriberInterface
 {
-    /**
-     * @var AuthorizationCheckerInterface
-     */
-    protected $authorizationChecker;
+    protected AuthorizationCheckerInterface $authorizationChecker;
 
-    /**
-     * @var Environment
-     */
-    protected $twig;
+    protected Environment $twig;
 
-    /**
-     * @var UrlGeneratorInterface
-     */
-    protected $urlGenerator;
+    protected UrlGeneratorInterface $urlGenerator;
 
-    /**
-     * @var array
-     */
-    protected $impersonateBarConfig;
+    protected array $impersonateBarConfig;
 
     /**
      * ImpersonateBarListener constructor.

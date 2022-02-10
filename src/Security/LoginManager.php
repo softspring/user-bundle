@@ -15,35 +15,17 @@ use Symfony\Component\Security\Http\Session\SessionAuthenticationStrategyInterfa
 
 class LoginManager
 {
-    /**
-     * @var FirewallMap
-     */
-    protected $firewallMap;
+    protected FirewallMap $firewallMap;
 
-    /**
-     * @var TokenStorageInterface
-     */
-    protected $tokenStorage;
+    protected TokenStorageInterface $tokenStorage;
 
-    /**
-     * @var UserCheckerInterface
-     */
-    protected $userChecker;
+    protected UserCheckerInterface $userChecker;
 
-    /**
-     * @var SessionAuthenticationStrategyInterface
-     */
-    protected $sessionStrategy;
+    protected SessionAuthenticationStrategyInterface $sessionStrategy;
 
-    /**
-     * @var RequestStack
-     */
-    protected $requestStack;
+    protected RequestStack $requestStack;
 
-    /**
-     * @var RememberMeServicesInterface
-     */
-    protected $rememberMeService;
+    protected RememberMeServicesInterface $rememberMeService;
 
     /**
      * LoginManager constructor.

@@ -4,10 +4,7 @@ namespace Softspring\UserBundle\Model;
 
 trait UserHasLocalePreferenceTrait
 {
-    /**
-     * @var string|null
-     */
-    protected $locale;
+    protected ?string $locale;
 
     public function getLocale(): ?string
     {

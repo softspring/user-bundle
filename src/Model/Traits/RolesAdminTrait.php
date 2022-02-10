@@ -6,15 +6,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 trait RolesAdminTrait
 {
-    /**
-     * @var bool
-     */
-    protected $admin = false;
+    protected bool $admin = false;
 
-    /**
-     * @var bool
-     */
-    protected $superAdmin = false;
+    protected bool $superAdmin = false;
 
     public function isAdmin(): bool
     {

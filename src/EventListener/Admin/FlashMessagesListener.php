@@ -11,15 +11,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class FlashMessagesListener implements EventSubscriberInterface
 {
-    /**
-     * @var FlashBagInterface
-     */
-    protected $flashBag;
+    protected FlashBagInterface $flashBag;
 
-    /**
-     * @var TranslatorInterface
-     */
-    protected $translator;
+    protected TranslatorInterface $translator;
 
     /**
      * FlashMessagesListener constructor.

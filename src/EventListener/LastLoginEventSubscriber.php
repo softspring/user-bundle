@@ -12,10 +12,7 @@ use Symfony\Component\Security\Http\SecurityEvents;
 
 class LastLoginEventSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var UserManagerInterface
-     */
-    protected $userManager;
+    protected UserManagerInterface $userManager;
 
     /**
      * LastLoginEventSubscriber constructor.

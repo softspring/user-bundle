@@ -12,25 +12,13 @@ abstract class UserAccess implements UserAccessInterface
      */
     protected $id;
 
-    /**
-     * @var UserInterface
-     */
-    protected $user;
+    protected UserInterface $user;
 
-    /**
-     * @var int|null
-     */
-    protected $loginAt;
+    protected ?int $loginAt;
 
-    /**
-     * @var string
-     */
-    protected $ip;
+    protected string $ip;
 
-    /**
-     * @var string
-     */
-    protected $userAgent;
+    protected string $userAgent;
 
     public function getUser(): UserInterface
     {

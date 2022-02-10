@@ -10,9 +10,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class ResolveDoctrineTargetEntityPass extends AbstractResolveDoctrineTargetEntityPass
 {
-    /**
-     * {@inheritDoc}
-     */
     protected function getEntityManagerName(ContainerBuilder $container): string
     {
         return $container->getParameter('sfs_user.entity_manager_name');

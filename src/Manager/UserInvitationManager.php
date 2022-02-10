@@ -22,15 +22,9 @@ class UserInvitationManager implements UserInvitationManagerInterface
      */
     protected $em;
 
-    /**
-     * @var UserManagerInterface
-     */
-    protected $userManager;
+    protected UserManagerInterface $userManager;
 
-    /**
-     * @var TokenGeneratorInterface
-     */
-    protected $tokenGenerator;
+    protected TokenGeneratorInterface $tokenGenerator;
 
     /**
      * UserInvitationManager constructor.

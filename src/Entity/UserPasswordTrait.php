@@ -10,14 +10,12 @@ trait UserPasswordTrait
     use UserPasswordTraitModel;
 
     /**
-     * @var string|null
      * @ORM\Column(name="salt", type="string", nullable=true)
      */
-    protected $salt;
+    protected ?string $salt;
 
     /**
-     * @var string|null
      * @ORM\Column(name="password_encoded", type="string", nullable=true)
      */
-    protected $password;
+    protected ?string $password;
 }

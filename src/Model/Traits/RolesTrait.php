@@ -4,10 +4,7 @@ namespace Softspring\UserBundle\Model\Traits;
 
 trait RolesTrait
 {
-    /**
-     * @var array
-     */
-    protected $roles = [];
+    protected array $roles = [];
 
     public function getRoles(): array
     {

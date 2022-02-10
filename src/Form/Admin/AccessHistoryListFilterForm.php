@@ -11,10 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AccessHistoryListFilterForm extends EntityListFilterForm implements AccessHistoryListFilterFormInterface
 {
-    /**
-     * @var UserAccessManagerInterface
-     */
-    protected $accessManager;
+    protected UserAccessManagerInterface $accessManager;
 
     /**
      * AccessHistoryListFilterForm constructor.

@@ -4,20 +4,11 @@ namespace Softspring\UserBundle\Model\Traits;
 
 trait UserPasswordTrait
 {
-    /**
-     * @var string|null
-     */
-    protected $salt;
+    protected ?string $salt;
 
-    /**
-     * @var string|null
-     */
-    protected $password;
+    protected ?string $password;
 
-    /**
-     * @var string|null
-     */
-    protected $plainPassword;
+    protected ?string $plainPassword;
 
     public function getSalt(): ?string
     {

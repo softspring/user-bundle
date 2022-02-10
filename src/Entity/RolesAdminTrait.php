@@ -10,14 +10,12 @@ trait RolesAdminTrait
     use RolesAdminTraitModel;
 
     /**
-     * @var bool
      * @ORM\Column(name="is_admin", type="boolean", nullable=false, options={"default":false})
      */
-    protected $admin = false;
+    protected bool $admin = false;
 
     /**
-     * @var bool
      * @ORM\Column(name="is_super_admin", type="boolean", nullable=false, options={"default":false})
      */
-    protected $superAdmin = false;
+    protected bool $superAdmin = false;
 }

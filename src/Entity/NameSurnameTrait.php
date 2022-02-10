@@ -7,16 +7,14 @@ use Doctrine\ORM\Mapping as ORM;
 trait NameSurnameTrait
 {
     /**
-     * @var string|null
      * @ORM\Column(name="name", type="string", nullable=true, length=50)
      */
-    protected $name;
+    protected ?string $name;
 
     /**
-     * @var string|null
      * @ORM\Column(name="surname", type="string", nullable=true, length=80)
      */
-    protected $surname;
+    protected ?string $surname;
 
     public function getName(): ?string
     {

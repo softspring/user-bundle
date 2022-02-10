@@ -14,10 +14,7 @@ class PromoteUserCommand extends Command
 {
     protected static $defaultName = 'sfs:user:promote';
 
-    /**
-     * @var UserManipulator
-     */
-    protected $userManager;
+    protected UserManipulator $userManager;
 
     /**
      * PromoteUserCommand constructor.

@@ -16,10 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AcceptInvitationForm extends AbstractType implements AcceptInvitationFormInterface
 {
-    /**
-     * @var UserManagerInterface
-     */
-    protected $userManager;
+    protected UserManagerInterface $userManager;
 
     /**
      * RegisterForm constructor.

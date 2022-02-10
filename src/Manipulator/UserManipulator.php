@@ -16,20 +16,11 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class UserManipulator
 {
-    /**
-     * @var UserManagerInterface
-     */
-    protected $userManager;
+    protected UserManagerInterface $userManager;
 
-    /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
+    protected EventDispatcherInterface $eventDispatcher;
 
-    /**
-     * @var RequestStack
-     */
-    protected $requestStack;
+    protected RequestStack $requestStack;
 
     /**
      * UserManipulator constructor.

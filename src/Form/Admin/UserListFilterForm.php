@@ -15,10 +15,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserListFilterForm extends EntityListFilterForm implements UserListFilterFormInterface
 {
-    /**
-     * @var UserManagerInterface
-     */
-    protected $userManager;
+    protected UserManagerInterface $userManager;
 
     /**
      * UserListFilterForm constructor.

@@ -13,10 +13,7 @@ use Symfony\Component\Security\Http\SecurityEvents;
 
 class UserAccessEventSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var UserAccessManipulator
-     */
-    protected $userAccessManipulator;
+    protected UserAccessManipulator $userAccessManipulator;
 
     /**
      * UserAccessEventSubscriber constructor.

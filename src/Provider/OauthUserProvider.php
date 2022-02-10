@@ -24,27 +24,15 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
  */
 class OauthUserProvider implements UserProviderInterface, AccountConnectorInterface, OAuthAwareUserProviderInterface
 {
-    /**
-     * @var UserManagerInterface
-     */
-    protected $userManager;
+    protected UserManagerInterface $userManager;
 
-    /**
-     * @var array
-     */
-    protected $properties = [
+    protected array $properties = [
         'identifier' => 'id',
     ];
 
-    /**
-     * @var PropertyAccessor
-     */
-    protected $accessor;
+    protected PropertyAccessor $accessor;
 
-    /**
-     * @var array
-     */
-    protected $oauthServices;
+    protected array $oauthServices;
 
     /**
      * OauthUserProvider constructor.

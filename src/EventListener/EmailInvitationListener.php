@@ -9,10 +9,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class EmailInvitationListener implements EventSubscriberInterface
 {
-    /**
-     * @var UserMailerInterface
-     */
-    protected $mailer;
+    protected UserMailerInterface $mailer;
 
     /**
      * EmailInvitationListener constructor.

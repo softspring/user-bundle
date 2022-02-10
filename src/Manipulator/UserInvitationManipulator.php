@@ -12,25 +12,13 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class UserInvitationManipulator
 {
-    /**
-     * @var UserInvitationManagerInterface
-     */
-    protected $userInvitationManager;
+    protected UserInvitationManagerInterface $userInvitationManager;
 
-    /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
+    protected EventDispatcherInterface $eventDispatcher;
 
-    /**
-     * @var RequestStack
-     */
-    protected $requestStack;
+    protected RequestStack $requestStack;
 
-    /**
-     * @var TokenGeneratorInterface
-     */
-    protected $tokenGenerator;
+    protected TokenGeneratorInterface $tokenGenerator;
 
     /**
      * UserInvitationManipulator constructor.

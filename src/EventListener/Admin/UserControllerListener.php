@@ -11,20 +11,11 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class UserControllerListener implements EventSubscriberInterface
 {
-    /**
-     * @var EntityManagerInterface
-     */
-    protected $em;
+    protected EntityManagerInterface $em;
 
-    /**
-     * @var array
-     */
-    protected $impersonateBarConfig;
+    protected array $impersonateBarConfig;
 
-    /**
-     * @var UserAccessManagerInterface|null
-     */
-    protected $accessManager;
+    protected ?UserAccessManagerInterface $accessManager;
 
     /**
      * UserControllerListener constructor.

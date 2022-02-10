@@ -14,20 +14,11 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 class LoginForm extends AbstractType implements LoginFormInterface
 {
-    /**
-     * @var CsrfTokenManagerInterface
-     */
-    protected $csrfTokenManager;
+    protected CsrfTokenManagerInterface $csrfTokenManager;
 
-    /**
-     * @var FirewallMap
-     */
-    protected $firewallMap;
+    protected FirewallMap $firewallMap;
 
-    /**
-     * @var RequestStack
-     */
-    protected $requestStack;
+    protected RequestStack $requestStack;
 
     /**
      * LoginForm constructor.

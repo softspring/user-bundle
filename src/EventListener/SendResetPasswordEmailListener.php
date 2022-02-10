@@ -13,20 +13,11 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class SendResetPasswordEmailListener implements EventSubscriberInterface
 {
-    /**
-     * @var UserMailerInterface
-     */
-    protected $mailer;
+    protected UserMailerInterface $mailer;
 
-    /**
-     * @var UserManagerInterface
-     */
-    protected $userManager;
+    protected UserManagerInterface $userManager;
 
-    /**
-     * @var TokenGenerator
-     */
-    protected $tokenGenerator;
+    protected TokenGenerator $tokenGenerator;
 
     /**
      * SendResetPasswordEmailListener constructor.

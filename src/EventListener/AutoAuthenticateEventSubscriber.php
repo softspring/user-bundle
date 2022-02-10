@@ -12,10 +12,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class AutoAuthenticateEventSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var LoginManager
-     */
-    protected $loginManager;
+    protected LoginManager $loginManager;
 
     /**
      * AuthenticateEventSubscriber constructor.

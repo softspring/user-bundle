@@ -7,22 +7,19 @@ use Doctrine\ORM\Mapping as ORM;
 trait UserAccessLocationTrait
 {
     /**
-     * @var string|null
      * @ORM\Column(name="location_city", type="string", length=255, nullable=true)
      */
-    protected $city;
+    protected ?string $city;
 
     /**
-     * @var string|null
      * @ORM\Column(name="location_region", type="string", length=2, nullable=true, options={"fixed":true})
      */
-    protected $region;
+    protected ?string $region;
 
     /**
-     * @var string|null
      * @ORM\Column(name="location_country", type="string", length=2, nullable=true, options={"fixed":true})
      */
-    protected $country;
+    protected ?string $country;
 
     public function getCity(): ?string
     {

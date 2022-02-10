@@ -13,10 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RegisterForm extends AbstractType implements RegisterFormInterface
 {
-    /**
-     * @var UserManagerInterface
-     */
-    protected $userManager;
+    protected UserManagerInterface $userManager;
 
     /**
      * RegisterForm constructor.

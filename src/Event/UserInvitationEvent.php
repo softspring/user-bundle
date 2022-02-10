@@ -8,10 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UserInvitationEvent extends RequestEvent
 {
-    /**
-     * @var UserInvitationInterface
-     */
-    protected $invitation;
+    protected UserInvitationInterface $invitation;
 
     /**
      * UserInvitationEvent constructor.

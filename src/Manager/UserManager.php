@@ -15,15 +15,13 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 class UserManager implements UserManagerInterface
 {
     use CrudlEntityManagerTrait;
+
     /**
      * @var EntityManagerInterface
      */
     protected $em;
 
-    /**
-     * @var EncoderFactoryInterface
-     */
-    protected $encoderFactory;
+    protected EncoderFactoryInterface $encoderFactory;
 
     /**
      * UserManager constructor.

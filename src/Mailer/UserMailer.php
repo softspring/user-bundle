@@ -20,20 +20,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UserMailer implements UserMailerInterface
 {
-    /**
-     * @var MailerInterface
-     */
-    protected $mailer;
+    protected MailerInterface $mailer;
 
-    /**
-     * @var UrlGeneratorInterface
-     */
-    protected $urlGenerator;
+    protected UrlGeneratorInterface $urlGenerator;
 
-    /**
-     * @var TranslatorInterface
-     */
-    protected $translator;
+    protected TranslatorInterface $translator;
 
     /**
      * UserMailer constructor.

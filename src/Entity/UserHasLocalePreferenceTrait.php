@@ -10,8 +10,7 @@ trait UserHasLocalePreferenceTrait
     use UserHasLocalePreferenceTraitModel;
 
     /**
-     * @var string|null
      * @ORM\Column(name="locale", type="string", length=5, nullable=true, options={"fixed": true})
      */
-    protected $locale;
+    protected ?string $locale;
 }
