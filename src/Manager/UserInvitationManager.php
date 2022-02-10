@@ -17,10 +17,7 @@ class UserInvitationManager implements UserInvitationManagerInterface
 {
     use CrudlEntityManagerTrait;
 
-    /**
-     * @var EntityManagerInterface
-     */
-    protected $em;
+    protected EntityManagerInterface $em;
 
     protected UserManagerInterface $userManager;
 

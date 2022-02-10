@@ -16,10 +16,7 @@ class UserManager implements UserManagerInterface
 {
     use CrudlEntityManagerTrait;
 
-    /**
-     * @var EntityManagerInterface
-     */
-    protected $em;
+    protected EntityManagerInterface $em;
 
     protected EncoderFactoryInterface $encoderFactory;
 

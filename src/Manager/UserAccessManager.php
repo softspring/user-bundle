@@ -10,10 +10,7 @@ class UserAccessManager implements UserAccessManagerInterface
 {
     use CrudlEntityManagerTrait;
 
-    /**
-     * @var EntityManagerInterface
-     */
-    protected $em;
+    protected EntityManagerInterface $em;
 
     /**
      * UserAccessManager constructor.
