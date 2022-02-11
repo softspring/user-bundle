@@ -86,11 +86,9 @@ class SfsUserExtension extends Extension implements PrependExtensionInterface
 
         $container->prependExtensionConfig('doctrine', $doctrineConfig);
 
-        $container->prependExtensionConfig('sfs_core', [
-            'twig' => [
-                'routing_extension' => true,
-                'date_span_extension' => true,
-            ],
+        $container->prependExtensionConfig('sfs_twig_extra', [
+            'routing_extension' => true,
+            'date_span_extension' => true,
         ]);
     }
 }
