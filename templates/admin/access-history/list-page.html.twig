@@ -1,7 +1,7 @@
 {% trans_default_domain 'sfs_user' %}
 {% for access in entities %}
     <tr>
-        <td>{{ access.loginAt|dateSpan('H:i:s d-m-Y') }}</td>
+        <td>{{ access.loginAt|date_span('H:i:s d-m-Y') }}</td>
         <td>{{ access.user.username }}</td>
         <td>{{ access.ip }}</td>
         {% if sfs_user_access_is('location') %}

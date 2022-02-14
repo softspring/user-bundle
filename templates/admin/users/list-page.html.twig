@@ -20,7 +20,7 @@
         {% endif %}
         {% if sfs_user_is('lastLogin') %}
         <td>
-            {{ user.lastLogin ? user.lastLogin|dateSpan('H:i:s d-m-Y') : 'not yet' }}
+            {{ user.lastLogin ? user.lastLogin|date_span('H:i:s d-m-Y') : 'not yet' }}
         </td>
         {% endif %}
         <td>

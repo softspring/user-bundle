@@ -11,7 +11,7 @@
         {% endif %}
         {% if sfs_user_is('lastLogin') %}
         <td>
-            {{ administrator.lastLogin ? administrator.lastLogin|dateSpan('H:i:s d-m-Y') : 'not yet' }}
+            {{ administrator.lastLogin ? administrator.lastLogin|date_span('H:i:s d-m-Y') : 'not yet' }}
         </td>
         {% endif %}
         <td>{{ administrator.roles|join(', ') }}</td>
