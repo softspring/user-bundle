@@ -26,8 +26,8 @@ services:
             $manager: '@Softspring\UserBundle\Manager\UserManagerInterface'
             $eventDispatcher: '@event_dispatcher'
             $listFilterForm: '@Softspring\UserBundle\Form\Admin\AdministratorListFilterFormInterface'
-            $updateForm: '@Softspring\UserBundle\Form\Admin\UserUpdateFormInterface'
-            $deleteForm: '@Softspring\UserBundle\Form\Admin\UserDeleteFormInterface'
+            $updateForm: '@Softspring\UserBundle\Form\Admin\AdministratorUpdateFormInterface'
+            $deleteForm: '@Softspring\UserBundle\Form\Admin\AdministratorDeleteFormInterface'
             $config:
                 entity_attribute: 'administrator'
                 list:
@@ -36,6 +36,7 @@ services:
                     view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_LIST_VIEW
                     view: '@@SfsUser/admin/administrators/list.html.twig'
                     view_page: '@@SfsUser/admin/administrators/list-page.html.twig'
+                    entities_attribute: 'administrators'
                 update:
                     is_granted: 'ROLE_ADMIN_ADMINISTRATORS_UPDATE'
                     param_converter_key: 'id'
