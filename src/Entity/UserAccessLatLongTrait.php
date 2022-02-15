@@ -12,10 +12,10 @@ trait UserAccessLatLongTrait
     /**
      * @ORM\Column(name="location_lat", type="decimal", precision=20, scale=16, nullable=true)
      */
-    protected ?float $lat;
+    protected ?float $lat = null;
 
     /**
      * @ORM\Column(name="location_long", type="decimal", precision=20, scale=16, nullable=true)
      */
-    protected ?float $long;
+    protected ?float $long = null;
 }

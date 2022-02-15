@@ -4,7 +4,7 @@ namespace Softspring\UserBundle\Model;
 
 trait UserLastLoginTrait
 {
-    protected ?int $lastLogin;
+    protected ?int $lastLogin = null;
 
     public function getLastLogin(): ?\DateTime
     {

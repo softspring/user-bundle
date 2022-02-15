@@ -4,11 +4,11 @@ namespace Softspring\UserBundle\Model;
 
 trait UserAccessLocationTrait
 {
-    protected ?string $city;
+    protected ?string $city = null;
 
-    protected ?string $region;
+    protected ?string $region = null;
 
-    protected ?string $country;
+    protected ?string $country = null;
 
     public function getCity(): ?string
     {

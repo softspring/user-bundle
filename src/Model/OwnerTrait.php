@@ -4,7 +4,7 @@ namespace Softspring\UserBundle\Model;
 
 trait OwnerTrait
 {
-    protected ?UserInterface $owner;
+    protected ?UserInterface $owner = null;
 
     public function getOwner(): ?UserInterface
     {

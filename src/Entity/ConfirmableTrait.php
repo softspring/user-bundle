@@ -12,10 +12,10 @@ trait ConfirmableTrait
     /**
      * @ORM\Column(name="confirmation_token", type="string", length=180, unique=true, nullable=true)
      */
-    protected ?string $confirmationToken;
+    protected ?string $confirmationToken = null;
 
     /**
      * @ORM\Column(name="confirmed_at", type="integer", nullable=true, options={"unsigned":true})
      */
-    protected ?int $confirmedAt;
+    protected ?int $confirmedAt = null;
 }

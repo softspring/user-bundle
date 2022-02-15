@@ -4,9 +4,9 @@ namespace Softspring\UserBundle\Model;
 
 trait PasswordRequestTrait
 {
-    protected ?string $passwordRequestToken;
+    protected ?string $passwordRequestToken = null;
 
-    protected ?int $passwordRequestedAt;
+    protected ?int $passwordRequestedAt = null;
 
     public function getPasswordRequestedAt(): ?\DateTime
     {

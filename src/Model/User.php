@@ -7,7 +7,7 @@ namespace Softspring\UserBundle\Model;
  */
 abstract class User implements UserInterface
 {
-    protected ?string $username;
+    protected ?string $username = null;
 
     public function __toString(): string
     {

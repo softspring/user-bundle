@@ -4,7 +4,7 @@ namespace Softspring\UserBundle\Model;
 
 trait EmailTrait
 {
-    protected ?string $email;
+    protected ?string $email = null;
 
     public function getEmail(): ?string
     {

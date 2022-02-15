@@ -4,9 +4,9 @@ namespace Softspring\UserBundle\Model;
 
 trait NameSurnameTrait
 {
-    protected ?string $name;
+    protected ?string $name = null;
 
-    protected ?string $surname;
+    protected ?string $surname = null;
 
     public function getName(): ?string
     {

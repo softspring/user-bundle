@@ -4,9 +4,9 @@ namespace Softspring\UserBundle\Model;
 
 trait ConfirmableTrait
 {
-    protected ?string $confirmationToken;
+    protected ?string $confirmationToken = null;
 
-    protected ?int $confirmedAt;
+    protected ?int $confirmedAt = null;
 
     public function getConfirmationToken(): ?string
     {

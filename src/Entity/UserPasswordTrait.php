@@ -12,10 +12,10 @@ trait UserPasswordTrait
     /**
      * @ORM\Column(name="salt", type="string", nullable=true)
      */
-    protected ?string $salt;
+    protected ?string $salt = null;
 
     /**
      * @ORM\Column(name="password_encoded", type="string", nullable=true)
      */
-    protected ?string $password;
+    protected ?string $password = null;
 }

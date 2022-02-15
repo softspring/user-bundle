@@ -12,5 +12,5 @@ trait UserLastLoginTrait
     /**
      * @ORM\Column(name="last_login", type="integer", nullable=true, options={"unsigned":true})
      */
-    protected ?int $lastLogin;
+    protected ?int $lastLogin = null;
 }

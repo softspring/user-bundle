@@ -4,9 +4,9 @@ namespace Softspring\UserBundle\Model;
 
 trait UserAccessLatLongTrait
 {
-    protected ?float $lat;
+    protected ?float $lat = null;
 
-    protected ?float $long;
+    protected ?float $long = null;
 
     public function getLat(): ?float
     {

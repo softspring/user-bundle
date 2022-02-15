@@ -12,10 +12,10 @@ trait PasswordRequestTrait
     /**
      * @ORM\Column(name="password_request_token", type="string", length=180, unique=true, nullable=true)
      */
-    protected ?string $passwordRequestToken;
+    protected ?string $passwordRequestToken = null;
 
     /**
      * @ORM\Column(name="password_requested_at", type="integer", nullable=true, options={"unsigned":true})
      */
-    protected ?int $passwordRequestedAt;
+    protected ?int $passwordRequestedAt = null;
 }

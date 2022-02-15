@@ -4,9 +4,9 @@ namespace Softspring\UserBundle\Model;
 
 trait UserPasswordTrait
 {
-    protected ?string $salt;
+    protected ?string $salt = null;
 
-    protected ?string $password;
+    protected ?string $password = null;
 
     protected ?string $plainPassword = null;
 
