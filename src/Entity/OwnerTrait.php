@@ -3,8 +3,8 @@
 namespace Softspring\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Model\OwnerTrait as OwnerTraitModel;
+use Softspring\UserBundle\Model\UserInterface;
 
 trait OwnerTrait
 {

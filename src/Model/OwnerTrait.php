@@ -2,8 +2,6 @@
 
 namespace Softspring\UserBundle\Model;
 
-use Softspring\UserBundle\Model\UserInterface;
-
 trait OwnerTrait
 {
     protected ?UserInterface $owner;
