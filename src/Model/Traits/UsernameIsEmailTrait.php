@@ -1,11 +1,11 @@
 <?php
 
-namespace Softspring\UserBundle\Entity;
+namespace Softspring\UserBundle\Model\Traits;
 
 use Softspring\UserBundle\Model\UsernameIsEmailTrait as UsernameIsEmailTraitModel;
 
 /**
- * @deprecated Use Softspring\UserBundle\Model\UsernameIsEmailTrait
+ * @deprecated use Softspring\UserBundle\Model\UsernameIsEmailTrait
  */
 trait UsernameIsEmailTrait
 {

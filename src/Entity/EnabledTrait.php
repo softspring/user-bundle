@@ -3,24 +3,14 @@
 namespace Softspring\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Softspring\UserBundle\Model\EnabledTrait as EnabledTraitModel;
 
-/**
- * Trait EnabledTrait.
- */
 trait EnabledTrait
 {
+    use EnabledTraitModel;
+
     /**
      * @ORM\Column(name="enabled", type="boolean", nullable=false, options={"default":false})
      */
     protected bool $enabled = false;
-
-    public function isEnabled(): bool
-    {
-        return $this->enabled;
-    }
-
-    public function setEnabled(bool $enabled): void
-    {
-        $this->enabled = $enabled;
-    }
 }

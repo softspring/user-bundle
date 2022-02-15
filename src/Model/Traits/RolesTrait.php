@@ -2,17 +2,12 @@
 
 namespace Softspring\UserBundle\Model\Traits;
 
+use Softspring\UserBundle\Model\RolesTrait as RolesTraitModel;
+
+/**
+ * @deprecated use Softspring\UserBundle\Model\RolesTrait
+ */
 trait RolesTrait
 {
-    protected array $roles = [];
-
-    public function getRoles(): array
-    {
-        return $this->roles;
-    }
-
-    public function setRoles(array $roles): void
-    {
-        $this->roles = $roles;
-    }
+    use RolesTraitModel;
 }

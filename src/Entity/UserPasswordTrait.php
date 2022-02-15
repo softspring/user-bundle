@@ -3,7 +3,7 @@
 namespace Softspring\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Softspring\UserBundle\Model\Traits\UserPasswordTrait as UserPasswordTraitModel;
+use Softspring\UserBundle\Model\UserPasswordTrait as UserPasswordTraitModel;
 
 trait UserPasswordTrait
 {

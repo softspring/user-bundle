@@ -3,7 +3,7 @@
 namespace Softspring\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Softspring\UserBundle\Model\Traits\RolesAdminTrait as RolesAdminTraitModel;
+use Softspring\UserBundle\Model\RolesAdminTrait as RolesAdminTraitModel;
 
 trait RolesAdminTrait
 {

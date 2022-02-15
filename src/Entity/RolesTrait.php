@@ -3,7 +3,7 @@
 namespace Softspring\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Softspring\UserBundle\Model\Traits\RolesTrait as RolesTraitModel;
+use Softspring\UserBundle\Model\RolesTrait as RolesTraitModel;
 
 trait RolesTrait
 {

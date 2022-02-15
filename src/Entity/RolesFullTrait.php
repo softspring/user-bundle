@@ -2,7 +2,7 @@
 
 namespace Softspring\UserBundle\Entity;
 
-use Softspring\UserBundle\Model\Traits\RolesFullTrait as RolesFullTraitModel;
+use Softspring\UserBundle\Model\RolesFullTrait as RolesFullTraitModel;
 
 trait RolesFullTrait
 {
