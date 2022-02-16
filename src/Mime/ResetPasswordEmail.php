@@ -17,10 +17,9 @@ class ResetPasswordEmail extends TranslatableEmail implements ExampleEmailInterf
     public static function generateExample(TranslatorInterface $translator, ?string $locale = null): TranslatableEmail
     {
         $user = new ExampleUser();
-        $user->setUsername('mery_mccarty');
         $user->setName('Mery');
         $user->setSurname('McCarty');
-        $user->setUsername('username');
+        $user->setUsername('mery_mccarty');
         $resetUrl = '#reset-url';
 
         return new self($user, $resetUrl, $translator, $locale);

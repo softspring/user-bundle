@@ -18,7 +18,7 @@ class InvitationEmail extends TranslatableEmail implements ExampleEmailInterface
         $user = new ExampleInvitation();
         $user->setName('Mery');
         $user->setSurname('McCarty');
-        $user->setUsername('username');
+        $user->setUsername('mery_mccarty');
         $user->setEmail('mery@example.test');
         $acceptUrl = '#accept-url';
 
