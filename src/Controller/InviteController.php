@@ -51,6 +51,10 @@ class InviteController extends AbstractController
         }
 
         if ($invitation->getAcceptedAt()) {
+            if ($response = $this->dispatchGetResponse(SfsUserEvents::INVITATION_ACCEPTED, new GetResponseUserEvent($invitation->getUser(), $request))) {
+                return $response;
+            }
+
             return $this->redirectToRoute('sfs_user_invite_success');
         }
 
@@ -91,6 +95,8 @@ class InviteController extends AbstractController
 
         return $this->render('@SfsUser/invite/accept.html.twig', [
             'accept_form' => $form->createView(),
+            'invitation' => $invitation,
+            'user' => $user,
         ]);
     }
 

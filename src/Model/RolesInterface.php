@@ -2,9 +2,9 @@
 
 namespace Softspring\UserBundle\Model;
 
-use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
-
-interface RolesInterface extends SymfonyUserInterface
+interface RolesInterface
 {
     public function setRoles(array $roles): void;
+
+    public function getRoles(): array;
 }

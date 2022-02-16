@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Softspring\CrudlBundle\Manager\CrudlEntityManagerTrait;
 use Softspring\UserBundle\Model\ConfirmableInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;
+use Softspring\UserBundle\Model\RolesAdminInterface;
 use Softspring\UserBundle\Model\RolesInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Model\UserInvitationInterface;
@@ -78,6 +79,11 @@ class UserInvitationManager implements UserInvitationManagerInterface
 
         if ($invitation instanceof RolesInterface && $user instanceof RolesInterface) {
             $user->setRoles($invitation->getRoles());
+        }
+
+        if ($invitation instanceof RolesAdminInterface && $user instanceof RolesAdminInterface) {
+            $user->setAdmin($invitation->isAdmin());
+            $user->setSuperAdmin($invitation->isSuperAdmin());
         }
 
         if ($user instanceof ConfirmableInterface) {

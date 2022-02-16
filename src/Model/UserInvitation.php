@@ -10,19 +10,19 @@ abstract class UserInvitation implements UserInvitationInterface
     /**
      * @var mixed|null
      */
-    protected $id;
+    protected $id = null;
 
-    protected ?UserInterface $inviter;
+    protected ?UserInterface $inviter = null;
 
-    protected ?UserInterface $user;
+    protected ?UserInterface $user = null;
 
-    protected ?string $username;
+    protected ?string $username = null;
 
-    protected ?string $email;
+    protected ?string $email = null;
 
-    protected ?string $invitationToken;
+    protected ?string $invitationToken = null;
 
-    protected ?int $acceptedAt;
+    protected ?int $acceptedAt = null;
 
     public function __toString(): string
     {

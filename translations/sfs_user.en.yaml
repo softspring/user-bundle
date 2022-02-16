@@ -154,6 +154,14 @@ admin_administrators:
         actions:
             update.button: "Update"
             cancel.button: "Cancel"
+    invite:
+        form:
+            name.label: "Name"
+            surname.label: "Surname"
+            email.label: "Email"
+            username.label: "Username"
+            admin.label: "Administrator"
+            superAdmin.label: "Super-administrator"
 
 admin_access_history:
     list:

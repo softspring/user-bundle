@@ -2,6 +2,6 @@
 
 namespace Softspring\UserBundle\Model;
 
-interface RolesFullInterface extends RolesAdminInterface, RolesInterface
+interface RolesFullInterface extends RolesAdminInterface
 {
 }

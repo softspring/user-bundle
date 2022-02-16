@@ -11,25 +11,19 @@ class EmailInvitationListener implements EventSubscriberInterface
 {
     protected UserMailerInterface $mailer;
 
-    /**
-     * EmailInvitationListener constructor.
-     */
     public function __construct(UserMailerInterface $mailer)
     {
         $this->mailer = $mailer;
     }
 
-    /**
-     * @return array
-     */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             SfsUserEvents::USER_INVITED => 'onInvitation',
         ];
     }
 
-    public function onInvitation(UserInvitationEvent $event)
+    public function onInvitation(UserInvitationEvent $event): void
     {
         $invitation = $event->getInvitation();
 

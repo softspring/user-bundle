@@ -2,9 +2,7 @@
 
 namespace Softspring\UserBundle\Model;
 
-use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
-
-interface RolesAdminInterface extends SymfonyUserInterface
+interface RolesAdminInterface extends RolesInterface
 {
     public function isAdmin(): bool;
 

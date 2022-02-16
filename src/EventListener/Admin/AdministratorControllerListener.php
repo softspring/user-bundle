@@ -3,11 +3,19 @@
 namespace Softspring\UserBundle\EventListener\Admin;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Softspring\CoreBundle\Event\ViewEvent;
+use Softspring\CrudlBundle\Event\GetResponseEntityEvent;
+use Softspring\CrudlBundle\Event\GetResponseFormEvent;
 use Softspring\UserBundle\Doctrine\Filter\AdminFilter;
+use Softspring\UserBundle\Event\UserInvitationEvent;
 use Softspring\UserBundle\Manager\UserAccessManagerInterface;
+use Softspring\UserBundle\Model\RolesAdminInterface;
+use Softspring\UserBundle\Model\UserInterface;
+use Softspring\UserBundle\Model\UserInvitationInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class AdministratorControllerListener implements EventSubscriberInterface
 {
@@ -17,14 +25,14 @@ class AdministratorControllerListener implements EventSubscriberInterface
 
     protected ?UserAccessManagerInterface $accessManager;
 
-    /**
-     * AdministratorControllerListener constructor.
-     */
-    public function __construct(EntityManagerInterface $em, array $impersonateBarConfig, ?UserAccessManagerInterface $accessManager)
+    protected TokenStorageInterface $tokenStorage;
+
+    public function __construct(EntityManagerInterface $em, array $impersonateBarConfig, ?UserAccessManagerInterface $accessManager, TokenStorageInterface $tokenStorage)
     {
         $this->em = $em;
         $this->impersonateBarConfig = $impersonateBarConfig;
         $this->accessManager = $accessManager;
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -42,6 +50,8 @@ class AdministratorControllerListener implements EventSubscriberInterface
             // enable filter for administrators
             SfsUserEvents::ADMIN_ADMINISTRATORS_LIST_INITIALIZE => 'onControllerInitializeEnableFilter',
             SfsUserEvents::ADMIN_ADMINISTRATORS_DETAILS_INITIALIZE => 'onControllerInitializeEnableFilter',
+            SfsUserEvents::ADMIN_ADMINISTRATORS_INVITE_FORM_VALID => 'onAdminInvitationValidSetInviterAndAdmin',
+            SfsUserEvents::ADMIN_ADMINISTRATORS_INVITE_SUCCESS => 'onAdminInvitationSuccessLaunchEvent',
         ];
     }
 
@@ -78,5 +88,23 @@ class AdministratorControllerListener implements EventSubscriberInterface
         $data = $event->getData();
 
         $data['user_access_history'] = $this->accessManager->getRepository()->findBy(['user' => $data['administrator']], ['loginAt' => 'DESC'], 5);
+    }
+
+    public function onAdminInvitationValidSetInviterAndAdmin(GetResponseFormEvent $event, string $eventName, EventDispatcherInterface $dispatcher): void
+    {
+        /** @var UserInvitationInterface $invitation */
+        $invitation = $event->getForm()->getData();
+        /** @var UserInterface $inviter */
+        $inviter = $this->tokenStorage->getToken()->getUser();
+        $invitation->setInviter($inviter);
+
+        if ($invitation instanceof RolesAdminInterface) {
+            $invitation->setAdmin(true);
+        }
+    }
+
+    public function onAdminInvitationSuccessLaunchEvent(GetResponseEntityEvent $event, string $eventName, EventDispatcherInterface $dispatcher): void
+    {
+        $dispatcher->dispatch(new UserInvitationEvent($event->getEntity(), $event->getRequest()), SfsUserEvents::USER_INVITED);
     }
 }
