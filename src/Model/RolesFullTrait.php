@@ -12,7 +12,7 @@ trait RolesFullTrait
     /**
      * {@inheritdoc}
      */
-    public function getRoles()
+    public function getRoles(): array
     {
         $roles = $this->roles;
 

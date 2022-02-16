@@ -127,7 +127,7 @@ abstract class User implements UserInterface
         return $this->getUsername();
     }
 
-    public function getRoles()
+    public function getRoles(): array
     {
         return ['ROLE_USER'];
     }
