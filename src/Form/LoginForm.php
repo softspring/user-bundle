@@ -30,7 +30,7 @@ class LoginForm extends AbstractType implements LoginFormInterface
         $this->requestStack = $requestStack;
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return '';
     }

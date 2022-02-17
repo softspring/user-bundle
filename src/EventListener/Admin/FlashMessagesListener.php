@@ -24,7 +24,7 @@ class FlashMessagesListener implements EventSubscriberInterface
         $this->translator = $translator;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             SfsUserEvents::ADMIN_USERS_RESEND_CONFIRMATION_SUCCESS => 'onResendConfirmationSuccess',

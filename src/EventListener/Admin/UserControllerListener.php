@@ -30,7 +30,7 @@ class UserControllerListener implements EventSubscriberInterface
     /**
      * {@inheritDoc}
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             SfsUserEvents::ADMIN_USERS_DETAILS_VIEW => [

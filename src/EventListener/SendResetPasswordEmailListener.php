@@ -29,7 +29,7 @@ class SendResetPasswordEmailListener implements EventSubscriberInterface
         $this->tokenGenerator = $tokenGenerator;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             SfsUserEvents::RESET_REQUEST_FORM_VALID => [

@@ -31,7 +31,7 @@ class UserRegistrationListener implements EventSubscriberInterface
     /**
      * {@inheritDoc}
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             SfsUserEvents::REGISTER_SUCCESS => ['onRegisterSendConfirmationEmail', 100],

@@ -21,7 +21,7 @@ class InvitationControllerListener implements EventSubscriberInterface
         $this->tokenStorage = $tokenStorage;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             SfsUserEvents::ADMIN_INVITATIONS_CREATE_FORM_VALID => 'onInvitationValidSetInviter',

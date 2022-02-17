@@ -38,7 +38,7 @@ class AdministratorControllerListener implements EventSubscriberInterface
     /**
      * {@inheritDoc}
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             SfsUserEvents::ADMIN_ADMINISTRATORS_DETAILS_VIEW => [
