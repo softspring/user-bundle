@@ -35,9 +35,6 @@ class ImpersonateBarListener implements EventSubscriberInterface
         $this->impersonateBarConfig = $impersonateBarConfig;
     }
 
-    /**
-     * @return array
-     */
     public static function getSubscribedEvents(): array
     {
         return [

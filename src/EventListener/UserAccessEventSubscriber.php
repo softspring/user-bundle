@@ -23,9 +23,6 @@ class UserAccessEventSubscriber implements EventSubscriberInterface
         $this->userAccessManipulator = $userAccessManipulator;
     }
 
-    /**
-     * @return array
-     */
     public static function getSubscribedEvents(): array
     {
         return [

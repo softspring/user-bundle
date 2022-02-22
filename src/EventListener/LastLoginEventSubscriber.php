@@ -22,9 +22,6 @@ class LastLoginEventSubscriber implements EventSubscriberInterface
         $this->userManager = $userManager;
     }
 
-    /**
-     * @return array
-     */
     public static function getSubscribedEvents(): array
     {
         return [
