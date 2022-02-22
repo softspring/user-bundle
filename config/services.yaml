@@ -6,7 +6,7 @@ services:
         bind:
 #            $changeEmailConfig: []
 #            $changeUsernameConfig: []
-            $locales: '%sfs_core.locales%'
+            $locales: '%kernel.enabled_locales%'
             $firewallMap: '@security.firewall.map'
             $impersonateBarConfig: '%sfs_user.impersonate_bar%'
             $em: '@sfs_user.entity_manager'
