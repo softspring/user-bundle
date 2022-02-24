@@ -10,6 +10,7 @@ use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Model\UserPasswordInterface;
 use Softspring\UserBundle\Model\UserWithEmailInterface;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
+use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\User\LegacyPasswordAuthenticatedUserInterface;
 
 class UserManager implements UserManagerInterface
@@ -18,12 +19,15 @@ class UserManager implements UserManagerInterface
 
     protected EntityManagerInterface $em;
 
-    protected PasswordHasherFactoryInterface $encoderFactory;
+    /**
+     * @var PasswordHasherFactoryInterface|EncoderFactoryInterface
+     */
+    protected $encoderFactory;
 
     /**
-     * UserManager constructor.
+     * @param PasswordHasherFactoryInterface|EncoderFactoryInterface $encoderFactory
      */
-    public function __construct(EntityManagerInterface $em, PasswordHasherFactoryInterface $encoderFactory)
+    public function __construct(EntityManagerInterface $em, $encoderFactory)
     {
         $this->em = $em;
         $this->encoderFactory = $encoderFactory;
@@ -113,17 +117,32 @@ class UserManager implements UserManagerInterface
             return;
         }
 
-        try {
-            $hasher = $this->encoderFactory->getPasswordHasher($user);
-        } catch (RuntimeException $e) {
-            $hasher = $this->encoderFactory->getPasswordHasher(UserInterface::class);
-        }
+        if ($this->encoderFactory instanceof EncoderFactoryInterface) {
+            try {
+                $encoder = $this->encoderFactory->getEncoder($user);
+            } catch (RuntimeException $e) {
+                $encoder = $this->encoderFactory->getEncoder(UserInterface::class);
+            }
 
-        if ($user instanceof LegacyPasswordAuthenticatedUserInterface && $user instanceof UserPasswordInterface) {
-            $user->setSalt(rtrim(str_replace('+', '.', base64_encode(random_bytes(32))), '='));
-        }
+            if ($user instanceof LegacyPasswordAuthenticatedUserInterface && $user instanceof UserPasswordInterface) {
+                $user->setSalt(rtrim(str_replace('+', '.', base64_encode(random_bytes(32))), '='));
+            }
 
-        $user->setPassword($hasher->hash($plainPassword, $user->getSalt()));
-        $user->eraseCredentials();
+            $user->setPassword($encoder->encodePassword($plainPassword, $user->getSalt()));
+            $user->eraseCredentials();
+        } elseif ($this->encoderFactory instanceof PasswordHasherFactoryInterface) {
+            try {
+                $hasher = $this->encoderFactory->getPasswordHasher($user);
+            } catch (RuntimeException $e) {
+                $hasher = $this->encoderFactory->getPasswordHasher(UserInterface::class);
+            }
+
+            if ($user instanceof LegacyPasswordAuthenticatedUserInterface && $user instanceof UserPasswordInterface) {
+                $user->setSalt(rtrim(str_replace('+', '.', base64_encode(random_bytes(32))), '='));
+            }
+
+            $user->setPassword($hasher->hash($plainPassword, $user->getSalt()));
+            $user->eraseCredentials();
+        }
     }
 }
