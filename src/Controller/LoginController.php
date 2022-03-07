@@ -12,7 +12,9 @@ use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Security\Core\Exception\TooManyLoginAttemptsAuthenticationException;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class LoginController extends AbstractController
 {
@@ -37,7 +39,7 @@ class LoginController extends AbstractController
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    public function login(Request $request): Response
+    public function login(Request $request, TranslatorInterface $translator): Response
     {
         /** @var $session Session */
         $session = $request->getSession();
@@ -57,7 +59,14 @@ class LoginController extends AbstractController
         if ($request->attributes->has(Security::AUTHENTICATION_ERROR)) {
             $form->addError(new FormError($request->attributes->get(Security::AUTHENTICATION_ERROR)));
         } elseif (null !== $session && $session->has(Security::AUTHENTICATION_ERROR)) {
-            $form->addError(new FormError($session->get(Security::AUTHENTICATION_ERROR)->getMessage()));
+            $error = $session->get(Security::AUTHENTICATION_ERROR);
+
+            if ($error instanceof TooManyLoginAttemptsAuthenticationException) {
+                $form->addError(new FormError($translator->trans($error->getMessageKey(), $error->getMessageData(), 'security')));
+            } else {
+                $form->addError(new FormError($session->get(Security::AUTHENTICATION_ERROR)->getMessage()));
+            }
+
             $session->remove(Security::AUTHENTICATION_ERROR);
         }
 
