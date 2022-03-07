@@ -6,11 +6,11 @@ use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use RuntimeException;
 use Softspring\CrudlBundle\Manager\CrudlEntityManagerTrait;
+use Softspring\UserBundle\Model\ConfirmableInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Model\UserPasswordInterface;
 use Softspring\UserBundle\Model\UserWithEmailInterface;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\User\LegacyPasswordAuthenticatedUserInterface;
 
 class UserManager implements UserManagerInterface
@@ -19,15 +19,9 @@ class UserManager implements UserManagerInterface
 
     protected EntityManagerInterface $em;
 
-    /**
-     * @var PasswordHasherFactoryInterface|EncoderFactoryInterface
-     */
-    protected $encoderFactory;
+    protected PasswordHasherFactoryInterface $encoderFactory;
 
-    /**
-     * @param PasswordHasherFactoryInterface|EncoderFactoryInterface $encoderFactory
-     */
-    public function __construct(EntityManagerInterface $em, $encoderFactory)
+    public function __construct(EntityManagerInterface $em, PasswordHasherFactoryInterface $encoderFactory)
     {
         $this->em = $em;
         $this->encoderFactory = $encoderFactory;
@@ -38,53 +32,33 @@ class UserManager implements UserManagerInterface
         return UserInterface::class;
     }
 
-    /**
-     * @param UserInterface $user
-     *
-     * @throws Exception
-     */
-    public function saveEntity($user): void
+    public function saveEntity($entity): void
     {
-        if (!$this->getEntityClassReflection()->isInstance($user)) {
-            throw new \InvalidArgumentException(sprintf('$user must be an instance of %s', $this->getEntityClass()));
+        if (!$this->getEntityClassReflection()->isInstance($entity)) {
+            throw new \InvalidArgumentException(sprintf('$entity must be an instance of %s', $this->getEntityClass()));
         }
 
-        $this->hashPassword($user);
+        $this->hashPassword($entity);
 
-        $this->em->persist($user);
+        $this->em->persist($entity);
         $this->em->flush();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findUserBy(array $criteria): ?UserInterface
     {
-        /** @var UserInterface|null $user */
-        $user = $this->getRepository()->findOneBy($criteria);
-
-        return $user;
+        return $this->getRepository()->findOneBy($criteria);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findUserByUsername(string $username): ?UserInterface
     {
         return $this->findUserBy(['username' => $username]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findUserByEmail(string $email): ?UserInterface
     {
         return $this->findUserBy(['email' => $email]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findUserByUsernameOrEmail(string $usernameOrEmail): ?UserInterface
     {
         if ($this->getEntityClassReflection()->implementsInterface(UserWithEmailInterface::class) && preg_match('/^.+@\S+\.\S+$/', $usernameOrEmail)) {
@@ -94,12 +68,7 @@ class UserManager implements UserManagerInterface
         return $this->findUserByUsername($usernameOrEmail);
     }
 
-    /**
-     * @param string $token
-     *
-     * @return UserInterface|null
-     */
-    public function findUserByConfirmationToken($token)
+    public function findUserByConfirmationToken(string $token): ?ConfirmableInterface
     {
         return $this->findUserBy(['confirmationToken' => $token]);
     }
@@ -117,32 +86,17 @@ class UserManager implements UserManagerInterface
             return;
         }
 
-        if ($this->encoderFactory instanceof EncoderFactoryInterface) {
-            try {
-                $encoder = $this->encoderFactory->getEncoder($user);
-            } catch (RuntimeException $e) {
-                $encoder = $this->encoderFactory->getEncoder(UserInterface::class);
-            }
-
-            if ($user instanceof LegacyPasswordAuthenticatedUserInterface && $user instanceof UserPasswordInterface) {
-                $user->setSalt(rtrim(str_replace('+', '.', base64_encode(random_bytes(32))), '='));
-            }
-
-            $user->setPassword($encoder->encodePassword($plainPassword, $user->getSalt()));
-            $user->eraseCredentials();
-        } elseif ($this->encoderFactory instanceof PasswordHasherFactoryInterface) {
-            try {
-                $hasher = $this->encoderFactory->getPasswordHasher($user);
-            } catch (RuntimeException $e) {
-                $hasher = $this->encoderFactory->getPasswordHasher(UserInterface::class);
-            }
-
-            if ($user instanceof LegacyPasswordAuthenticatedUserInterface && $user instanceof UserPasswordInterface) {
-                $user->setSalt(rtrim(str_replace('+', '.', base64_encode(random_bytes(32))), '='));
-            }
-
-            $user->setPassword($hasher->hash($plainPassword, $user->getSalt()));
-            $user->eraseCredentials();
+        try {
+            $hasher = $this->encoderFactory->getPasswordHasher($user);
+        } catch (RuntimeException $e) {
+            $hasher = $this->encoderFactory->getPasswordHasher(UserInterface::class);
         }
+
+        if ($user instanceof LegacyPasswordAuthenticatedUserInterface && $user instanceof UserPasswordInterface) {
+            $user->setSalt(rtrim(str_replace('+', '.', base64_encode(random_bytes(32))), '='));
+        }
+
+        $user->setPassword($hasher->hash($plainPassword, $user->getSalt()));
+        $user->eraseCredentials();
     }
 }

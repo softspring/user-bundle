@@ -8,6 +8,9 @@ use Softspring\UserBundle\Model\UserInterface;
 
 interface UserManagerInterface extends CrudlEntityManagerInterface
 {
+    /**
+     * @return UserInterface|ConfirmableInterface|null
+     */
     public function findUserBy(array $criteria): ?UserInterface;
 
     public function findUserByUsername(string $username): ?UserInterface;
@@ -16,12 +19,7 @@ interface UserManagerInterface extends CrudlEntityManagerInterface
 
     public function findUserByUsernameOrEmail(string $usernameOrEmail): ?UserInterface;
 
-    /**
-     * @param string $token
-     *
-     * @return UserInterface|ConfirmableInterface|null
-     */
-    public function findUserByConfirmationToken($token);
+    public function findUserByConfirmationToken(string $token): ?ConfirmableInterface;
 
     /**
      * @return UserInterface
@@ -30,6 +28,8 @@ interface UserManagerInterface extends CrudlEntityManagerInterface
 
     /**
      * @param UserInterface $entity
+     *
+     * @throws \Exception
      */
     public function saveEntity($entity): void;
 
