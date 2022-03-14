@@ -5,9 +5,7 @@ namespace Softspring\UserBundle\EventListener;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -42,11 +40,7 @@ class ImpersonateBarListener implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param FilterResponseEvent|ResponseEvent $event
-     *                                                 Note: in SF4 FilterResponseEvent, in SF5 ResponseEvent
-     */
-    public function onKernelResponse($event): void
+    public function onKernelResponse(ResponseEvent $event): void
     {
         $response = $event->getResponse();
         $request = $event->getRequest();
@@ -63,11 +57,7 @@ class ImpersonateBarListener implements EventSubscriberInterface
     protected function isImpersonated(): bool
     {
         try {
-            if (Kernel::VERSION_ID > 50100) {
-                return $this->authorizationChecker->isGranted('IS_IMPERSONATOR');
-            } else {
-                return $this->authorizationChecker->isGranted('ROLE_PREVIOUS_ADMIN');
-            }
+            return $this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') && $this->authorizationChecker->isGranted('IS_IMPERSONATOR');
         } catch (AuthenticationCredentialsNotFoundException $e) {
             return false;
         }

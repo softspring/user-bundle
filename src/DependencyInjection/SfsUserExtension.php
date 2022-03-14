@@ -43,6 +43,10 @@ class SfsUserExtension extends Extension implements PrependExtensionInterface
             $loader->load('services/controller/admin_history.yaml');
         }
 
+        if ($config['impersonate_bar']['enabled']) {
+            $loader->load('services/impersonate.yaml');
+        }
+
         $loader->load('services/controller/admin_administrators.yaml');
         $loader->load('services/controller/admin_administrators_invite.yaml');
         $loader->load('services/controller/admin_users.yaml');

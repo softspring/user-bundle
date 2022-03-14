@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            $impersonateBarConfig: '%sfs_user.impersonate_bar%'
+
+    Softspring\UserBundle\EventListener\ImpersonateBarListener: ~

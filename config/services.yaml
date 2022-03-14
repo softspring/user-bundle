@@ -8,7 +8,6 @@ services:
 #            $changeUsernameConfig: []
             $locales: '%kernel.enabled_locales%'
             $firewallMap: '@security.firewall.map'
-            $impersonateBarConfig: '%sfs_user.impersonate_bar%'
             $em: '@sfs_user.entity_manager'
             $resetTokenTTL: '%sfs_user.reset_password.token_ttl%'
             $oauthServices: '%sfs_user.oauth.services%'
@@ -24,7 +23,6 @@ services:
 
     Softspring\UserBundle\EventListener\Admin\FlashMessagesListener: ~
     Softspring\UserBundle\EventListener\AutoAuthenticateEventSubscriber: ~
-    Softspring\UserBundle\EventListener\ImpersonateBarListener: ~
     Softspring\UserBundle\EventListener\EmailInvitationListener: ~
     Softspring\UserBundle\EventListener\LastLoginEventSubscriber: ~
     Softspring\UserBundle\EventListener\SendResetPasswordEmailListener: ~
