@@ -8,10 +8,10 @@
     "require": {
         "php": ">=7.4",
         "symfony/translation": "^4.4 || ^5.3 || ^6.0",
-        "softspring/core-bundle": "^4.0",
-        "softspring/crudl-bundle": "^4.0",
-        "softspring/mime-translatable": "^4.0",
-        "softspring/twig-extra-bundle": "^4.0"
+        "softspring/core-bundle": "^5.0",
+        "softspring/crudl-bundle": "^5.0",
+        "softspring/mime-translatable": "^5.0",
+        "softspring/twig-extra-bundle": "^5.0"
     },
     "require-dev": {
         "symfony/config": "^4.4 || ^5.3 || ^6.0",
