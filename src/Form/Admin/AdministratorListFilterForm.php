@@ -17,17 +17,11 @@ class AdministratorListFilterForm extends EntityListFilterForm implements Admini
 {
     protected UserManagerInterface $userManager;
 
-    /**
-     * UserListFilterForm constructor.
-     */
     public function __construct(UserManagerInterface $userManager)
     {
         $this->userManager = $userManager;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
@@ -37,9 +31,6 @@ class AdministratorListFilterForm extends EntityListFilterForm implements Admini
         ]);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
@@ -69,11 +60,18 @@ class AdministratorListFilterForm extends EntityListFilterForm implements Admini
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    public static function orderValidFields(): array
+    {
+        return ['name', 'surname', 'email', 'lastLogin'];
+    }
+
+    public static function orderDefaultField(): string
+    {
+        return 'surname';
+    }
+
     public function getRpp(Request $request): int
     {
-        return 20;
+        return 10;
     }
 }
