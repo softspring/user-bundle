@@ -1,24 +1,30 @@
 login:
+    title: "Inicia sesión"
+    signup.question: "¿No tienes una cuenta?"
     form:
-        _username.label: "Usuario"
+        username.label: "Nombre de usuario"
+        email.label: "Email"
         _password.label: "Contraseña"
         _remember_me.label: "Recordarme en este equipo"
     actions:
         login.button: "Entrar"
         facebook_oauth.button: "Entrar con Facebook"
-        resetting.link: "¿olvidaste tu contraseña?"
-        signup.button: "Registrarme"
+        resetting.link: "¿No recuerdas tu contraseña?"
+        signup.button: "Crea tu cuenta"
 
 register:
+    title: "Crea tu cuenta"
+    signin.question: "¿Tienes una cuenta?"
     form:
         name.label: "Nombre"
         surname.label: "Apellidos"
-        username.label: "Usuario"
+        username.label: "Nombre de usuario"
         email.label: "Email"
         plainPassword.label: "Contraseña"
         acceptConditions.label: "Acepto los términos y condiciones"
     actions:
-        register.button: "Registrar"
+        register.button: "Crear cuenta"
+        signin.button: "Inicia sesión"
     confirm:
         email:
             subject: "Bienvenid@ %name%!"
@@ -30,17 +36,23 @@ register:
 
 reset_password:
     request:
+        title: "Restablecer la contraseña"
+        text: "Introduce la dirección de correo electrónico asociada a tu cuenta y te enviaremos un enlace para restablecer tu contraseña."
         form:
             email.label: "Email"
         actions:
             reset.button: "Enviar"
+            signin.link: "Volver a inicio de sesión"
     requested:
+        title: "Comprueba tu bandeja de entrada"
         message: |
             Si la dirección %requestedEmail% corresponde a un usuario registrado, te enviaremos un enlace que debes seguir para finalizar con el reestablecimiento de tu contraseña.
 
             El enlace solicitado es válido durante las próximas %tokenTTLhours% horas.
 
             Si no recibes el correo, por favor, revisa tu carpeta de spam o vuelve a solicitar el reestablecimiento.
+        actions:
+            signin.link: "Volver a inicio de sesión"
     email:
         subject: "Cambio de contraseña"
         html: |
@@ -48,6 +60,8 @@ reset_password:
             <p><a href="%reset_url%">Pincha aquí</a> para cambiar tu contraseña.</p>
             <p>Saludos.</p>
     reset:
+        title: "Crea tu nueva contraseña"
+        text: "Introduce tu nueva contraseña"
         form:
             newPassword:
                 password.label: "Contraseña"
@@ -79,6 +93,7 @@ invite:
                 <p>Saludos.</p>
 
 preferences:
+    title: "Preferencias"
     actions:
         submit:
             button: "Guardar cambios"
@@ -88,13 +103,14 @@ preferences:
         locale.label: "Idioma"
 
 change_password:
+    title: "Cambiar contraseña"
     form:
         currentPassword.label: "Contraseña actual"
         newPassword:
             password.label: "Nueva contraseña"
             confirmation.label: "Repite la nueva contraseña"
     actions:
-        submit.button: "Cambiar contraseña"
+        submit.button: "Cambiar"
 
 admin_users:
     list:
@@ -143,6 +159,7 @@ admin_administrators:
             surname.header: "Apellidos"
             username.header: "Username"
             email.header: "Email"
+            confirmed.header: "Confirmado"
             lastLogin.header: "Última entrada"
             role.header: "Rol"
         filter_form:
@@ -150,6 +167,9 @@ admin_administrators:
             surname.label: "Apellidos"
             email.label: "Email"
             search.label: "Buscar"
+        actions:
+            details:
+                link: "detalles"
     update:
         actions:
             update.button: "Actualizar"

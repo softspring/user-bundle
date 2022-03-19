@@ -1,15 +1,20 @@
 login:
+    title: "Please sign in"
+    signup.question: "Have not and account?"
     form:
-        _username.label: "Username"
+        username.label: "Username"
+        email.label: "Email"
         _password.label: "Password"
         _remember_me.label: "Remember me"
     actions:
         login.button: "Login"
         facebook_oauth.button: "Facebook login"
-        resetting.link: "Forgot password"
-        signup.button: "Sign up"
+        resetting.link: "Forgot your password?"
+        signup.button: "Create your account"
 
 register:
+    title: "Create your account"
+    signin.question: "Already have an account?"
     form:
         name.label: "Name"
         surname.label: "Surname"
@@ -18,7 +23,8 @@ register:
         plainPassword.label: "Password"
         acceptConditions.label: "Accept terms and conditions"
     actions:
-        register.button: "Register"
+        register.button: "Create account"
+        signin.button: "Sign in"
     confirm:
         email:
             subject: "Welcome %name%!"
@@ -30,17 +36,23 @@ register:
 
 reset_password:
     request:
+        title: "Reset your password"
+        text: "Enter your account email address and we will send you a link to restore your password."
         form:
             email.label: "Email"
         actions:
             reset.button: "Reset"
+            signin.link: "Go to sign in"
     requested:
+        title: "Check your inbox"
         message: |
             If %requestedEmail% email matches with a registered user, we'll send you an email containing a link that you must click to perform your password resetting.
 
             This link is only valid on the next %tokenTTLhours% hours.
 
             If you don't receive the email, please, check your spam folder or try to request the resseting again.
+        actions:
+            signin.link: "Go to sign in"
     email:
         subject: "Password resetting"
         html: |
@@ -48,6 +60,8 @@ reset_password:
             <p><a href="%reset_url%">Click here</a> to reset your password.</p>
             <p>Regards.</p>
     reset:
+        title: "Create new password"
+        text: "Enter your new password"
         form:
             newPassword:
                 password.label: "Password"
@@ -79,6 +93,7 @@ invite:
                 <p>Regards.</p>
 
 preferences:
+    title: "Preferences"
     actions:
         submit:
             button: "Save changes"
@@ -88,13 +103,14 @@ preferences:
         locale.label: "Preferred language"
 
 change_password:
+    title: "Change password"
     form:
         currentPassword.label: "Current password"
         newPassword:
             password.label: "New password"
             confirmation.label: "Repeat new password"
     actions:
-        submit.button: "Change password"
+        submit.button: "Change"
 
 admin_users:
     list:
@@ -143,6 +159,7 @@ admin_administrators:
             surname.header: "Surname"
             username.header: "Username"
             email.header: "Email"
+            confirmed.header: "Confirmed"
             lastLogin.header: "Last login"
             role.header: "Role"
         filter_form:
@@ -150,6 +167,9 @@ admin_administrators:
             surname.label: "Surname"
             email.label: "Email"
             search.label: "Search"
+        actions:
+            details:
+                link: "details"
     update:
         actions:
             update.button: "Update"
