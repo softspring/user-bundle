@@ -27,9 +27,7 @@ class UserControllerListener implements EventSubscriberInterface
         $this->accessManager = $accessManager;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    
     public static function getSubscribedEvents(): array
     {
         return [

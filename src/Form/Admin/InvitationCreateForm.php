@@ -33,9 +33,7 @@ class InvitationCreateForm extends AbstractType implements InvitationCreateFormI
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $reflection = $this->invitationManager->getEntityClassReflection();

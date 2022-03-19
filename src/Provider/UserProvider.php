@@ -22,9 +22,6 @@ class UserProvider implements UserProviderInterface
         $this->userManager = $userManager;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function loadUserByUsername($username)
     {
         $user = $this->getUser($username);
@@ -44,9 +41,6 @@ class UserProvider implements UserProviderInterface
         return $this->loadUserByUsername($identifier);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function refreshUser(SymfonyUserInterface $user)
     {
         if (!$user instanceof SfsUserInterface) {
@@ -64,17 +58,11 @@ class UserProvider implements UserProviderInterface
         return $reloadedUser;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supportsClass($class)
     {
         return $this->userManager->getEntityClass() === $class || is_subclass_of($class, $this->userManager->getEntityClass());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getUser(string $usernameOrEmail)
     {
         return $this->userManager->findUserByUsernameOrEmail($usernameOrEmail);

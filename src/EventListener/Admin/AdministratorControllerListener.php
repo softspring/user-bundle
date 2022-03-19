@@ -35,9 +35,7 @@ class AdministratorControllerListener implements EventSubscriberInterface
         $this->tokenStorage = $tokenStorage;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    
     public static function getSubscribedEvents(): array
     {
         return [

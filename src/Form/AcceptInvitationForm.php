@@ -26,9 +26,7 @@ class AcceptInvitationForm extends AbstractType implements AcceptInvitationFormI
         $this->userManager = $userManager;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
@@ -40,9 +38,7 @@ class AcceptInvitationForm extends AbstractType implements AcceptInvitationFormI
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $reflection = $this->userManager->getEntityClassReflection();

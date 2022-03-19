@@ -28,9 +28,7 @@ class UserRegistrationListener implements EventSubscriberInterface
         $this->tokenGenerator = $tokenGenerator;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    
     public static function getSubscribedEvents(): array
     {
         return [

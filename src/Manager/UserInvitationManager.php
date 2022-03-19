@@ -58,9 +58,7 @@ class UserInvitationManager implements UserInvitationManagerInterface
         return $this->createEntity();
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    
     public function createUser(UserInvitationInterface $invitation): UserInterface
     {
         /** @var UserInterface $user */
@@ -101,9 +99,6 @@ class UserInvitationManager implements UserInvitationManagerInterface
         $this->saveEntity($userInvitation);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findInvitationBy(array $criteria): ?UserInvitationInterface
     {
         /** @var UserInvitationInterface|null $invitation */
@@ -112,9 +107,6 @@ class UserInvitationManager implements UserInvitationManagerInterface
         return $invitation;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findInvitationByToken(string $token): ?UserInvitationInterface
     {
         return $this->findInvitationBy(['invitationToken' => $token]);

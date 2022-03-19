@@ -36,9 +36,7 @@ class AdministratorInviteForm extends AbstractType implements AdministratorInvit
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $reflection = $this->invitationManager->getEntityClassReflection();

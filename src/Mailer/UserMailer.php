@@ -36,9 +36,6 @@ class UserMailer implements UserMailerInterface
         $this->translator = $translator;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function sendRegisterConfirmationEmail(UserInterface $user, ?string $locale = null): void
     {
         if (!$user instanceof ConfirmableInterface) {
@@ -65,9 +62,6 @@ class UserMailer implements UserMailerInterface
         $this->mailer->send($email);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function sendInvitationEmail(UserInvitationInterface $invitation, ?string $locale = null): void
     {
         $toName = $invitation instanceof NameSurnameInterface ? "{$invitation->getName()} {$invitation->getSurname()}" : '';
@@ -80,9 +74,6 @@ class UserMailer implements UserMailerInterface
         $this->mailer->send($email);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function sendResettingEmail(UserInterface $user, ?string $locale = null): void
     {
         if (!$user instanceof PasswordRequestInterface) {
