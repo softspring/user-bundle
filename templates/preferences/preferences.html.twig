@@ -2,8 +2,16 @@
 {% extends '@SfsUser/preferences_layout.html.twig' %}
 
 {% block content %}
-    {{ form_start(preferences_form) }}
-    {{ form_rest(preferences_form) }}
-    <input type="submit" value="{{ 'preferences.actions.submit.button'|trans }}" class="btn btn-primary btn-block" />
-    {{ form_end(preferences_form) }}
+    <div class="bg-white p-5 w-50">
+        <h1 class="h4 mb-3 fw-normal">{{ 'preferences.title'|trans }}</h1>
+
+        <div class="text-center">
+            <img alt="{{ app.user.username }}" src="https://ui-avatars.com/api/?name={{ app.user.username|url_encode }}&size=128&background=random" alt="" width="128" height="128" class="rounded-circle">
+        </div>
+
+        {{ form_start(preferences_form) }}
+        {{ form_rest(preferences_form) }}
+        <button type="submit" class="btn btn-primary btn-block">{{ 'preferences.actions.submit.button'|trans }}</button>
+        {{ form_end(preferences_form) }}
+    </div>
 {% endblock content %}

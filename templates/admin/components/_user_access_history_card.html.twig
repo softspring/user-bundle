@@ -1,38 +1,36 @@
 {% trans_default_domain 'sfs_user' %}
 
-<div class="card">
-    <div class="card-header">
-        <h4>Latest access</h4>
-    </div>
-    <div class="card-body">
-        {% if not user_access_history|length %}
-            <p>User has not access yet</p>
-        {% else %}
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Login at</th>
-                    <th>IP</th>
+<div class="bg-white p-4">
+    <h4>Latest accesses</h4>
+    {% if not user_access_history|length %}
+        <p>User has not access yet</p>
+    {% else %}
+        <table class="table table-borderless">
+            <thead>
+            <tr>
+                <th>Login at</th>
+                <th>IP</th>
+                <th>OS</th>
 {#                    <th>User agent</th>#}
+                {% if sfs_user_access_is('location') %}
+                    <th scope="col">{{ 'admin_access_history.list.fields.location.header'|trans }}</th>
+                {% endif %}
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for access in user_access_history %}
+                <tr>
+                    <td><span title="{{ access.loginAt|date('H:i:s d-m-Y', 'UTC') }} UTC">{{ access.loginAt|date('H:i:s d-m-Y', 'Europe/Madrid') }}</span></td>
+                    <td>{{ access.ip }}</td>
+                    <td><i class="bi bi-{{ access.operatingSystemVendor }}"></i></td>
+{#                        <td>{{ access.userAgent }}</td>#}
                     {% if sfs_user_access_is('location') %}
-                        <th scope="col">{{ 'admin_access_history.list.fields.location.header'|trans }}</th>
+                        <td>{{ access.city }} {% if access.country %}({{ access.country }}){% endif %}</td>
                     {% endif %}
                 </tr>
-                </thead>
-
-                <tbody>
-                {% for access in user_access_history %}
-                    <tr>
-                        <td><span title="{{ access.loginAt|date('H:i:s d-m-Y', 'UTC') }} UTC">{{ access.loginAt|date('H:i:s d-m-Y', 'Europe/Madrid') }}</span></td>
-                        <td>{{ access.ip }}</td>
-{#                        <td>{{ access.userAgent }}</td>#}
-                        {% if sfs_user_access_is('location') %}
-                            <td>{{ access.city }} {% if access.country %}({{ access.country }}){% endif %}</td>
-                        {% endif %}
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        {% endif %}
-    </div>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
 </div>

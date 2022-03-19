@@ -25,3 +25,7 @@ sfs_user_admin_users_resend:
 sfs_user_admin_users_count_widget:
     controller: Softspring\UserBundle\Controller\Admin\UsersController::usersCountWidget
     path: /_widget/users-count
+
+sfs_user_admin_users_pending_confirm_count_widget:
+    controller: Softspring\UserBundle\Controller\Admin\UsersController::usersPendingConfirmCountWidget
+    path: /_widget/pending-confirm-count

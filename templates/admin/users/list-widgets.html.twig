@@ -1,0 +1,45 @@
+{% trans_default_domain 'sfs_user' %}
+
+<div class="container mb-5">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="font-weight-bold text-dark">total users</h6>
+                    <p class="h1" id="totalUsersWidget">{#{{ render(url('sfs_user_admin_users_count_widget')) }}#}</p>
+                    <script type="text/javascript">
+                        var totalUsersWidgetXhr = new XMLHttpRequest();
+                        totalUsersWidgetXhr.onreadystatechange = function() {
+                            if (totalUsersWidgetXhr.readyState === 4){
+                                document.getElementById('totalUsersWidget').innerHTML = totalUsersWidgetXhr.responseText;
+                            }
+                        };
+                        totalUsersWidgetXhr.open('GET', '{{ url('sfs_user_admin_users_count_widget') }}');
+                        totalUsersWidgetXhr.send()
+                    </script>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="font-weight-bold text-dark">pending confirm</h6>
+                    <p class="h1" id="pendingConfirmUsersWidget">{#{{ render(url('sfs_user_admin_users_pending_confirm_count_widget')) }}#}</p>
+                    <script type="text/javascript">
+                        var pendingConfirmUsersWidgetXhr = new XMLHttpRequest();
+                        pendingConfirmUsersWidgetXhr.onreadystatechange = function() {
+                            if (pendingConfirmUsersWidgetXhr.readyState === 4){
+                                document.getElementById('pendingConfirmUsersWidget').innerHTML = pendingConfirmUsersWidgetXhr.responseText;
+                            }
+                        };
+                        pendingConfirmUsersWidgetXhr.open('GET', '{{ url('sfs_user_admin_users_pending_confirm_count_widget') }}');
+                        pendingConfirmUsersWidgetXhr.send()
+                    </script>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+        <div class="col"></div>
+    </div>
+</div>

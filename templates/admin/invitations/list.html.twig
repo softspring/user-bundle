@@ -13,7 +13,7 @@
         <a href="{{ url('sfs_user_admin_invitations_invite') }}" class="btn btn-primary">{{ 'admin_invitations.list.actions.invite.link'|trans }}</a>
     </div>
 
-    {% embed '@SfsAdmin/components/table.html.twig' with {'collection':entities, 'pagination_route': false} %}
+    {% embed '@SfsAdmin/components/table.html.twig' with {'collection':entities, 'pagination_route': 'sfs_user_admin_invitations_list'} %}
         {% trans_default_domain 'sfs_user' %}
         {% block ths %}
             {% if sfs_invitation_is('nameSurname') %}

@@ -2,5 +2,12 @@
 {% extends '@SfsUser/layout_fullscreen.html.twig' %}
 
 {% block content %}
-    <p>{{ 'reset_password.requested.message'|trans({'%tokenTTLhours%': (resetTokenTTL/3600)|round, '%requestedEmail%':requestedEmail})|nl2br }}</p>
+    <div class="bg-white p-5 w-25">
+        <h1 class="h4 mb-3 fw-normal">{{ 'reset_password.requested.title'|trans }}</h1>
+        <p>{{ 'reset_password.requested.message'|trans({'%tokenTTLhours%': (resetTokenTTL/3600)|round, '%requestedEmail%':requestedEmail})|nl2br }}</p>
+
+        <div class="d-grid gap-2 mt-3">
+            <a href="{{ url('sfs_user_login') }}" class="text-center mt-3">{{ 'reset_password.request.actions.signin.link'|trans }}</a>
+        </div>
+    </div>
 {% endblock content %}

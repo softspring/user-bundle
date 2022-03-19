@@ -67,6 +67,13 @@ class UsersController extends AbstractController
         ]);
     }
 
+    public function usersPendingConfirmCountWidget(): Response
+    {
+        return $this->render('@SfsUser/admin/users/widget-pending-confirm-count.html.twig', [
+            'count' => $this->userManager->getRepository()->count(['confirmedAt' => null]),
+        ]);
+    }
+
     public function resendEmail(string $user, Request $request): Response
     {
         /** @var ConfirmableInterface|UserInterface $user */

@@ -1,29 +1,34 @@
 {% trans_default_domain 'sfs_user' %}
 {% for user in entities %}
     <tr>
-        {% if sfs_user_is('nameSurname') %}
-            <td>{{ user.name }}</td>
-            <td>{{ user.surname }}</td>
+        {% if sfs_user_is('avatar') %}
+            <td class="ps-3 pe-3 align-middle"><img alt="{{ user.username }}" src="{{ user.avatarUrl }}" width="28" height="28" class="rounded-circle"></td>
         {% endif %}
-        <td>{{ user.username }}</td>
-        {% if sfs_user_is('email') %}
-            <td>{{ user.email }}</td>
+        {% if sfs_user_is('nameSurname') %}
+            <td class="p-3">{{ user.name }}</td>
+            <td class="p-3">{{ user.surname }}</td>
+        {% endif %}
+        {% if sfs_user_is('identifierUsername') %}
+            <td class="p-3">{{ user.username }}</td>
+        {% endif %}
+        {% if sfs_user_is('identifierEmail') or sfs_user_is('email') %}
+            <td class="p-3">{{ user.email }}</td>
         {% endif %}
         {% if sfs_user_is('confirmable') %}
-            <td class="text-center">
+            <td class="text-center align-middle">
                 {% if user.confirmed %}
-                <span class="mdi mdi-18px mdi-check align-middle text-success"></span>
+                <span class="bi bi-check  align-middle text-success"></span>
                 {% else %}
-                <span class="mdi mdi-18px mdi-close align-middle text-danger"></span>
+                <span class="bi bi-x align-middle text-danger"></span>
                 {% endif %}
             </td>
         {% endif %}
         {% if sfs_user_is('lastLogin') %}
-        <td>
+        <td class="p-3">
             {{ user.lastLogin ? user.lastLogin|date_span('H:i:s d-m-Y') : 'not yet' }}
         </td>
         {% endif %}
-        <td>
+        <td class="p-3">
             {% if is_granted('ROLE_ADMIN_USERS_DETAILS', user) %}
                 <a href="{{ url('sfs_user_admin_users_details', {'user': user}) }}" class="text-nowrap">{{ 'admin_users.list.actions.details.link'|trans }} <span class="mdi mdi-18px mdi-eye-outline align-middle"></span></a>
             {% endif %}

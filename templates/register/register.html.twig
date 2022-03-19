@@ -2,9 +2,28 @@
 {% extends '@SfsUser/layout_fullscreen.html.twig' %}
 
 {% block content %}
-    {{ form_start(register_form) }}
-        {{ form_rest(register_form) }}
-        <input type="submit" value="{{ 'register.actions.register.button'|trans }}" class="btn btn-primary btn-block" />
-        <a href="{{ url('sfs_user_login', register_params) }}" class="mt-2 btn btn-secondary btn-block">Sign in</a>
-    {{ form_end(register_form) }}
+    <div class="bg-white p-5 w-25">
+        {{ form_start(register_form) }}
+            <h1 class="h4 mb-3 fw-normal">{{ 'register.title'|trans }}</h1>
+
+            {% if register_form.name is defined %}{{ form_row(register_form.name) }}{% endif %}
+            {% if register_form.surname is defined %}{{ form_row(register_form.surname) }}{% endif %}
+            {% if register_form.username is defined %}{{ form_row(register_form.username) }}{% endif %}
+            {% if register_form.email is defined %}{{ form_row(register_form.email) }}{% endif %}
+            {% if register_form.plainPassword is defined %}{{ form_row(register_form.plainPassword) }}{% endif %}
+
+            {{ form_row(register_form.acceptConditions, {'row_class':'form-floating mt-3'}) }}
+
+            {{ form_rest(register_form) }}
+
+            <div class="d-grid gap-2 mt-3">
+                <button type="submit" class="btn btn-primary btn-lg">{{ 'register.actions.register.button'|trans }}</button>
+            </div>
+
+            <p class="text-center mt-3">
+                {{ 'register.signin.question'|trans }}
+                <a href="{{ url('sfs_user_login', register_params) }}">{{ 'register.actions.signin.button'|trans }}</a>
+            </p>
+        {{ form_end(register_form) }}
+    </div>
 {% endblock content %}

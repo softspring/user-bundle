@@ -1,7 +1,7 @@
 {% trans_default_domain 'sfs_user' %}
 {% extends '@SfsUser/admin_layout.html.twig' %}
 
-{% form_theme filterForm 'bootstrap_4_horizontal_layout.html.twig' %}
+{% form_theme filterForm 'bootstrap_5_horizontal_layout.html.twig' %}
 
 {% block breadcrums_content %}
     {{ parent() }}
@@ -13,35 +13,65 @@
         <h1 class="h3">Users</h1>
     </div>
 
-    {% if entities|length %}
-    {{ form_start(filterForm) }}
-    <div class="row">
-        {% if filterForm.name is defined %}<div class="col">{{ form_row(filterForm.name) }}</div>{% endif %}
-        {% if filterForm.surname is defined %}<div class="col">{{ form_row(filterForm.surname) }}</div>{% endif %}
-        {% if filterForm.email is defined %}<div class="col">{{ form_row(filterForm.email) }}</div>{% endif %}
-        {% if filterForm.search is defined %}<div class="col">{{ form_row(filterForm.search) }}</div>{% endif %}
-    </div>
-    {{ form_widget(filterForm) }}
-    {{ form_rest(filterForm) }}
-    {{ form_end(filterForm) }}
-    {% endif %}
+    {% include '@SfsUser/admin/users/list-widgets.html.twig' %}
+
+    <div class="container bg-white p-4">
+        {% if entities|length %}
+            <div class="mb-4">
+                {{ form_start(filterForm) }}
+                <div class="row">
+                    {% if filterForm.name is defined %}<div class="col">{{ form_row(filterForm.name, {'row_class':'form-floating'}) }}</div>{% endif %}
+                    {% if filterForm.surname is defined %}<div class="col">{{ form_row(filterForm.surname, {'row_class':'form-floating'}) }}</div>{% endif %}
+                    {% if filterForm.email is defined %}<div class="col">{{ form_row(filterForm.email, {'row_class':'form-floating'}) }}</div>{% endif %}
+                    {% if filterForm.search is defined %}<div class="col">{{ form_row(filterForm.search, {'row_class': 'form-floating'}) }}</div>{% endif %}
+                </div>
+                {{ form_widget(filterForm) }}
+                {{ form_rest(filterForm) }}
+                {{ form_end(filterForm) }}
+            </div>
+        {% endif %}
 
     {% embed '@SfsAdmin/components/table.html.twig' with {'collection':entities, 'pagination_route': 'sfs_user_admin_users_list'} %}
         {% trans_default_domain 'sfs_user' %}
         {% block ths %}
-            {% if sfs_user_is('nameSurname') %}
-                <th scope="col">{{ 'admin_users.list.fields.name.header'|trans }}</th>
-                <th scope="col">{{ 'admin_users.list.fields.surname.header'|trans }}</th>
+            {% if sfs_user_is('avatar') %}
+                <th scope="col" class="p-3" style="width:28px">&nbsp;</th>
             {% endif %}
-            <th scope="col">{{ 'admin_users.list.fields.username.header'|trans }}</th>
-            {% if sfs_user_is('email') %}
-                <th scope="col">{{ 'admin_users.list.fields.email.header'|trans }}</th>
+            {% if sfs_user_is('nameSurname') %}
+                <th scope="col" class="p-3">
+                    <a href="{{ sort_toggler_url('name') }}" class="text-dark">
+                        {{ 'admin_users.list.fields.name.header'|trans }}
+                        {% if is_sorted_by('name', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif is_sorted_by('name', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
+                    </a>
+                </th>
+                <th scope="col" class="p-3">
+                    <a href="{{ sort_toggler_url('surname') }}" class="text-dark">
+                        {{ 'admin_users.list.fields.surname.header'|trans }}
+                        {% if is_sorted_by('surname', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif is_sorted_by('surname', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
+                    </a>
+                </th>
+            {% endif %}
+            {% if sfs_user_is('identifierUsername') %}
+                <th scope="col" class="p-3">{{ 'admin_users.list.fields.username.header'|trans }}</th>
+            {% endif %}
+            {% if sfs_user_is('identifierEmail') or sfs_user_is('email') %}
+                <th scope="col" class="p-3">
+                    <a href="{{ sort_toggler_url('email') }}" class="text-dark">
+                        {{ 'admin_users.list.fields.email.header'|trans }}
+                        {% if is_sorted_by('email', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif is_sorted_by('email', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
+                    </a>
+                </th>
             {% endif %}
             {% if sfs_user_is('confirmable') %}
-                <th scope="col" class="text-center">{{ 'admin_users.list.fields.confirmed.header'|trans }}</th>
+                <th scope="col" class="p-3 text-center">{{ 'admin_users.list.fields.confirmed.header'|trans }}</th>
             {% endif %}
             {% if sfs_user_is('lastLogin') %}
-            <th scope="col">{{ 'admin_users.list.fields.lastLogin.header'|trans }}</th>
+                <th scope="col" class="p-3">
+                    <a href="{{ sort_toggler_url('lastLogin') }}" class="text-dark">
+                        {{ 'admin_users.list.fields.lastLogin.header'|trans }}
+                        {% if is_sorted_by('lastLogin', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif is_sorted_by('lastLogin', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
+                    </a>
+                </th>
             {% endif %}
             <th>&nbsp;</th>
         {% endblock ths %}
@@ -51,4 +81,5 @@
         {% endblock tbody %}
 
     {% endembed %}
+    </div>
 {% endblock content %}

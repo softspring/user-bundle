@@ -2,8 +2,14 @@
 {% extends '@SfsUser/layout_fullscreen.html.twig' %}
 
 {% block content %}
+    <div class="bg-white p-5 w-25">
     {{ form_start(reset_form) }}
+        <h1 class="h4 mb-3 fw-normal">{{ 'reset_password.reset.title'|trans }}</h1>
+        <p>{{ 'reset_password.reset.text'|trans }}</p>
         {{ form_rest(reset_form) }}
-        <input type="submit" value="{{ 'reset_password.reset.actions.reset.button'|trans }}" class="btn btn-primary btn-block" />
+
+        <div class="d-grid gap-2 mt-3">
+            <button type="submit" class="btn btn-primary btn-lg">{{ 'reset_password.reset.actions.reset.button'|trans }}</button>
+        </div>
     {{ form_end(reset_form) }}
 {% endblock content %}

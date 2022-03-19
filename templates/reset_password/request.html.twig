@@ -2,8 +2,19 @@
 {% extends '@SfsUser/layout_fullscreen.html.twig' %}
 
 {% block content %}
-    {{ form_start(reset_form) }}
-        {{ form_rest(reset_form) }}
-        <input type="submit" value="{{ 'reset_password.request.actions.reset.button'|trans }}" class="btn btn-primary btn-block" />
-    {{ form_end(reset_form) }}
+    <div class="bg-white p-5 w-25">
+        {{ form_start(reset_form) }}
+        <h1 class="h4 mb-3 fw-normal">{{ 'reset_password.request.title'|trans }}</h1>
+        <p>{{ 'reset_password.request.text'|trans }}</p>
+
+            {{ form_row(reset_form.email) }}
+            {{ form_rest(reset_form) }}
+
+            <div class="d-grid gap-2 mt-3">
+                <button type="submit" class="btn btn-primary btn-lg">{{ 'reset_password.request.actions.reset.button'|trans }}</button>
+
+                <a href="{{ url('sfs_user_login') }}" class="text-center mt-3">{{ 'reset_password.request.actions.signin.link'|trans }}</a>
+            </div>
+        {{ form_end(reset_form) }}
+    </div>
 {% endblock content %}

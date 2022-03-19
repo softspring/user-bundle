@@ -9,119 +9,167 @@
 {% endblock breadcrums_content %}
 
 {% block content %}
-    {% if sfs_user_is('nameSurname') %}
-        <h1 class="h3 mb-4">{{ administrator.name }} {{ administrator.surname }}</h1>
-    {% else %}
-        <h1 class="h3 mb-4">{{ administrator.username }}</h1>
-    {% endif %}
-
-    <div class="text-right">
-{#        {% if switch_enabled and is_granted(switch_role) %}#}
-{#            <a href="{{ url(switch_route, switch_route_params) }}{{ switch_route_params|length ? '&' : '?' }}{{ switch_parameter }}={{ administrator.username }}"#}
-{#               class="btn btn-outline-secondary">view as {{ administrator.username }}</a>#}
-{#        {% endif %}#}
-
-        <div class="btn-group d-inline">
-            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                More
-            </button>
-            <div class="dropdown-menu dropdown-menu-right">
-                {% if is_granted('ROLE_ADMIN_ADMINISTRATORS_DEMOTE', administrator) %}
-                    <a href="{{ url('sfs_user_admin_administrators_demote_admin', {'administrator':administrator}) }}" class="dropdown-item">Demote Admin</a>
-                {% else %}
-                    <a href="#" class="dropdown-item disabled">Demote Admin</a>
-                {% endif %}
-
-                <a href="#" class="dropdown-item disabled">Reset password</a>
-                {#        <a href="#" class="dropdown-item disabled">Manual password</a>#}
-
-                {% if is_granted('ROLE_ADMIN_ADMINISTRATORS_DELETE', administrator) %}
-                    <a href="{{ url('sfs_user_admin_administrators_delete', {'administrator':administrator}) }}" class="dropdown-item">Delete</a>
-                {% else %}
-                    <a href="#" class="dropdown-item disabled">Delete</a>
-                {% endif %}
-
-{#                {% if sfs_user_is('confirmable') %}#}
-{#                    {% if administrator.confirmed %}#}
-{#                        <a href="#" class="dropdown-item disabled">Unconfirm</a>#}
-{#                    {% else %}#}
-{#                        <a href="#" class="dropdown-item disabled">Confirm</a>#}
-{#                        <a href="{{ url('sfs_user_admin_administrators_resend', {'administrator':administrator}) }}" class="dropdown-item">Resend confirmation</a>#}
-{#                    {% endif %}#}
-{#                {% endif %}#}
-            </div>
-        </div>
-
-        {% if is_granted('ROLE_ADMIN_ADMINISTRATORS_UPDATE', administrator) %}
-            <a href="{{ url('sfs_user_admin_administrators_update', {'administrator': administrator}) }}" class="btn btn-primary ml-4">Edit</a>
-        {% else %}
-            <a href="#" class="btn btn-primary disabled ml-4">Edit</a>
-        {% endif %}
-    </div>
-
-    {% if sfs_user_is('nameSurname') %}
-    <p><strong>name:</strong> {{ administrator.name }}</p>
-    <p><strong>surname:</strong> {{ administrator.surname }}</p>
-    {% endif %}
-
-    <p><strong>username:</strong> {{ administrator.username }}</p>
-    {% if sfs_user_is('email') %}
-    <p><strong>email:</strong> {{ administrator.email }}</p>
-    {% endif %}
-    {% if sfs_user_is('lastLogin') %}
-    <p><strong>lastLogin:</strong> {{ administrator.lastLogin ? administrator.lastLogin|date('H:i d-m-Y') : 'not yet' }}</p>
-    {% endif %}
-    <p><strong>role:</strong> {{ administrator.roles|join(', ') }}</p>
-
-    <div class="row">
-        {% if multi_accounted_user %}
+    <div class="container-fluid">
+        <div class="row">
             <div class="col">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Accounts</h4>
-                    </div>
-                    <div class="card-body">
-                        {% if administrator.relations.count %}
-                            <ul>
-                                {% for relation in administrator.relations %}
-                                    <li>
-                                        {% if route_defined('sfs_account_admin_accounts_details') %}
-                                            <a href="{{ url('sfs_account_admin_accounts_details', {'account':relation.account}) }}">{{ relation.account.name }}</a>
-                                        {% else %}
-                                            {{ relation.account.name }}
-                                        {% endif %}
+                <h1 class="h3 mb-4">Administrator details</h1>
+            </div>
 
-                                        {% if relation.grantedBy is defined and relation.grantedBy != relation.user %}
-                                            (granted by {{ relation.grantedBy.username }})
-                                        {% endif %}
-                                    </li>
-                                {% endfor %}
-                            </ul>
+            <div class="col text-end">
+                {% if is_granted('ROLE_ADMIN_ADMINISTRATORS_UPDATE', administrator) %}
+                    <a href="{{ url('sfs_user_admin_administrators_update', {'administrator': administrator}) }}" class="btn btn-primary ml-4">Edit</a>
+                {% else %}
+                    <a href="#" class="btn btn-primary disabled ml-4">Edit</a>
+                {% endif %}
+
+                {% if switch_enabled and is_granted(switch_role) %}
+                    <a href="{{ url(switch_route, switch_route_params) }}{{ switch_route_params|length ? '&' : '?' }}{{ switch_parameter }}={{ administrator.username }}"
+                       class="btn btn-outline-secondary"><i class="bi bi-incognito"></i> view as {{ administrator.username }}</a>
+                {% endif %}
+
+                <div class="btn-group d-inline dropdown">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMoreActions" data-bs-toggle="dropdown" aria-expanded="false">
+                        More
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMoreActions">
+                        {% if is_granted('ROLE_ADMIN_ADMINISTRATORS_DEMOTE', administrator) %}
+                            <a href="{{ url('sfs_user_admin_administrators_demote_admin', {'administrator':administrator}) }}" class="dropdown-item">Demote Admin</a>
                         {% else %}
-                            <p><em>This user is not associated to any account</em></p>
+                            <a href="#" class="dropdown-item disabled">Demote Admin</a>
+                        {% endif %}
+
+                        <a href="#" class="dropdown-item disabled">Reset password</a>
+                                <a href="#" class="dropdown-item disabled">Manual password</a>
+
+                        {% if is_granted('ROLE_ADMIN_ADMINISTRATORS_DELETE', administrator) %}
+                            <a href="{{ url('sfs_user_admin_administrators_delete', {'administrator':administrator}) }}" class="dropdown-item">Delete</a>
+                        {% else %}
+                            <a href="#" class="dropdown-item disabled">Delete</a>
+                        {% endif %}
+
+                        {% if sfs_user_is('confirmable') %}
+                            {% if administrator.confirmed %}
+                                <a href="#" class="dropdown-item disabled">Unconfirm</a>
+                            {% else %}
+                                <a href="#" class="dropdown-item disabled">Confirm</a>
+{#                                <a href="{{ url('sfs_user_admin_administrators_resend', {'administrator':administrator}) }}" class="dropdown-item">Resend confirmation</a>#}
+                                <a href="#" class="dropdown-item">Resend confirmation</a>
+                            {% endif %}
                         {% endif %}
                     </div>
                 </div>
             </div>
-        {% endif %}
+        </div>
+    </div>
 
-        {% if is_granted('ROLE_ADMIN_ACCESS_HISTORY_LIST') and user_access_history is defined %}
-            <div class="col">
-                {% include '@SfsUser/admin/components/_user_access_history_card.html.twig' %}
-            </div>
-        {% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <div class="bg-white p-4">
+                    <div class="text-center mb-4">
+                        {% if sfs_user_is('avatar') %}
+                            <img alt="{{ administrator.username }}" src="{{ administrator.avatarUrl }}" width="128" height="128" class="rounded-circle mb-3">
+                        {% endif %}
 
-        {% if false %}
-            <div class="col">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Emails sent</h4>
+                        {% if sfs_user_is('nameSurname') %}
+                            <h4>{{ administrator.name }} {{ administrator.surname }}</h4>
+                        {% endif %}
                     </div>
-                    <div class="card-body">
-                        <p><i>TODO</i></p>
-                    </div>
+
+                    {% if sfs_user_is('identifierUsername') %}
+                        <p><strong>username:</strong><br/>{{ administrator.username }}</p>
+                    {% endif %}
+
+                    {% if sfs_user_is('identifierEmail') or sfs_user_is('email') %}
+                        <p><strong>email:</strong><br/>{{ administrator.email }}</p>
+                    {% endif %}
+
+                    {% if sfs_user_is('confirmable') %}
+                        <p>
+                            <strong>confirmed:</strong><br/>                            {% if administrator.confirmed %}
+                                <span class="bi bi-check  align-middle text-success"></span>
+                                at
+                                <span title="{{ administrator.confirmedAt|date('H:i:s d-m-Y', 'UTC') }} UTC">{{ administrator.confirmedAt|date('H:i:s d-m-Y', 'Europe/Madrid') }}</span>
+                            {% else %}
+                                <span class="bi bi-x align-middle text-danger"></span>
+                            {% endif %}
+                        </p>
+                    {% endif %}
+
+                    {% if sfs_user_is('lastLogin') %}
+                        <p><strong>lastLogin:</strong><br/>
+                            {% if administrator.lastLogin %}
+                                <span title="{{ administrator.lastLogin|date('H:i:s d-m-Y', 'UTC') }} UTC">{{ administrator.lastLogin|date('H:i:s d-m-Y', 'Europe/Madrid') }}</span>
+                            {% else %}
+                                not yet
+                            {% endif %}
+                        </p>
+                    {% endif %}
+
+                    <p><strong>role:</strong>
+                        {% if sfs_user_is('rolesAdmin') %}
+                            {% if administrator.superAdmin %}
+                                <br/><span class="badge bg-danger">super-admin</span>
+                            {% else %}
+                                <br/><span class="badge bg-info text-dark">admin</span>
+                            {% endif %}
+                        {% else %}
+                            <br/>{{ administrator.roles|join(', ') }}
+                        {% endif %}
+                    </p>
                 </div>
             </div>
-        {% endif %}
+            <div class="col">
+                {% if is_granted('ROLE_ADMIN_ACCESS_HISTORY_LIST') and user_access_history is defined %}
+                    {% include '@SfsUser/admin/components/_user_access_history_card.html.twig' %}
+                {% endif %}
+            </div>
+        </div>
     </div>
+
+{#    <div class="row">#}
+{#        {% if multi_accounted_user %}#}
+{#            <div class="col">#}
+{#                <div class="card">#}
+{#                    <div class="card-header">#}
+{#                        <h4>Accounts</h4>#}
+{#                    </div>#}
+{#                    <div class="card-body">#}
+{#                        {% if administrator.relations.count %}#}
+{#                            <ul>#}
+{#                                {% for relation in administrator.relations %}#}
+{#                                    <li>#}
+{#                                        {% if route_defined('sfs_account_admin_accounts_details') %}#}
+{#                                            <a href="{{ url('sfs_account_admin_accounts_details', {'account':relation.account}) }}">{{ relation.account.name }}</a>#}
+{#                                        {% else %}#}
+{#                                            {{ relation.account.name }}#}
+{#                                        {% endif %}#}
+
+{#                                        {% if relation.grantedBy is defined and relation.grantedBy != relation.user %}#}
+{#                                            (granted by {{ relation.grantedBy.username }})#}
+{#                                        {% endif %}#}
+{#                                    </li>#}
+{#                                {% endfor %}#}
+{#                            </ul>#}
+{#                        {% else %}#}
+{#                            <p><em>This user is not associated to any account</em></p>#}
+{#                        {% endif %}#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        {% endif %}#}
+
+{#        {% if false %}#}
+{#            <div class="col">#}
+{#                <div class="card">#}
+{#                    <div class="card-header">#}
+{#                        <h4>Emails sent</h4>#}
+{#                    </div>#}
+{#                    <div class="card-body">#}
+{#                        <p><i>TODO</i></p>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        {% endif %}#}
+{#    </div>#}
 {% endblock content %}

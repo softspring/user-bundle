@@ -7,6 +7,6 @@
         {% if sfs_user_access_is('location') %}
             <td>{{ access.city }} ({{ access.country }})</td>
         {% endif %}
-        <td>{{ access.userAgent }}</td>
+        <td><i class="bi bi-{{ access.operatingSystemVendor }}"></i> {{ access.userAgent }}</td>
     </tr>
 {% endfor %}

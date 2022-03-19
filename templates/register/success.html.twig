@@ -2,5 +2,5 @@
 {% extends '@SfsUser/layout_fullscreen.html.twig' %}
 
 {% block content %}
-    Welcome!!
+    <h1>Welcome {{ app.user.name|default(app.user.userIdentifier) }}!!</h1>
 {% endblock content %}
