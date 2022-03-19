@@ -40,6 +40,6 @@ class InviteUserCommand extends Command
 
         $this->userInvitationManipulator->invite($email, $username, $roles);
 
-        return 0;
+        return Command::SUCCESS;
     }
 }

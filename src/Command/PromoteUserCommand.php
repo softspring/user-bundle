@@ -42,7 +42,7 @@ class PromoteUserCommand extends Command
         if (!$user) {
             $output->writeln(sprintf('User %s not found', $username));
 
-            return 1;
+            return Command::FAILURE;
         }
 
         $user->setAdmin(true);
@@ -55,6 +55,6 @@ class PromoteUserCommand extends Command
 
         $output->writeln(sprintf('User %s has been promoted', $username));
 
-        return 0;
+        return Command::SUCCESS;
     }
 }
