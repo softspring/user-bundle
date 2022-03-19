@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Softspring\UserBundle\DataFixtures\:
+        resource: '../src/DataFixtures/*'
+        tags: ['doctrine.fixtures.loader']

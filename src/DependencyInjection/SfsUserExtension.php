@@ -2,6 +2,7 @@
 
 namespace Softspring\UserBundle\DependencyInjection;
 
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Softspring\MailerBundle\Template\Loader\TemplateLoaderInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
@@ -24,7 +25,9 @@ class SfsUserExtension extends Extension implements PrependExtensionInterface
         $container->setParameter('sfs_user.entity_manager_name', $config['entity_manager']);
 
         $container->setParameter('sfs_user.user.class', $config['class']);
-        $container->setParameter('sfs_user.invite.class', $config['invite']['class']);
+
+        $container->setParameter('sfs_user.invite.enabled', $config['invite']['enabled']);
+        $container->setParameter('sfs_user.invite.class', $config['invite']['enabled'] ? $config['invite']['class'] : null);
 
         $container->setParameter('sfs_user.impersonate_bar', $config['impersonate_bar']);
 
@@ -73,6 +76,10 @@ class SfsUserExtension extends Extension implements PrependExtensionInterface
 
         if (interface_exists(TemplateLoaderInterface::class)) {
             $loader->load('services/mailer_loader.yaml');
+        }
+
+        if (class_exists(Fixture::class)) {
+            $loader->load('services/data_fixtures.yaml');
         }
     }
 
