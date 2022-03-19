@@ -30,9 +30,11 @@ class Configuration implements ConfigurationInterface
                 ->end()
 
                 ->arrayNode('invite')
+                    ->canBeEnabled()
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('class')->defaultNull()->end()
+                        ->booleanNode('enabled')->defaultFalse()->end()
+                        ->scalarNode('class')->defaultValue('App\\Entity\\UserInvitation')->end()
                     ->end()
                 ->end()
 

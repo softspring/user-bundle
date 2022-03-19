@@ -21,7 +21,7 @@ services:
         arguments:
             $manager: '@Softspring\UserBundle\Manager\UserInvitationManagerInterface'
             $eventDispatcher: '@event_dispatcher'
-            $listFilterForm: '@Softspring\UserBundle\Form\Admin\AdministratorListFilterFormInterface'
+            $listFilterForm: '@Softspring\UserBundle\Form\Admin\InvitationListFilterFormInterface'
             $createForm: '@Softspring\UserBundle\Form\Admin\InvitationCreateFormInterface'
             $config:
                 entity_attribute: 'invitation'
