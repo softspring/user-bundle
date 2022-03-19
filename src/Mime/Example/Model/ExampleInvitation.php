@@ -9,4 +9,9 @@ use Softspring\UserBundle\Model\UserInvitation;
 class ExampleInvitation extends UserInvitation implements NameSurnameInterface
 {
     use NameSurnameTrait;
+
+    public function getId()
+    {
+        // TODO: Implement getId() method.
+    }
 }

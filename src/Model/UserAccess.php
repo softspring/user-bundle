@@ -7,11 +7,6 @@ namespace Softspring\UserBundle\Model;
  */
 abstract class UserAccess implements UserAccessInterface
 {
-    /**
-     * @var mixed
-     */
-    protected $id;
-
     protected UserInterface $user;
 
     protected ?int $loginAt;
@@ -58,5 +53,20 @@ abstract class UserAccess implements UserAccessInterface
     public function setIp(string $ip): void
     {
         $this->ip = $ip;
+    }
+
+    public function getOperatingSystemVendor(): ?string
+    {
+        if (preg_match('/windows/i', $this->getUserAgent())) {
+            return 'microsoft';
+        }
+        if (preg_match('/mac/i', $this->getUserAgent())) {
+            return 'apple';
+        }
+        if (preg_match('/linux/i', $this->getUserAgent())) {
+            return 'linux';
+        }
+
+        return '';
     }
 }

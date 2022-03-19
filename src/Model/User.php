@@ -7,8 +7,6 @@ namespace Softspring\UserBundle\Model;
  */
 abstract class User implements UserInterface
 {
-    protected ?string $username = null;
-
     public function __toString(): string
     {
         return "{$this->getId()}";
@@ -52,9 +50,7 @@ abstract class User implements UserInterface
         return serialize($data);
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    
     public function unserialize($data)
     {
         $data = unserialize($data);
@@ -74,6 +70,11 @@ abstract class User implements UserInterface
         }
     }
 
+    protected function getIdentifierField(): string
+    {
+        return 'username';
+    }
+
     protected function getSerializeFields(): array
     {
         $fields = [];
@@ -83,7 +84,7 @@ abstract class User implements UserInterface
             $fields[] = ['name' => 'salt', 'type' => 'string'];
         }
 
-        $fields[] = ['name' => 'username', 'type' => 'string'];
+        $fields[] = ['name' => $this->getIdentifierField(), 'type' => 'string'];
 
         if ($this instanceof EnablableInterface) {
             $fields[] = ['name' => 'enabled', 'type' => 'string'];
@@ -106,25 +107,9 @@ abstract class User implements UserInterface
      */
     abstract public function getId();
 
-    /**
-     * @deprecated use getUserIdentifier
-     */
     public function getUsername(): ?string
     {
-        return $this->username;
-    }
-
-    /**
-     * @deprecated
-     */
-    public function setUsername(?string $username): void
-    {
-        $this->username = $username;
-    }
-
-    public function getUserIdentifier(): string
-    {
-        return $this->getUsername();
+        return $this->getUserIdentifier();
     }
 
     public function getRoles(): array

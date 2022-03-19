@@ -7,11 +7,6 @@ namespace Softspring\UserBundle\Model;
  */
 abstract class UserInvitation implements UserInvitationInterface
 {
-    /**
-     * @var mixed|null
-     */
-    protected $id = null;
-
     protected ?UserInterface $inviter = null;
 
     protected ?UserInterface $user = null;
@@ -27,14 +22,6 @@ abstract class UserInvitation implements UserInvitationInterface
     public function __toString(): string
     {
         return "{$this->getId()}";
-    }
-
-    /**
-     * @return mixed|null
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     public function getUsername(): ?string

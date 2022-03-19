@@ -17,7 +17,7 @@ class ConfirmationEmail extends TranslatableEmail implements ExampleEmailInterfa
     public static function generateExample(TranslatorInterface $translator, ?string $locale = null): TranslatableEmail
     {
         $user = new ExampleUser();
-        $user->setUsername('mery_mccarty');
+        $user->setEmail('mery_mccarty@example.com');
         $user->setName('Mery');
         $user->setSurname('McCarty');
         $confirmationUrl = '#confirm-url';

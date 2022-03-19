@@ -9,9 +9,7 @@ trait RolesFullTrait
     use RolesAdminTrait;
     use RolesTrait;
 
-    /**
-     * {@inheritdoc}
-     */
+    
     public function getRoles(): array
     {
         $roles = $this->roles;

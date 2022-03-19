@@ -2,19 +2,24 @@
 
 namespace Softspring\UserBundle\Mime\Example\Model;
 
-use Softspring\UserBundle\Entity\EmailTrait;
 use Softspring\UserBundle\Entity\NameSurnameTrait;
 use Softspring\UserBundle\Model\NameSurnameInterface;
 use Softspring\UserBundle\Model\User;
-use Softspring\UserBundle\Model\UserWithEmailInterface;
+use Softspring\UserBundle\Model\UserIdentifierEmailInterface;
+use Softspring\UserBundle\Model\UserIdentifierEmailTrait;
 
-class ExampleUser extends User implements NameSurnameInterface, UserWithEmailInterface
+class ExampleUser extends User implements NameSurnameInterface, UserIdentifierEmailInterface
 {
     use NameSurnameTrait;
-    use EmailTrait;
+    use UserIdentifierEmailTrait;
 
     public function getId()
     {
         // TODO: Implement getId() method.
+    }
+
+    public function getDisplayName(): ?string
+    {
+        return $this->getName().' '.$this->getSurname();
     }
 }

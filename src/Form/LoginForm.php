@@ -2,6 +2,8 @@
 
 namespace Softspring\UserBundle\Form;
 
+use Softspring\UserBundle\Manager\UserManagerInterface;
+use Softspring\UserBundle\Model\UserIdentifierEmailInterface;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -20,14 +22,14 @@ class LoginForm extends AbstractType implements LoginFormInterface
 
     protected RequestStack $requestStack;
 
-    /**
-     * LoginForm constructor.
-     */
-    public function __construct(CsrfTokenManagerInterface $csrfTokenManager, FirewallMap $firewallMap, RequestStack $requestStack)
+    protected UserManagerInterface $userManager;
+
+    public function __construct(CsrfTokenManagerInterface $csrfTokenManager, FirewallMap $firewallMap, RequestStack $requestStack, UserManagerInterface $userManager)
     {
         $this->csrfTokenManager = $csrfTokenManager;
         $this->firewallMap = $firewallMap;
         $this->requestStack = $requestStack;
+        $this->userManager = $userManager;
     }
 
     public function getBlockPrefix(): string
@@ -49,7 +51,9 @@ class LoginForm extends AbstractType implements LoginFormInterface
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('_username', TextType::class);
+        $builder->add('_username', TextType::class, [
+            'label' => $this->userManager->getEntityClassReflection()->implementsInterface(UserIdentifierEmailInterface::class) ? 'login.form.email.label' : 'login.form.username.label',
+        ]);
         $builder->add('_password', PasswordType::class);
 
         if ($this->isRememberMeEnabled()) {

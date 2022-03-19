@@ -38,9 +38,7 @@ trait RolesAdminTrait
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    
     public function getRoles(): array
     {
         $roles = [];
