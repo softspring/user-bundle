@@ -5,7 +5,7 @@ namespace Softspring\UserBundle\Mailer;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Model\UserInvitationInterface;
 
-interface MailerInterface
+interface UserMailerInterface
 {
     /**
      * Send an email to a user to confirm the user creation

@@ -3,23 +3,23 @@
 namespace Softspring\UserBundle\EventListener;
 
 use Softspring\UserBundle\Event\UserInvitationEvent;
-use Softspring\UserBundle\Mailer\MailerInterface;
+use Softspring\UserBundle\Mailer\UserMailerInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class EmailInvitationListener implements EventSubscriberInterface
 {
     /**
-     * @var MailerInterface
+     * @var UserMailerInterface
      */
     protected $mailer;
 
     /**
      * EmailInvitationListener constructor.
      *
-     * @param MailerInterface $mailer
+     * @param UserMailerInterface $mailer
      */
-    public function __construct(MailerInterface $mailer)
+    public function __construct(UserMailerInterface $mailer)
     {
         $this->mailer = $mailer;
     }

@@ -3,7 +3,7 @@
 namespace Softspring\UserBundle\EventListener;
 
 use Softspring\CoreBundle\Event\GetResponseFormEvent;
-use Softspring\UserBundle\Mailer\MailerInterface;
+use Softspring\UserBundle\Mailer\UserMailerInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\PasswordRequestInterface;
 use Softspring\UserBundle\Model\UserInterface;
@@ -14,7 +14,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class SendResetPasswordEmailListener implements EventSubscriberInterface
 {
     /**
-     * @var MailerInterface
+     * @var UserMailerInterface
      */
     protected $mailer;
 
@@ -30,11 +30,12 @@ class SendResetPasswordEmailListener implements EventSubscriberInterface
 
     /**
      * SendResetPasswordEmailListener constructor.
-     * @param MailerInterface $mailer
+     *
+     * @param UserMailerInterface  $mailer
      * @param UserManagerInterface $userManager
-     * @param TokenGenerator $tokenGenerator
+     * @param TokenGenerator       $tokenGenerator
      */
-    public function __construct(MailerInterface $mailer, UserManagerInterface $userManager, TokenGenerator $tokenGenerator)
+    public function __construct(UserMailerInterface $mailer, UserManagerInterface $userManager, TokenGenerator $tokenGenerator)
     {
         $this->mailer = $mailer;
         $this->userManager = $userManager;

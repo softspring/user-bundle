@@ -1,0 +1,5 @@
+{% trans_default_domain 'sfs_user' %}
+
+{% autoescape false %}
+{{ 'invite.accept.email.message'|trans({'%username%': user_username, '%name%': user_name, '%surname%': user_surname, '%email%': user_email, '%acceptUrl%': acceptUrl}) }}
+{% endautoescape %}
