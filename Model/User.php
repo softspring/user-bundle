@@ -103,11 +103,11 @@ abstract class User implements UserInterface
         $data = array_slice($data, 4);
 
         if ($this instanceof EnablableInterface) {
-            $this->setEnabled(array_unshift($data));
+            $this->setEnabled(array_shift($data));
         }
 
         if ($this instanceof UserWithEmailInterface) {
-            $this->setEmail(array_unshift($data));
+            $this->setEmail(array_shift($data));
         }
     }
 
