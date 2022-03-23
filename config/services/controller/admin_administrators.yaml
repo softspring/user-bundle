@@ -8,6 +8,7 @@ services:
 
     Softspring\UserBundle\Form\Admin\:
         resource: '../../../src/Form/Admin/Administrator*'
+        exclude: '../../../src/Form/Admin/AdministratorInvite*'
 
     Softspring\UserBundle\EventListener\Admin\:
         resource: '../../../src/EventListener/Admin/Admin*'

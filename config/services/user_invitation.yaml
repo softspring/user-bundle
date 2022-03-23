@@ -1,0 +1,19 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            $em: '@sfs_user.entity_manager'
+
+    Softspring\UserBundle\Controller\InviteController:
+        public: true
+
+    Softspring\UserBundle\Command\InviteUserCommand: ~
+
+    Softspring\UserBundle\EventListener\EmailInvitationListener: ~
+
+    Softspring\UserBundle\Manager\UserInvitationManagerInterface:
+        class: Softspring\UserBundle\Manager\UserInvitationManager
+
+    Softspring\UserBundle\Manipulator\UserInvitationManipulator: ~

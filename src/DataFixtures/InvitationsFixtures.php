@@ -10,9 +10,9 @@ use Softspring\UserBundle\Model\ConfirmableInterface;
 
 class InvitationsFixtures extends UserFixtures
 {
-    protected UserInvitationManagerInterface $invitationManager;
+    protected ?UserInvitationManagerInterface $invitationManager;
 
-    public function __construct(UserManagerInterface $userManager, UserInvitationManagerInterface $invitationManager, ?UserAccessManagerInterface $userAccessManager)
+    public function __construct(UserManagerInterface $userManager, ?UserInvitationManagerInterface $invitationManager, ?UserAccessManagerInterface $userAccessManager)
     {
         parent::__construct($userManager, $userAccessManager);
         $this->invitationManager = $invitationManager;
@@ -20,6 +20,10 @@ class InvitationsFixtures extends UserFixtures
 
     public function load(ObjectManager $manager)
     {
+        if (!$this->invitationManager) {
+            return;
+        }
+
         $faker = \Faker\Factory::create('es_ES');
 
         for ($i=0 ; $i < 200 ; $i++) {

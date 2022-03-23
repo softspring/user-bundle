@@ -4,6 +4,8 @@ services:
         autoconfigure: true
         public: false
 
+    Softspring\UserBundle\Form\Admin\AdministratorInviteForm: ~
+
     sfs_user.admin.administrator_invite.controller:
         class: Softspring\CrudlBundle\Controller\CrudlController
         public: true

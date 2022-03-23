@@ -13,17 +13,30 @@ services:
             $oauthServices: '%sfs_user.oauth.services%'
             $targetPathParameter: '%sfs_user.login.target_path_parameter%'
 
-    Softspring\UserBundle\Command\:
-        resource: '../src/Command/*'
+    Softspring\UserBundle\Command\CreateUserCommand: ~
+    Softspring\UserBundle\Command\PromoteUserCommand: ~
 
-    Softspring\UserBundle\Controller\:
-        resource: '../src/Controller/*'
-        exclude:  '../src/Controller/Admin/*'
+    Softspring\UserBundle\Controller\LoginController:
+        public: true
+    Softspring\UserBundle\Controller\OauthLoginIntegrationController:
+        public: true
+    Softspring\UserBundle\Controller\RegisterController:
+        public: true
+    Softspring\UserBundle\Controller\ResetPasswordController:
+        public: true
+    Softspring\UserBundle\Controller\Settings\ChangeEmailController:
+        public: true
+    Softspring\UserBundle\Controller\Settings\ChangePasswordController:
+        public: true
+    Softspring\UserBundle\Controller\Settings\ChangeUsernameController:
+        public: true
+    Softspring\UserBundle\Controller\Settings\ConfirmationController:
+        public: true
+    Softspring\UserBundle\Controller\Settings\PreferencesController:
         public: true
 
     Softspring\UserBundle\EventListener\Admin\FlashMessagesListener: ~
     Softspring\UserBundle\EventListener\AutoAuthenticateEventSubscriber: ~
-    Softspring\UserBundle\EventListener\EmailInvitationListener: ~
     Softspring\UserBundle\EventListener\LastLoginEventSubscriber: ~
     Softspring\UserBundle\EventListener\SendResetPasswordEmailListener: ~
     Softspring\UserBundle\EventListener\UserRegistrationListener: ~
@@ -35,13 +48,10 @@ services:
     Softspring\UserBundle\Mailer\UserMailerInterface:
         class: Softspring\UserBundle\Mailer\UserMailer
 
-    Softspring\UserBundle\Manager\UserInvitationManagerInterface:
-        class: Softspring\UserBundle\Manager\UserInvitationManager
 
     Softspring\UserBundle\Manager\UserManagerInterface:
         class: Softspring\UserBundle\Manager\UserManager
 
-    Softspring\UserBundle\Manipulator\UserInvitationManipulator: ~
     Softspring\UserBundle\Manipulator\UserManipulator: ~
 
     Softspring\UserBundle\Provider\:
