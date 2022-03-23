@@ -24,7 +24,7 @@ class UserProvider implements UserProviderInterface
         $this->userManager = $userManager;
     }
 
-    public function loadUserByUsername($username)
+    public function loadUserByUsername($username): SymfonyUserInterface
     {
         return $this->loadUserByIdentifier($username);
     }
@@ -43,7 +43,7 @@ class UserProvider implements UserProviderInterface
         return $user;
     }
 
-    public function refreshUser(SymfonyUserInterface $user)
+    public function refreshUser(SymfonyUserInterface $user): SymfonyUserInterface
     {
         if (!$user instanceof SfsUserInterface) {
             throw new UnsupportedUserException(sprintf('Expected an instance of Softspring\UserBundle\Model\UserInterface, but got "%s".', get_class($user)));
@@ -60,7 +60,7 @@ class UserProvider implements UserProviderInterface
         return $reloadedUser;
     }
 
-    public function supportsClass($class)
+    public function supportsClass($class): bool
     {
         return $this->userManager->getEntityClass() === $class || is_subclass_of($class, $this->userManager->getEntityClass());
     }

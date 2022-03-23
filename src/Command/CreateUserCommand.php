@@ -38,7 +38,7 @@ class CreateUserCommand extends Command
         $this->addOption('skip-existing', 'k', InputOption::VALUE_NONE, 'Skip if user exists');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $username = $input->getArgument('username');
         $email = $input->getArgument('email');

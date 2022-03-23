@@ -32,7 +32,7 @@ class PromoteUserCommand extends Command
         $this->addOption('super-admin', 's', InputOption::VALUE_NONE, 'User is super admin');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $username = $input->getArgument('username');
         $superAdmin = $input->getOption('super-admin');
