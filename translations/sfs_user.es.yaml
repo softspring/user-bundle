@@ -114,6 +114,9 @@ change_password:
 
 admin_users:
     list:
+        page_title: "Usuarios"
+        breadcrumb: "Usuarios"
+        title: "Usuarios"
         fields:
             name.header: "Nombre"
             surname.header: "Apellidos"
@@ -130,14 +133,49 @@ admin_users:
         actions:
             details:
                 link: "detalles"
+        widgets:
+            total.title: "usuarios totales"
+            pending_confirm.title: "pendientes confirmación"
+
+    details:
+        page_title: "%displayName%"
+        breadcrumb: "%displayName%"
+        title: "Detalles de usuario"
+        actions:
+            more: "Más"
+            switch: "Ver como %switchUserIdentifier%"
+            update: "Editar"
+            promote: "Promocionar a administrador"
+            reset_password: "Restablecer contraseña"
+            manual_password: "Contraseña manual"
+            delete: "Eliminar"
+            unconfirm: "Desconfirmar manualmente"
+            confirm: "Confirmar manualmente"
+            resend_confirm: "Reenviar confirmación"
+        fields:
+            username: "Nombre de usuario"
+            email: "Email"
+            confirmed: "Confirmado"
+            lastLogin: "Último acceso"
+            lastLogin.notYet: "aún no ha accedido"
+            role: "Rol"
+            locale: "Idioma"
+
     delete:
+        page_title: "%displayName%"
+        breadcrumb: "Eliminar"
+        title: "Eliminar usuario"
         confirm_message: "¿Confirmas que deseas eliminar este usuario?"
         actions:
             delete.button: "Eliminar"
             cancel: "Cancelar"
         form:
             deleteOwnedAccounts.label: "¿Eliminar las cuentas asociadas de las que es propietario/a?"
+
     update:
+        page_title: "%displayName%"
+        breadcrumb: "Editar"
+        title: "Editar usuario"
         actions:
             update.button: "Guardar cambios"
             cancel: "Cancelar"
@@ -146,6 +184,7 @@ admin_users:
             surname.label: "Apellidos"
             username.label: "Username"
             email.label: "Email"
+
     resend_confirmation:
         messages:
             success: "El email de confirmación se ha enviado a %email%"
@@ -154,6 +193,9 @@ admin_users:
 
 admin_administrators:
     list:
+        page_title: "Administratores"
+        breadcrumb: "Administratores"
+        title: "Administratores"
         fields:
             name.header: "Nombre"
             surname.header: "Apellidos"
@@ -170,10 +212,46 @@ admin_administrators:
         actions:
             details:
                 link: "detalles"
-    update:
+
+    details:
+        page_title: "%displayName%"
+        breadcrumb: "%displayName%"
+        title: "Detalles de administrador"
         actions:
-            update.button: "Actualizar"
+            more: "Más"
+            switch: "Ver como %switchUserIdentifier%"
+            update: "Editar"
+            demote: "Degradar de administrador"
+            reset_password: "Restablecer contraseña"
+            manual_password: "Contraseña manual"
+            promote_super: "Promocionar a super-admin"
+            demote_super: "Degradar de super-admin"
+            delete: "Eliminar"
+            unconfirm: "Desconfirmar manualmente"
+            confirm: "Confirmar manualmente"
+            resend_confirm: "Reenviar confirmación"
+        fields:
+            username: "Nombre de usuario"
+            email: "Email"
+            confirmed: "Confirmado"
+            lastLogin: "Último acceso"
+            lastLogin.notYet: "aún no ha accedido"
+            role: "Rol"
+            locale: "Idioma"
+
+    update:
+        page_title: "%displayName%"
+        breadcrumb: "Editar"
+        title: "Editar administrador"
+        actions:
+            update.button: "Guardar cambios"
             cancel.button: "Cancelar"
+        form:
+            name.label: "Nombre"
+            surname.label: "Apellidos"
+            username.label: "Username"
+            email.label: "Email"
+
     invite:
         form:
             name.label: "Nombre"

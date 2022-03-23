@@ -1,18 +1,21 @@
 {% trans_default_domain 'sfs_user' %}
 {% extends '@SfsUser/admin_layout.html.twig' %}
 
-{% form_theme filterForm 'bootstrap_4_horizontal_layout.html.twig' %}
+{% form_theme filterForm 'bootstrap_5_horizontal_layout.html.twig' %}
+
+{% block title %}{{ 'admin_administrators.list.page_title'|trans }}{% endblock %}
 
 {% block breadcrums_content %}
     {{ parent() }}
-    <li class="breadcrumb-item">Users</li>
-    <li class="breadcrumb-item active" aria-current="page">Administrators</li>
+    <li class="breadcrumb-item active" aria-current="page">{{ 'admin_administrators.list.breadcrumb'|trans }}</li>
 {% endblock breadcrums_content %}
 
 {% block content %}
     <div class="d-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3">Administrators</h1>
+        <h1 class="h3">{{ 'admin_administrators.list.title'|trans }}</h1>
     </div>
+
+    {#{% include '@SfsUser/admin/administrators/list-widgets.html.twig' %}#}
 
     <div class="container bg-white p-4">
         {% if entities|length %}
@@ -34,7 +37,7 @@
             {% trans_default_domain 'sfs_user' %}
             {% block ths %}
                 {% if sfs_user_is('avatar') %}
-                    <th scope="col" style="width:28px">&nbsp;</th>
+                    <th scope="col" class="p-3" style="width:28px">&nbsp;</th>
                 {% endif %}
                 {% if sfs_user_is('nameSurname') %}
                     <th scope="col" class="p-3">

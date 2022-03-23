@@ -114,6 +114,9 @@ change_password:
 
 admin_users:
     list:
+        page_title: "Users"
+        breadcrumb: "Users"
+        title: "Users"
         fields:
             name.header: "Name"
             surname.header: "Surname"
@@ -130,14 +133,49 @@ admin_users:
         actions:
             details:
                 link: "details"
+        widgets:
+            total.title: "total users"
+            pending_confirm.title: "pending confirm"
+
+    details:
+        page_title: "%displayName%"
+        breadcrumb: "%displayName%"
+        title: "User details"
+        actions:
+            more: "More"
+            switch: "View as %switchUserIdentifier%"
+            update: "Edit"
+            promote: "Promote as admin"
+            reset_password: "Reset password"
+            manual_password: "Manual password"
+            delete: "Delete"
+            unconfirm: "Unconfirm"
+            confirm: "Confirm"
+            resend_confirm: "Resend confirm"
+        fields:
+            username: "Username"
+            email: "Email"
+            confirmed: "Confirmation"
+            lastLogin: "Last access"
+            lastLogin.notYet: "not yet"
+            role: "Role"
+            locale: "Language"
+
     delete:
+        page_title: "%displayName%"
+        breadcrumb: "Delete"
+        title: "User deletion"
         confirm_message: "Are you sure to delete this user?"
         actions:
             delete.button: "Delete"
             cancel: "Cancel"
         form:
             deleteOwnedAccounts.label: "Delete owned accounts?"
+
     update:
+        page_title: "%displayName%"
+        breadcrumb: "Edit"
+        title: "User edit"
         actions:
             update.button: "Save changes"
             cancel: "Cancel"
@@ -146,6 +184,7 @@ admin_users:
             surname.label: "Surname"
             username.label: "Username"
             email.label: "Email"
+
     resend_confirmation:
         messages:
             success: "The confirmation email has been sent to %email%"
@@ -154,6 +193,9 @@ admin_users:
 
 admin_administrators:
     list:
+        page_title: "Administrators"
+        breadcrumb: "Administrators"
+        title: "Administrators"
         fields:
             name.header: "Name"
             surname.header: "Surname"
@@ -170,10 +212,46 @@ admin_administrators:
         actions:
             details:
                 link: "details"
-    update:
+
+    details:
+        page_title: "%displayName%"
+        breadcrumb: "%displayName%"
+        title: "Administrator details"
         actions:
-            update.button: "Update"
+            more: "More"
+            switch: "View as %switchUserIdentifier%"
+            update: "Edit"
+            demote: "Demote admin"
+            reset_password: "Reset password"
+            manual_password: "Manual password"
+            promote_super: "Promote super-admin"
+            demote_super: "Demote super-admin"
+            delete: "Delete"
+            unconfirm: "Unconfirm"
+            confirm: "Confirm"
+            resend_confirm: "Resend confirm"
+        fields:
+            username: "Username"
+            email: "Email"
+            confirmed: "Confirmation"
+            lastLogin: "Last access"
+            lastLogin.notYet: "not yet"
+            role: "Role"
+            locale: "Language"
+
+    update:
+        page_title: "%displayName%"
+        breadcrumb: "Edit"
+        title: "Administrator edit"
+        actions:
+            update.button: "Save changes"
             cancel.button: "Cancel"
+        form:
+            name.label: "Name"
+            surname.label: "Surname"
+            username.label: "Username"
+            email.label: "Email"
+
     invite:
         form:
             name.label: "Name"

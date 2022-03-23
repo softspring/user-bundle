@@ -1,60 +1,68 @@
 {% trans_default_domain 'sfs_user' %}
 {% extends '@SfsUser/admin_layout.html.twig' %}
 
+{% block title %}{{ 'admin_administrators.details.page_title'|trans({'%displayName%': administrator.displayName}) }}{% endblock %}
+
 {% block breadcrums_content %}
     {{ parent() }}
-    <li class="breadcrumb-item">Users</li>
-    <li class="breadcrumb-item"><a href="{{ url('sfs_user_admin_administrators_list') }}">Administrators</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{ sfs_user_is('nameSurname') ? administrator.name~' '~administrator.surname : administrator.username }}</li>
+    <li class="breadcrumb-item"><a href="{{ url('sfs_user_admin_administrators_list') }}">{{ 'admin_administrators.list.breadcrumb'|trans }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ 'admin_administrators.details.breadcrumb'|trans({'%displayName%': administrator.displayName}) }}</li>
 {% endblock breadcrums_content %}
 
 {% block content %}
     <div class="container-fluid">
         <div class="row">
             <div class="col">
-                <h1 class="h3 mb-4">Administrator details</h1>
+                <h1 class="h3 mb-4">{{ 'admin_administrators.details.title'|trans({'%displayName%': administrator.displayName}) }}</h1>
             </div>
 
             <div class="col text-end">
                 {% if is_granted('ROLE_ADMIN_ADMINISTRATORS_UPDATE', administrator) %}
-                    <a href="{{ url('sfs_user_admin_administrators_update', {'administrator': administrator}) }}" class="btn btn-primary ml-4">Edit</a>
-                {% else %}
-                    <a href="#" class="btn btn-primary disabled ml-4">Edit</a>
+                    <a href="{{ url('sfs_user_admin_administrators_update', {'administrator': administrator}) }}" class="btn btn-outline-secondary">{{ 'admin_administrators.details.actions.update'|trans }}</a>
                 {% endif %}
 
                 {% if switch_enabled and is_granted(switch_role) %}
-                    <a href="{{ url(switch_route, switch_route_params) }}{{ switch_route_params|length ? '&' : '?' }}{{ switch_parameter }}={{ administrator.username }}"
-                       class="btn btn-outline-secondary"><i class="bi bi-incognito"></i> view as {{ administrator.username }}</a>
+                    {% if is_granted(switch_role, administrator) %}
+                        <a href="{{ url(switch_route, switch_route_params) }}{{ switch_route_params|length ? '&' : '?' }}{{ switch_parameter }}={{ administrator.username }}"
+                           class="btn btn-outline-secondary"><i class="bi bi-incognito"></i> {{ 'admin_administrators.details.actions.switch'|trans({'%switchUserIdentifier%':administrator.userIdentifier, '%switchUserDisplayName%':administrator.displayName}) }}</a>
+                    {% else %}
+                        <a href="#" class="disabled btn btn-outline-secondary"><i class="bi bi-incognito"></i> {{ 'admin_administrators.details.actions.switch'|trans({'%switchUserIdentifier%':administrator.userIdentifier, '%switchUserDisplayName%':administrator.displayName}) }}</a>
+                    {% endif %}
                 {% endif %}
 
-                <div class="btn-group d-inline dropdown">
+                <div class="btn-group dropdown">
                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMoreActions" data-bs-toggle="dropdown" aria-expanded="false">
-                        More
+                        {{ 'admin_administrators.details.actions.more'|trans }}
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMoreActions">
-                        {% if is_granted('ROLE_ADMIN_ADMINISTRATORS_DEMOTE', administrator) %}
-                            <a href="{{ url('sfs_user_admin_administrators_demote_admin', {'administrator':administrator}) }}" class="dropdown-item">Demote Admin</a>
-                        {% else %}
-                            <a href="#" class="dropdown-item disabled">Demote Admin</a>
+                        <a href="#" class="dropdown-item disabled">{{ 'admin_administrators.details.actions.reset_password'|trans }}</a>
+                        <a href="#" class="dropdown-item disabled">{{ 'admin_administrators.details.actions.manual_password'|trans }}</a>
+
+                        {#{% if sfs_user_is('confirmable') %}
+                            {% if administrator.confirmed %}
+                                <a href="#" class="dropdown-item disabled">{{ 'admin_administrators.details.actions.unconfirm'|trans }}</a>
+                            {% else %}
+                                <a href="#" class="dropdown-item disabled">{{ 'admin_administrators.details.actions.confirm'|trans }}</a>
+                                <a href="{{ url('sfs_user_admin_administrators_resend', {'administrator':administrator}) }}" class="dropdown-item">{{ 'admin_administrators.details.actions.resend_confirm'|trans }}</a>
+                            {% endif %}
+                        {% endif %}#}
+
+                        <li><div class="dropdown-divider"></div></li>
+
+                        {% if is_granted('ROLE_ADMIN_ADMINISTRATORS_PROMOTE_SUPER', administrator) and not administrator.superAdmin %}
+                            <a href="{{ url('sfs_user_admin_administrators_promote_super_admin', {'administrator':administrator}) }}" class="dropdown-item text-danger">{{ 'admin_administrators.details.actions.promote_super'|trans }}</a>
                         {% endif %}
 
-                        <a href="#" class="dropdown-item disabled">Reset password</a>
-                                <a href="#" class="dropdown-item disabled">Manual password</a>
+                        {% if is_granted('ROLE_ADMIN_ADMINISTRATORS_DEMOTE_SUPER', administrator) and administrator.superAdmin %}
+                            <a href="{{ url('sfs_user_admin_administrators_demote_super_admin', {'administrator':administrator}) }}" class="dropdown-item text-danger">{{ 'admin_administrators.details.actions.demote_super'|trans }}</a>
+                        {% endif %}
+
+                        {% if is_granted('ROLE_ADMIN_ADMINISTRATORS_DEMOTE', administrator) %}
+                            <a href="{{ url('sfs_user_admin_administrators_demote_admin', {'administrator':administrator}) }}" class="dropdown-item text-danger">{{ 'admin_administrators.details.actions.demote'|trans }}</a>
+                        {% endif %}
 
                         {% if is_granted('ROLE_ADMIN_ADMINISTRATORS_DELETE', administrator) %}
-                            <a href="{{ url('sfs_user_admin_administrators_delete', {'administrator':administrator}) }}" class="dropdown-item">Delete</a>
-                        {% else %}
-                            <a href="#" class="dropdown-item disabled">Delete</a>
-                        {% endif %}
-
-                        {% if sfs_user_is('confirmable') %}
-                            {% if administrator.confirmed %}
-                                <a href="#" class="dropdown-item disabled">Unconfirm</a>
-                            {% else %}
-                                <a href="#" class="dropdown-item disabled">Confirm</a>
-{#                                <a href="{{ url('sfs_user_admin_administrators_resend', {'administrator':administrator}) }}" class="dropdown-item">Resend confirmation</a>#}
-                                <a href="#" class="dropdown-item">Resend confirmation</a>
-                            {% endif %}
+                            <a href="{{ url('sfs_user_admin_administrators_delete', {'administrator':administrator}) }}" class="dropdown-item text-danger">{{ 'admin_administrators.details.actions.delete'|trans }}</a>
                         {% endif %}
                     </div>
                 </div>
@@ -77,16 +85,17 @@
                     </div>
 
                     {% if sfs_user_is('identifierUsername') %}
-                        <p><strong>username:</strong><br/>{{ administrator.username }}</p>
+                        <p><strong>{{ 'admin_administrators.details.fields.username'|trans }}:</strong><br/>{{ administrator.username }}</p>
                     {% endif %}
 
                     {% if sfs_user_is('identifierEmail') or sfs_user_is('email') %}
-                        <p><strong>email:</strong><br/>{{ administrator.email }}</p>
+                        <p><strong>{{ 'admin_administrators.details.fields.email'|trans }}:</strong><br/>{{ administrator.email }}</p>
                     {% endif %}
 
                     {% if sfs_user_is('confirmable') %}
                         <p>
-                            <strong>confirmed:</strong><br/>                            {% if administrator.confirmed %}
+                            <strong>{{ 'admin_administrators.details.fields.confirmed'|trans }}:</strong><br/>
+                            {% if administrator.confirmed %}
                                 <span class="bi bi-check  align-middle text-success"></span>
                                 at
                                 <span title="{{ administrator.confirmedAt|date('H:i:s d-m-Y', 'UTC') }} UTC">{{ administrator.confirmedAt|date('H:i:s d-m-Y', 'Europe/Madrid') }}</span>
@@ -97,16 +106,16 @@
                     {% endif %}
 
                     {% if sfs_user_is('lastLogin') %}
-                        <p><strong>lastLogin:</strong><br/>
+                        <p><strong>{{ 'admin_administrators.details.fields.lastLogin'|trans }}:</strong><br/>
                             {% if administrator.lastLogin %}
                                 <span title="{{ administrator.lastLogin|date('H:i:s d-m-Y', 'UTC') }} UTC">{{ administrator.lastLogin|date('H:i:s d-m-Y', 'Europe/Madrid') }}</span>
                             {% else %}
-                                not yet
+                                {{ 'admin_administrators.details.fields.lastLogin.notYet'|trans }}
                             {% endif %}
                         </p>
                     {% endif %}
 
-                    <p><strong>role:</strong>
+                    <p><strong>{{ 'admin_administrators.details.fields.role'|trans }}:</strong>
                         {% if sfs_user_is('rolesAdmin') %}
                             {% if administrator.superAdmin %}
                                 <br/><span class="badge bg-danger">super-admin</span>
@@ -117,8 +126,13 @@
                             <br/>{{ administrator.roles|join(', ') }}
                         {% endif %}
                     </p>
+
+                    {% if sfs_user_is('hasLocalePreference') %}
+                        <p><strong>{{ 'admin_administrators.details.fields.locale'|trans }}:</strong><br/>{{ administrator.locale|default('not selected') }}</p>
+                    {% endif %}
                 </div>
             </div>
+
             <div class="col">
                 {% if is_granted('ROLE_ADMIN_ACCESS_HISTORY_LIST') and user_access_history is defined %}
                     {% include '@SfsUser/admin/components/_user_access_history_card.html.twig' %}
@@ -127,49 +141,4 @@
         </div>
     </div>
 
-{#    <div class="row">#}
-{#        {% if multi_accounted_user %}#}
-{#            <div class="col">#}
-{#                <div class="card">#}
-{#                    <div class="card-header">#}
-{#                        <h4>Accounts</h4>#}
-{#                    </div>#}
-{#                    <div class="card-body">#}
-{#                        {% if administrator.relations.count %}#}
-{#                            <ul>#}
-{#                                {% for relation in administrator.relations %}#}
-{#                                    <li>#}
-{#                                        {% if route_defined('sfs_account_admin_accounts_details') %}#}
-{#                                            <a href="{{ url('sfs_account_admin_accounts_details', {'account':relation.account}) }}">{{ relation.account.name }}</a>#}
-{#                                        {% else %}#}
-{#                                            {{ relation.account.name }}#}
-{#                                        {% endif %}#}
-
-{#                                        {% if relation.grantedBy is defined and relation.grantedBy != relation.user %}#}
-{#                                            (granted by {{ relation.grantedBy.username }})#}
-{#                                        {% endif %}#}
-{#                                    </li>#}
-{#                                {% endfor %}#}
-{#                            </ul>#}
-{#                        {% else %}#}
-{#                            <p><em>This user is not associated to any account</em></p>#}
-{#                        {% endif %}#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        {% endif %}#}
-
-{#        {% if false %}#}
-{#            <div class="col">#}
-{#                <div class="card">#}
-{#                    <div class="card-header">#}
-{#                        <h4>Emails sent</h4>#}
-{#                    </div>#}
-{#                    <div class="card-body">#}
-{#                        <p><i>TODO</i></p>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        {% endif %}#}
-{#    </div>#}
 {% endblock content %}

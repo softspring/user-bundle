@@ -9,7 +9,7 @@ trait UserAvatarTrait
     public function getAvatarUrl(array $options = []): string
     {
         if (!$this->avatarUrl) {
-            $name = $options['name'] ?? $this->getDisplayName();
+            $name = $options['name'] ?? implode(' ', array_slice(explode(' ', $this->getDisplayName()), 0, 2));
             $size = $options['size'] ?? 128;
             $background = $options['background'] ?? 'random';
 

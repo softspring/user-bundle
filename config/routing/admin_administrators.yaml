@@ -14,6 +14,14 @@ sfs_user_admin_administrators_demote_admin:
     controller: Softspring\UserBundle\Controller\Admin\AdministratorsController::demoteAdmin
     path: /{administrator}/demote-admin
 
+sfs_user_admin_administrators_promote_super_admin:
+    controller: Softspring\UserBundle\Controller\Admin\AdministratorsController::promoteSuper
+    path: /{administrator}/promote-super
+
+sfs_user_admin_administrators_demote_super_admin:
+    controller: Softspring\UserBundle\Controller\Admin\AdministratorsController::demoteSuper
+    path: /{administrator}/demote-super
+
 sfs_user_admin_administrators_delete:
     controller: sfs_user.admin.administrator.controller::delete
     path: /{administrator}/delete

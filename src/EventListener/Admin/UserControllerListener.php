@@ -4,14 +4,20 @@ namespace Softspring\UserBundle\EventListener\Admin;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Softspring\CoreBundle\Event\ViewEvent;
+use Softspring\CrudlBundle\Event\GetResponseEntityEvent;
 use Softspring\UserBundle\Doctrine\Filter\UserFilter;
+use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Manager\UserAccessManagerInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\RouterInterface;
 
 class UserControllerListener implements EventSubscriberInterface
 {
     protected EntityManagerInterface $em;
+
+    protected RouterInterface $router;
 
     protected array $impersonateBarConfig;
 
@@ -20,9 +26,10 @@ class UserControllerListener implements EventSubscriberInterface
     /**
      * UserControllerListener constructor.
      */
-    public function __construct(EntityManagerInterface $em, array $impersonateBarConfig, ?UserAccessManagerInterface $accessManager)
+    public function __construct(EntityManagerInterface $em, RouterInterface $router, array $impersonateBarConfig, ?UserAccessManagerInterface $accessManager)
     {
         $this->em = $em;
+        $this->router = $router;
         $this->impersonateBarConfig = $impersonateBarConfig;
         $this->accessManager = $accessManager;
     }
@@ -42,6 +49,7 @@ class UserControllerListener implements EventSubscriberInterface
             SfsUserEvents::ADMIN_USERS_DETAILS_INITIALIZE => 'onControllerInitializeEnableFilter',
             SfsUserEvents::ADMIN_USERS_DELETE_INITIALIZE => 'onControllerInitializeEnableFilter',
             SfsUserEvents::ADMIN_USERS_PROMOTE_INITIALIZE => 'onControllerInitializeEnableFilter',
+            SfsUserEvents::ADMIN_USERS_UPDATE_SUCCESS => 'onUpdateSuccessRedirect',
         ];
     }
 
@@ -78,5 +86,10 @@ class UserControllerListener implements EventSubscriberInterface
         $data = $event->getData();
 
         $data['user_access_history'] = $this->accessManager->getRepository()->findBy(['user' => $data['user']], ['loginAt' => 'DESC'], 5);
+    }
+
+    public function onUpdateSuccessRedirect(GetResponseEntityEvent $event): void
+    {
+        $event->setResponse(new RedirectResponse($this->router->generate('sfs_user_admin_users_details', ['user' => $event->getEntity()])));
     }
 }

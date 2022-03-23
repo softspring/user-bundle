@@ -1,52 +1,60 @@
 {% trans_default_domain 'sfs_user' %}
 {% extends '@SfsUser/admin_layout.html.twig' %}
 
+{% block title %}{{ 'admin_users.details.page_title'|trans({'%displayName%': user.displayName}) }}{% endblock %}
+
 {% block breadcrums_content %}
     {{ parent() }}
-    <li class="breadcrumb-item"><a href="{{ url('sfs_user_admin_users_list') }}">Users</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{ sfs_user_is('nameSurname') ? user.name~' '~user.surname : user.username }}</li>
+    <li class="breadcrumb-item"><a href="{{ url('sfs_user_admin_users_list') }}">{{ 'admin_users.list.breadcrumb'|trans }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ 'admin_users.details.breadcrumb'|trans({'%displayName%': user.displayName}) }}</li>
 {% endblock breadcrums_content %}
 
 {% block content %}
     <div class="container-fluid">
         <div class="row">
             <div class="col">
-                <h1 class="h3 mb-4">User details</h1>
+                <h1 class="h3 mb-4">{{ 'admin_users.details.title'|trans({'%displayName%': user.displayName}) }}</h1>
             </div>
 
             <div class="col text-end">
                 {% if is_granted('ROLE_ADMIN_USERS_UPDATE', user) %}
-                    <a href="{{ url('sfs_user_admin_users_update', {'user': user}) }}" class="btn btn-outline-secondary">Edit</a>
+                    <a href="{{ url('sfs_user_admin_users_update', {'user': user}) }}" class="btn btn-outline-secondary">{{ 'admin_users.details.actions.update'|trans }}</a>
                 {% endif %}
 
                 {% if switch_enabled and is_granted(switch_role) %}
-                    <a href="{{ url(switch_route, switch_route_params) }}{{ switch_route_params|length ? '&' : '?' }}{{ switch_parameter }}={{ user.username }}"
-                       class="btn btn-outline-secondary"><i class="bi bi-incognito"></i> view as {{ user.username }}</a>
+                    {% if is_granted(switch_role, user) %}
+                        <a href="{{ url(switch_route, switch_route_params) }}{{ switch_route_params|length ? '&' : '?' }}{{ switch_parameter }}={{ user.username }}"
+                           class="btn btn-outline-secondary"><i class="bi bi-incognito"></i> {{ 'admin_users.details.actions.switch'|trans({'%switchUserIdentifier%':user.userIdentifier, '%switchUserDisplayName%':user.displayName}) }}</a>
+                    {% else %}
+                        <a href="#" class="disabled btn btn-outline-secondary"><i class="bi bi-incognito"></i> {{ 'admin_users.details.actions.switch'|trans({'%switchUserIdentifier%':user.userIdentifier, '%switchUserDisplayName%':user.displayName}) }}</a>
+                    {% endif %}
                 {% endif %}
 
                 <div class="btn-group dropdown">
                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMoreActions" data-bs-toggle="dropdown" aria-expanded="false">
-                        More
+                        {{ 'admin_users.details.actions.more'|trans }}
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMoreActions">
-                        {% if is_granted('ROLE_ADMIN_USERS_PROMOTE', user) %}
-                            <a href="{{ url('sfs_user_admin_users_promote_admin', {'user':user}) }}" class="dropdown-item">Promote Admin</a>
-                        {% endif %}
-
-                        <a href="#" class="dropdown-item disabled">Reset password</a>
-                        <a href="#" class="dropdown-item disabled">Manual password</a>
-
-                        {% if is_granted('ROLE_ADMIN_USERS_DELETE', user) %}
-                            <a href="{{ url('sfs_user_admin_users_delete', {'user':user}) }}" class="dropdown-item">Delete</a>
-                        {% endif %}
+                        <a href="#" class="dropdown-item disabled">{{ 'admin_users.details.actions.reset_password'|trans }}</a>
+                        <a href="#" class="dropdown-item disabled">{{ 'admin_users.details.actions.manual_password'|trans }}</a>
 
                         {% if sfs_user_is('confirmable') %}
                             {% if user.confirmed %}
-                                <a href="#" class="dropdown-item disabled">Unconfirm</a>
+                                <a href="#" class="dropdown-item disabled">{{ 'admin_users.details.actions.unconfirm'|trans }}</a>
                             {% else %}
-                                <a href="#" class="dropdown-item disabled">Confirm</a>
-                                <a href="{{ url('sfs_user_admin_users_resend', {'user':user}) }}" class="dropdown-item">Resend confirmation</a>
+                                <a href="#" class="dropdown-item disabled">{{ 'admin_users.details.actions.confirm'|trans }}</a>
+                                <a href="{{ url('sfs_user_admin_users_resend', {'user':user}) }}" class="dropdown-item">{{ 'admin_users.details.actions.resend_confirm'|trans }}</a>
                             {% endif %}
+                        {% endif %}
+
+                        <li><div class="dropdown-divider"></div></li>
+
+                        {% if is_granted('ROLE_ADMIN_USERS_PROMOTE', user) %}
+                            <a href="{{ url('sfs_user_admin_users_promote_admin', {'user':user}) }}" class="dropdown-item text-danger">{{ 'admin_users.details.actions.promote'|trans }}</a>
+                        {% endif %}
+
+                        {% if is_granted('ROLE_ADMIN_USERS_DELETE', user) %}
+                            <a href="{{ url('sfs_user_admin_users_delete', {'user':user}) }}" class="dropdown-item text-danger">{{ 'admin_users.details.actions.delete'|trans }}</a>
                         {% endif %}
                     </div>
                 </div>
@@ -69,16 +77,17 @@
                     </div>
 
                     {% if sfs_user_is('identifierUsername') %}
-                        <p><strong>username:</strong><br/>{{ user.username }}</p>
+                        <p><strong>{{ 'admin_users.details.fields.username'|trans }}:</strong><br/>{{ user.username }}</p>
                     {% endif %}
 
                     {% if sfs_user_is('identifierEmail') or sfs_user_is('email') %}
-                        <p><strong>email:</strong><br/>{{ user.email }}</p>
+                        <p><strong>{{ 'admin_users.details.fields.email'|trans }}:</strong><br/>{{ user.email }}</p>
                     {% endif %}
 
                     {% if sfs_user_is('confirmable') %}
                         <p>
-                            <strong>confirmed:</strong><br/>                            {% if user.confirmed %}
+                            <strong>{{ 'admin_users.details.fields.confirmed'|trans }}:</strong><br/>
+                            {% if user.confirmed %}
                                 <span class="bi bi-check  align-middle text-success"></span>
                                 at
                                 <span title="{{ user.confirmedAt|date('H:i:s d-m-Y', 'UTC') }} UTC">{{ user.confirmedAt|date('H:i:s d-m-Y', 'Europe/Madrid') }}</span>
@@ -89,19 +98,19 @@
                     {% endif %}
 
                     {% if sfs_user_is('lastLogin') %}
-                        <p><strong>lastLogin:</strong><br/>
+                        <p><strong>{{ 'admin_users.details.fields.lastLogin'|trans }}:</strong><br/>
                             {% if user.lastLogin %}
                                 <span title="{{ user.lastLogin|date('H:i:s d-m-Y', 'UTC') }} UTC">{{ user.lastLogin|date('H:i:s d-m-Y', 'Europe/Madrid') }}</span>
                             {% else %}
-                                not yet
+                                {{ 'admin_users.details.fields.lastLogin.notYet'|trans }}
                             {% endif %}
                         </p>
                     {% endif %}
 
-                    <p><strong>role:</strong><br/>{{ user.roles|join(', ') }}</p>
+                    <p><strong>{{ 'admin_users.details.fields.role'|trans }}:</strong><br/>{{ user.roles|join(', ') }}</p>
 
                     {% if sfs_user_is('hasLocalePreference') %}
-                        <p><strong>locale:</strong><br/>{{ user.locale|default('not selected') }}</p>
+                        <p><strong>{{ 'admin_users.details.fields.locale'|trans }}:</strong><br/>{{ user.locale|default('not selected') }}</p>
                     {% endif %}
                 </div>
             </div>

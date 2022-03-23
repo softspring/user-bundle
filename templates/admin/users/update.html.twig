@@ -1,25 +1,33 @@
 {% trans_default_domain 'sfs_user' %}
 {% extends '@SfsUser/admin_layout.html.twig' %}
 
+{% block title %}{{ 'admin_users.update.page_title'|trans({'%displayName%': user.displayName}) }}{% endblock %}
+
 {% block breadcrums_content %}
     {{ parent() }}
-    <li class="breadcrumb-item"><a href="{{ url('sfs_user_admin_users_list') }}">Users</a></li>
-    <li class="breadcrumb-item"><a href="{{ url('sfs_user_admin_users_details', {'user':user}) }}">{{ sfs_user_is('nameSurname') ? user.name~' '~user.surname : user.username }}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Edit</li>
+    <li class="breadcrumb-item"><a href="{{ url('sfs_user_admin_users_list') }}">{{ 'admin_users.list.breadcrumb'|trans }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ url('sfs_user_admin_users_details', {'user':user}) }}">{{ 'admin_users.details.breadcrumb'|trans({'%displayName%': user.displayName}) }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ 'admin_users.update.breadcrumb'|trans({'%displayName%': user.displayName}) }}</li>
 {% endblock breadcrums_content %}
 
 {% block content %}
-    {% if sfs_user_is('nameSurname') %}
-        <h1 class="h3 mb-4">{{ user.name }} {{ user.surname }}</h1>
-    {% else %}
-        <h1 class="h3 mb-4">{{ user.username }}</h1>
-    {% endif %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <h1 class="h3 mb-4">{{ 'admin_users.update.title'|trans({'%displayName%': user.displayName}) }}</h1>
+            </div>
+        </div>
+    </div>
 
-    {{ form_start(form) }}
-    {{ form_rest(form) }}
-    <a href="{{ url('sfs_user_admin_users_details', {'user':user}) }}" class="btn btn-outline-secondary">{{ 'admin_users.update.actions.cancel'|trans }}</a>
-    <input type="submit" value="{{ 'admin_users.update.actions.update.button'|trans }}" class="btn btn-primary" />
-    {{ form_end(form) }}
-
-
+    <div class="container">
+        <div class="row">
+            <div class="col bg-white p-5">
+                {{ form_start(form) }}
+                    {{ form_rest(form) }}
+                    <a href="{{ url('sfs_user_admin_users_details', {'user':user}) }}" class="btn btn-outline-secondary">{{ 'admin_users.update.actions.cancel'|trans }}</a>
+                    <input type="submit" value="{{ 'admin_users.update.actions.update.button'|trans }}" class="btn btn-primary" />
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
 {% endblock content %}

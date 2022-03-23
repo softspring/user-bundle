@@ -166,7 +166,7 @@ class SfsUserEvents
     /** @Event("Softspring\CoreBundle\Event\GetResponseFormEvent") */
     public const ADMIN_USERS_UPDATE_FORM_VALID = 'sfs_user.admin.users.update_form_valid';
 
-    /** @Event("Softspring\UserBundle\Event\GetResponseUserEvent") */
+    /** @Event("Softspring\UserBundle\Event\GetResponseEntityEvent") */
     public const ADMIN_USERS_UPDATE_SUCCESS = 'sfs_user.admin.users.update_success';
 
     /** @Event("Softspring\CoreBundle\Event\GetResponseFormEvent") */
@@ -198,6 +198,18 @@ class SfsUserEvents
 
     /** @Event("Softspring\UserBundle\Event\GetResponseUserEvent") */
     public const ADMIN_ADMINISTRATORS_DEMOTE_SUCCESS = 'sfs_user.admin.administrators.demote_success';
+
+    /** @Event("Softspring\UserBundle\Event\GetResponseUserEvent") */
+    public const ADMIN_ADMINISTRATORS_PROMOTE_SUPER_INITIALIZE = 'sfs_user.admin.administrators.promote_super_initialize';
+
+    /** @Event("Softspring\UserBundle\Event\GetResponseUserEvent") */
+    public const ADMIN_ADMINISTRATORS_PROMOTE_SUPER_SUCCESS = 'sfs_user.admin.administrators.promote_super_success';
+
+    /** @Event("Softspring\UserBundle\Event\GetResponseUserEvent") */
+    public const ADMIN_ADMINISTRATORS_DEMOTE_SUPER_INITIALIZE = 'sfs_user.admin.administrators.demote_super_initialize';
+
+    /** @Event("Softspring\UserBundle\Event\GetResponseUserEvent") */
+    public const ADMIN_ADMINISTRATORS_DEMOTE_SUPER_SUCCESS = 'sfs_user.admin.administrators.demote_super_success';
 
     /** @Event("Softspring\UserBundle\Event\GetResponseUserEvent") */
     public const ADMIN_ADMINISTRATORS_DELETE_INITIALIZE = 'sfs_user.admin.administrators.delete_initialize';
