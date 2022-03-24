@@ -1,7 +1,7 @@
 {% trans_default_domain 'sfs_user' %}
 {% extends '@SfsUser/admin_layout.html.twig' %}
 
-{% block title %}{{ 'admin_administrators.details.page_title'|trans({'%displayName%': administrator.displayName}) }}{% endblock %}
+{% block title %}{{ 'admin_administrators.details.meta.title'|trans({'%displayName%': administrator.displayName}) }}{% endblock %}
 
 {% block breadcrums_content %}
     {{ parent() }}

@@ -117,7 +117,7 @@ change_password:
 
 admin_users:
     list:
-        page_title: "Usuarios"
+        meta.title: "Usuarios"
         breadcrumb: "Usuarios"
         title: "Usuarios"
         fields:
@@ -141,7 +141,7 @@ admin_users:
             pending_confirm.title: "pendientes confirmación"
 
     details:
-        page_title: "%displayName%"
+        meta.title: "%displayName%"
         breadcrumb: "%displayName%"
         title: "Detalles de usuario"
         actions:
@@ -165,7 +165,7 @@ admin_users:
             locale: "Idioma"
 
     delete:
-        page_title: "%displayName%"
+        meta.title: "%displayName%"
         breadcrumb: "Eliminar"
         title: "Eliminar usuario"
         confirm_message: "¿Confirmas que deseas eliminar este usuario?"
@@ -176,7 +176,7 @@ admin_users:
             deleteOwnedAccounts.label: "¿Eliminar las cuentas asociadas de las que es propietario/a?"
 
     update:
-        page_title: "%displayName%"
+        meta.title: "%displayName%"
         breadcrumb: "Editar"
         title: "Editar usuario"
         actions:
@@ -196,7 +196,7 @@ admin_users:
 
 admin_administrators:
     list:
-        page_title: "Administratores"
+        meta.title: "Administratores"
         breadcrumb: "Administratores"
         title: "Administratores"
         fields:
@@ -217,7 +217,7 @@ admin_administrators:
                 link: "detalles"
 
     details:
-        page_title: "%displayName%"
+        meta.title: "%displayName%"
         breadcrumb: "%displayName%"
         title: "Detalles de administrador"
         actions:
@@ -243,7 +243,7 @@ admin_administrators:
             locale: "Idioma"
 
     update:
-        page_title: "%displayName%"
+        meta.title: "%displayName%"
         breadcrumb: "Editar"
         title: "Editar administrador"
         actions:
@@ -277,7 +277,7 @@ admin_access_history:
 
 admin_invitations:
     list:
-        page_title: "Invitaciones"
+        meta.title: "Invitaciones"
         breadcrumb: "Invitaciones"
         title: "Invitaciones"
         filter_form:
@@ -301,7 +301,7 @@ admin_invitations:
                 link: "Invitar"
 
     details:
-        page_title: "%invitation%"
+        meta.title: "%invitation%"
         breadcrumb: "%invitation%"
         title: "Detalles de invitación"
         actions:
