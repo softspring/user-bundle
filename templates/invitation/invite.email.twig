@@ -1,0 +1,12 @@
+{% trans_default_domain 'sfs_user' %}
+{% extends '@SfsUser/base.email.twig' %}
+
+{% block content %}
+    {% autoescape false %}
+        {% if sfs_invitation_is('rolesAdmin') and invitation.admin %}
+            {{ 'invitation.email.admin_html'|trans(__translation_params) }}
+        {% else %}
+            {{ 'invitation.email.html'|trans(__translation_params) }}
+        {% endif %}
+    {% endautoescape %}
+{% endblock content %}

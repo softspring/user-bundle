@@ -241,21 +241,6 @@ class SfsUserEvents
     /** @Event("Softspring\CoreBundle\Event\ViewEvent") */
     public const ADMIN_ADMINISTRATORS_UPDATE_VIEW = 'sfs_user.admin.administrators.update_view';
 
-    /** @Event("Softspring\UserBundle\Event\GetResponseUserEvent") */
-    public const ADMIN_ADMINISTRATORS_INVITE_INITIALIZE = 'sfs_user.admin.administrators.invite_initialize';
-
-    /** @Event("Softspring\CoreBundle\Event\GetResponseFormEvent") */
-    public const ADMIN_ADMINISTRATORS_INVITE_FORM_VALID = 'sfs_user.admin.administrators.invite_form_valid';
-
-    /** @Event("Softspring\UserBundle\Event\GetResponseUserEvent") */
-    public const ADMIN_ADMINISTRATORS_INVITE_SUCCESS = 'sfs_user.admin.administrators.invite_success';
-
-    /** @Event("Softspring\CoreBundle\Event\GetResponseFormEvent") */
-    public const ADMIN_ADMINISTRATORS_INVITE_FORM_INVALID = 'sfs_user.admin.administrators.invite_form_invalid';
-
-    /** @Event("Softspring\CoreBundle\Event\ViewEvent") */
-    public const ADMIN_ADMINISTRATORS_INVITE_VIEW = 'sfs_user.admin.administrators.invite_view';
-
     /** @Event("Softspring\CoreBundle\Event\GetResponseRequestEvent") */
     public const ADMIN_INVITATIONS_LIST_INITIALIZE = 'sfs_user.admin.invitations.list_initialize';
 

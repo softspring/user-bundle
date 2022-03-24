@@ -5,7 +5,6 @@
                       https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Softspring\UserBundle\Model\UserInvitation" table="user_invitation">
-        <field name="username" column="username" type="string" nullable="false" length="180" />
         <field name="email" column="email" type="string" nullable="false" length="180" />
 
         <field name="invitationToken" column="invitation_token" type="string" length="180" unique="true" nullable="true" />

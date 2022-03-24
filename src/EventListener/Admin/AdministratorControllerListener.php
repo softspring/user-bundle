@@ -54,8 +54,6 @@ class AdministratorControllerListener implements EventSubscriberInterface
             // enable filter for administrators
             SfsUserEvents::ADMIN_ADMINISTRATORS_LIST_INITIALIZE => 'onControllerInitializeEnableFilter',
             SfsUserEvents::ADMIN_ADMINISTRATORS_DETAILS_INITIALIZE => 'onControllerInitializeEnableFilter',
-            SfsUserEvents::ADMIN_ADMINISTRATORS_INVITE_FORM_VALID => 'onAdminInvitationValidSetInviterAndAdmin',
-            SfsUserEvents::ADMIN_ADMINISTRATORS_INVITE_SUCCESS => 'onAdminInvitationSuccessLaunchEvent',
             SfsUserEvents::ADMIN_USERS_PROMOTE_SUCCESS => 'onUserPromoteRedirect',
             SfsUserEvents::ADMIN_ADMINISTRATORS_DEMOTE_SUCCESS => 'onAdminDemoteRedirect',
             SfsUserEvents::ADMIN_ADMINISTRATORS_UPDATE_SUCCESS => 'onUpdateSuccessRedirect',
@@ -97,24 +95,6 @@ class AdministratorControllerListener implements EventSubscriberInterface
         $data = $event->getData();
 
         $data['user_access_history'] = $this->accessManager->getRepository()->findBy(['user' => $data['administrator']], ['loginAt' => 'DESC'], 5);
-    }
-
-    public function onAdminInvitationValidSetInviterAndAdmin(GetResponseFormEvent $event, string $eventName, EventDispatcherInterface $dispatcher): void
-    {
-        /** @var UserInvitationInterface $invitation */
-        $invitation = $event->getForm()->getData();
-        /** @var UserInterface $inviter */
-        $inviter = $this->tokenStorage->getToken()->getUser();
-        $invitation->setInviter($inviter);
-
-        if ($invitation instanceof RolesAdminInterface) {
-            $invitation->setAdmin(true);
-        }
-    }
-
-    public function onAdminInvitationSuccessLaunchEvent(GetResponseEntityEvent $event, string $eventName, EventDispatcherInterface $dispatcher): void
-    {
-        $dispatcher->dispatch(new UserInvitationEvent($event->getEntity(), $event->getRequest()), SfsUserEvents::USER_INVITED);
     }
 
     public function onUserPromoteRedirect(GetResponseUserEvent $event): void

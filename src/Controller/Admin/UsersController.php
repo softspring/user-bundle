@@ -74,7 +74,7 @@ class UsersController extends AbstractController
         ]);
     }
 
-    public function resendEmail(string $user, Request $request): Response
+    public function resendConfirmationEmail(string $user, Request $request): Response
     {
         /** @var ConfirmableInterface|UserInterface $user */
         $user = $this->userManager->findUserBy(['id' => $user]);

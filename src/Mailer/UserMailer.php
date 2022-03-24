@@ -65,7 +65,7 @@ class UserMailer implements UserMailerInterface
     public function sendInvitationEmail(UserInvitationInterface $invitation, ?string $locale = null): void
     {
         $toName = $invitation instanceof NameSurnameInterface ? "{$invitation->getName()} {$invitation->getSurname()}" : '';
-        $acceptUrl = $this->urlGenerator->generate('sfs_user_invite_accept', ['token' => $invitation->getInvitationToken()], UrlGeneratorInterface::ABSOLUTE_URL);
+        $acceptUrl = $this->urlGenerator->generate('sfs_user_invitation_accept', ['token' => $invitation->getInvitationToken()], UrlGeneratorInterface::ABSOLUTE_URL);
 
         $email = (new InvitationEmail($invitation, $acceptUrl, $this->translator, $locale))
             ->to(new Address($invitation->getEmail(), $toName))

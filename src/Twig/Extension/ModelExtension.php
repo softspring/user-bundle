@@ -53,7 +53,7 @@ class ModelExtension extends AbstractExtension
 
     public function userInvitationInterface(string $interface): bool
     {
-        if (!$this->invitationManager instanceof UserInvitationInterface) {
+        if (!$this->invitationManager instanceof UserInvitationManagerInterface) {
             return false;
         }
 

@@ -7,6 +7,8 @@ use Softspring\UserBundle\Manager\UserAccessManagerInterface;
 use Softspring\UserBundle\Manager\UserInvitationManagerInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\ConfirmableInterface;
+use Softspring\UserBundle\Model\NameSurnameInterface;
+use Softspring\UserBundle\Model\UserIdentifierUsernameInterface;
 
 class InvitationsFixtures extends UserFixtures
 {
@@ -29,7 +31,15 @@ class InvitationsFixtures extends UserFixtures
         for ($i=0 ; $i < 200 ; $i++) {
             $invitation = $this->invitationManager->createEntity();
 
-            $invitation->setUsername($faker->unique()->userName());
+            if ($invitation instanceof NameSurnameInterface) {
+                $invitation->setName($faker->firstName());
+                $invitation->setSurname($faker->lastName(). ' '. $faker->lastName());
+            }
+
+            if ($invitation instanceof UserIdentifierUsernameInterface) {
+                $invitation->setUsername($faker->unique()->userName());
+            }
+
             $invitation->setEmail($faker->unique()->email());
 
             if ($faker->boolean(60)) {
@@ -41,7 +51,7 @@ class InvitationsFixtures extends UserFixtures
                     $user->setConfirmedAt($invitation->getAcceptedAt());
                 }
 
-                $manager->persist($user);
+                $manager->persist($user); // $this->userManager->saveEntity($user, false); // this is disabled because wastes a lot of time hashing passwords
             }
 
             $manager->persist($invitation);

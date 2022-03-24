@@ -11,8 +11,6 @@ abstract class UserInvitation implements UserInvitationInterface
 
     protected ?UserInterface $user = null;
 
-    protected ?string $username = null;
-
     protected ?string $email = null;
 
     protected ?string $invitationToken = null;
@@ -22,26 +20,6 @@ abstract class UserInvitation implements UserInvitationInterface
     public function __toString(): string
     {
         return "{$this->getId()}";
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(?string $username): void
-    {
-        $this->username = $username;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(?string $email): void
-    {
-        $this->email = $email;
     }
 
     public function getInvitationToken(): ?string

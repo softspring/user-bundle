@@ -6,6 +6,7 @@ use Softspring\Component\MimeTranslatable\ExampleEmailInterface;
 use Softspring\Component\MimeTranslatable\TranslatableEmail;
 use Softspring\UserBundle\Mime\Example\Model\ExampleInvitation;
 use Softspring\UserBundle\Model\NameSurnameInterface;
+use Softspring\UserBundle\Model\UserIdentifierUsernameInterface;
 use Softspring\UserBundle\Model\UserInvitationInterface;
 use Symfony\Component\Mime\Header\Headers;
 use Symfony\Component\Mime\Part\AbstractPart;
@@ -24,9 +25,6 @@ class InvitationEmail extends TranslatableEmail implements ExampleEmailInterface
         return new self($user, $acceptUrl, $translator, $locale);
     }
 
-    /**
-     * InvitationEmail constructor.
-     */
     public function __construct(UserInvitationInterface $invitation, string $acceptUrl, TranslatorInterface $translator, ?string $locale = null, Headers $headers = null, AbstractPart $body = null)
     {
         parent::__construct($translator, $locale, $headers, $body);
@@ -34,16 +32,24 @@ class InvitationEmail extends TranslatableEmail implements ExampleEmailInterface
         $this->setContextParam('invitation', $invitation);
         $this->setContextParam('acceptUrl', $acceptUrl);
 
-        $this->setTranslationParams([
-            '%name%' => $invitation instanceof NameSurnameInterface ? $invitation->getName() : $invitation->getUsername(),
-            '%surname%' => $invitation instanceof NameSurnameInterface ? $invitation->getSurname() : '',
-            '%username%' => $invitation->getUsername(),
+        $translationParams = [
             '%email%' => $invitation->getEmail(),
             '%accept_url%' => $acceptUrl,
-        ]);
+        ];
 
-        $this->htmlTemplate('@SfsUser/invite/invite.email.twig');
+        if ($invitation instanceof NameSurnameInterface) {
+            $translationParams['%name%'] = $invitation->getName();
+            $translationParams['%surname%'] = $invitation->getSurname();
+        }
 
-        $this->subject('invite.accept.email.subject', 'sfs_user');
+        if ($invitation instanceof UserIdentifierUsernameInterface) {
+            $translationParams['%username%'] = $invitation->getUsername();
+        }
+
+        $this->setTranslationParams($translationParams);
+
+        $this->htmlTemplate('@SfsUser/invitation/invite.email.twig');
+
+        $this->subject('invitation.email.subject', 'sfs_user');
     }
 }

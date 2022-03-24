@@ -1,39 +1,96 @@
 {% trans_default_domain 'sfs_user' %}
 {% extends '@SfsUser/admin_layout.html.twig' %}
 
-{% set details_title = sfs_invitation_is('nameSurname') ? invitation.name ~ ' ' ~ invitation.surname : invitation.username %}
+{% block title %}{{ 'admin_invitations.details.page_title'|trans({'%invitation%': invitation.email}) }}{% endblock %}
 
 {% block breadcrums_content %}
     {{ parent() }}
-    <li class="breadcrumb-item">Users</li>
-    <li class="breadcrumb-item"><a href="{{ url('sfs_user_admin_invitations_list') }}">Invitations</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{ details_title }}</li>
+    <li class="breadcrumb-item"><a href="{{ url('sfs_user_admin_invitations_list') }}">{{ 'admin_invitations.list.breadcrumb'|trans }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ 'admin_invitations.details.breadcrumb'|trans({'%invitation%': invitation.email}) }}</li>
 {% endblock breadcrums_content %}
 
 {% block content %}
-    <h1 class="h3 mb-4">{{ details_title }}</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <h1 class="h3 mb-4">{{ 'admin_invitations.details.title'|trans({'%invitation%': invitation.email}) }}</h1>
+            </div>
 
-    <div class="text-right">
-        {% if not invitation.acceptedAt %}
-            <a href="{{ url('sfs_user_admin_invitations_resend', {'invitation':invitation}) }}" class="btn btn-outline-secondary">Resend invitation</a>
-        {% endif %}
+            <div class="col text-end">
+                {% if not invitation.acceptedAt %}
+                    <a href="{{ url('sfs_user_admin_invitations_resend', {'invitation':invitation}) }}" class="btn btn-outline-secondary">Resend invitation</a>
+                {% endif %}
+            </div>
+        </div>
     </div>
 
-    {% if sfs_invitation_is('nameSurname') %}
-    <p><strong>name:</strong> {{ invitation.name }}</p>
-    <p><strong>surname:</strong> {{ invitation.surname }}</p>
-    {% endif %}
-    <p><strong>username:</strong> {{ invitation.username }}</p>
-    <p><strong>email:</strong> {{ invitation.email }}</p>
-    <p><strong>acceptedAt:</strong> {{ invitation.acceptedAt ? invitation.acceptedAt|date('H:i d-m-Y') : 'not yet' }}</p>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="bg-white p-4">
+                    {% if sfs_invitation_is('nameSurname') %}
+                        <p><strong>{{ 'admin_invitations.details.fields.name'|trans }}:</strong> {{ invitation.name }}</p>
+                        <p><strong>{{ 'admin_invitations.details.fields.surname'|trans }}:</strong> {{ invitation.surname }}</p>
+                    {% endif %}
 
-    {% if sfs_invitation_is('roles') %}
-    <p><strong>role:</strong> {{ invitation.roles|join(', ') }}</p>
-    {% endif %}
+                    {% if sfs_invitation_is('identifierUsername') %}
+                        <p><strong>{{ 'admin_invitations.details.fields.username'|trans }}:</strong> {{ invitation.username }}</p>
+                    {% endif %}
 
-    {% if invitation.user %}
-        <p><strong>user:</strong> <a href="{{ url('sfs_user_admin_users_details', {'user':invitation.user}) }}">{{ invitation.user.username }}</a></p>
-    {% elseif invitation.acceptedAt %}
-        <p><strong>user:</strong> <em>user is deleted</em></p>
-    {% endif %}
+                    <p><strong>{{ 'admin_invitations.details.fields.email'|trans }}:</strong> {{ invitation.email }}</p>
+
+                    <p>
+                        <strong>{{ 'admin_invitations.details.fields.acceptedAt'|trans }}:</strong>
+                        {% if invitation.acceptedAt %}
+                            <span class="bi bi-check  align-middle text-success"></span>
+                            <span title="{{ invitation.acceptedAt|date('H:i:s d-m-Y', 'UTC') }} UTC">{{ invitation.acceptedAt|date('H:i:s d-m-Y', 'Europe/Madrid') }}</span>
+                        {% else %}
+                            <span class="bi bi-x align-middle text-danger"></span>
+                        {% endif %}
+                    </p>
+
+                    {% if invitation.user %}
+                        <p>
+                            <strong>{{ 'admin_invitations.details.fields.user'|trans }}:</strong>
+                            <a href="{{ url('sfs_user_admin_users_details', {'user':invitation.user}) }}">
+                                {{ invitation.user.displayName }}
+                                ({{ invitation.user.userIdentifier }})
+                            </a>
+                        </p>
+                    {% elseif invitation.acceptedAt %}
+                        <p>
+                            <strong>{{ 'admin_invitations.details.fields.user'|trans }}:</strong>
+                            <em>{{ 'admin_invitations.details.fields.user.deleted'|trans }}</em>
+                        </p>
+                    {% endif %}
+
+                    <p>
+                        <strong>{{ 'admin_invitations.details.fields.inviter'|trans }}:</strong>
+                        {% if invitation.inviter %}
+                            {{ invitation.inviter.displayName }} ({{ invitation.inviter.userIdentifier }})
+                        {% endif %}
+                    </p>
+
+                    {% if sfs_invitation_is('roles') %}
+                        <p>
+                            <strong>{{ 'admin_invitations.details.fields.role'|trans }}:</strong>
+                            {% if sfs_invitation_is('rolesAdmin') %}
+                                {% if invitation.superAdmin %}
+                                    <span class="badge bg-danger">super-admin</span>
+                                {% elseif invitation.admin %}
+                                    <span class="badge bg-info text-dark">admin</span>
+                                {% else %}
+                                    <span class="badge bg-light text-dark">usuario</span>
+                                {% endif %}
+                            {% else %}
+                                {{ invitation.roles|join(', ') }}
+                            {% endif %}
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 {% endblock content %}

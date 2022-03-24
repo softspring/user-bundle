@@ -9,6 +9,7 @@ use Softspring\UserBundle\Model\ConfirmableInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;
 use Softspring\UserBundle\Model\RolesAdminInterface;
 use Softspring\UserBundle\Model\RolesInterface;
+use Softspring\UserBundle\Model\UserIdentifierUsernameInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Model\UserInvitationInterface;
 use Softspring\UserBundle\Model\UserWithEmailInterface;
@@ -24,9 +25,6 @@ class UserInvitationManager implements UserInvitationManagerInterface
 
     protected TokenGeneratorInterface $tokenGenerator;
 
-    /**
-     * UserInvitationManager constructor.
-     */
     public function __construct(EntityManagerInterface $em, UserManagerInterface $userManager, TokenGeneratorInterface $tokenGenerator)
     {
         $this->em = $em;
@@ -39,7 +37,7 @@ class UserInvitationManager implements UserInvitationManagerInterface
         return UserInvitationInterface::class;
     }
 
-    public function createEntity()
+    public function createEntity(): object
     {
         $class = $this->getEntityClass();
         $entity = new $class();
@@ -50,21 +48,13 @@ class UserInvitationManager implements UserInvitationManagerInterface
         return $entity;
     }
 
-    /**
-     * @deprecated
-     */
-    public function create(): UserInvitationInterface
-    {
-        return $this->createEntity();
-    }
-
-    
     public function createUser(UserInvitationInterface $invitation): UserInterface
     {
-        /** @var UserInterface $user */
         $user = $this->userManager->createEntity();
 
-        $user->setUsername($invitation->getUsername());
+        if ($user instanceof UserIdentifierUsernameInterface && $invitation instanceof UserIdentifierUsernameInterface) {
+            $user->setUsername($invitation->getUsername());
+        }
 
         if ($user instanceof UserWithEmailInterface) {
             $user->setEmail($invitation->getEmail());
@@ -91,20 +81,9 @@ class UserInvitationManager implements UserInvitationManagerInterface
         return $user;
     }
 
-    /**
-     * @deprecated
-     */
-    public function save(UserInvitationInterface $userInvitation): void
-    {
-        $this->saveEntity($userInvitation);
-    }
-
     public function findInvitationBy(array $criteria): ?UserInvitationInterface
     {
-        /** @var UserInvitationInterface|null $invitation */
-        $invitation = $this->getRepository()->findOneBy($criteria);
-
-        return $invitation;
+        return $this->getRepository()->findOneBy($criteria);
     }
 
     public function findInvitationByToken(string $token): ?UserInvitationInterface

@@ -76,7 +76,7 @@ class UserFixtures extends Fixture
             $user->setLocale($faker->boolean(60) ? $faker->languageCode() : null);
         }
 
-        $manager->persist($user);
+        $manager->persist($user); // $this->userManager->saveEntity($user, false); // this is disabled because wastes a lot of time hashing passwords
 
         if ($this->userAccessManager) {
             if ($user instanceof ConfirmableInterface && !$user->getConfirmedAt()) {

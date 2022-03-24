@@ -33,14 +33,14 @@ class UserInvitationManipulator
 
     public function invite(string $email, ?string $username = null, array $roles = []): UserInvitationInterface
     {
-        $invitation = $this->userInvitationManager->create();
+        $invitation = $this->userInvitationManager->createEntity();
         $invitation->setUsername($username);
         $invitation->setEmail($email);
         $invitation->setEnabled(false);
         $invitation->setInvitationToken($this->tokenGenerator->generateToken());
         $invitation->setRoles($roles);
 
-        $this->userInvitationManager->save($invitation);
+        $this->userInvitationManager->saveEntity($invitation);
 
         $event = new UserInvitationEvent($invitation, $this->requestStack->getCurrentRequest());
         $this->eventDispatcher->dispatch(SfsUserEvents::USER_INVITED, $event);

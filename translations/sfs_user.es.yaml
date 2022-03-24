@@ -82,15 +82,18 @@ invitation:
         actions:
             accept.button: "Aceptar invitación"
 
-invite:
-    accept:
-        email:
-            subject: "Bienvenid@ %name%!"
-            html: |
-                <p>Bienvenid@ %name%:</p>
-                <p>Has sido invitad@ a unirte a nuestra aplicación.</p>
-                <p><a href="%accept_url%">Pincha aquí</a> para aceptar la invitación.</p>
-                <p>Saludos.</p>
+    email:
+        subject: "Bienvenid@ %name%!"
+        html: |
+            <p>Bienvenid@ %name%:</p>
+            <p>Has sido invitad@ a unirte a nuestra aplicación.</p>
+            <p><a href="%accept_url%">Pincha aquí</a> para aceptar la invitación.</p>
+            <p>Saludos.</p>
+        admin_html: |
+            <p>Bienvenid@ %name%:</p>
+            <p>Has sido invitad@ a unirte a nuestra aplicación como <strong>administrador</strong>.</p>
+            <p><a href="%accept_url%">Pincha aquí</a> para aceptar la invitación.</p>
+            <p>Saludos.</p>
 
 preferences:
     title: "Preferencias"
@@ -274,6 +277,18 @@ admin_access_history:
 
 admin_invitations:
     list:
+        page_title: "Invitaciones"
+        breadcrumb: "Invitaciones"
+        title: "Invitaciones"
+        filter_form:
+            name.label: "Nombre"
+            surname.label: "Apellidos"
+            email.label: "Email"
+            status.label: "Estado"
+            status.any: ""
+            status.accepted: "Aceptado"
+            status.pending: "Pendiente"
+            search.label: "Buscar"
         fields:
             name.header: "Nombre"
             surname.header: "Apellidos"
@@ -284,6 +299,25 @@ admin_invitations:
         actions:
             invite:
                 link: "Invitar"
+
+    details:
+        page_title: "%invitation%"
+        breadcrumb: "%invitation%"
+        title: "Detalles de invitación"
+        actions:
+            resend: "Reenviar email"
+        fields:
+            email: "Email"
+            acceptedAt: "Aceptado"
+            acceptedAt.notYet: "aún no"
+            name: "Nombre"
+            surname: "Apellidos"
+            username: "Nombre de usuario"
+            user: "Usuario creado"
+            user.deleted: "el usuario fue eliminado"
+            inviter: "Invitado por"
+            role: "Rol"
+
     create:
         actions:
             create.button: "Invitar"

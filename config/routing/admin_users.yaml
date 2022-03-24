@@ -18,8 +18,8 @@ sfs_user_admin_users_delete:
     controller: sfs_user.admin.user.controller::delete
     path: /{user}/delete
 
-sfs_user_admin_users_resend:
-    controller: Softspring\UserBundle\Controller\Admin\UsersController::resendEmail
+sfs_user_admin_users_resend_confirmation:
+    controller: Softspring\UserBundle\Controller\Admin\UsersController::resendConfirmationEmail
     path: /{user}/resend
 
 sfs_user_admin_users_count_widget:

@@ -82,15 +82,18 @@ invitation:
         actions:
             accept.button: "Accept invitation"
 
-invite:
-    accept:
-        email:
-            subject: "Welcome %name%!"
-            html: |
-                <p>Welcome %name%:</p>
-                <p>You have been invited to join our app.</p>
-                <p><a href="%accept_url%">Click here</a> to accept the invitation.</p>
-                <p>Regards.</p>
+    email:
+        subject: "Welcome %name%!"
+        html: |
+            <p>Welcome %name%:</p>
+            <p>You have been invited to join our app.</p>
+            <p><a href="%accept_url%">Click here</a> to accept the invitation.</p>
+            <p>Regards.</p>
+        admin_html: |
+            <p>Welcome %name%:</p>
+            <p>You have been invited to join our app as <strong>administrator</strong>.</p>
+            <p><a href="%accept_url%">Click here</a> to accept the invitation.</p>
+            <p>Regards.</p>
 
 preferences:
     title: "Preferences"
@@ -274,6 +277,18 @@ admin_access_history:
 
 admin_invitations:
     list:
+        page_title: "Invitations"
+        breadcrumb: "Invitations"
+        title: "Invitations"
+        filter_form:
+            name.label: "Name"
+            surname.label: "Surname"
+            email.label: "Email"
+            status.label: "Status"
+            status.any: ""
+            status.accepted: "Accepted"
+            status.pending: "Pending"
+            search.label: "Search"
         fields:
             name.header: "Name"
             surname.header: "Surname"
@@ -284,6 +299,25 @@ admin_invitations:
         actions:
             invite:
                 link: "Invite"
+
+    details:
+        page_title: "%invitation%"
+        breadcrumb: "%invitation%"
+        title: "Invitation details"
+        actions:
+            resend: "Resend email"
+        fields:
+            email: "Email"
+            acceptedAt: "Accepted on"
+            acceptedAt.notYet: "not yet"
+            name: "Name"
+            surname: "Surname"
+            username: "Username"
+            user: "Created user"
+            user.deleted: "user was deleted"
+            inviter: "Invited by"
+            role: "Role"
+
     create:
         actions:
             create.button: "Invite"

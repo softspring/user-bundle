@@ -24,7 +24,7 @@ interface UserManagerInterface extends CrudlEntityManagerInterface
     /**
      * @return UserInterface
      */
-    public function createEntity();
+    public function createEntity(): object;
 
     /**
      * @param UserInterface $entity

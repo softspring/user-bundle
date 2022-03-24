@@ -8,17 +8,7 @@ use Softspring\UserBundle\Model\UserInvitationInterface;
 
 interface UserInvitationManagerInterface extends CrudlEntityManagerInterface
 {
-    /**
-     * @deprecated
-     */
-    public function create(): UserInvitationInterface;
-
     public function createUser(UserInvitationInterface $invitation): UserInterface;
-
-    /**
-     * @deprecated
-     */
-    public function save(UserInvitationInterface $invitation): void;
 
     public function findInvitationBy(array $criteria): ?UserInvitationInterface;
 
@@ -27,7 +17,7 @@ interface UserInvitationManagerInterface extends CrudlEntityManagerInterface
     /**
      * @return UserInvitationInterface
      */
-    public function createEntity();
+    public function createEntity(): object;
 
     /**
      * @param UserInvitationInterface $entity

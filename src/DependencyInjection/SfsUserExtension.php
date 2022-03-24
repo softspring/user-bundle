@@ -54,7 +54,6 @@ class SfsUserExtension extends Extension implements PrependExtensionInterface
         $loader->load('services/controller/admin_users.yaml');
 
         if ($config['invite']['enabled']) {
-            $loader->load('services/controller/admin_administrators_invite.yaml');
             $loader->load('services/controller/admin_invitations.yaml');
             $loader->load('services/user_invitation.yaml');
         }

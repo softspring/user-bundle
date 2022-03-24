@@ -43,7 +43,7 @@
                                 <a href="#" class="dropdown-item disabled">{{ 'admin_users.details.actions.unconfirm'|trans }}</a>
                             {% else %}
                                 <a href="#" class="dropdown-item disabled">{{ 'admin_users.details.actions.confirm'|trans }}</a>
-                                <a href="{{ url('sfs_user_admin_users_resend', {'user':user}) }}" class="dropdown-item">{{ 'admin_users.details.actions.resend_confirm'|trans }}</a>
+                                <a href="{{ url('sfs_user_admin_users_resend_confirmation', {'user':user}) }}" class="dropdown-item">{{ 'admin_users.details.actions.resend_confirm'|trans }}</a>
                             {% endif %}
                         {% endif %}
 

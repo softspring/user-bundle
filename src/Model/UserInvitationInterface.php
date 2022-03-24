@@ -4,20 +4,11 @@ namespace Softspring\UserBundle\Model;
 
 interface UserInvitationInterface
 {
-    public function __toString(): string;
-
-    /**
-     * @return mixed|null
-     */
-    public function getId();
-
-    public function getUsername(): ?string;
+    public function getUserIdentifier(): ?string;
 
     public function getEmail(): ?string;
 
     public function setEmail(?string $email): void;
-
-    public function setUsername(?string $username): void;
 
     public function getInvitationToken(): ?string;
 

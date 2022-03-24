@@ -4,6 +4,7 @@ namespace Softspring\UserBundle\Form;
 
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;
+use Softspring\UserBundle\Model\UserIdentifierUsernameInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Model\UserWithEmailInterface;
 use Symfony\Component\Form\AbstractType;
@@ -11,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -47,7 +49,9 @@ class AcceptInvitationForm extends AbstractType implements AcceptInvitationFormI
             $builder->add('email', EmailType::class);
         }
 
-        $builder->add('username');
+        if ($reflection->implementsInterface(UserIdentifierUsernameInterface::class)) {
+            $builder->add('username', TextType::class);
+        }
 
         if ($reflection->implementsInterface(NameSurnameInterface::class)) {
             $builder->add('name');

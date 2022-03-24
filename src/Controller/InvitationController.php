@@ -16,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class InviteController extends AbstractController
+class InvitationController extends AbstractController
 {
     use DispatchGetResponseTrait;
 
@@ -55,7 +55,7 @@ class InviteController extends AbstractController
                 return $response;
             }
 
-            return $this->redirectToRoute('sfs_user_invite_success');
+            return $this->redirectToRoute('sfs_user_invitation_success');
         }
 
         $user = $invitation->getUser() ?? $this->invitationManager->createUser($invitation);
@@ -79,13 +79,13 @@ class InviteController extends AbstractController
                 }
 
                 $this->userManager->saveEntity($user);
-                $this->invitationManager->save($invitation);
+                $this->invitationManager->saveEntity($invitation);
 
                 if ($response = $this->dispatchGetResponse(SfsUserEvents::INVITATION_ACCEPTED, new GetResponseUserEvent($user, $request))) {
                     return $response;
                 }
 
-                return $this->redirectToRoute('sfs_user_invite_success');
+                return $this->redirectToRoute('sfs_user_invitation_success');
             } else {
                 if ($response = $this->dispatchGetResponse(SfsUserEvents::INVITATION_FORM_INVALID, new GetResponseFormEvent($form, $request))) {
                     return $response;
@@ -93,7 +93,7 @@ class InviteController extends AbstractController
             }
         }
 
-        return $this->render('@SfsUser/invite/accept.html.twig', [
+        return $this->render('@SfsUser/invitation/accept.html.twig', [
             'accept_form' => $form->createView(),
             'invitation' => $invitation,
             'user' => $user,
@@ -102,7 +102,7 @@ class InviteController extends AbstractController
 
     public function success(Request $request): Response
     {
-        return $this->render('@SfsUser/invite/success.html.twig', [
+        return $this->render('@SfsUser/invitation/success.html.twig', [
         ]);
     }
 }
