@@ -15,9 +15,6 @@ class UserAccessEventSubscriber implements EventSubscriberInterface
 {
     protected UserAccessManipulator $userAccessManipulator;
 
-    /**
-     * UserAccessEventSubscriber constructor.
-     */
     public function __construct(UserAccessManipulator $userAccessManipulator)
     {
         $this->userAccessManipulator = $userAccessManipulator;

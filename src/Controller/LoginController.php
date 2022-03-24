@@ -28,9 +28,6 @@ class LoginController extends AbstractController
 
     protected EventDispatcherInterface $eventDispatcher;
 
-    /**
-     * LoginController constructor.
-     */
     public function __construct(LoginFormInterface $loginForm, array $oauthServices, ?string $targetPathParameter, EventDispatcherInterface $eventDispatcher)
     {
         $this->loginForm = $loginForm;

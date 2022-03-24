@@ -18,9 +18,6 @@ class UserRegistrationListener implements EventSubscriberInterface
 
     protected TokenGenerator $tokenGenerator;
 
-    /**
-     * UserRegistrationListener constructor.
-     */
     public function __construct(UserManagerInterface $userManager, UserMailerInterface $mailer, TokenGenerator $tokenGenerator)
     {
         $this->userManager = $userManager;

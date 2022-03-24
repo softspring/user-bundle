@@ -10,9 +10,6 @@ class UserEvent extends RequestEvent
 {
     protected UserInterface $user;
 
-    /**
-     * UserEvent constructor.
-     */
     public function __construct(UserInterface $user, ?Request $request)
     {
         parent::__construct($request);

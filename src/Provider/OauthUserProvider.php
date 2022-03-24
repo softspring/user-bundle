@@ -34,9 +34,6 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
 
     protected array $oauthServices;
 
-    /**
-     * OauthUserProvider constructor.
-     */
     public function __construct(UserManagerInterface $userManager, array $properties, array $oauthServices)
     {
         $this->userManager = $userManager;

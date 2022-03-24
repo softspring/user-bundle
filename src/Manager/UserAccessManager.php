@@ -12,9 +12,6 @@ class UserAccessManager implements UserAccessManagerInterface
 
     protected EntityManagerInterface $em;
 
-    /**
-     * UserAccessManager constructor.
-     */
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;

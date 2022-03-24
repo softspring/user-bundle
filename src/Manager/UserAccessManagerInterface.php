@@ -10,15 +10,15 @@ interface UserAccessManagerInterface extends CrudlEntityManagerInterface
     /**
      * @return UserAccessInterface
      */
-    public function createEntity();
+    public function createEntity(): object;
 
     /**
      * @param UserAccessInterface $entity
      */
-    public function saveEntity($entity): void;
+    public function saveEntity(object $entity): void;
 
     /**
      * @param UserAccessInterface $entity
      */
-    public function deleteEntity($entity): void;
+    public function deleteEntity(object $entity): void;
 }

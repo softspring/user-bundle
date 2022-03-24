@@ -12,9 +12,6 @@ abstract class User implements UserInterface
         return "{$this->getId()}";
     }
 
-    /**
-     * User constructor.
-     */
     public function __construct()
     {
         if ($this instanceof RolesInterface || $this instanceof RolesAdminInterface || $this instanceof RolesFullInterface) {

@@ -19,9 +19,6 @@ class SendResetPasswordEmailListener implements EventSubscriberInterface
 
     protected TokenGenerator $tokenGenerator;
 
-    /**
-     * SendResetPasswordEmailListener constructor.
-     */
     public function __construct(UserMailerInterface $mailer, UserManagerInterface $userManager, TokenGenerator $tokenGenerator)
     {
         $this->mailer = $mailer;

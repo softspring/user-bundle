@@ -13,9 +13,6 @@ class AccessHistoryListFilterForm extends EntityListFilterForm implements Access
 {
     protected UserAccessManagerInterface $accessManager;
 
-    /**
-     * AccessHistoryListFilterForm constructor.
-     */
     public function __construct(UserAccessManagerInterface $accessManager)
     {
         $this->accessManager = $accessManager;

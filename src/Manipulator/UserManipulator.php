@@ -22,9 +22,6 @@ class UserManipulator
 
     protected RequestStack $requestStack;
 
-    /**
-     * UserManipulator constructor.
-     */
     public function __construct(UserManagerInterface $userManager, EventDispatcherInterface $eventDispatcher, RequestStack $requestStack)
     {
         $this->userManager = $userManager;

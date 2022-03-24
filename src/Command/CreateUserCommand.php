@@ -16,9 +16,6 @@ class CreateUserCommand extends Command
 
     protected UserManipulator $userManipulator;
 
-    /**
-     * CreateUserCommand constructor.
-     */
     public function __construct(UserManipulator $userManipulator, string $name = null)
     {
         $this->userManipulator = $userManipulator;

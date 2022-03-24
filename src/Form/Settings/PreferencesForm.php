@@ -17,9 +17,6 @@ class PreferencesForm extends AbstractType implements PreferencesFormInterface
 
     protected array $locales;
 
-    /**
-     * PreferencesForm constructor.
-     */
     public function __construct(UserManagerInterface $userManager, array $locales)
     {
         $this->userManager = $userManager;

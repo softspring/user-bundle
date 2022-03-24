@@ -26,9 +26,6 @@ class UserMailer implements UserMailerInterface
 
     protected TranslatorInterface $translator;
 
-    /**
-     * UserMailer constructor.
-     */
     public function __construct(MailerInterface $mailer, UrlGeneratorInterface $urlGenerator, TranslatorInterface $translator)
     {
         $this->mailer = $mailer;

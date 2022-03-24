@@ -10,9 +10,6 @@ class UserInvitationEvent extends RequestEvent
 {
     protected UserInvitationInterface $invitation;
 
-    /**
-     * UserInvitationEvent constructor.
-     */
     public function __construct(UserInvitationInterface $invitation, ?Request $request)
     {
         parent::__construct($request);

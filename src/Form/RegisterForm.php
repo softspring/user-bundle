@@ -19,9 +19,6 @@ class RegisterForm extends AbstractType implements RegisterFormInterface
 {
     protected UserManagerInterface $userManager;
 
-    /**
-     * RegisterForm constructor.
-     */
     public function __construct(UserManagerInterface $userManager)
     {
         $this->userManager = $userManager;

@@ -16,9 +16,6 @@ class AdministratorUpdateForm extends AbstractType implements AdministratorUpdat
 {
     protected UserManagerInterface $userManager;
 
-    /**
-     * UserListFilterForm constructor.
-     */
     public function __construct(UserManagerInterface $userManager)
     {
         $this->userManager = $userManager;

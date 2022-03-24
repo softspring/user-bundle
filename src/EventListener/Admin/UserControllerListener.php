@@ -23,9 +23,6 @@ class UserControllerListener implements EventSubscriberInterface
 
     protected ?UserAccessManagerInterface $accessManager;
 
-    /**
-     * UserControllerListener constructor.
-     */
     public function __construct(EntityManagerInterface $em, RouterInterface $router, array $impersonateBarConfig, ?UserAccessManagerInterface $accessManager)
     {
         $this->em = $em;

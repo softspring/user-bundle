@@ -32,9 +32,6 @@ class ResetPasswordController extends AbstractController
 
     protected EventDispatcherInterface   $eventDispatcher;
 
-    /**
-     * ResetPasswordController constructor.
-     */
     public function __construct(UserManagerInterface $userManager, ResetPasswordRequestFormInterface $resetRequestForm, int $resetTokenTTL, ResetPasswordFormInterface $resetForm, EventDispatcherInterface $eventDispatcher)
     {
         $this->userManager = $userManager;

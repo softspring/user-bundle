@@ -31,10 +31,10 @@ interface UserManagerInterface extends CrudlEntityManagerInterface
      *
      * @throws \Exception
      */
-    public function saveEntity($entity): void;
+    public function saveEntity(object $entity): void;
 
     /**
      * @param UserInterface $entity
      */
-    public function deleteEntity($entity): void;
+    public function deleteEntity(object $entity): void;
 }

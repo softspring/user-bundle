@@ -9,9 +9,6 @@ class OauthLoginIntegrationController extends AbstractController
 {
     protected array $oauthServices;
 
-    /**
-     * OauthLoginIntegrationController constructor.
-     */
     public function __construct(array $oauthServices)
     {
         $this->oauthServices = $oauthServices;

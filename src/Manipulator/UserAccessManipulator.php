@@ -13,9 +13,6 @@ class UserAccessManipulator
 {
     protected UserAccessManagerInterface $userAccessManager;
 
-    /**
-     * UserAccessManipulator constructor.
-     */
     public function __construct(UserAccessManagerInterface $userAccessManager)
     {
         $this->userAccessManager = $userAccessManager;

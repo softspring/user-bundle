@@ -16,9 +16,6 @@ class UserProvider implements UserProviderInterface
 {
     protected UserManagerInterface $userManager;
 
-    /**
-     * UserProvider constructor.
-     */
     public function __construct(UserManagerInterface $userManager)
     {
         $this->userManager = $userManager;

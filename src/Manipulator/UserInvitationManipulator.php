@@ -20,9 +20,6 @@ class UserInvitationManipulator
 
     protected TokenGeneratorInterface $tokenGenerator;
 
-    /**
-     * UserInvitationManipulator constructor.
-     */
     public function __construct(UserInvitationManagerInterface $userInvitationManager, EventDispatcherInterface $eventDispatcher, RequestStack $requestStack, TokenGeneratorInterface $tokenGenerator)
     {
         $this->userInvitationManager = $userInvitationManager;

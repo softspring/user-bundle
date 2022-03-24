@@ -22,9 +22,6 @@ class ImpersonateBarListener implements EventSubscriberInterface
 
     protected array $impersonateBarConfig;
 
-    /**
-     * ImpersonateBarListener constructor.
-     */
     public function __construct(AuthorizationCheckerInterface $authorizationChecker, Environment $twig, UrlGeneratorInterface $urlGenerator, array $impersonateBarConfig)
     {
         $this->authorizationChecker = $authorizationChecker;

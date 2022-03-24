@@ -15,9 +15,6 @@ class InviteUserCommand extends Command
 
     protected UserInvitationManipulator $userInvitationManipulator;
 
-    /**
-     * CreateUserCommand constructor.
-     */
     public function __construct(UserInvitationManipulator $userInvitationManipulator, string $name = null)
     {
         $this->userInvitationManipulator = $userInvitationManipulator;

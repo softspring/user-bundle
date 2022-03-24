@@ -32,7 +32,7 @@ class UserManager implements UserManagerInterface
         return UserInterface::class;
     }
 
-    public function saveEntity($entity, bool $flush = true): void
+    public function saveEntity(object $entity, bool $flush = true): void
     {
         if (!$this->getEntityClassReflection()->isInstance($entity)) {
             throw new \InvalidArgumentException(sprintf('$entity must be an instance of %s', $this->getEntityClass()));

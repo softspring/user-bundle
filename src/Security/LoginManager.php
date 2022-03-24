@@ -24,9 +24,6 @@ class LoginManager
 
     protected RequestStack $requestStack;
 
-    /**
-     * LoginManager constructor.
-     */
     public function __construct(FirewallMap $firewallMap, TokenStorageInterface $tokenStorage, UserCheckerInterface $userChecker, SessionAuthenticationStrategyInterface $sessionStrategy, RequestStack $requestStack)
     {
         $this->firewallMap = $firewallMap;

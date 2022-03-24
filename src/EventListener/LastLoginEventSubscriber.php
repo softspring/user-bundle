@@ -14,9 +14,6 @@ class LastLoginEventSubscriber implements EventSubscriberInterface
 {
     protected UserManagerInterface $userManager;
 
-    /**
-     * LastLoginEventSubscriber constructor.
-     */
     public function __construct(UserManagerInterface $userManager)
     {
         $this->userManager = $userManager;

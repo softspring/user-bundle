@@ -22,10 +22,10 @@ interface UserInvitationManagerInterface extends CrudlEntityManagerInterface
     /**
      * @param UserInvitationInterface $entity
      */
-    public function saveEntity($entity): void;
+    public function saveEntity(object $entity): void;
 
     /**
      * @param UserInvitationInterface $entity
      */
-    public function deleteEntity($entity): void;
+    public function deleteEntity(object $entity): void;
 }

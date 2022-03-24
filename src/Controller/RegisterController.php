@@ -29,9 +29,6 @@ class RegisterController extends AbstractController
 
     protected EventDispatcherInterface $eventDispatcher;
 
-    /**
-     * RegisterController constructor.
-     */
     public function __construct(UserManagerInterface $userManager, RegisterFormInterface $registerForm, ?string $targetPathParameter, EventDispatcherInterface $eventDispatcher)
     {
         $this->userManager = $userManager;

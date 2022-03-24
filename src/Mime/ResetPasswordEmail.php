@@ -25,9 +25,6 @@ class ResetPasswordEmail extends TranslatableEmail implements ExampleEmailInterf
         return new self($user, $resetUrl, $translator, $locale);
     }
 
-    /**
-     * ConfirmationEmail constructor.
-     */
     public function __construct(UserInterface $user, string $resetUrl, TranslatorInterface $translator, ?string $locale = null, Headers $headers = null, AbstractPart $body = null)
     {
         parent::__construct($translator, $locale, $headers, $body);

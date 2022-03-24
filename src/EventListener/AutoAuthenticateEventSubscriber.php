@@ -14,9 +14,6 @@ class AutoAuthenticateEventSubscriber implements EventSubscriberInterface
 {
     protected LoginManager $loginManager;
 
-    /**
-     * AuthenticateEventSubscriber constructor.
-     */
     public function __construct(LoginManager $loginManager)
     {
         $this->loginManager = $loginManager;

@@ -20,9 +20,6 @@ class AcceptInvitationForm extends AbstractType implements AcceptInvitationFormI
 {
     protected UserManagerInterface $userManager;
 
-    /**
-     * RegisterForm constructor.
-     */
     public function __construct(UserManagerInterface $userManager)
     {
         $this->userManager = $userManager;

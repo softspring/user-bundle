@@ -16,9 +16,6 @@ class PromoteUserCommand extends Command
 
     protected UserManagerInterface $userManager;
 
-    /**
-     * PromoteUserCommand constructor.
-     */
     public function __construct(UserManagerInterface $userManager, string $name = null)
     {
         $this->userManager = $userManager;

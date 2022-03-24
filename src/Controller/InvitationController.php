@@ -28,9 +28,6 @@ class InvitationController extends AbstractController
 
     protected EventDispatcherInterface $eventDispatcher;
 
-    /**
-     * InviteController constructor.
-     */
     public function __construct(UserManagerInterface $userManager, UserInvitationManagerInterface $invitationManager, AcceptInvitationFormInterface $acceptForm, EventDispatcherInterface $eventDispatcher)
     {
         $this->userManager = $userManager;
