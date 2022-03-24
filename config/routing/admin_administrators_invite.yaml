@@ -1,3 +1,0 @@
-sfs_user_admin_administrators_invite:
-    controller: sfs_user.admin.administrator_invite.controller::create
-    path: /invite
