@@ -6,7 +6,9 @@
         <h1 class="h4 mb-3 fw-normal">{{ 'preferences.title'|trans }}</h1>
 
         <div class="text-center">
-            <img alt="{{ app.user.username }}" src="https://ui-avatars.com/api/?name={{ app.user.username|url_encode }}&size=128&background=random" alt="" width="128" height="128" class="rounded-circle">
+            {% if sfs_user_is('avatar') %}
+                <img alt="{{ app.user.displayName }}" src="{{ app.user.avatarUrl }}" width="128" height="128" class="rounded-circle mb-3">
+            {% endif %}
         </div>
 
         {{ form_start(preferences_form) }}
