@@ -3,6 +3,7 @@
 [![Latest Stable Version](https://poser.pugx.org/softspring/user-bundle/v/stable.svg)](https://packagist.org/packages/softspring/user-bundle)
 [![Latest Unstable Version](https://poser.pugx.org/softspring/user-bundle/v/unstable.svg)](https://packagist.org/packages/softspring/user-bundle)
 [![License](https://poser.pugx.org/softspring/user-bundle/license.svg)](https://packagist.org/packages/softspring/user-bundle)
+[![PHP Version Require](http://poser.pugx.org/softspring/user-bundle/require/php)](https://packagist.org/packages/softspring/user-bundle)
 [![Total Downloads](https://poser.pugx.org/softspring/user-bundle/downloads)](https://packagist.org/packages/softspring/user-bundle)
 [![Build status](https://travis-ci.com/softspring/user-bundle.svg?branch=master)](https://app.travis-ci.com/github/softspring/user-bundle)
 
@@ -25,4 +26,4 @@ This package provides a new complete user bundle out of the box.
 
 ## License
 
-This bundle is under the MIT license. See the complete license in the bundle LICENSE file.
+This bundle is under the MIT license. See the complete license in the bundle [LICENSE](LICENSE) file.
