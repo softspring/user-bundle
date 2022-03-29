@@ -3,6 +3,7 @@
 namespace Softspring\UserBundle\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
 use Softspring\UserBundle\Manager\UserAccessManagerInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
@@ -17,7 +18,7 @@ use Softspring\UserBundle\Model\UserLastLoginInterface;
 use Softspring\UserBundle\Model\UserPasswordInterface;
 use Softspring\UserBundle\Model\UserWithEmailInterface;
 
-class UserFixtures extends Fixture
+class UserFixtures extends Fixture implements FixtureGroupInterface
 {
     protected UserManagerInterface $userManager;
     protected ?UserAccessManagerInterface $userAccessManager;
@@ -115,5 +116,10 @@ class UserFixtures extends Fixture
         $manager->persist($access);
 
         return $access;
+    }
+
+    public static function getGroups(): array
+    {
+        return ['sfs_user'];
     }
 }
