@@ -24,7 +24,7 @@ class ModelExtension extends AbstractExtension
         $this->invitationManager = $invitationManager;
     }
 
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new TwigFunction('sfs_user_is', [$this, 'userCheckInterface']),
