@@ -29,7 +29,7 @@ class SwitchUserVoter implements VoterInterface
         $role = $attributes[0] ?? '';
 
         // check role
-        if ($role !== 'ROLE_ALLOWED_TO_SWITCH') {
+        if ('ROLE_ALLOWED_TO_SWITCH' !== $role) {
             return VoterInterface::ACCESS_ABSTAIN;
         }
 

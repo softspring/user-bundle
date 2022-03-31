@@ -31,7 +31,7 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
 
     public function load(ObjectManager $manager)
     {
-        for ($i=0 ; $i < 300 ; $i++) {
+        for ($i = 0; $i < 300; ++$i) {
             $this->createUser($manager);
         }
 
@@ -46,7 +46,7 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
 
         if ($user instanceof NameSurnameInterface) {
             $user->setName($faker->firstName());
-            $user->setSurname($faker->lastName(). ' '. $faker->lastName());
+            $user->setSurname($faker->lastName().' '.$faker->lastName());
         }
 
         if ($user instanceof UserIdentifierUsernameInterface) {
@@ -88,7 +88,7 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
                 $this->createUserAccess($manager, $user);
             }
 
-            for ($j=0 ; $j < rand(0, 10) ; $j++) {
+            for ($j = 0; $j < rand(0, 10); ++$j) {
                 $access = $this->createUserAccess($manager, $user);
                 $access->setLoginAt($faker->dateTimeBetween('-5 years', '-1 minute'));
             }

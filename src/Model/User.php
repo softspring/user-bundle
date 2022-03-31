@@ -34,11 +34,11 @@ abstract class User implements UserInterface
             $fieldName = $field['name'];
 
             switch (true) {
-                case ($field['type'] === 'json'):
+                case 'json' === $field['type']:
                     $data[] = json_encode($this->$fieldName);
                     break;
 
-                case ($field['type'] === 'string'):
+                case 'string' === $field['type']:
                 default:
                     $data[] = $this->$fieldName;
             }
@@ -47,7 +47,6 @@ abstract class User implements UserInterface
         return serialize($data);
     }
 
-    
     public function unserialize($data): void
     {
         $data = unserialize($data);
@@ -56,11 +55,11 @@ abstract class User implements UserInterface
             $fieldName = $field['name'];
 
             switch (true) {
-                case ($field['type'] === 'json'):
+                case 'json' === $field['type']:
                     $this->$fieldName = json_decode(array_shift($data), true);
                     break;
 
-                case ($field['type'] === 'string'):
+                case 'string' === $field['type']:
                 default:
                     $this->$fieldName = array_shift($data);
             }

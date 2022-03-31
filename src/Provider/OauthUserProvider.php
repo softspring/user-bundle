@@ -42,13 +42,11 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }
 
-    
     public function loadUserByUsername($username)
     {
         return $this->userManager->findUserByUsername($username);
     }
 
-    
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
         $username = $response->getUsername(); // provides id (identifier)
@@ -76,7 +74,6 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
         return $user;
     }
 
-    
     public function connect(UserInterface $user, UserResponseInterface $response)
     {
         if (!$user instanceof SoftspringUserInterface) {
@@ -112,7 +109,6 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
         $this->userManager->saveEntity($user);
     }
 
-    
     public function refreshUser(UserInterface $user)
     {
         $identifier = $this->properties['identifier'];
@@ -128,7 +124,6 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
         return $user;
     }
 
-    
     public function supportsClass($class)
     {
         $userClass = $this->userManager->getEntityClass();

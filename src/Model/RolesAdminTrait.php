@@ -38,7 +38,6 @@ trait RolesAdminTrait
         }
     }
 
-    
     public function getRoles(): array
     {
         $roles = [];

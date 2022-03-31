@@ -5,7 +5,6 @@ namespace Softspring\UserBundle\Twig\Extension;
 use Softspring\UserBundle\Manager\UserAccessManagerInterface;
 use Softspring\UserBundle\Manager\UserInvitationManagerInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
-use Softspring\UserBundle\Model\UserInvitationInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 

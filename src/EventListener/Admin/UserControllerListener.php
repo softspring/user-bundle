@@ -3,10 +3,9 @@
 namespace Softspring\UserBundle\EventListener\Admin;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Softspring\CoreBundle\Event\ViewEvent;
 use Softspring\Component\CrudlController\Event\GetResponseEntityEvent;
+use Softspring\CoreBundle\Event\ViewEvent;
 use Softspring\UserBundle\Doctrine\Filter\UserFilter;
-use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Manager\UserAccessManagerInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -31,7 +30,6 @@ class UserControllerListener implements EventSubscriberInterface
         $this->accessManager = $accessManager;
     }
 
-    
     public static function getSubscribedEvents(): array
     {
         return [

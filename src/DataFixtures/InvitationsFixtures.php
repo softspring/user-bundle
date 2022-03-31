@@ -28,12 +28,12 @@ class InvitationsFixtures extends UserFixtures
 
         $faker = \Faker\Factory::create('es_ES');
 
-        for ($i=0 ; $i < 200 ; $i++) {
+        for ($i = 0; $i < 200; ++$i) {
             $invitation = $this->invitationManager->createEntity();
 
             if ($invitation instanceof NameSurnameInterface) {
                 $invitation->setName($faker->firstName());
-                $invitation->setSurname($faker->lastName(). ' '. $faker->lastName());
+                $invitation->setSurname($faker->lastName().' '.$faker->lastName());
             }
 
             if ($invitation instanceof UserIdentifierUsernameInterface) {

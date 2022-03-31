@@ -18,7 +18,6 @@ class AccessHistoryListFilterForm extends EntityListFilterForm implements Access
         $this->accessManager = $accessManager;
     }
 
-    
     public function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
@@ -28,7 +27,6 @@ class AccessHistoryListFilterForm extends EntityListFilterForm implements Access
         ]);
     }
 
-    
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
@@ -36,7 +34,6 @@ class AccessHistoryListFilterForm extends EntityListFilterForm implements Access
         $builder->add('search', SubmitType::class);
     }
 
-    
     public static function getRpp(Request $request): int
     {
         return 50;

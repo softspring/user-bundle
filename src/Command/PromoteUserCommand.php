@@ -3,7 +3,6 @@
 namespace Softspring\UserBundle\Command;
 
 use Softspring\UserBundle\Manager\UserManagerInterface;
-use Softspring\UserBundle\Manipulator\UserManipulator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

@@ -19,7 +19,6 @@ class AutoAuthenticateEventSubscriber implements EventSubscriberInterface
         $this->loginManager = $loginManager;
     }
 
-    
     public static function getSubscribedEvents(): array
     {
         return [

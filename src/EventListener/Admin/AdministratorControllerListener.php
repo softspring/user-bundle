@@ -3,17 +3,11 @@
 namespace Softspring\UserBundle\EventListener\Admin;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Psr\EventDispatcher\EventDispatcherInterface;
-use Softspring\CoreBundle\Event\ViewEvent;
 use Softspring\Component\CrudlController\Event\GetResponseEntityEvent;
-use Softspring\Component\CrudlController\Event\GetResponseFormEvent;
+use Softspring\CoreBundle\Event\ViewEvent;
 use Softspring\UserBundle\Doctrine\Filter\AdminFilter;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
-use Softspring\UserBundle\Event\UserInvitationEvent;
 use Softspring\UserBundle\Manager\UserAccessManagerInterface;
-use Softspring\UserBundle\Model\RolesAdminInterface;
-use Softspring\UserBundle\Model\UserInterface;
-use Softspring\UserBundle\Model\UserInvitationInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -41,7 +35,6 @@ class AdministratorControllerListener implements EventSubscriberInterface
         $this->tokenStorage = $tokenStorage;
     }
 
-    
     public static function getSubscribedEvents(): array
     {
         return [

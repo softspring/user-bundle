@@ -9,7 +9,7 @@ class AdministratorsFixtures extends UserFixtures
 {
     public function load(ObjectManager $manager)
     {
-        for ($i=0 ; $i < 20 ; $i++) {
+        for ($i = 0; $i < 20; ++$i) {
             $user = $this->createUser($manager);
 
             if ($user instanceof RolesAdminInterface) {

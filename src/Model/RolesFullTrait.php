@@ -9,7 +9,6 @@ trait RolesFullTrait
     use RolesAdminTrait;
     use RolesTrait;
 
-    
     public function getRoles(): array
     {
         $roles = $this->roles;
