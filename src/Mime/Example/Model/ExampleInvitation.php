@@ -2,7 +2,7 @@
 
 namespace Softspring\UserBundle\Mime\Example\Model;
 
-use Softspring\DoctrineTemplates\Entity\Traits\UniqIdString;
+use Softspring\Component\DoctrineTemplates\Entity\Traits\UniqIdString;
 use Softspring\UserBundle\Entity\NameSurnameTrait;
 use Softspring\UserBundle\Entity\RolesAdminTrait;
 use Softspring\UserBundle\Entity\UserIdentifierEmailTrait;
