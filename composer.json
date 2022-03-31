@@ -8,6 +8,7 @@
     "require": {
         "php": ">=7.4",
         "symfony/translation": "^5.4 || ^6.0",
+        "javihgil/doctrine-pagination-bundle": "^2.0",
         "softspring/core-bundle": "^5.0",
         "softspring/crudl-bundle": "^5.0",
         "softspring/mime-translatable": "^5.0",
