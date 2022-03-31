@@ -37,12 +37,12 @@ class AccessHistoryListFilterForm extends EntityListFilterForm implements Access
     }
 
     
-    public function getRpp(Request $request): int
+    public static function getRpp(Request $request): int
     {
         return 50;
     }
 
-    public function getOrder(Request $request): array
+    public static function getOrder(Request $request): array
     {
         return ['loginAt' => 'DESC'];
     }

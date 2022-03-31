@@ -5,7 +5,6 @@ namespace Softspring\UserBundle\Form\Admin;
 use Jhg\DoctrinePagination\ORM\FilterRepositoryInterface;
 use Softspring\Component\CrudlController\Form\EntityListFilterForm;
 use Softspring\UserBundle\Manager\UserInvitationManagerInterface;
-use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;
 use Softspring\UserBundle\Model\UserWithEmailInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -76,7 +75,7 @@ class InvitationListFilterForm extends EntityListFilterForm implements Invitatio
         return 'email';
     }
 
-    public function getRpp(Request $request): int
+    public static function getRpp(Request $request): int
     {
         return 10;
     }

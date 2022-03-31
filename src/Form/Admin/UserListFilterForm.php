@@ -70,7 +70,7 @@ class UserListFilterForm extends EntityListFilterForm implements UserListFilterF
         return 'surname';
     }
 
-    public function getRpp(Request $request): int
+    public static function getRpp(Request $request): int
     {
         return 10;
     }
