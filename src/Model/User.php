@@ -26,19 +26,19 @@ abstract class User implements UserInterface
         }
     }
 
-    public function serialize()
+    public function serialize(): ?string
     {
         $data = [];
 
         foreach ($this->getSerializeFields() as $field) {
             $fieldName = $field['name'];
 
-            switch ($field['type']) {
-                case 'json':
+            switch (true) {
+                case ($field['type'] === 'json'):
                     $data[] = json_encode($this->$fieldName);
                     break;
 
-                case 'string':
+                case ($field['type'] === 'string'):
                 default:
                     $data[] = $this->$fieldName;
             }
@@ -48,19 +48,19 @@ abstract class User implements UserInterface
     }
 
     
-    public function unserialize($data)
+    public function unserialize($data): void
     {
         $data = unserialize($data);
 
         foreach ($this->getSerializeFields() as $field) {
             $fieldName = $field['name'];
 
-            switch ($field['type']) {
-                case 'json':
+            switch (true) {
+                case ($field['type'] === 'json'):
                     $this->$fieldName = json_decode(array_shift($data), true);
                     break;
 
-                case 'string':
+                case ($field['type'] === 'string'):
                 default:
                     $this->$fieldName = array_shift($data);
             }
