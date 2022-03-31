@@ -19,7 +19,7 @@ services:
     Softspring\UserBundle\Security\Authorization\Voter\AdminAdministratorsActionsVoter: ~
 
     sfs_user.admin.administrator.controller:
-        class: Softspring\CrudlBundle\Controller\CrudlController
+        class: Softspring\Component\CrudlController\Controller\CrudlController
         public: true
         calls:
             - { method: setContainer, arguments: ['@service_container'] }

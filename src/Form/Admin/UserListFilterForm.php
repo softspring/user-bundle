@@ -3,7 +3,7 @@
 namespace Softspring\UserBundle\Form\Admin;
 
 use Jhg\DoctrinePagination\ORM\FilterRepositoryInterface;
-use Softspring\CrudlBundle\Form\EntityListFilterForm;
+use Softspring\Component\CrudlController\Form\EntityListFilterForm;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;
 use Softspring\UserBundle\Model\UserWithEmailInterface;

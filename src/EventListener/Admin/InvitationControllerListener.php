@@ -3,8 +3,8 @@
 namespace Softspring\UserBundle\EventListener\Admin;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Softspring\CrudlBundle\Event\GetResponseEntityEvent;
-use Softspring\CrudlBundle\Event\GetResponseFormEvent;
+use Softspring\Component\CrudlController\Event\GetResponseEntityEvent;
+use Softspring\Component\CrudlController\Event\GetResponseFormEvent;
 use Softspring\UserBundle\Event\UserInvitationEvent;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Model\UserInvitationInterface;

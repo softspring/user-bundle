@@ -3,7 +3,7 @@
 namespace Softspring\UserBundle\Manager;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Softspring\CrudlBundle\Manager\CrudlEntityManagerTrait;
+use Softspring\Component\CrudlController\Manager\CrudlEntityManagerTrait;
 use Softspring\UserBundle\Model\UserAccessInterface;
 
 class UserAccessManager implements UserAccessManagerInterface

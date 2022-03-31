@@ -2,7 +2,7 @@
 
 namespace Softspring\UserBundle\Form\Admin;
 
-use Softspring\CrudlBundle\Form\EntityListFilterForm;
+use Softspring\Component\CrudlController\Form\EntityListFilterForm;
 use Softspring\UserBundle\Manager\UserAccessManagerInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
