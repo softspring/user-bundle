@@ -22,6 +22,7 @@
 
 ### Changes
 
+```
  config/services.yaml                 |  2 +-
  src/Controller/LoginController.php   | 13 +++++-
  src/Entity/OwnerTrait.php            |  4 +-
@@ -29,3 +30,4 @@
  src/Manager/UserManagerInterface.php | 12 ++---
  src/Provider/UserProvider.php        | 15 ++++--
  6 files changed, 53 insertions(+), 81 deletions(-)
+```
