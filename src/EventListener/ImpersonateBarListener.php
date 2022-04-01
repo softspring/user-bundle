@@ -68,10 +68,11 @@ class ImpersonateBarListener implements EventSubscriberInterface
     protected function injectBar(Response $response, Request $request): void
     {
         $content = $response->getContent();
-        $pos = strripos($content, '</body>');
+        $pos = stripos($content, '<body');
+        $posEnd = stripos($content, '>', $pos);
 
-        if (false !== $pos) {
-            $content = substr($content, 0, $pos).$this->renderBar().substr($content, $pos);
+        if (false !== $posEnd) {
+            $content = substr($content, 0, $posEnd+1).$this->renderBar().substr($content, $posEnd+1);
             $response->setContent($content);
         }
     }
