@@ -2,7 +2,7 @@
 
 namespace Softspring\UserBundle\Security\Authorization\Voter;
 
-use Softspring\UserBundle\Model\UserInterface;
+use Softspring\UserBundle\Model\RolesAdminInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Exception\InvalidArgumentException;
@@ -20,11 +20,11 @@ class AdminAdministratorsActionsVoter implements VoterInterface
             return false;
         }
 
-        return $administrator instanceof UserInterface;
+        return $administrator instanceof RolesAdminInterface;
     }
 
     /**
-     * @param UserInterface $administrator
+     * @param RolesAdminInterface $administrator
      *
      * @return int
      */
@@ -44,7 +44,7 @@ class AdminAdministratorsActionsVoter implements VoterInterface
 
         $currentLoggedInUser = $token->getUser();
 
-        if (!$currentLoggedInUser instanceof UserInterface) {
+        if (!$currentLoggedInUser instanceof RolesAdminInterface) {
             throw new InvalidArgumentException('Invalid user class');
         }
 
@@ -57,7 +57,7 @@ class AdminAdministratorsActionsVoter implements VoterInterface
         }
 
         $ownAllowedActions = ['ROLE_ADMIN_ADMINISTRATORS_UPDATE', 'ROLE_ADMIN_ADMINISTRATORS_DETAILS'];
-        if ($currentLoggedInUser == $administrator && !in_array($role, $ownAllowedActions)) {
+        if ($currentLoggedInUser === $administrator && !in_array($role, $ownAllowedActions)) {
             return VoterInterface::ACCESS_DENIED;
         }
 
