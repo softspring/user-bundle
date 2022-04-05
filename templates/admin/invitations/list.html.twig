@@ -37,13 +37,13 @@
             {% trans_default_domain 'sfs_user' %}
             {% block ths %}
                 {% if sfs_invitation_is('nameSurname') %}
-                    <th scope="col" class="p-3">
+                    <th scope="col">
                         <a href="{{ sort_toggler_url('name') }}" class="text-dark">
                             {{ 'admin_invitations.list.fields.name.header'|trans }}
                             {% if is_sorted_by('name', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif is_sorted_by('name', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
                         </a>
                     </th>
-                    <th scope="col" class="p-3">
+                    <th scope="col">
                         <a href="{{ sort_toggler_url('surname') }}" class="text-dark">
                             {{ 'admin_invitations.list.fields.surname.header'|trans }}
                             {% if is_sorted_by('surname', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif is_sorted_by('surname', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
@@ -52,7 +52,7 @@
                 {% endif %}
 
                 {% if sfs_invitation_is('identifierUsername') %}
-                    <th scope="col" class="p-3">
+                    <th scope="col">
                         <a href="{{ sort_toggler_url('username') }}" class="text-dark">
                             {{ 'admin_invitations.list.fields.username.header'|trans }}
                             {% if is_sorted_by('username', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif is_sorted_by('username', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
@@ -60,13 +60,13 @@
                     </th>
                 {% endif %}
 
-                <th scope="col" class="p-3">
+                <th scope="col">
                     <a href="{{ sort_toggler_url('email') }}" class="text-dark">
                         {{ 'admin_invitations.list.fields.email.header'|trans }}
                         {% if is_sorted_by('email', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif is_sorted_by('email', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
                     </a>
                 </th>
-                <th scope="col" class="p-3">
+                <th scope="col">
                     <a href="{{ sort_toggler_url('acceptedAt') }}" class="text-dark">
                         {{ 'admin_invitations.list.fields.acceptedAt.header'|trans }}
                         {% if is_sorted_by('acceptedAt', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif is_sorted_by('acceptedAt', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
@@ -74,7 +74,7 @@
                 </th>
 
                 {% if sfs_invitation_is('roles') %}
-                <th scope="col" class="p-3">{{ 'admin_invitations.list.fields.role.header'|trans }}</th>
+                <th scope="col">{{ 'admin_invitations.list.fields.role.header'|trans }}</th>
                 {% endif %}
                 <th>&nbsp;</th>
             {% endblock ths %}
@@ -83,19 +83,19 @@
                 {% for invitation in entities %}
                     <tr>
                         {% if sfs_invitation_is('nameSurname') %}
-                            <td class="p-3">{{ invitation.name }}</td>
-                            <td class="p-3">{{ invitation.surname }}</td>
+                            <td>{{ invitation.name }}</td>
+                            <td>{{ invitation.surname }}</td>
                         {% endif %}
 
                         {% if sfs_invitation_is('identifierUsername') %}
-                            <td class="p-3">{{ invitation.username }}</td>
+                            <td>{{ invitation.username }}</td>
                         {% endif %}
 
-                        <td class="p-3">{{ invitation.email }}</td>
-                        <td class="p-3 {{ invitation.acceptedAt?'text-success':'text-danger' }}">{{ invitation.acceptedAt ? invitation.acceptedAt|date('H:i d-m-Y') : 'not yet' }}</td>
+                        <td>{{ invitation.email }}</td>
+                        <td class="{{ invitation.acceptedAt?'text-success':'text-danger' }}">{{ invitation.acceptedAt ? invitation.acceptedAt|date('H:i d-m-Y') : 'not yet' }}</td>
 
                         {% if sfs_invitation_is('roles') %}
-                            <td class="p-3">
+                            <td>
                                 {% if sfs_invitation_is('rolesAdmin') %}
                                     {% if invitation.superAdmin %}
                                         <span class="badge bg-danger">super-admin</span>
@@ -110,7 +110,7 @@
                             </td>
                         {% endif %}
 
-                        <td class="p-3">
+                        <td>
                             <a href="{{ url('sfs_user_admin_invitations_details', {'invitation': invitation}) }}" class="text-nowrap">details <span class="mdi mdi-18px mdi-eye-outline align-middle"></span></a>
                         </td>
                     </tr>
