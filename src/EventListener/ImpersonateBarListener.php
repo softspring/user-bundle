@@ -42,7 +42,7 @@ class ImpersonateBarListener implements EventSubscriberInterface
         $response = $event->getResponse();
         $request = $event->getRequest();
 
-        if (!$event->isMainRequest() || $request->isXmlHttpRequest()) {
+        if (!$event->isMainRequest() || $request->isXmlHttpRequest() || $request->getPathInfo() === '/_fragment') {
             return;
         }
 
@@ -69,6 +69,11 @@ class ImpersonateBarListener implements EventSubscriberInterface
     {
         $content = $response->getContent();
         $pos = stripos($content, '<body');
+
+        if ($pos === false) {
+            return; // no body tag
+        }
+
         $posEnd = stripos($content, '>', $pos);
 
         if (false !== $posEnd) {
