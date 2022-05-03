@@ -3,7 +3,7 @@
 <div class="container mb-5">
     <div class="row">
         <div class="col">
-            <div class="card">
+            <div class="card h-100">
                 <div class="card-body">
                     <h6 class="font-weight-bold text-dark">{{ 'admin_users.list.widgets.total.title'|trans }}</h6>
                     <p class="h1" id="totalUsersWidget">{#{{ render(url('sfs_user_admin_users_count_widget')) }}#}</p>
@@ -22,7 +22,7 @@
         </div>
 
         <div class="col">
-            <div class="card">
+            <div class="card h-100">
                 <div class="card-body">
                     <h6 class="font-weight-bold text-dark">{{ 'admin_users.list.widgets.pending_confirm.title'|trans }}</h6>
                     <p class="h1" id="pendingConfirmUsersWidget">{#{{ render(url('sfs_user_admin_users_pending_confirm_count_widget')) }}#}</p>

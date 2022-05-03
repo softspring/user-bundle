@@ -11,23 +11,11 @@
 
 {% block content %}
     <div class="container-fluid">
-        <div class="row">
-            <div class="col">
-                <h1 class="h3 mb-4">{{ 'admin_users.details.title'|trans({'%displayName%': user.displayName}) }}</h1>
-            </div>
-
-            <div class="col text-end">
+        <div class="d-flex justify-content-between">
+            <h1 class="h3 mb-4">{{ 'admin_users.details.title'|trans({'%displayName%': user.displayName}) }}</h1>
+            <div class="ms-3">
                 {% if is_granted('ROLE_ADMIN_USERS_UPDATE', user) %}
                     <a href="{{ url('sfs_user_admin_users_update', {'user': user}) }}" class="btn btn-outline-secondary">{{ 'admin_users.details.actions.update'|trans }}</a>
-                {% endif %}
-
-                {% if switch_enabled and is_granted(switch_role) %}
-                    {% if is_granted(switch_role, user) %}
-                        <a href="{{ url(switch_route, switch_route_params) }}{{ switch_route_params|length ? '&' : '?' }}{{ switch_parameter }}={{ user.username }}"
-                           class="btn btn-outline-secondary"><i class="bi bi-incognito"></i> {{ 'admin_users.details.actions.switch'|trans({'%switchUserIdentifier%':user.userIdentifier, '%switchUserDisplayName%':user.displayName}) }}</a>
-                    {% else %}
-                        <a href="#" class="disabled btn btn-outline-secondary"><i class="bi bi-incognito"></i> {{ 'admin_users.details.actions.switch'|trans({'%switchUserIdentifier%':user.userIdentifier, '%switchUserDisplayName%':user.displayName}) }}</a>
-                    {% endif %}
                 {% endif %}
 
                 <div class="btn-group dropdown">
@@ -62,19 +50,29 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-4">
-                <div class="bg-white p-4">
+<div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="card p-4">
+                <div class="card-body">
                     <div class="text-center mb-4">
                         {% if sfs_user_is('avatar') %}
                             <img alt="{{ user.username }}" src="{{ user.avatarUrl }}" width="128" height="128" class="rounded-circle mb-3">
                         {% endif %}
 
                         {% if sfs_user_is('nameSurname') %}
-                            <h4>{{ user.name }} {{ user.surname }}</h4>
+                            <h2 class="card-title">{{ user.name }} {{ user.surname }}</h2>
                         {% endif %}
                     </div>
+
+                    {% if switch_enabled and is_granted(switch_role) %}
+                        {% if is_granted(switch_role, user) %}
+                            <a href="{{ url(switch_route, switch_route_params) }}{{ switch_route_params|length ? '&' : '?' }}{{ switch_parameter }}={{ user.username }}"
+                               class="btn btn-outline-secondary w-100 mb-4"><i class="bi bi-incognito"></i> {{ 'admin_users.details.actions.switch'|trans({'%switchUserIdentifier%':user.userIdentifier, '%switchUserDisplayName%':user.displayName}) }}</a>
+                        {% else %}
+                            <a href="#" class="disabled btn btn-outline-secondary w-100 mb-4"><i class="bi bi-incognito"></i> {{ 'admin_users.details.actions.switch'|trans({'%switchUserIdentifier%':user.userIdentifier, '%switchUserDisplayName%':user.displayName}) }}</a>
+                        {% endif %}
+                    {% endif %}
 
                     {% if sfs_user_is('identifierUsername') %}
                         <p><strong>{{ 'admin_users.details.fields.username'|trans }}:</strong><br/>{{ user.username }}</p>
@@ -115,7 +113,7 @@
                 </div>
             </div>
 
-            <div class="col">
+            <div class="col-12">
                 {% if is_granted('ROLE_ADMIN_ACCESS_HISTORY_LIST') and user_access_history is defined %}
                     {% include '@SfsUser/admin/components/_user_access_history_card.html.twig' %}
                 {% endif %}

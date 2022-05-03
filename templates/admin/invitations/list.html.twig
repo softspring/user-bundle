@@ -16,7 +16,7 @@
         <a href="{{ url('sfs_user_admin_invitations_invite') }}" class="btn btn-primary">{{ 'admin_invitations.list.actions.invite.link'|trans }}</a>
     </div>
 
-    <div class="container bg-white p-4">
+    <div class="container-fluid bg-white p-4">
         {% if entities|length %}
             <div class="mb-4">
                 {{ form_start(filterForm) }}

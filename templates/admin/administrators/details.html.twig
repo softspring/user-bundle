@@ -11,23 +11,12 @@
 
 {% block content %}
     <div class="container-fluid">
-        <div class="row">
-            <div class="col">
-                <h1 class="h3 mb-4">{{ 'admin_administrators.details.title'|trans({'%displayName%': administrator.displayName}) }}</h1>
-            </div>
+        <div class="d-flex justify-content-between">
+            <h1 class="h3 mb-4">{{ 'admin_administrators.details.title'|trans({'%displayName%': administrator.displayName}) }}</h1>
 
-            <div class="col text-end">
+            <div class="ms-3">
                 {% if is_granted('ROLE_ADMIN_ADMINISTRATORS_UPDATE', administrator) %}
                     <a href="{{ url('sfs_user_admin_administrators_update', {'administrator': administrator}) }}" class="btn btn-outline-secondary">{{ 'admin_administrators.details.actions.update'|trans }}</a>
-                {% endif %}
-
-                {% if switch_enabled and is_granted(switch_role) %}
-                    {% if is_granted(switch_role, administrator) %}
-                        <a href="{{ url(switch_route, switch_route_params) }}{{ switch_route_params|length ? '&' : '?' }}{{ switch_parameter }}={{ administrator.username }}"
-                           class="btn btn-outline-secondary"><i class="bi bi-incognito"></i> {{ 'admin_administrators.details.actions.switch'|trans({'%switchUserIdentifier%':administrator.userIdentifier, '%switchUserDisplayName%':administrator.displayName}) }}</a>
-                    {% else %}
-                        <a href="#" class="disabled btn btn-outline-secondary"><i class="bi bi-incognito"></i> {{ 'admin_administrators.details.actions.switch'|trans({'%switchUserIdentifier%':administrator.userIdentifier, '%switchUserDisplayName%':administrator.displayName}) }}</a>
-                    {% endif %}
                 {% endif %}
 
                 <div class="btn-group dropdown">
@@ -70,73 +59,84 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container-fluid mt-5">
         <div class="row">
-            <div class="col-4">
-                <div class="bg-white p-4">
-                    <div class="text-center mb-4">
-                        {% if sfs_user_is('avatar') %}
-                            <img alt="{{ administrator.username }}" src="{{ administrator.avatarUrl }}" width="128" height="128" class="rounded-circle mb-3">
+            <div class="col-12 col-md-6">
+                <div class="card p-4">
+                    <div class="card-body">
+                        <div class="text-center mb-4">
+                            {% if sfs_user_is('avatar') %}
+                                <img alt="{{ administrator.username }}" src="{{ administrator.avatarUrl }}" width="128" height="128" class="rounded-circle mb-3">
+                            {% endif %}
+
+                            {% if sfs_user_is('nameSurname') %}
+                                <h2 class="card-title">{{ administrator.name }} {{ administrator.surname }}</h2>
+                            {% endif %}
+                        </div>
+
+                        {% if switch_enabled and is_granted(switch_role) %}
+                            {% if is_granted(switch_role, administrator) %}
+                                <a href="{{ url(switch_route, switch_route_params) }}{{ switch_route_params|length ? '&' : '?' }}{{ switch_parameter }}={{ administrator.username }}"
+                                   class="btn btn-outline-secondary w-100 mb-4"><i class="bi bi-incognito"></i> {{ 'admin_administrators.details.actions.switch'|trans({'%switchUserIdentifier%':administrator.userIdentifier, '%switchUserDisplayName%':administrator.displayName}) }}</a>
+                            {% else %}
+                                <a href="#" class="disabled btn btn-outline-secondary w-100 mb-4"><i class="bi bi-incognito"></i> {{ 'admin_administrators.details.actions.switch'|trans({'%switchUserIdentifier%':administrator.userIdentifier, '%switchUserDisplayName%':administrator.displayName}) }}</a>
+                            {% endif %}
                         {% endif %}
 
-                        {% if sfs_user_is('nameSurname') %}
-                            <h4>{{ administrator.name }} {{ administrator.surname }}</h4>
+                        {% if sfs_user_is('identifierUsername') %}
+                            <p><strong>{{ 'admin_administrators.details.fields.username'|trans }}:</strong><br/>{{ administrator.username }}</p>
+                        {% endif %}
+
+                        {% if sfs_user_is('identifierEmail') or sfs_user_is('email') %}
+                            <p><strong>{{ 'admin_administrators.details.fields.email'|trans }}:</strong><br/>{{ administrator.email }}</p>
+                        {% endif %}
+
+                        {% if sfs_user_is('confirmable') %}
+                            <p>
+                                <strong>{{ 'admin_administrators.details.fields.confirmed'|trans }}:</strong><br/>
+                                {% if administrator.confirmed %}
+                                    <span class="bi bi-check  align-middle text-success"></span>
+                                    at
+                                    <span title="{{ administrator.confirmedAt|date('H:i:s d-m-Y', 'UTC') }} UTC">{{ administrator.confirmedAt|date('H:i:s d-m-Y', 'Europe/Madrid') }}</span>
+                                {% else %}
+                                    <span class="bi bi-x align-middle text-danger"></span>
+                                {% endif %}
+                            </p>
+                        {% endif %}
+
+                        {% if sfs_user_is('lastLogin') %}
+                            <p><strong>{{ 'admin_administrators.details.fields.lastLogin'|trans }}:</strong><br/>
+                                {% if administrator.lastLogin %}
+                                    <span title="{{ administrator.lastLogin|date('H:i:s d-m-Y', 'UTC') }} UTC">{{ administrator.lastLogin|date('H:i:s d-m-Y', 'Europe/Madrid') }}</span>
+                                {% else %}
+                                    {{ 'admin_administrators.details.fields.lastLogin.notYet'|trans }}
+                                {% endif %}
+                            </p>
+                        {% endif %}
+
+                        <p><strong>{{ 'admin_administrators.details.fields.role'|trans }}:</strong>
+                            {% if sfs_user_is('rolesAdmin') %}
+                                {% if administrator.superAdmin %}
+                                    <br/><span class="badge bg-danger">super-admin</span>
+                                {% else %}
+                                    <br/><span class="badge bg-info text-dark">admin</span>
+                                {% endif %}
+                            {% else %}
+                                <br/>{{ administrator.roles|join(', ') }}
+                            {% endif %}
+                        </p>
+
+                        {% if sfs_user_is('hasLocalePreference') %}
+                            <p><strong>{{ 'admin_administrators.details.fields.locale'|trans }}:</strong><br/>{{ administrator.locale|default('not selected') }}</p>
                         {% endif %}
                     </div>
+                </div>
 
-                    {% if sfs_user_is('identifierUsername') %}
-                        <p><strong>{{ 'admin_administrators.details.fields.username'|trans }}:</strong><br/>{{ administrator.username }}</p>
-                    {% endif %}
-
-                    {% if sfs_user_is('identifierEmail') or sfs_user_is('email') %}
-                        <p><strong>{{ 'admin_administrators.details.fields.email'|trans }}:</strong><br/>{{ administrator.email }}</p>
-                    {% endif %}
-
-                    {% if sfs_user_is('confirmable') %}
-                        <p>
-                            <strong>{{ 'admin_administrators.details.fields.confirmed'|trans }}:</strong><br/>
-                            {% if administrator.confirmed %}
-                                <span class="bi bi-check  align-middle text-success"></span>
-                                at
-                                <span title="{{ administrator.confirmedAt|date('H:i:s d-m-Y', 'UTC') }} UTC">{{ administrator.confirmedAt|date('H:i:s d-m-Y', 'Europe/Madrid') }}</span>
-                            {% else %}
-                                <span class="bi bi-x align-middle text-danger"></span>
-                            {% endif %}
-                        </p>
-                    {% endif %}
-
-                    {% if sfs_user_is('lastLogin') %}
-                        <p><strong>{{ 'admin_administrators.details.fields.lastLogin'|trans }}:</strong><br/>
-                            {% if administrator.lastLogin %}
-                                <span title="{{ administrator.lastLogin|date('H:i:s d-m-Y', 'UTC') }} UTC">{{ administrator.lastLogin|date('H:i:s d-m-Y', 'Europe/Madrid') }}</span>
-                            {% else %}
-                                {{ 'admin_administrators.details.fields.lastLogin.notYet'|trans }}
-                            {% endif %}
-                        </p>
-                    {% endif %}
-
-                    <p><strong>{{ 'admin_administrators.details.fields.role'|trans }}:</strong>
-                        {% if sfs_user_is('rolesAdmin') %}
-                            {% if administrator.superAdmin %}
-                                <br/><span class="badge bg-danger">super-admin</span>
-                            {% else %}
-                                <br/><span class="badge bg-info text-dark">admin</span>
-                            {% endif %}
-                        {% else %}
-                            <br/>{{ administrator.roles|join(', ') }}
-                        {% endif %}
-                    </p>
-
-                    {% if sfs_user_is('hasLocalePreference') %}
-                        <p><strong>{{ 'admin_administrators.details.fields.locale'|trans }}:</strong><br/>{{ administrator.locale|default('not selected') }}</p>
+                <div class="col-12">
+                    {% if is_granted('ROLE_ADMIN_ACCESS_HISTORY_LIST') and user_access_history is defined %}
+                        {% include '@SfsUser/admin/components/_user_access_history_card.html.twig' %}
                     {% endif %}
                 </div>
-            </div>
-
-            <div class="col">
-                {% if is_granted('ROLE_ADMIN_ACCESS_HISTORY_LIST') and user_access_history is defined %}
-                    {% include '@SfsUser/admin/components/_user_access_history_card.html.twig' %}
-                {% endif %}
             </div>
         </div>
     </div>
