@@ -1,7 +1,7 @@
 {% trans_default_domain 'sfs_user' %}
 {% extends '@SfsUser/admin_layout.html.twig' %}
 
-{% form_theme filterForm 'bootstrap_5_horizontal_layout.html.twig' %}
+{% form_theme filterForm '@SfsAdmin/admin_form_horizontal_layout.html.twig' %}
 
 {% block title %}{{ 'admin_users.list.meta.title'|trans }}{% endblock %}
 
@@ -21,11 +21,11 @@
         {% if entities|length %}
             <div class="mb-4">
                 {{ form_start(filterForm) }}
-                <div class="row">
-                    {% if filterForm.name is defined %}<div class="col">{{ form_row(filterForm.name, {'row_class':'form-floating'}) }}</div>{% endif %}
-                    {% if filterForm.surname is defined %}<div class="col">{{ form_row(filterForm.surname, {'row_class':'form-floating'}) }}</div>{% endif %}
-                    {% if filterForm.email is defined %}<div class="col">{{ form_row(filterForm.email, {'row_class':'form-floating'}) }}</div>{% endif %}
-                    {% if filterForm.search is defined %}<div class="col">{{ form_row(filterForm.search, {'row_class': 'form-floating'}) }}</div>{% endif %}
+                <div class="d-flex align-items-center">
+                    {% if filterForm.name is defined %}{{ form_row(filterForm.name, {'row_class':'form-floating mb-3'}) }}{% endif %}
+                    {% if filterForm.surname is defined %}{{ form_row(filterForm.surname, {'row_class':'form-floating mb-3'}) }}{% endif %}
+                    {% if filterForm.email is defined %}{{ form_row(filterForm.email, {'row_class':'form-floating mb-3'}) }}{% endif %}
+                    {% if filterForm.search is defined %}{{ form_row(filterForm.search, {'row_class': 'form-floating mb-3'}) }}{% endif %}
                 </div>
                 {{ form_widget(filterForm) }}
                 {{ form_rest(filterForm) }}
