@@ -2,7 +2,7 @@
 
 namespace Softspring\UserBundle\EventListener;
 
-use Softspring\CoreBundle\Event\GetResponseFormEvent;
+use Softspring\Component\Events\GetResponseFormEvent;
 use Softspring\UserBundle\Mailer\UserMailerInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\PasswordRequestInterface;

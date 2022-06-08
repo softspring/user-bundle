@@ -2,7 +2,7 @@
 
 namespace Softspring\UserBundle\Controller\Admin;
 
-use Softspring\CoreBundle\Controller\Traits\DispatchGetResponseTrait;
+use Softspring\Component\Events\DispatchGetResponseTrait;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Mailer\UserMailerInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;

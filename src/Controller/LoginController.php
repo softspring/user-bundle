@@ -3,8 +3,8 @@
 namespace Softspring\UserBundle\Controller;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Softspring\CoreBundle\Controller\Traits\DispatchGetResponseTrait;
-use Softspring\CoreBundle\Event\GetResponseFormEvent;
+use Softspring\Component\Events\DispatchGetResponseTrait;
+use Softspring\Component\Events\GetResponseFormEvent;
 use Softspring\UserBundle\Form\LoginFormInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

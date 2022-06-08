@@ -3,9 +3,9 @@
 namespace Softspring\UserBundle\Controller;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Softspring\CoreBundle\Controller\Traits\DispatchGetResponseTrait;
-use Softspring\CoreBundle\Event\GetResponseFormEvent;
-use Softspring\CoreBundle\Event\ViewEvent;
+use Softspring\Component\Events\DispatchGetResponseTrait;
+use Softspring\Component\Events\GetResponseFormEvent;
+use Softspring\Component\Events\ViewEvent;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Event\RegisterExceptionEvent;
 use Softspring\UserBundle\Form\RegisterFormInterface;

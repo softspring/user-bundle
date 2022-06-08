@@ -2,8 +2,8 @@
 
 namespace Softspring\UserBundle\Controller\Settings;
 
-use Softspring\CoreBundle\Controller\Traits\DispatchGetResponseTrait;
-use Softspring\CoreBundle\Event\GetResponseFormEvent;
+use Softspring\Component\Events\DispatchGetResponseTrait;
+use Softspring\Component\Events\GetResponseFormEvent;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Form\Settings\ChangePasswordFormInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;

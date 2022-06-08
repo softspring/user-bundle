@@ -11,6 +11,7 @@
         "javihgil/doctrine-pagination-bundle": "^2.0",
         "softspring/core-bundle": "^5.0",
         "softspring/crudl-controller": "^5.0",
+        "softspring/events": "^5.0",
         "softspring/mime-translatable": "^5.0",
         "softspring/twig-extra-bundle": "^5.0"
     },

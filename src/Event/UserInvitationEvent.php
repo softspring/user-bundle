@@ -2,7 +2,7 @@
 
 namespace Softspring\UserBundle\Event;
 
-use Softspring\CoreBundle\Event\RequestEvent;
+use Softspring\Component\Events\RequestEvent;
 use Softspring\UserBundle\Model\UserInvitationInterface;
 use Symfony\Component\HttpFoundation\Request;
 

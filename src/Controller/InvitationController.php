@@ -3,9 +3,9 @@
 namespace Softspring\UserBundle\Controller;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Softspring\CoreBundle\Controller\Traits\DispatchGetResponseTrait;
-use Softspring\CoreBundle\Event\FormEvent;
-use Softspring\CoreBundle\Event\GetResponseFormEvent;
+use Softspring\Component\Events\DispatchGetResponseTrait;
+use Softspring\Component\Events\FormEvent;
+use Softspring\Component\Events\GetResponseFormEvent;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Form\AcceptInvitationFormInterface;
 use Softspring\UserBundle\Manager\UserInvitationManagerInterface;

@@ -2,7 +2,7 @@
 
 namespace Softspring\UserBundle\Event;
 
-use Softspring\CoreBundle\Event\GetResponseFormEvent;
+use Softspring\Component\Events\GetResponseFormEvent;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 

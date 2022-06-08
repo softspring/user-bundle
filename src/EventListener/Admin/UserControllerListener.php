@@ -4,7 +4,7 @@ namespace Softspring\UserBundle\EventListener\Admin;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Softspring\Component\CrudlController\Event\GetResponseEntityEvent;
-use Softspring\CoreBundle\Event\ViewEvent;
+use Softspring\Component\Events\ViewEvent;
 use Softspring\UserBundle\Doctrine\Filter\UserFilter;
 use Softspring\UserBundle\Manager\UserAccessManagerInterface;
 use Softspring\UserBundle\SfsUserEvents;
