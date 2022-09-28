@@ -22,4 +22,9 @@ class AdministratorsFixtures extends UserFixtures
 
         $manager->flush();
     }
+    
+    public static function getGroups(): array
+    {
+        return ['sfs_user_admins'];
+    }
 }
