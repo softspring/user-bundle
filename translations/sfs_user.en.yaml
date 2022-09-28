@@ -264,6 +264,12 @@ admin_administrators:
             admin.label: "Administrator"
             superAdmin.label: "Super-administrator"
 
+    delete:
+        confirm_message: "Are you sure you want to remove this administrator?"
+        actions:
+            cancel: "Cancel"
+            delete.button: "Remove administrator"
+
 admin_access_history:
     list:
         fields:
