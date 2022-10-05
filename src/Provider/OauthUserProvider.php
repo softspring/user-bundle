@@ -181,8 +181,8 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
                 if (!$user instanceof FacebookOauthInterface) {
                     throw new \Exception(sprintf('Your entity does not extend %s interface. Check documentation.', FacebookOauthInterface::class));
                 }
-            $user->setFacebookUserId($response->getUsername());
-            break;
+                $user->setFacebookUserId($response->getUsername());
+                break;
 
             default:
                 throw new \Exception('Integration not yet implemented');
