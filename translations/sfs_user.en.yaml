@@ -96,7 +96,10 @@ invitation:
             <p>Regards.</p>
 
 preferences:
-    title: "Preferences"
+    menu:
+        my_preferences.title: "My Preferences"
+        accounts.title: "Accounts"
+    title: "My Preferences"
     actions:
         submit:
             button: "Save changes"
