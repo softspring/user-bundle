@@ -6,7 +6,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": ">=7.4",
+        "php": ">=8.0",
         "symfony/translation": "^5.4|^6.0",
         "javihgil/doctrine-pagination-bundle": "^2.0",
         "softspring/core-bundle": "^5.0",
