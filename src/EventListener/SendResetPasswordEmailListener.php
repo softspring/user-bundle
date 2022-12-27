@@ -40,7 +40,7 @@ class SendResetPasswordEmailListener implements EventSubscriberInterface
 
     public function onResetRequestCheckToken(GetResponseFormEvent $event)
     {
-        /** @var UserInterface|PasswordRequestInterface $user */
+        /** @var UserInterface $user */
         $user = $this->userManager->findUserByEmail($event->getForm()->get('email')->getData());
 
         if (!$user instanceof PasswordRequestInterface) {

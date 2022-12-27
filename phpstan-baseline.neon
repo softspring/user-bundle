@@ -1,7 +1,15 @@
 parameters:
     ignoreErrors:
+#        -
+#            message: "#Parameter \\#1 \\$entity of method Softspring\\\\UserBundle\\\\Manager\\\\UserManagerInterface::saveEntity\\(\\) expects Softspring\\\\UserBundle\\\\Model\\\\UserInterface, Softspring\\\\UserBundle\\\\Model\\\\PasswordRequestInterface given.#"
+#            count: 1
+#            path: src/EventListener/SendResetPasswordEmailListener.php
         -
             message: "#Parameter \\#1 \\$entity \\(Softspring\\\\UserBundle\\\\Model\\\\UserInterface\\) of method Softspring\\\\UserBundle\\\\Manager\\\\UserManager::saveEntity\\(\\) should be contravariant with parameter \\$entity \\(object\\) of method Softspring\\\\Component\\\\CrudlController\\\\Manager\\\\CrudlEntityManagerInterface::saveEntity\\(\\)#"
+            count: 1
+            path: src/Manager/UserManager.php
+        -
+            message: "#Method Symfony\\\\Component\\\\PasswordHasher\\\\PasswordHasherInterface::hash\\(\\) invoked with 2 parameters, 1 required.#"
             count: 1
             path: src/Manager/UserManager.php
         -
