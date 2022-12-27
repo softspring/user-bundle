@@ -2,13 +2,15 @@
 
 namespace Softspring\UserBundle\Manipulator;
 
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Softspring\UserBundle\Event\UserEvent;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\EnablableInterface;
-use Softspring\UserBundle\Model\UserAdminRolesInterface;
+use Softspring\UserBundle\Model\RolesAdminInterface;
+use Softspring\UserBundle\Model\RolesInterface;
+use Softspring\UserBundle\Model\UserIdentifierUsernameInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Model\UserPasswordInterface;
-use Softspring\UserBundle\Model\UserRolesInterface;
 use Softspring\UserBundle\Model\UserWithEmailInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -29,12 +31,18 @@ class UserManipulator
         $this->requestStack = $requestStack;
     }
 
+    /**
+     * @throws UniqueConstraintViolationException
+     * @throws \Exception
+     */
     public function create(string $username, string $email, string $plainPassword, array $roles = [], bool $enabled = false, bool $admin = false, bool $superAdmin = false): UserInterface
     {
         /** @var UserInterface $user */
         $user = $this->userManager->createEntity();
 
-        $user->setUsername($username);
+        if ($user instanceof UserIdentifierUsernameInterface) {
+            $user->setUsername($username);
+        }
 
         if ($user instanceof UserWithEmailInterface) {
             $user->setEmail($email);
@@ -44,7 +52,7 @@ class UserManipulator
             $user->setPlainPassword($plainPassword);
         }
 
-        if ($user instanceof UserRolesInterface) {
+        if ($user instanceof RolesInterface) {
             $user->setRoles($roles);
         }
 
@@ -52,7 +60,7 @@ class UserManipulator
             $user->setEnabled($enabled);
         }
 
-        if ($user instanceof UserAdminRolesInterface) {
+        if ($user instanceof RolesAdminInterface) {
             $user->setAdmin($admin);
             $user->setSuperAdmin($superAdmin);
         }

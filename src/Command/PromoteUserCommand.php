@@ -3,6 +3,7 @@
 namespace Softspring\UserBundle\Command;
 
 use Softspring\UserBundle\Manager\UserManagerInterface;
+use Softspring\UserBundle\Model\RolesAdminInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -31,13 +32,17 @@ class PromoteUserCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $username = $input->getArgument('username');
-        $superAdmin = $input->getOption('super-admin');
+        $superAdmin = (bool) $input->getOption('super-admin');
 
         $user = $this->userManager->findUserByUsername($username);
 
-        if (!$user) {
+        if (null === $user) {
             $output->writeln(sprintf('User %s not found', $username));
 
+            return Command::FAILURE;
+        }
+
+        if (!$user instanceof RolesAdminInterface) {
             return Command::FAILURE;
         }
 

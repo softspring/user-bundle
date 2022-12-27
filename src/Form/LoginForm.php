@@ -70,6 +70,7 @@ class LoginForm extends AbstractType implements LoginFormInterface
         $request = $this->requestStack->getCurrentRequest();
         $firewallConfig = $this->firewallMap->getFirewallConfig($request);
 
-        return in_array('remember_me', $firewallConfig->getListeners());
+        // TODO REVIEW THIS
+        return in_array('remember_me', $firewallConfig->getAuthenticators());
     }
 }

@@ -2,9 +2,6 @@
 
 namespace Softspring\UserBundle\Model;
 
-/**
- * Class User.
- */
 abstract class User implements UserInterface
 {
     public function __toString(): string
@@ -103,7 +100,10 @@ abstract class User implements UserInterface
      */
     abstract public function getId();
 
-    public function getUsername(): ?string
+    /**
+     * @deprecated this method will be removed on SF 6
+     */
+    public function getUsername()
     {
         return $this->getUserIdentifier();
     }
@@ -114,6 +114,8 @@ abstract class User implements UserInterface
     }
 
     /**
+     * @deprecated this method will be removed on SF 6
+     *
      * @throws \Exception
      */
     public function getPassword(): ?string
@@ -122,6 +124,8 @@ abstract class User implements UserInterface
     }
 
     /**
+     * @deprecated this method will be removed on SF 6
+     *
      * @throws \Exception
      */
     public function getSalt(): ?string

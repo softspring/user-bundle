@@ -47,6 +47,8 @@ class UserDeleteForm extends AbstractType implements UserDeleteFormInterface
 
     protected function getDeletableAccounts(MultiAccountedInterface $user): array
     {
+        return [];
+
 //        $accountsForDeletion = [];
 //
 //        /** @var MultiAccountedInterface $user */

@@ -15,7 +15,7 @@ class ExampleUser extends User implements NameSurnameInterface, UserIdentifierEm
 
     public function getId()
     {
-        // TODO: Implement getId() method.
+        return $this->getUserIdentifier();
     }
 
     public function getDisplayName(): ?string

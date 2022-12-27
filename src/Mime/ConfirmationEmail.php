@@ -35,7 +35,7 @@ class ConfirmationEmail extends TranslatableEmail implements ExampleEmailInterfa
         $this->setTranslationParams([
             '%name%' => $user instanceof NameSurnameInterface ? $user->getName() : '',
             '%surname%' => $user instanceof NameSurnameInterface ? $user->getSurname() : '',
-            '%username%' => $user->getUsername(),
+            '%username%' => $user->getUserIdentifier(),
             '%email%' => $user instanceof UserWithEmailInterface ? $user->getEmail() : '',
             '%confirmation_url%' => $confirmationUrl,
         ]);

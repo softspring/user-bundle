@@ -2,11 +2,13 @@
 
 namespace Softspring\UserBundle\Controller\Admin;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Softspring\Component\Events\DispatchGetResponseTrait;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Mailer\UserMailerInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\ConfirmableInterface;
+use Softspring\UserBundle\Model\RolesAdminInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,13 +23,16 @@ class UsersController extends AbstractController
 
     protected UserManagerInterface $userManager;
 
-    protected UserMailerInterface $userMailer;
+    protected EntityManagerInterface $em;
+
+    protected ?UserMailerInterface $userMailer;
 
     protected EventDispatcherInterface $eventDispatcher;
 
-    public function __construct(UserManagerInterface $userManager, UserMailerInterface $userMailer, EventDispatcherInterface $eventDispatcher)
+    public function __construct(UserManagerInterface $userManager, EntityManagerInterface $em, ?UserMailerInterface $userMailer, EventDispatcherInterface $eventDispatcher)
     {
         $this->userManager = $userManager;
+        $this->em = $em;
         $this->userMailer = $userMailer;
         $this->eventDispatcher = $eventDispatcher;
     }
@@ -38,13 +43,17 @@ class UsersController extends AbstractController
 
         $this->denyAccessUnlessGranted('ROLE_ADMIN_USERS_PROMOTE', $user);
 
+        if (!$user instanceof RolesAdminInterface) {
+            throw new \Exception(sprintf('User %s class must implement %s to promoting admins', get_class($user), RolesAdminInterface::class));
+        }
+
         if ($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_USERS_PROMOTE_INITIALIZE, new GetResponseUserEvent($user, $request))) {
             return $response;
         }
 
         if (!$user->isAdmin()) {
             $user->setAdmin(true);
-            $this->getDoctrine()->getManager()->flush();
+            $this->em->flush();
         }
 
         if ($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_USERS_PROMOTE_SUCCESS, new GetResponseUserEvent($user, $request))) {
@@ -85,7 +94,7 @@ class UsersController extends AbstractController
 
         if (!$user->isConfirmed()) {
             try {
-                $this->userMailer->sendRegisterConfirmationEmail($user);
+                $this->userMailer && $this->userMailer->sendRegisterConfirmationEmail($user);
 
                 if ($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_USERS_RESEND_CONFIRMATION_SUCCESS, new GetResponseUserEvent($user, $request))) {
                     return $response;

@@ -42,6 +42,7 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
     {
         $faker = \Faker\Factory::create('es_ES');
 
+        /** @var UserInterface $user */
         $user = $this->userManager->createEntity();
 
         if ($user instanceof NameSurnameInterface) {
@@ -67,6 +68,7 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
 
         if ($user instanceof UserLastLoginInterface) {
             if ($user instanceof ConfirmableInterface && !$user->getConfirmedAt()) {
+                /* @var UserLastLoginInterface $user */
                 $user->setLastLogin(null);
             } else {
                 $user->setLastLogin($faker->boolean(95) ? $faker->dateTimeBetween('-2 months', '-1 minute') : null);
@@ -97,7 +99,7 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
         return $user;
     }
 
-    protected function createUserAccess(ObjectManager $manager, UserInterface $user): UserAccessInterface
+    protected function createUserAccess(ObjectManager $manager, object $user): UserAccessInterface
     {
         $faker = \Faker\Factory::create('es_ES');
 
@@ -105,7 +107,7 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
         $access->setUser($user);
         $access->setUserAgent($faker->userAgent());
         $access->setIp($faker->ipv4());
-        $access->setLoginAt($user->getLastLogin());
+        $access->setLoginAt($user instanceof UserLastLoginInterface ? $user->getLastLogin() : new \DateTime('now'));
 
         if ($access instanceof UserAccessLocationInterface) {
             $access->setCountry($faker->countryCode());

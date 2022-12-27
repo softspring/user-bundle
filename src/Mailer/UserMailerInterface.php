@@ -3,7 +3,6 @@
 namespace Softspring\UserBundle\Mailer;
 
 use Softspring\UserBundle\Mailer\Exception\InvalidUserClassException;
-use Softspring\UserBundle\Model\PasswordRequestInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Model\UserInvitationInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
@@ -27,8 +26,6 @@ interface UserMailerInterface
 
     /**
      * Send an email to a user with the password reset link.
-     *
-     * @param UserInterface|PasswordRequestInterface $user
      *
      * @throws TransportExceptionInterface
      * @throws InvalidUserClassException

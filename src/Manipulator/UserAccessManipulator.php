@@ -40,8 +40,8 @@ class UserAccessManipulator
             if ($request->server->has('GAE_APPLICATION')) {
                 // HTTP_X_APPENGINE_CITYLATLONG "37.386051,-122.083851"
                 [$lat, $long] = explode(',', $request->server->get('HTTP_X_APPENGINE_CITYLATLONG'));
-                $userAccess->setLat($lat);
-                $userAccess->setLong($long);
+                $userAccess->setLat(floatval($lat));
+                $userAccess->setLong(floatval($long));
             }
         }
 

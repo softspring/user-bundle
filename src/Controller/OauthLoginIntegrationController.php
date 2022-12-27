@@ -16,7 +16,7 @@ class OauthLoginIntegrationController extends AbstractController
 
     public function facebookJs(): Response
     {
-        if (empty($this->oauthServices['facebook']['application_id'])) {
+        if (!isset($this->oauthServices['facebook']['application_id']) || !$this->oauthServices['facebook']['application_id']) {
             throw new \RuntimeException('Facebook oauth configuration is required');
         }
 

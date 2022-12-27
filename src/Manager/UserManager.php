@@ -3,14 +3,15 @@
 namespace Softspring\UserBundle\Manager;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
-use RuntimeException;
 use Softspring\Component\CrudlController\Manager\CrudlEntityManagerTrait;
 use Softspring\UserBundle\Model\ConfirmableInterface;
+use Softspring\UserBundle\Model\UserIdentifierEmailInterface;
+use Softspring\UserBundle\Model\UserIdentifierUsernameInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Model\UserPasswordInterface;
 use Softspring\UserBundle\Model\UserWithEmailInterface;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
+use Symfony\Component\PasswordHasher\LegacyPasswordHasherInterface;
 use Symfony\Component\Security\Core\User\LegacyPasswordAuthenticatedUserInterface;
 
 class UserManager implements UserManagerInterface
@@ -38,6 +39,7 @@ class UserManager implements UserManagerInterface
             throw new \InvalidArgumentException(sprintf('$entity must be an instance of %s', $this->getEntityClass()));
         }
 
+        /* @var UserInterface $entity */
         $this->hashPassword($entity);
 
         $this->em->persist($entity);
@@ -52,6 +54,19 @@ class UserManager implements UserManagerInterface
     public function findUserByUsername(string $username): ?UserInterface
     {
         return $this->findUserBy(['username' => $username]);
+    }
+
+    public function findUserByIdentifier(string $identifier): ?UserInterface
+    {
+        if ($this->getEntityClassReflection()->implementsInterface(UserIdentifierUsernameInterface::class)) {
+            return $this->findUserByUsername($identifier);
+        }
+
+        if ($this->getEntityClassReflection()->implementsInterface(UserIdentifierEmailInterface::class)) {
+            return $this->findUserByEmail($identifier);
+        }
+
+        throw new \Exception('Unknown user identifier field');
     }
 
     public function findUserByEmail(string $email): ?UserInterface
@@ -70,11 +85,14 @@ class UserManager implements UserManagerInterface
 
     public function findUserByConfirmationToken(string $token): ?ConfirmableInterface
     {
-        return $this->findUserBy(['confirmationToken' => $token]);
+        /** @var ?ConfirmableInterface $user */
+        $user = $this->findUserBy(['confirmationToken' => $token]);
+
+        return $user;
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     protected function hashPassword(UserInterface $user): void
     {
@@ -88,15 +106,19 @@ class UserManager implements UserManagerInterface
 
         try {
             $hasher = $this->encoderFactory->getPasswordHasher($user);
-        } catch (RuntimeException $e) {
+        } catch (\RuntimeException $e) {
             $hasher = $this->encoderFactory->getPasswordHasher(UserInterface::class);
         }
 
-        if ($user instanceof LegacyPasswordAuthenticatedUserInterface && $user instanceof UserPasswordInterface) {
+        if ($user instanceof LegacyPasswordAuthenticatedUserInterface) {
+            /* @var UserPasswordInterface $user */
             $user->setSalt(rtrim(str_replace('+', '.', base64_encode(random_bytes(32))), '='));
+            /* @var LegacyPasswordHasherInterface $hasher */
+            $user->setPassword($hasher->hash($plainPassword, $user->getSalt()));
+        } else {
+            $user->setPassword($hasher->hash($plainPassword));
         }
 
-        $user->setPassword($hasher->hash($plainPassword, $user->getSalt()));
         $user->eraseCredentials();
     }
 }

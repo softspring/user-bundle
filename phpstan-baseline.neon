@@ -1,0 +1,10 @@
+parameters:
+    ignoreErrors:
+        -
+            message: "#Parameter \\#1 \\$entity \\(Softspring\\\\UserBundle\\\\Model\\\\UserInterface\\) of method Softspring\\\\UserBundle\\\\Manager\\\\UserManager::saveEntity\\(\\) should be contravariant with parameter \\$entity \\(object\\) of method Softspring\\\\Component\\\\CrudlController\\\\Manager\\\\CrudlEntityManagerInterface::saveEntity\\(\\)#"
+            count: 1
+            path: src/Manager/UserManager.php
+        -
+            message: "#Variable property access on \\$this\\(Softspring\\\\UserBundle\\\\Model\\\\User\\)\\.#"
+            count: 4
+            path: src/Model/User.php

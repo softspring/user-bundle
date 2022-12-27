@@ -2,7 +2,6 @@
 
 namespace Softspring\UserBundle\Manager;
 
-use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Softspring\Component\CrudlController\Manager\CrudlEntityManagerTrait;
 use Softspring\UserBundle\Model\ConfirmableInterface;
@@ -75,7 +74,7 @@ class UserInvitationManager implements UserInvitationManagerInterface
         }
 
         if ($user instanceof ConfirmableInterface) {
-            $user->setConfirmedAt(new DateTime('now'));
+            $user->setConfirmedAt(new \DateTime('now'));
         }
 
         return $user;

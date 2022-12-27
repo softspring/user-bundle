@@ -15,11 +15,11 @@ class InvitationsController extends AbstractController
 
     protected UserInvitationManagerInterface $invitationsManager;
 
-    protected UserMailerInterface $userMailer;
+    protected ?UserMailerInterface $userMailer;
 
     protected EventDispatcherInterface $eventDispatcher;
 
-    public function __construct(UserInvitationManagerInterface $invitationsManager, UserMailerInterface $userMailer, EventDispatcherInterface $eventDispatcher)
+    public function __construct(UserInvitationManagerInterface $invitationsManager, ?UserMailerInterface $userMailer, EventDispatcherInterface $eventDispatcher)
     {
         $this->invitationsManager = $invitationsManager;
         $this->userMailer = $userMailer;
@@ -38,7 +38,7 @@ class InvitationsController extends AbstractController
     {
         $invitation = $this->invitationsManager->findInvitationBy(['id' => $invitation]);
 
-        if (!$invitation->getAcceptedAt()) {
+        if (!$invitation->getAcceptedAt() && $this->userMailer) {
             $this->userMailer->sendInvitationEmail($invitation);
         }
 

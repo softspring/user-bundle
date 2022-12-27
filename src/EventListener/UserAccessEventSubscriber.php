@@ -49,7 +49,7 @@ class UserAccessEventSubscriber implements EventSubscriberInterface
         $user = $event->getAuthenticationToken()->getUser();
         $request = $event->getRequest();
 
-        if ($user instanceof UserInterface && $request instanceof Request) {
+        if ($user instanceof UserInterface) {
             $this->userAccessManipulator->register($user, $request);
         }
     }

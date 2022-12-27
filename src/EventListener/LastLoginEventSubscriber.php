@@ -4,6 +4,7 @@ namespace Softspring\UserBundle\EventListener;
 
 use Softspring\UserBundle\Event\UserEvent;
 use Softspring\UserBundle\Manager\UserManagerInterface;
+use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Model\UserLastLoginInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -45,6 +46,7 @@ class LastLoginEventSubscriber implements EventSubscriberInterface
      */
     public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
     {
+        /** @var UserInterface $user */
         $user = $event->getAuthenticationToken()->getUser();
 
         if ($user instanceof UserLastLoginInterface) {

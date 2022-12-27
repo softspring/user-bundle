@@ -43,8 +43,8 @@ class CreateUserCommand extends Command
         $roles = $input->getOption('role');
         $enabled = $input->getOption('enabled');
         $admin = $input->getOption('admin');
-        $superAdmin = $input->getOption('super-admin');
-        $skipExisting = $input->getOption('skip-existing');
+        $superAdmin = (bool) $input->getOption('super-admin');
+        $skipExisting = (bool) $input->getOption('skip-existing');
 
         if ($superAdmin) {
             $admin = true;

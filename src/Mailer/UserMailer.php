@@ -9,6 +9,7 @@ use Softspring\UserBundle\Mime\ResetPasswordEmail;
 use Softspring\UserBundle\Model\ConfirmableInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;
 use Softspring\UserBundle\Model\PasswordRequestInterface;
+use Softspring\UserBundle\Model\User;
 use Softspring\UserBundle\Model\UserHasLocalePreferenceInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Model\UserInvitationInterface;
@@ -43,9 +44,10 @@ class UserMailer implements UserMailerInterface
             throw new InvalidUserClassException(sprintf('%s must implements %s interface', get_class($user), UserWithEmailInterface::class));
         }
 
+        /** @var User|ConfirmableInterface|UserWithEmailInterface $user */
         $toName = $user instanceof NameSurnameInterface ? implode(' ', [$user->getName(), $user->getSurname()]) : '';
 
-        $locale = $user && $user instanceof UserHasLocalePreferenceInterface ? $user->getLocale() : $locale;
+        $locale = $user instanceof UserHasLocalePreferenceInterface ? $user->getLocale() : $locale;
 
         $confirmationUrl = $this->urlGenerator->generate('sfs_user_register_confirm', [
             'user' => $user->getId(),
@@ -81,6 +83,7 @@ class UserMailer implements UserMailerInterface
             throw new InvalidUserClassException(sprintf('%s must implements %s interface', get_class($user), UserWithEmailInterface::class));
         }
 
+        /** @var User|PasswordRequestInterface|UserWithEmailInterface $user */
         $toName = $user instanceof NameSurnameInterface ? implode(' ', [$user->getName(), $user->getSurname()]) : '';
 
         $resetUrl = $this->urlGenerator->generate('sfs_user_reset_password', [
@@ -88,7 +91,7 @@ class UserMailer implements UserMailerInterface
             'token' => $user->getPasswordRequestToken(),
         ], UrlGeneratorInterface::ABSOLUTE_URL);
 
-        $locale = $user && $user instanceof UserHasLocalePreferenceInterface ? $user->getLocale() : $locale;
+        $locale = $user instanceof UserHasLocalePreferenceInterface ? $user->getLocale() : $locale;
 
         $email = (new ResetPasswordEmail($user, $resetUrl, $this->translator, $locale))
             ->to(new Address($user->getEmail(), $toName))

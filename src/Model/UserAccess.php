@@ -27,12 +27,12 @@ abstract class UserAccess implements UserAccessInterface
 
     public function getLoginAt(): ?\DateTime
     {
-        return \DateTime::createFromFormat('U', $this->loginAt) ?? null;
+        return null !== $this->loginAt ? \DateTime::createFromFormat('U', "{$this->loginAt}") : null;
     }
 
     public function setLoginAt(?\DateTime $loginAt): void
     {
-        $this->loginAt = $loginAt instanceof \DateTime ? $loginAt->format('U') : null;
+        $this->loginAt = $loginAt instanceof \DateTime ? (int) $loginAt->format('U') : null;
     }
 
     public function getUserAgent(): string

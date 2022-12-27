@@ -11,11 +11,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class FlashMessagesListener implements EventSubscriberInterface
 {
-    protected FlashBagInterface $flashBag;
+    protected ?FlashBagInterface $flashBag;
 
     protected TranslatorInterface $translator;
 
-    public function __construct(FlashBagInterface $flashBag, TranslatorInterface $translator)
+    public function __construct(?FlashBagInterface $flashBag, TranslatorInterface $translator)
     {
         $this->flashBag = $flashBag;
         $this->translator = $translator;
@@ -36,8 +36,8 @@ class FlashMessagesListener implements EventSubscriberInterface
         $locale = $event->getRequest()->getLocale();
 
         $this->addFlash('success', 'admin_users.resend_confirmation.messages.success', [
-            '%username%' => $user->getUsername(),
-            '%email%' => $user instanceof UserWithEmailInterface ? $user->getEmail() : $user->getUsername(),
+            '%username%' => $user->getDisplayName(),
+            '%email%' => $user instanceof UserWithEmailInterface ? $user->getEmail() : $user->getDisplayName(),
         ], 'sfs_user', $locale);
     }
 
@@ -47,8 +47,8 @@ class FlashMessagesListener implements EventSubscriberInterface
         $locale = $event->getRequest()->getLocale();
 
         $this->addFlash('error', 'admin_users.resend_confirmation.messages.error', [
-            '%username%' => $user->getUsername(),
-            '%email%' => $user instanceof UserWithEmailInterface ? $user->getEmail() : $user->getUsername(),
+            '%username%' => $user->getDisplayName(),
+            '%email%' => $user instanceof UserWithEmailInterface ? $user->getEmail() : $user->getDisplayName(),
         ], 'sfs_user', $locale);
     }
 
@@ -58,13 +58,17 @@ class FlashMessagesListener implements EventSubscriberInterface
         $locale = $event->getRequest()->getLocale();
 
         $this->addFlash('warning', 'admin_users.resend_confirmation.messages.already_confirmed', [
-            '%username%' => $user->getUsername(),
-            '%email%' => $user instanceof UserWithEmailInterface ? $user->getEmail() : $user->getUsername(),
+            '%username%' => $user->getDisplayName(),
+            '%email%' => $user instanceof UserWithEmailInterface ? $user->getEmail() : $user->getDisplayName(),
         ], 'sfs_user', $locale);
     }
 
     protected function addFlash(string $type, string $trans, array $transParams = [], string $domain = 'sfs_user', string $locale = 'en'): void
     {
+        if (!$this->flashBag) {
+            return;
+        }
+
         $this->flashBag->add($type, $this->translator->trans($trans, $transParams, $domain, $locale));
     }
 }

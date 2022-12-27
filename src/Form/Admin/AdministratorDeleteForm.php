@@ -47,6 +47,8 @@ class AdministratorDeleteForm extends AbstractType implements AdministratorDelet
 
     protected function getDeletableAccounts(MultiAccountedInterface $user): array
     {
+        return [];
+
 //        $accountsForDeletion = [];
 //
 //        /** @var MultiAccountedInterface $user */

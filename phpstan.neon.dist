@@ -1,0 +1,23 @@
+includes:
+	- phpstan-baseline.neon
+
+parameters:
+    level: 5
+    reportUnmatchedIgnoredErrors: false
+    paths:
+        - src/
+    bootstrapFiles:
+        - vendor/autoload.php
+    excludePaths:
+        analyse:
+            - src/Manager/UserAccessManagerInterface.php
+            - src/Manager/UserInvitationManagerInterface.php
+            - src/Manager/UserManagerInterface.php
+    ignoreErrors:
+        - '#Only booleans are allowed in an if condition#'
+        - '#Only booleans are allowed in a negated boolean#'
+        - '#Only booleans are allowed in &&#'
+        - '#Call to an undefined method Doctrine\\ORM\\EntityRepository::findOneBy#'
+        - '#Method Psr\\EventDispatcher\\EventDispatcherInterface::dispatch\(\) invoked with 2 parameters, 1 required.#'
+        - '#Call to function in_array\(\) requires parameter \#3 to be set.#'
+        - '#Construct empty\(\) is not allowed. Use more strict comparison.#'

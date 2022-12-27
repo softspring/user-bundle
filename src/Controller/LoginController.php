@@ -38,7 +38,7 @@ class LoginController extends AbstractController
 
     public function login(Request $request, TranslatorInterface $translator): Response
     {
-        /** @var $session Session */
+        /** @var Session $session */
         $session = $request->getSession();
 
         $loginCheckParams = [];
@@ -55,7 +55,7 @@ class LoginController extends AbstractController
 
         if ($request->attributes->has(Security::AUTHENTICATION_ERROR)) {
             $form->addError(new FormError($request->attributes->get(Security::AUTHENTICATION_ERROR)));
-        } elseif (null !== $session && $session->has(Security::AUTHENTICATION_ERROR)) {
+        } elseif ($session->has(Security::AUTHENTICATION_ERROR)) {
             $error = $session->get(Security::AUTHENTICATION_ERROR);
 
             if ($error instanceof TooManyLoginAttemptsAuthenticationException) {

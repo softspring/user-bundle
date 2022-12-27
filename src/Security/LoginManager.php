@@ -56,6 +56,6 @@ class LoginManager
         $firewallContext = $this->firewallMap->getFirewallConfig($request);
         $firewallName = $firewallContext->getName();
 
-        return new UsernamePasswordToken($user, null, $firewallName, $user->getRoles());
+        return new UsernamePasswordToken($user, $firewallName, $user->getRoles());
     }
 }

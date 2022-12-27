@@ -7,13 +7,18 @@ use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\Exception\AccountNotLinkedException;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
+use Softspring\UserBundle\Model\EnablableInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;
 use Softspring\UserBundle\Model\Oauth\FacebookOauthInterface;
+use Softspring\UserBundle\Model\RolesInterface;
+use Softspring\UserBundle\Model\UserIdentifierUsernameInterface;
 use Softspring\UserBundle\Model\UserInterface as SoftspringUserInterface;
+use Softspring\UserBundle\Model\UserPasswordInterface;
+use Softspring\UserBundle\Model\UserWithEmailInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
@@ -42,9 +47,29 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }
 
-    public function loadUserByUsername($username)
+    public function loadUserByIdentifier(string $identifier): UserInterface
     {
-        return $this->userManager->findUserByUsername($username);
+        $user = $this->userManager->findUserByUsername($identifier);
+
+        if (!$user) {
+            throw new UserNotFoundException();
+        }
+
+        return $user;
+    }
+
+    /**
+     * @deprecated this method will be removed on SF 6
+     */
+    public function loadUserByUsername(string $username): UserInterface
+    {
+        $user = $this->userManager->findUserByUsername($username);
+
+        if (!$user) {
+            throw new UserNotFoundException();
+        }
+
+        return $user;
     }
 
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
@@ -52,7 +77,7 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
         $username = $response->getUsername(); // provides id (identifier)
 
         $user = $this->userManager->findUserBy([$this->getProperty($response) => $username]);
-        if (null === $user || null === $username) {
+        if (null === $user || !$username) {
             $user = $this->userManager->findUserByEmail($response->getEmail());
             if ($user) {
                 $this->linkUser($user, $response);
@@ -118,7 +143,7 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
 
         $userId = $this->accessor->getValue($user, $identifier);
         if (null === $user = $this->userManager->findUserBy([$identifier => $userId])) {
-            throw new UsernameNotFoundException(sprintf('User with ID "%d" could not be reloaded.', $userId));
+            throw new UserNotFoundException(sprintf('User with ID "%d" could not be reloaded.', $userId));
         }
 
         return $user;
@@ -158,11 +183,25 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
         $user = $this->userManager->createEntity();
 //        $user->setLastLogin(new \DateTime());
 
-        $user->setEnabled(true);
-        $user->setUsername($response->getUsername());
-        $user->setPassword('invalid-oauth');
-        $user->setRoles(['ROLE_USER']);
-        $user->setEmail($response->getEmail());
+        if ($user instanceof EnablableInterface) {
+            $user->setEnabled(true);
+        }
+
+        if ($user instanceof UserIdentifierUsernameInterface) {
+            $user->setUsername($response->getUsername());
+        }
+
+        if ($user instanceof UserPasswordInterface) {
+            $user->setPassword('invalid-oauth');
+        }
+
+        if ($user instanceof RolesInterface) {
+            $user->setRoles(['ROLE_USER']);
+        }
+
+        if ($user instanceof UserWithEmailInterface) {
+            $user->setEmail($response->getEmail());
+        }
 
         if ($user instanceof NameSurnameInterface) {
             $user->setName($response->getFirstName());

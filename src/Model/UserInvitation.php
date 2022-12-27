@@ -19,7 +19,7 @@ abstract class UserInvitation implements UserInvitationInterface
 
     public function __toString(): string
     {
-        return "{$this->getId()}";
+        return "{$this->getUserIdentifier()}";
     }
 
     public function getInvitationToken(): ?string
@@ -34,12 +34,12 @@ abstract class UserInvitation implements UserInvitationInterface
 
     public function getAcceptedAt(): ?\DateTime
     {
-        return \DateTime::createFromFormat('U', $this->acceptedAt) ?: null;
+        return null !== $this->acceptedAt ? \DateTime::createFromFormat('U', "{$this->acceptedAt}") : null;
     }
 
     public function setAcceptedAt(?\DateTime $acceptedAt): void
     {
-        $this->acceptedAt = $acceptedAt instanceof \DateTime ? $acceptedAt->format('U') : null;
+        $this->acceptedAt = $acceptedAt instanceof \DateTime ? (int) $acceptedAt->format('U') : null;
     }
 
     public function getInviter(): ?UserInterface

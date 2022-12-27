@@ -9,12 +9,7 @@ use Symfony\Component\Security\Core\Exception\InvalidArgumentException;
 
 class AdminAdministratorsActionsVoter implements VoterInterface
 {
-    /**
-     * @param mixed $administrator
-     *
-     * @return bool
-     */
-    public function supportsObject($administrator)
+    public function supportsObject($administrator): bool
     {
         if (!is_object($administrator)) {
             return false;
@@ -23,17 +18,13 @@ class AdminAdministratorsActionsVoter implements VoterInterface
         return $administrator instanceof RolesAdminInterface;
     }
 
-    /**
-     * @param RolesAdminInterface $administrator
-     *
-     * @return int
-     */
-    public function vote(TokenInterface $token, $administrator, array $attributes)
+    public function vote(TokenInterface $token, $administrator, array $attributes): int
     {
+        /** @var RolesAdminInterface $administrator */
         $role = $attributes[0] ?? '';
 
         // check role
-        if ('ROLE_ADMIN_ADMINISTRATORS_' !== substr($role, 0, 26)) {
+        if (!str_starts_with($role, 'ROLE_ADMIN_ADMINISTRATORS_')) {
             return VoterInterface::ACCESS_ABSTAIN;
         }
 

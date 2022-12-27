@@ -13,6 +13,11 @@ interface UserManagerInterface extends CrudlEntityManagerInterface
      */
     public function findUserBy(array $criteria): ?UserInterface;
 
+    public function findUserByIdentifier(string $identifier): ?UserInterface;
+
+    /**
+     * @deprecated This method will be removed soon, use findUserByIdentifier
+     */
     public function findUserByUsername(string $username): ?UserInterface;
 
     public function findUserByEmail(string $email): ?UserInterface;

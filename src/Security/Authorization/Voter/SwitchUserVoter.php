@@ -19,13 +19,9 @@ class SwitchUserVoter implements VoterInterface
         return $user instanceof UserInterface and $user instanceof RolesAdminInterface;
     }
 
-    /**
-     * @param UserInterface|RolesAdminInterface $user
-     *
-     * @return int
-     */
-    public function vote(TokenInterface $token, $user, array $attributes)
+    public function vote(TokenInterface $token, $user, array $attributes): int
     {
+        /** @var UserInterface|RolesAdminInterface $user */
         $role = $attributes[0] ?? '';
 
         // check role

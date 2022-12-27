@@ -16,7 +16,7 @@ trait UserIdentifierEmailTrait
         $this->email = $email;
     }
 
-    public function getUserIdentifier(): ?string
+    public function getUserIdentifier(): string
     {
         return $this->getEmail();
     }

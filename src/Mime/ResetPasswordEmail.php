@@ -35,7 +35,7 @@ class ResetPasswordEmail extends TranslatableEmail implements ExampleEmailInterf
         $this->setTranslationParams([
             '%name%' => $user instanceof NameSurnameInterface ? $user->getName() : '',
             '%surname%' => $user instanceof NameSurnameInterface ? $user->getSurname() : '',
-            '%username%' => $user->getUsername(),
+            '%username%' => $user->getUserIdentifier(),
             '%email%' => $user instanceof UserWithEmailInterface ? $user->getEmail() : '',
             '%reset_url%' => $resetUrl,
         ]);

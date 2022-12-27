@@ -18,11 +18,11 @@ class ConfirmationController extends AbstractController
 
     protected UserManagerInterface $userManager;
 
-    protected UserMailerInterface $userMailer;
+    protected ?UserMailerInterface $userMailer;
 
     protected EventDispatcherInterface $eventDispatcher;
 
-    public function __construct(UserManagerInterface $userManager, UserMailerInterface $userMailer, EventDispatcherInterface $eventDispatcher)
+    public function __construct(UserManagerInterface $userManager, ?UserMailerInterface $userMailer, EventDispatcherInterface $eventDispatcher)
     {
         $this->userManager = $userManager;
         $this->userMailer = $userMailer;

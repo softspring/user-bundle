@@ -4,6 +4,9 @@ namespace Softspring\UserBundle\Manipulator;
 
 use Softspring\UserBundle\Event\UserInvitationEvent;
 use Softspring\UserBundle\Manager\UserInvitationManagerInterface;
+use Softspring\UserBundle\Model\EnablableInterface;
+use Softspring\UserBundle\Model\RolesInterface;
+use Softspring\UserBundle\Model\UserIdentifierUsernameInterface;
 use Softspring\UserBundle\Model\UserInvitationInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Softspring\UserBundle\Util\TokenGeneratorInterface;
@@ -31,16 +34,27 @@ class UserInvitationManipulator
     public function invite(string $email, ?string $username = null, array $roles = []): UserInvitationInterface
     {
         $invitation = $this->userInvitationManager->createEntity();
-        $invitation->setUsername($username);
+
+        if ($invitation instanceof UserIdentifierUsernameInterface) {
+            $invitation->setUsername($username);
+        }
+
         $invitation->setEmail($email);
-        $invitation->setEnabled(false);
+
+        if ($invitation instanceof EnablableInterface) {
+            $invitation->setEnabled(false);
+        }
+
         $invitation->setInvitationToken($this->tokenGenerator->generateToken());
-        $invitation->setRoles($roles);
+
+        if ($invitation instanceof RolesInterface) {
+            $invitation->setRoles($roles);
+        }
 
         $this->userInvitationManager->saveEntity($invitation);
 
         $event = new UserInvitationEvent($invitation, $this->requestStack->getCurrentRequest());
-        $this->eventDispatcher->dispatch(SfsUserEvents::USER_INVITED, $event);
+        $this->eventDispatcher->dispatch($event, SfsUserEvents::USER_INVITED);
 
         return $invitation;
     }

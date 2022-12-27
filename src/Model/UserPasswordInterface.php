@@ -9,6 +9,8 @@ interface UserPasswordInterface extends SymfonyUserInterface, PasswordAuthentica
 {
     public function setSalt(?string $salt): void;
 
+    public function getSalt(): ?string;
+
     public function setPassword(?string $password): void;
 
     public function getPassword(): ?string;
