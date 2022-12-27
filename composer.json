@@ -55,6 +55,11 @@
             "Softspring\\UserBundle\\": "src/"
         }
     },
-    "extra": {
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "symfony/flex": true,
+            "phpstan/extension-installer": true
+        }
     }
 }
