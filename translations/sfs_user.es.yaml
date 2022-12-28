@@ -199,9 +199,9 @@ admin_users:
 
 admin_administrators:
     list:
-        meta.title: "Administratores"
-        breadcrumb: "Administratores"
-        title: "Administratores"
+        meta.title: "Administradores"
+        breadcrumb: "Administradores"
+        title: "Administradores"
         fields:
             name.header: "Nombre"
             surname.header: "Apellidos"
