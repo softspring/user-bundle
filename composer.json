@@ -55,6 +55,12 @@
             "Softspring\\UserBundle\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Softspring\\UserBundle\\Tests\\TestApplication\\": "tests/TestApplication/src",
+            "Softspring\\UserBundle\\Tests\\": "tests/"
+        }
+    },
     "config": {
         "sort-packages": true,
         "allow-plugins": {

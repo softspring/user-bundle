@@ -1,0 +1,18 @@
+parameters:
+    locale: en
+
+services:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    Softspring\UserBundle\Tests\TestApplication\:
+        resource: '../src/*'
+        exclude: '../src/{Entity,Tests,Kernel.php}'
+
+    Softspring\UserBundle\Tests\TestApplication\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+    Softspring\UserBundle\Tests\TestApplication\DataFixtures\AppFixtures:
+        tags: ['doctrine.fixture.orm']

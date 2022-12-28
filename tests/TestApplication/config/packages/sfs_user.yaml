@@ -1,0 +1,2 @@
+sfs_user:
+    class: Softspring\UserBundle\Tests\TestApplication\Entity\User
