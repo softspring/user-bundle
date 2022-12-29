@@ -69,5 +69,3 @@ services:
 
     # service aliases
     sfs_user.user_provider: '@Softspring\UserBundle\Provider\UserProvider'
-    sfs_user.user_provider.email: '@Softspring\UserBundle\Provider\EmailProvider'
-    sfs_user.user_provider.username: '@Softspring\UserBundle\Provider\UsernameProvider'

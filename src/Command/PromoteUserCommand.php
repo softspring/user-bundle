@@ -25,19 +25,19 @@ class PromoteUserCommand extends Command
 
     protected function configure()
     {
-        $this->addArgument('username', InputArgument::REQUIRED, 'Username');
+        $this->addArgument('identifier', InputArgument::REQUIRED, 'User identifier (username or email)');
         $this->addOption('super-admin', 's', InputOption::VALUE_NONE, 'User is super admin');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $username = $input->getArgument('username');
+        $identifier = $input->getArgument('identifier');
         $superAdmin = (bool) $input->getOption('super-admin');
 
-        $user = $this->userManager->findUserByUsername($username);
+        $user = $this->userManager->findUserByIdentifier($identifier);
 
         if (null === $user) {
-            $output->writeln(sprintf('User %s not found', $username));
+            $output->writeln(sprintf('User %s not found', $identifier));
 
             return Command::FAILURE;
         }
@@ -54,7 +54,7 @@ class PromoteUserCommand extends Command
 
         $this->userManager->saveEntity($user);
 
-        $output->writeln(sprintf('User %s has been promoted', $username));
+        $output->writeln(sprintf('User %s has been promoted', $identifier));
 
         return Command::SUCCESS;
     }
