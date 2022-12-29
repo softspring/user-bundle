@@ -49,7 +49,7 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
 
     public function loadUserByIdentifier(string $identifier): UserInterface
     {
-        $user = $this->userManager->findUserByUsername($identifier);
+        $user = $this->userManager->findUserByIdentifier($identifier);
 
         if (!$user) {
             throw new UserNotFoundException();
@@ -63,13 +63,7 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
      */
     public function loadUserByUsername(string $username): UserInterface
     {
-        $user = $this->userManager->findUserByUsername($username);
-
-        if (!$user) {
-            throw new UserNotFoundException();
-        }
-
-        return $user;
+        return $this->loadUserByIdentifier($username);
     }
 
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
@@ -78,7 +72,7 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
 
         $user = $this->userManager->findUserBy([$this->getProperty($response) => $username]);
         if (null === $user || !$username) {
-            $user = $this->userManager->findUserByEmail($response->getEmail());
+            $user = $this->userManager->findUserByIdentifier($response->getEmail());
             if ($user) {
                 $this->linkUser($user, $response);
                 $this->userManager->saveEntity($user);
