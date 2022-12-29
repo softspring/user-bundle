@@ -18,7 +18,7 @@
     {% include '@SfsUser/admin/users/list-widgets.html.twig' %}
 
     <div class="container-fluid bg-white p-4">
-        {% if entities|length %}
+        {% if users|length %}
             <div class="mb-4">
                 {{ form_start(filterForm) }}
                 <div class="d-flex align-items-center">
@@ -33,7 +33,7 @@
             </div>
         {% endif %}
 
-    {% embed '@SfsAdmin/components/table.html.twig' with {'collection':entities, 'pagination_route': 'sfs_user_admin_users_list'} %}
+    {% embed '@SfsComponents/pagination/table.html.twig' with {'collection':users, 'pagination_route': 'sfs_user_admin_users_list'} %}
         {% trans_default_domain 'sfs_user' %}
         {% block ths %}
             {% if sfs_user_is('avatar') %}
@@ -41,15 +41,15 @@
             {% endif %}
             {% if sfs_user_is('nameSurname') %}
                 <th scope="col" class="p-3">
-                    <a href="{{ sort_toggle_url('name') }}" class="text-dark">
+                    <a href="{{ users.sortToggleUrl(app.request, 'name') }}" class="text-dark">
                         {{ 'admin_users.list.fields.name.header'|trans }}
-                        {% if is_sorted_by('name', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif is_sorted_by('name', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
+                        {% if users.sortedBy('name', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif users.sortedBy('name', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
                     </a>
                 </th>
                 <th scope="col" class="p-3">
-                    <a href="{{ sort_toggle_url('surname') }}" class="text-dark">
+                    <a href="{{ users.sortToggleUrl(app.request, 'surname') }}" class="text-dark">
                         {{ 'admin_users.list.fields.surname.header'|trans }}
-                        {% if is_sorted_by('surname', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif is_sorted_by('surname', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
+                        {% if users.sortedBy('surname', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif users.sortedBy('surname', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
                     </a>
                 </th>
             {% endif %}
@@ -58,9 +58,9 @@
             {% endif %}
             {% if sfs_user_is('identifierEmail') or sfs_user_is('email') %}
                 <th scope="col" class="p-3">
-                    <a href="{{ sort_toggle_url('email') }}" class="text-dark">
+                    <a href="{{ users.sortToggleUrl(app.request, 'email') }}" class="text-dark">
                         {{ 'admin_users.list.fields.email.header'|trans }}
-                        {% if is_sorted_by('email', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif is_sorted_by('email', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
+                        {% if users.sortedBy('email', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif users.sortedBy('email', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
                     </a>
                 </th>
             {% endif %}
@@ -69,9 +69,9 @@
             {% endif %}
             {% if sfs_user_is('lastLogin') %}
                 <th scope="col" class="p-3">
-                    <a href="{{ sort_toggle_url('lastLogin') }}" class="text-dark">
+                    <a href="{{ users.sortToggleUrl(app.request, 'lastLogin') }}" class="text-dark">
                         {{ 'admin_users.list.fields.lastLogin.header'|trans }}
-                        {% if is_sorted_by('lastLogin', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif is_sorted_by('lastLogin', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
+                        {% if users.sortedBy('lastLogin', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif users.sortedBy('lastLogin', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
                     </a>
                 </th>
             {% endif %}

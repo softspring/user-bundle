@@ -2,18 +2,16 @@
 
 namespace Softspring\UserBundle\Form\Admin;
 
-use Jhg\DoctrinePagination\ORM\FilterRepositoryInterface;
-use Softspring\Component\CrudlController\Form\EntityListFilterForm;
+use Softspring\Component\DoctrinePaginator\Form\PaginatorFiltersForm;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;
 use Softspring\UserBundle\Model\UserWithEmailInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AdministratorListFilterForm extends EntityListFilterForm implements AdministratorListFilterFormInterface
+class AdministratorListFilterForm extends PaginatorFiltersForm implements AdministratorListFilterFormInterface
 {
     protected UserManagerInterface $userManager;
 
@@ -28,6 +26,10 @@ class AdministratorListFilterForm extends EntityListFilterForm implements Admini
         $resolver->setDefaults([
             'translation_domain' => 'sfs_user',
             'label_format' => 'admin_administrators.list.filter_form.%name%.label',
+            'rpp_valid_values' => [20],
+            'rpp_default_value' => 20,
+            'order_valid_fields' => ['name', 'surname', 'email', 'lastLogin'],
+            'order_default_value' => 'surname',
         ]);
     }
 
@@ -35,22 +37,21 @@ class AdministratorListFilterForm extends EntityListFilterForm implements Admini
     {
         parent::buildForm($builder, $options);
 
-        $isFilterRepo = $this->userManager->getRepository() instanceof FilterRepositoryInterface;
         $hasFields = false;
 
         if ($this->userManager->getEntityClassReflection()->implementsInterface(NameSurnameInterface::class)) {
             $builder->add('name', TextType::class, [
-                'property_path' => $isFilterRepo ? '[name_like]' : '[name]',
+                'property_path' => '[name_like]',
             ]);
             $builder->add('surname', TextType::class, [
-                'property_path' => $isFilterRepo ? '[surname_like]' : '[surname]',
+                'property_path' => '[surname_like]',
             ]);
             $hasFields = true;
         }
 
         if ($this->userManager->getEntityClassReflection()->implementsInterface(UserWithEmailInterface::class)) {
             $builder->add('email', TextType::class, [
-                'property_path' => $isFilterRepo ? '[email_like]' : '[email]',
+                'property_path' => '[email_like]',
             ]);
             $hasFields = true;
         }
@@ -58,20 +59,5 @@ class AdministratorListFilterForm extends EntityListFilterForm implements Admini
         if ($hasFields) {
             $builder->add('search', SubmitType::class);
         }
-    }
-
-    public static function orderValidFields(): array
-    {
-        return ['name', 'surname', 'email', 'lastLogin'];
-    }
-
-    public static function orderDefaultField(): string
-    {
-        return 'surname';
-    }
-
-    public static function getRpp(Request $request): int
-    {
-        return 10;
     }
 }

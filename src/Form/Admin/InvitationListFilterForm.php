@@ -2,8 +2,7 @@
 
 namespace Softspring\UserBundle\Form\Admin;
 
-use Jhg\DoctrinePagination\ORM\FilterRepositoryInterface;
-use Softspring\Component\CrudlController\Form\EntityListFilterForm;
+use Softspring\Component\DoctrinePaginator\Form\PaginatorFiltersForm;
 use Softspring\UserBundle\Manager\UserInvitationManagerInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;
 use Softspring\UserBundle\Model\UserWithEmailInterface;
@@ -11,10 +10,9 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class InvitationListFilterForm extends EntityListFilterForm implements InvitationListFilterFormInterface
+class InvitationListFilterForm extends PaginatorFiltersForm implements InvitationListFilterFormInterface
 {
     protected UserInvitationManagerInterface $invitationManager;
 
@@ -29,6 +27,10 @@ class InvitationListFilterForm extends EntityListFilterForm implements Invitatio
         $resolver->setDefaults([
             'translation_domain' => 'sfs_user',
             'label_format' => 'admin_invitations.list.filter_form.%name%.label',
+            'rpp_valid_values' => [20],
+            'rpp_default_value' => 20,
+            'order_valid_fields' => ['email', 'name', 'surname', 'username', 'acceptedAt'],
+            'order_default_value' => 'email',
         ]);
     }
 
@@ -36,20 +38,18 @@ class InvitationListFilterForm extends EntityListFilterForm implements Invitatio
     {
         parent::buildForm($builder, $options);
 
-        $isFilterRepo = $this->invitationManager->getRepository() instanceof FilterRepositoryInterface;
-
         if ($this->invitationManager->getEntityClassReflection()->implementsInterface(NameSurnameInterface::class)) {
             $builder->add('name', TextType::class, [
-                'property_path' => $isFilterRepo ? '[name_like]' : '[name]',
+                'property_path' => '[name_like]',
             ]);
             $builder->add('surname', TextType::class, [
-                'property_path' => $isFilterRepo ? '[surname_like]' : '[surname]',
+                'property_path' => '[surname_like]',
             ]);
         }
 
         if ($this->invitationManager->getEntityClassReflection()->implementsInterface(UserWithEmailInterface::class)) {
             $builder->add('email', TextType::class, [
-                'property_path' => $isFilterRepo ? '[email_like]' : '[email]',
+                'property_path' => '[email_like]',
             ]);
         }
 
@@ -59,24 +59,9 @@ class InvitationListFilterForm extends EntityListFilterForm implements Invitatio
                 'admin_invitations.list.filter_form.status.accepted' => 'not_null',
                 'admin_invitations.list.filter_form.status.pending' => 'null',
             ],
-            'property_path' => $isFilterRepo ? '[acceptedAt_is]' : '[acceptedAt]',
+            'property_path' => '[acceptedAt_is]',
         ]);
 
         $builder->add('search', SubmitType::class);
-    }
-
-    public static function orderValidFields(): array
-    {
-        return ['email', 'name', 'surname', 'username', 'acceptedAt'];
-    }
-
-    public static function orderDefaultField(): string
-    {
-        return 'email';
-    }
-
-    public static function getRpp(Request $request): int
-    {
-        return 10;
     }
 }
