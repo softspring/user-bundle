@@ -2,14 +2,13 @@
 
 namespace Softspring\UserBundle\Form\Admin;
 
-use Softspring\Component\CrudlController\Form\EntityListFilterForm;
+use Softspring\Component\DoctrinePaginator\Form\PaginatorFiltersForm;
 use Softspring\UserBundle\Manager\UserAccessManagerInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AccessHistoryListFilterForm extends EntityListFilterForm implements AccessHistoryListFilterFormInterface
+class AccessHistoryListFilterForm extends PaginatorFiltersForm implements AccessHistoryListFilterFormInterface
 {
     protected UserAccessManagerInterface $accessManager;
 
@@ -24,6 +23,11 @@ class AccessHistoryListFilterForm extends EntityListFilterForm implements Access
         $resolver->setDefaults([
             'translation_domain' => 'sfs_user',
             'label_format' => 'admin_access_history.list.filter_form.%name%.label',
+            'rpp_valid_values' => [50],
+            'rpp_default_value' => 50,
+            'order_valid_fields' => ['loginAt'],
+            'order_default_value' => 'loginAt',
+            'order_direction_default_value' => 'desc',
         ]);
     }
 
@@ -32,15 +36,5 @@ class AccessHistoryListFilterForm extends EntityListFilterForm implements Access
         parent::buildForm($builder, $options);
 
         $builder->add('search', SubmitType::class);
-    }
-
-    public static function getRpp(Request $request): int
-    {
-        return 50;
-    }
-
-    public static function getOrder(Request $request): array
-    {
-        return ['loginAt' => 'DESC'];
     }
 }
