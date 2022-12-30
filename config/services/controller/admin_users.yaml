@@ -35,6 +35,7 @@ services:
                     view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_LIST_VIEW
                     view: '@@SfsUser/admin/users/list.html.twig'
                     view_page: '@@SfsUser/admin/users/list-page.html.twig'
+                    entities_attribute: 'users'
                 update:
                     is_granted: 'ROLE_ADMIN_USERS_UPDATE'
                     param_converter_key: 'id'

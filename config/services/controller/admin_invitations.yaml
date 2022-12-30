@@ -31,6 +31,7 @@ services:
                     view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_INVITATIONS_LIST_VIEW
                     view: '@@SfsUser/admin/invitations/list.html.twig'
                     view_page: '@@SfsUser/admin/invitations/list-page.html.twig'
+                    entities_attribute: 'invitations'
                 create:
                     initialize_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_INVITATIONS_CREATE_INITIALIZE
                     form_valid_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_INVITATIONS_CREATE_FORM_VALID

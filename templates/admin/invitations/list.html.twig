@@ -17,7 +17,7 @@
     </div>
 
     <div class="container-fluid bg-white p-4">
-        {% if entities|length %}
+        {% if invitations|length %}
             <div class="mb-4">
                 {{ form_start(filterForm) }}
                 <div class="row">
@@ -33,43 +33,43 @@
             </div>
         {% endif %}
 
-        {% embed '@SfsAdmin/components/table.html.twig' with {'collection':entities, 'pagination_route': 'sfs_user_admin_invitations_list'} %}
+        {% embed '@SfsComponents/pagination/table.html.twig' with {'collection':invitations, 'pagination_route': 'sfs_user_admin_invitations_list'} %}
             {% trans_default_domain 'sfs_user' %}
             {% block ths %}
                 {% if sfs_invitation_is('nameSurname') %}
                     <th scope="col">
-                        <a href="{{ sort_toggle_url('name') }}" class="text-dark">
+                        <a href="{{ invitations.sortToggleUrl(app.request, 'name') }}" class="text-dark">
                             {{ 'admin_invitations.list.fields.name.header'|trans }}
-                            {% if is_sorted_by('name', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif is_sorted_by('name', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
+                            {% if invitations.sortedBy('name', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif invitations.sortedBy('name', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
                         </a>
                     </th>
                     <th scope="col">
-                        <a href="{{ sort_toggle_url('surname') }}" class="text-dark">
+                        <a href="{{ invitations.sortToggleUrl(app.request, 'surname') }}" class="text-dark">
                             {{ 'admin_invitations.list.fields.surname.header'|trans }}
-                            {% if is_sorted_by('surname', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif is_sorted_by('surname', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
+                            {% if invitations.sortedBy('surname', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif invitations.sortedBy('surname', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
                         </a>
                     </th>
                 {% endif %}
 
                 {% if sfs_invitation_is('identifierUsername') %}
                     <th scope="col">
-                        <a href="{{ sort_toggle_url('username') }}" class="text-dark">
+                        <a href="{{ invitations.sortToggleUrl(app.request, 'username') }}" class="text-dark">
                             {{ 'admin_invitations.list.fields.username.header'|trans }}
-                            {% if is_sorted_by('username', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif is_sorted_by('username', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
+                            {% if invitations.sortedBy('username', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif invitations.sortedBy('username', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
                         </a>
                     </th>
                 {% endif %}
 
                 <th scope="col">
-                    <a href="{{ sort_toggle_url('email') }}" class="text-dark">
+                    <a href="{{ invitations.sortToggleUrl(app.request, 'email') }}" class="text-dark">
                         {{ 'admin_invitations.list.fields.email.header'|trans }}
-                        {% if is_sorted_by('email', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif is_sorted_by('email', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
+                        {% if invitations.sortedBy('email', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif invitations.sortedBy('email', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
                     </a>
                 </th>
                 <th scope="col">
-                    <a href="{{ sort_toggle_url('acceptedAt') }}" class="text-dark">
+                    <a href="{{ invitations.sortToggleUrl(app.request, 'acceptedAt') }}" class="text-dark">
                         {{ 'admin_invitations.list.fields.acceptedAt.header'|trans }}
-                        {% if is_sorted_by('acceptedAt', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif is_sorted_by('acceptedAt', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
+                        {% if invitations.sortedBy('acceptedAt', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif invitations.sortedBy('acceptedAt', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
                     </a>
                 </th>
 
@@ -80,7 +80,7 @@
             {% endblock ths %}
 
             {% block tbody %}
-                {% for invitation in entities %}
+                {% for invitation in invitations %}
                     <tr>
                         {% if sfs_invitation_is('nameSurname') %}
                             <td>{{ invitation.name }}</td>
