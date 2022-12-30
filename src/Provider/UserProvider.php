@@ -3,8 +3,6 @@
 namespace Softspring\UserBundle\Provider;
 
 use Softspring\UserBundle\Manager\UserManagerInterface;
-use Softspring\UserBundle\Model\UserIdentifierEmailInterface;
-use Softspring\UserBundle\Model\UserIdentifierUsernameInterface;
 use Softspring\UserBundle\Model\UserInterface as SfsUserInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
@@ -31,7 +29,7 @@ class UserProvider implements UserProviderInterface
      */
     public function loadUserByIdentifier(string $identifier): UserInterface
     {
-        $user = $this->getUser($identifier);
+        $user = $this->userManager->findUserByIdentifier($identifier);
 
         if (!$user) {
             throw new UserNotFoundException(sprintf('Username "%s" does not exist.', $identifier));
@@ -50,7 +48,7 @@ class UserProvider implements UserProviderInterface
             throw new UnsupportedUserException(sprintf('Expected an instance of %s, but got "%s".', $this->userManager->getEntityClass(), get_class($user)));
         }
 
-        if (null === $reloadedUser = $this->userManager->findUserBy(['id' => $user->getUserIdentifier()])) {
+        if (null === $reloadedUser = $this->userManager->findUserByIdentifier($user->getUserIdentifier())) {
             throw new UserNotFoundException(sprintf('User with ID "%s" could not be reloaded.', $user->getUserIdentifier()));
         }
 
@@ -60,21 +58,5 @@ class UserProvider implements UserProviderInterface
     public function supportsClass($class): bool
     {
         return $this->userManager->getEntityClass() === $class || is_subclass_of($class, $this->userManager->getEntityClass());
-    }
-
-    protected function getUser(string $usernameOrEmail)
-    {
-        $usernameInterface = $this->userManager->getEntityClassReflection()->implementsInterface(UserIdentifierUsernameInterface::class);
-        $emailInterface = $this->userManager->getEntityClassReflection()->implementsInterface(UserIdentifierEmailInterface::class);
-
-        if ($usernameInterface && $usernameOrEmail) {
-            return $this->userManager->findUserByUsernameOrEmail($usernameOrEmail);
-        } elseif ($usernameInterface) {
-            return $this->userManager->findUserByUsername($usernameOrEmail);
-        } elseif ($emailInterface) {
-            return $this->userManager->findUserByEmail($usernameOrEmail);
-        }
-
-        throw new \Exception(sprintf('User must be an instance of %s or %s interface to use %s', UserIdentifierUsernameInterface::class, UserIdentifierEmailInterface::class, self::class));
     }
 }

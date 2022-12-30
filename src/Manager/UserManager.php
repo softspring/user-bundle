@@ -9,7 +9,6 @@ use Softspring\UserBundle\Model\UserIdentifierEmailInterface;
 use Softspring\UserBundle\Model\UserIdentifierUsernameInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Model\UserPasswordInterface;
-use Softspring\UserBundle\Model\UserWithEmailInterface;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 use Symfony\Component\PasswordHasher\LegacyPasswordHasherInterface;
 use Symfony\Component\Security\Core\User\LegacyPasswordAuthenticatedUserInterface;
@@ -51,36 +50,17 @@ class UserManager implements UserManagerInterface
         return $this->getRepository()->findOneBy($criteria);
     }
 
-    public function findUserByUsername(string $username): ?UserInterface
-    {
-        return $this->findUserBy(['username' => $username]);
-    }
-
     public function findUserByIdentifier(string $identifier): ?UserInterface
     {
         if ($this->getEntityClassReflection()->implementsInterface(UserIdentifierUsernameInterface::class)) {
-            return $this->findUserByUsername($identifier);
+            return $this->findUserBy(['username' => $identifier]);
         }
 
         if ($this->getEntityClassReflection()->implementsInterface(UserIdentifierEmailInterface::class)) {
-            return $this->findUserByEmail($identifier);
+            return $this->findUserBy(['email' => $identifier]);
         }
 
         throw new \Exception('Unknown user identifier field');
-    }
-
-    public function findUserByEmail(string $email): ?UserInterface
-    {
-        return $this->findUserBy(['email' => $email]);
-    }
-
-    public function findUserByUsernameOrEmail(string $usernameOrEmail): ?UserInterface
-    {
-        if ($this->getEntityClassReflection()->implementsInterface(UserWithEmailInterface::class) && preg_match('/^.+@\S+\.\S+$/', $usernameOrEmail)) {
-            return $this->findUserByEmail($usernameOrEmail);
-        }
-
-        return $this->findUserByUsername($usernameOrEmail);
     }
 
     public function findUserByConfirmationToken(string $token): ?ConfirmableInterface
