@@ -15,7 +15,6 @@ services:
         arguments:
             $manager: '@Softspring\UserBundle\Manager\UserAccessManagerInterface'
             $eventDispatcher: '@event_dispatcher'
-            $listFilterForm: '@Softspring\UserBundle\Form\Admin\AccessHistoryListFilterFormInterface'
             $config:
                 entity_attribute: 'access'
                 list:
@@ -24,3 +23,4 @@ services:
                     view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ACCESS_HISTORY_LIST_VIEW
                     view: '@@SfsUser/admin/access-history/list.html.twig'
                     view_page: '@@SfsUser/admin/access-history/list-page.html.twig'
+                    filter_form: '@Softspring\UserBundle\Form\Admin\AccessHistoryListFilterFormInterface'

@@ -26,9 +26,6 @@ services:
         arguments:
             $manager: '@Softspring\UserBundle\Manager\UserManagerInterface'
             $eventDispatcher: '@event_dispatcher'
-            $listFilterForm: '@Softspring\UserBundle\Form\Admin\AdministratorListFilterFormInterface'
-            $updateForm: '@Softspring\UserBundle\Form\Admin\AdministratorUpdateFormInterface'
-            $deleteForm: '@Softspring\UserBundle\Form\Admin\AdministratorDeleteFormInterface'
             $config:
                 entity_attribute: 'administrator'
                 list:
@@ -38,6 +35,7 @@ services:
                     view: '@@SfsUser/admin/administrators/list.html.twig'
                     view_page: '@@SfsUser/admin/administrators/list-page.html.twig'
                     entities_attribute: 'administrators'
+                    filter_form: '@Softspring\UserBundle\Form\Admin\AdministratorListFilterFormInterface'
                 update:
                     is_granted: 'ROLE_ADMIN_ADMINISTRATORS_UPDATE'
                     param_converter_key: 'id'
@@ -48,6 +46,7 @@ services:
                     view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_UPDATE_VIEW
                     success_redirect_to: 'sfs_user_admin_administrators_list'
                     view: '@@SfsUser/admin/administrators/update.html.twig'
+                    form: '@Softspring\UserBundle\Form\Admin\AdministratorUpdateFormInterface'
                 delete:
                     is_granted: 'ROLE_ADMIN_ADMINISTRATORS_DELETE'
                     param_converter_key: 'id'
@@ -58,6 +57,7 @@ services:
                     view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_DELETE_VIEW
                     success_redirect_to: 'sfs_user_admin_administrators_list'
                     view: '@@SfsUser/admin/administrators/delete.html.twig'
+                    form: '@Softspring\UserBundle\Form\Admin\AdministratorDeleteFormInterface'
                 read:
                     is_granted: 'ROLE_ADMIN_ADMINISTRATORS_DETAILS'
                     param_converter_key: 'id'

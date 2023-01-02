@@ -24,9 +24,6 @@ services:
         arguments:
             $manager: '@Softspring\UserBundle\Manager\UserManagerInterface'
             $eventDispatcher: '@event_dispatcher'
-            $listFilterForm: '@Softspring\UserBundle\Form\Admin\UserListFilterFormInterface'
-            $updateForm: '@Softspring\UserBundle\Form\Admin\UserUpdateFormInterface'
-            $deleteForm: '@Softspring\UserBundle\Form\Admin\UserDeleteFormInterface'
             $config:
                 entity_attribute: 'user'
                 list:
@@ -36,6 +33,7 @@ services:
                     view: '@@SfsUser/admin/users/list.html.twig'
                     view_page: '@@SfsUser/admin/users/list-page.html.twig'
                     entities_attribute: 'users'
+                    filter_form: '@Softspring\UserBundle\Form\Admin\UserListFilterFormInterface'
                 update:
                     is_granted: 'ROLE_ADMIN_USERS_UPDATE'
                     param_converter_key: 'id'
@@ -46,6 +44,7 @@ services:
                     view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_UPDATE_VIEW
                     success_redirect_to: 'sfs_user_admin_users_list'
                     view: '@@SfsUser/admin/users/update.html.twig'
+                    form: '@Softspring\UserBundle\Form\Admin\UserUpdateFormInterface'
                 delete:
                     is_granted: 'ROLE_ADMIN_USERS_DELETE'
                     param_converter_key: 'id'
@@ -56,6 +55,7 @@ services:
                     view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_DELETE_VIEW
                     success_redirect_to: 'sfs_user_admin_users_list'
                     view: '@@SfsUser/admin/users/delete.html.twig'
+                    form: '@Softspring\UserBundle\Form\Admin\UserDeleteFormInterface'
                 read:
                     is_granted: 'ROLE_ADMIN_USERS_DETAILS'
                     param_converter_key: 'id'

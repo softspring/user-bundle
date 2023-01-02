@@ -21,8 +21,6 @@ services:
         arguments:
             $manager: '@Softspring\UserBundle\Manager\UserInvitationManagerInterface'
             $eventDispatcher: '@event_dispatcher'
-            $listFilterForm: '@Softspring\UserBundle\Form\Admin\InvitationListFilterFormInterface'
-            $createForm: '@Softspring\UserBundle\Form\Admin\InvitationCreateFormInterface'
             $config:
                 entity_attribute: 'invitation'
                 list:
@@ -32,6 +30,7 @@ services:
                     view: '@@SfsUser/admin/invitations/list.html.twig'
                     view_page: '@@SfsUser/admin/invitations/list-page.html.twig'
                     entities_attribute: 'invitations'
+                    filter_form: '@Softspring\UserBundle\Form\Admin\InvitationListFilterFormInterface'
                 create:
                     initialize_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_INVITATIONS_CREATE_INITIALIZE
                     form_valid_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_INVITATIONS_CREATE_FORM_VALID
@@ -40,6 +39,7 @@ services:
                     view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_INVITATIONS_CREATE_VIEW
                     success_redirect_to: 'sfs_user_admin_invitations_list'
                     view: '@@SfsUser/admin/invitations/create.html.twig'
+                    form: '@Softspring\UserBundle\Form\Admin\InvitationCreateFormInterface'
                 read:
                     is_granted: 'ROLE_ADMIN_INVITATIONS_DETAILS'
                     param_converter_key: 'id'
