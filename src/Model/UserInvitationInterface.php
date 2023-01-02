@@ -4,6 +4,8 @@ namespace Softspring\UserBundle\Model;
 
 interface UserInvitationInterface
 {
+    public function getId();
+
     public function getUserIdentifier(): ?string;
 
     public function getEmail(): ?string;
