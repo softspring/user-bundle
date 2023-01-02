@@ -19,7 +19,7 @@ abstract class UserInvitation implements UserInvitationInterface
 
     public function __toString(): string
     {
-        return "{$this->getUserIdentifier()}";
+        return "{$this->getId()}";
     }
 
     public function getInvitationToken(): ?string
