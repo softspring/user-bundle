@@ -2,7 +2,7 @@
 
 namespace Softspring\UserBundle\DependencyInjection\Compiler;
 
-use Softspring\CoreBundle\DependencyInjection\Compiler\AbstractResolveDoctrineTargetEntityPass;
+use Softspring\Component\DoctrineTargetEntityResolver\DependencyInjection\Compiler\AbstractResolveDoctrineTargetEntityPass;
 use Softspring\UserBundle\Model\UserAccessInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Model\UserInvitationInterface;
