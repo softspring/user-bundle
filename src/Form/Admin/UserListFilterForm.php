@@ -2,7 +2,6 @@
 
 namespace Softspring\UserBundle\Form\Admin;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Softspring\Component\DoctrinePaginator\Form\PaginatorForm;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;

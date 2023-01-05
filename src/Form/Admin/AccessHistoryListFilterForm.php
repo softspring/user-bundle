@@ -14,6 +14,7 @@ class AccessHistoryListFilterForm extends PaginatorForm implements AccessHistory
 
     public function __construct(UserAccessManagerInterface $accessManager)
     {
+        parent::__construct($accessManager->getEntityManager());
         $this->accessManager = $accessManager;
     }
 
