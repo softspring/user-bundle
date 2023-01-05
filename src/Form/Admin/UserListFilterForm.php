@@ -2,21 +2,24 @@
 
 namespace Softspring\UserBundle\Form\Admin;
 
-use Softspring\Component\DoctrinePaginator\Form\PaginatorFiltersForm;
+use Doctrine\ORM\EntityManagerInterface;
+use Softspring\Component\DoctrinePaginator\Form\PaginatorForm;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;
+use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Model\UserWithEmailInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UserListFilterForm extends PaginatorFiltersForm implements UserListFilterFormInterface
+class UserListFilterForm extends PaginatorForm implements UserListFilterFormInterface
 {
     protected UserManagerInterface $userManager;
 
     public function __construct(UserManagerInterface $userManager)
     {
+        parent::__construct($userManager->getEntityManager());
         $this->userManager = $userManager;
     }
 
@@ -26,6 +29,7 @@ class UserListFilterForm extends PaginatorFiltersForm implements UserListFilterF
         $resolver->setDefaults([
             'translation_domain' => 'sfs_user',
             'label_format' => 'admin_users.list.filter_form.%name%.label',
+            'class' => UserInterface::class,
             'rpp_valid_values' => [20],
             'rpp_default_value' => 20,
             'order_valid_fields' => ['name', 'surname', 'email', 'lastLogin'],

@@ -2,13 +2,13 @@
 
 namespace Softspring\UserBundle\Form\Admin;
 
-use Softspring\Component\DoctrinePaginator\Form\PaginatorFiltersForm;
+use Softspring\Component\DoctrinePaginator\Form\PaginatorForm;
 use Softspring\UserBundle\Manager\UserAccessManagerInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AccessHistoryListFilterForm extends PaginatorFiltersForm implements AccessHistoryListFilterFormInterface
+class AccessHistoryListFilterForm extends PaginatorForm implements AccessHistoryListFilterFormInterface
 {
     protected UserAccessManagerInterface $accessManager;
 
