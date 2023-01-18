@@ -23,7 +23,7 @@ abstract class User implements UserInterface
         }
     }
 
-    public function serialize(): ?string
+    public function __serialize(): array
     {
         $data = [];
 
@@ -41,13 +41,11 @@ abstract class User implements UserInterface
             }
         }
 
-        return serialize($data);
+        return $data;
     }
 
-    public function unserialize($data): void
+    public function __unserialize(array $data): void
     {
-        $data = unserialize($data);
-
         foreach ($this->getSerializeFields() as $field) {
             $fieldName = $field['name'];
 

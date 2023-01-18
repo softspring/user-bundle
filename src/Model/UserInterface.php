@@ -4,7 +4,7 @@ namespace Softspring\UserBundle\Model;
 
 use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 
-interface UserInterface extends SymfonyUserInterface, \Serializable
+interface UserInterface extends SymfonyUserInterface
 {
     /**
      * @see Symfony\Component\Security\Core\User\UserInterface
@@ -12,4 +12,8 @@ interface UserInterface extends SymfonyUserInterface, \Serializable
     public function getUserIdentifier(): string;
 
     public function getDisplayName(): ?string;
+
+    public function __serialize(): array;
+
+    public function __unserialize(array $data): void;
 }
