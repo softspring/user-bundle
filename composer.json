@@ -46,7 +46,6 @@
         "symfony/phpunit-bridge": "^5.4|^6.0"
     },
     "suggest": {
-        "softspring/admin-bundle": "Use softspring admin templates",
         "softspring/mailer-bundle": "Integrates with softspring's mailer bundle",
         "hwi/oauth-bundle": "Integrate oauth clients"
     },
