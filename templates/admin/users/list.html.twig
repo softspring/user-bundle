@@ -33,7 +33,7 @@
             </div>
         {% endif %}
 
-    {% embed '@SfsComponents/pagination/table.html.twig' with {'collection':users, 'pagination_route': 'sfs_user_admin_users_list'} %}
+    {% embed '@SfsComponents/paginator/table.html.twig' with {'collection':users, 'pagination_route': 'sfs_user_admin_users_list'} %}
         {% trans_default_domain 'sfs_user' %}
         {% block ths %}
             {% if sfs_user_is('avatar') %}

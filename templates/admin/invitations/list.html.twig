@@ -33,7 +33,7 @@
             </div>
         {% endif %}
 
-        {% embed '@SfsComponents/pagination/table.html.twig' with {'collection':invitations, 'pagination_route': 'sfs_user_admin_invitations_list'} %}
+        {% embed '@SfsComponents/paginator/table.html.twig' with {'collection':invitations, 'pagination_route': 'sfs_user_admin_invitations_list'} %}
             {% trans_default_domain 'sfs_user' %}
             {% block ths %}
                 {% if sfs_invitation_is('nameSurname') %}
