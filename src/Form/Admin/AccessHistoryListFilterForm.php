@@ -4,6 +4,7 @@ namespace Softspring\UserBundle\Form\Admin;
 
 use Softspring\Component\DoctrinePaginator\Form\PaginatorForm;
 use Softspring\UserBundle\Manager\UserAccessManagerInterface;
+use Softspring\UserBundle\Model\UserAccessInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,6 +23,7 @@ class AccessHistoryListFilterForm extends PaginatorForm implements AccessHistory
     {
         parent::configureOptions($resolver);
         $resolver->setDefaults([
+            'class' => UserAccessInterface::class,
             'translation_domain' => 'sfs_user',
             'label_format' => 'admin_access_history.list.filter_form.%name%.label',
             'rpp_valid_values' => [50],
