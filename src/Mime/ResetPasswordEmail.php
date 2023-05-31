@@ -14,7 +14,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ResetPasswordEmail extends TranslatableEmail implements ExampleEmailInterface
 {
-    public static function generateExample(TranslatorInterface $translator, ?string $locale = null): TranslatableEmail
+    public static function generateExample(TranslatorInterface $translator, string $locale = null): TranslatableEmail
     {
         $user = new ExampleUser();
         $user->setName('Mery');
@@ -25,7 +25,7 @@ class ResetPasswordEmail extends TranslatableEmail implements ExampleEmailInterf
         return new self($user, $resetUrl, $translator, $locale);
     }
 
-    public function __construct(UserInterface $user, string $resetUrl, TranslatorInterface $translator, ?string $locale = null, Headers $headers = null, AbstractPart $body = null)
+    public function __construct(UserInterface $user, string $resetUrl, TranslatorInterface $translator, string $locale = null, Headers $headers = null, AbstractPart $body = null)
     {
         parent::__construct($translator, $locale, $headers, $body);
 

@@ -108,10 +108,10 @@ class ResetPasswordController extends AbstractController
             return $this->redirectToRoute('sfs_user_reset_password_request');
         }
 
-//        // TODO check if expired
-//        if (($user->getPasswordRequestedAt()->format('u') - (new \DateTime('now'))->format('u')) < $this->resetTokenTTL) {
-//            // TODO fuck this
-//        }
+        //        // TODO check if expired
+        //        if (($user->getPasswordRequestedAt()->format('u') - (new \DateTime('now'))->format('u')) < $this->resetTokenTTL) {
+        //            // TODO fuck this
+        //        }
 
         $form = $this->createForm(get_class($this->resetForm), $user, ['method' => 'POST'])->handleRequest($request);
 

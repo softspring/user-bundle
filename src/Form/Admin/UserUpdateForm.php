@@ -19,7 +19,7 @@ class UserUpdateForm extends AbstractType implements UserUpdateFormInterface
     protected UserManagerInterface $userManager;
     protected ?array $locales;
 
-    public function __construct(UserManagerInterface $userManager, ?array $locales = null)
+    public function __construct(UserManagerInterface $userManager, array $locales = null)
     {
         $this->userManager = $userManager;
         $this->locales = $locales;
@@ -51,11 +51,11 @@ class UserUpdateForm extends AbstractType implements UserUpdateFormInterface
             $builder->add('email', EmailType::class);
         }
 
-//        if ($reflection->implementsInterface(UserHasLocalePreferenceInterface::class)) {
-//            $builder->add('locale', LocaleType::class, [
-//                'choice_loader' => null,
-//                'choices' => $this->locales,
-//            ]);
-//        }
+        //        if ($reflection->implementsInterface(UserHasLocalePreferenceInterface::class)) {
+        //            $builder->add('locale', LocaleType::class, [
+        //                'choice_loader' => null,
+        //                'choices' => $this->locales,
+        //            ]);
+        //        }
     }
 }

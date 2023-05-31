@@ -175,7 +175,7 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
     {
         /** @var SoftspringUserInterface $user */
         $user = $this->userManager->createEntity();
-//        $user->setLastLogin(new \DateTime());
+        //        $user->setLastLogin(new \DateTime());
 
         if ($user instanceof EnablableInterface) {
             $user->setEnabled(true);

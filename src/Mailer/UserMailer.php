@@ -34,7 +34,7 @@ class UserMailer implements UserMailerInterface
         $this->translator = $translator;
     }
 
-    public function sendRegisterConfirmationEmail(UserInterface $user, ?string $locale = null): void
+    public function sendRegisterConfirmationEmail(UserInterface $user, string $locale = null): void
     {
         if (!$user instanceof ConfirmableInterface) {
             throw new InvalidUserClassException(sprintf('%s must implements %s interface', get_class($user), ConfirmableInterface::class));
@@ -61,7 +61,7 @@ class UserMailer implements UserMailerInterface
         $this->mailer->send($email);
     }
 
-    public function sendInvitationEmail(UserInvitationInterface $invitation, ?string $locale = null): void
+    public function sendInvitationEmail(UserInvitationInterface $invitation, string $locale = null): void
     {
         $toName = $invitation instanceof NameSurnameInterface ? "{$invitation->getName()} {$invitation->getSurname()}" : '';
         $acceptUrl = $this->urlGenerator->generate('sfs_user_invitation_accept', ['token' => $invitation->getInvitationToken()], UrlGeneratorInterface::ABSOLUTE_URL);
@@ -73,7 +73,7 @@ class UserMailer implements UserMailerInterface
         $this->mailer->send($email);
     }
 
-    public function sendResettingEmail(UserInterface $user, ?string $locale = null): void
+    public function sendResettingEmail(UserInterface $user, string $locale = null): void
     {
         if (!$user instanceof PasswordRequestInterface) {
             throw new InvalidUserClassException(sprintf('%s must implements %s interface', get_class($user), PasswordRequestInterface::class));
