@@ -15,7 +15,7 @@
             <h1 class="h3 mb-4">{{ 'admin_administrators.details.title'|trans({'%displayName%': administrator.displayName}) }}</h1>
 
             <div class="ms-3">
-                {% if is_granted('ROLE_ADMIN_ADMINISTRATORS_UPDATE', administrator) %}
+                {% if is_granted('PERMISSION_SFS_USER_ADMIN_ADMINISTRATORS_UPDATE', administrator) %}
                     <a href="{{ url('sfs_user_admin_administrators_update', {'administrator': administrator}) }}" class="btn btn-outline-secondary">{{ 'admin_administrators.details.actions.update'|trans }}</a>
                 {% endif %}
 
@@ -42,15 +42,15 @@
                             <a href="{{ url('sfs_user_admin_administrators_promote_super_admin', {'administrator':administrator}) }}" class="dropdown-item text-danger">{{ 'admin_administrators.details.actions.promote_super'|trans }}</a>
                         {% endif %}
 
-                        {% if is_granted('ROLE_ADMIN_ADMINISTRATORS_DEMOTE_SUPER', administrator) and administrator.superAdmin %}
+                        {% if is_granted('PERMISSION_SFS_USER_ADMIN_ADMINISTRATORS_DEMOTE_SUPER', administrator) and administrator.superAdmin %}
                             <a href="{{ url('sfs_user_admin_administrators_demote_super_admin', {'administrator':administrator}) }}" class="dropdown-item text-danger">{{ 'admin_administrators.details.actions.demote_super'|trans }}</a>
                         {% endif %}
 
-                        {% if is_granted('ROLE_ADMIN_ADMINISTRATORS_DEMOTE', administrator) %}
+                        {% if is_granted('PERMISSION_SFS_USER_ADMIN_ADMINISTRATORS_DEMOTE', administrator) %}
                             <a href="{{ url('sfs_user_admin_administrators_demote_admin', {'administrator':administrator}) }}" class="dropdown-item text-danger">{{ 'admin_administrators.details.actions.demote'|trans }}</a>
                         {% endif %}
 
-                        {% if is_granted('ROLE_ADMIN_ADMINISTRATORS_DELETE', administrator) %}
+                        {% if is_granted('PERMISSION_SFS_USER_ADMIN_ADMINISTRATORS_DELETE', administrator) %}
                             <a href="{{ url('sfs_user_admin_administrators_delete', {'administrator':administrator}) }}" class="dropdown-item text-danger">{{ 'admin_administrators.details.actions.delete'|trans }}</a>
                         {% endif %}
                     </div>

@@ -26,7 +26,7 @@ services:
             $config:
                 entity_attribute: 'user'
                 list:
-                    is_granted: 'ROLE_ADMIN_USERS_LIST'
+                    is_granted: 'PERMISSION_SFS_USER_ADMIN_USERS_LIST'
                     initialize_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_LIST_INITIALIZE
                     view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_LIST_VIEW
                     view: '@@SfsUser/admin/users/list.html.twig'
@@ -34,7 +34,7 @@ services:
                     entities_attribute: 'users'
                     filter_form: '@Softspring\UserBundle\Form\Admin\UserListFilterFormInterface'
                 update:
-                    is_granted: 'ROLE_ADMIN_USERS_UPDATE'
+                    is_granted: 'PERMISSION_SFS_USER_ADMIN_USERS_UPDATE'
                     param_converter_key: 'id'
                     initialize_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_UPDATE_INITIALIZE
                     form_valid_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_UPDATE_FORM_VALID
@@ -45,7 +45,7 @@ services:
                     view: '@@SfsUser/admin/users/update.html.twig'
                     form: '@Softspring\UserBundle\Form\Admin\UserUpdateFormInterface'
                 delete:
-                    is_granted: 'ROLE_ADMIN_USERS_DELETE'
+                    is_granted: 'PERMISSION_SFS_USER_ADMIN_USERS_DELETE'
                     param_converter_key: 'id'
                     initialize_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_DELETE_INITIALIZE
                     form_valid_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_DELETE_FORM_VALID
@@ -56,7 +56,7 @@ services:
                     view: '@@SfsUser/admin/users/delete.html.twig'
                     form: '@Softspring\UserBundle\Form\Admin\UserDeleteFormInterface'
                 read:
-                    is_granted: 'ROLE_ADMIN_USERS_DETAILS'
+                    is_granted: 'PERMISSION_SFS_USER_ADMIN_USERS_DETAILS'
                     param_converter_key: 'id'
                     initialize_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_DETAILS_INITIALIZE
                     view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_USERS_DETAILS_VIEW

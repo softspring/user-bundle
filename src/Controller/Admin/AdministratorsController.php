@@ -32,7 +32,7 @@ class AdministratorsController extends AbstractController
         /** @var User|RolesAdminInterface $administrator */
         $administrator = $this->userManager->findUserBy(['id' => $administrator]);
 
-        $this->denyAccessUnlessGranted('ROLE_ADMIN_ADMINISTRATORS_DEMOTE', $administrator);
+        $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_ADMINISTRATORS_DEMOTE', $administrator);
 
         if ($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_ADMINISTRATORS_DEMOTE_INITIALIZE, new GetResponseUserEvent($administrator, $request))) {
             return $response;
@@ -47,7 +47,7 @@ class AdministratorsController extends AbstractController
             return $response;
         }
 
-        if ($this->isGranted('ROLE_ADMIN_USERS_LIST')) {
+        if ($this->isGranted('PERMISSION_SFS_USER_ADMIN_USERS_LIST')) {
             return $this->redirectToRoute('sfs_user_admin_users_list');
         } else {
             return $this->redirectToRoute('sfs_user_admin_administrators_list');
@@ -74,7 +74,7 @@ class AdministratorsController extends AbstractController
             return $response;
         }
 
-        if ($this->isGranted('ROLE_ADMIN_USERS_LIST')) {
+        if ($this->isGranted('PERMISSION_SFS_USER_ADMIN_USERS_LIST')) {
             return $this->redirectToRoute('sfs_user_admin_users_list');
         } else {
             return $this->redirectToRoute('sfs_user_admin_administrators_list');
@@ -86,7 +86,7 @@ class AdministratorsController extends AbstractController
         /** @var User|RolesAdminInterface $administrator */
         $administrator = $this->userManager->findUserBy(['id' => $administrator]);
 
-        $this->denyAccessUnlessGranted('ROLE_ADMIN_ADMINISTRATORS_DEMOTE_SUPER', $administrator);
+        $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_ADMINISTRATORS_DEMOTE_SUPER', $administrator);
 
         if ($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_ADMINISTRATORS_DEMOTE_SUPER_INITIALIZE, new GetResponseUserEvent($administrator, $request))) {
             return $response;
@@ -101,7 +101,7 @@ class AdministratorsController extends AbstractController
             return $response;
         }
 
-        if ($this->isGranted('ROLE_ADMIN_USERS_LIST')) {
+        if ($this->isGranted('PERMISSION_SFS_USER_ADMIN_USERS_LIST')) {
             return $this->redirectToRoute('sfs_user_admin_users_list');
         } else {
             return $this->redirectToRoute('sfs_user_admin_administrators_list');

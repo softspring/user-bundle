@@ -14,7 +14,7 @@
         <div class="d-flex justify-content-between">
             <h1 class="h3 mb-4">{{ 'admin_users.details.title'|trans({'%displayName%': user.displayName}) }}</h1>
             <div class="ms-3">
-                {% if is_granted('ROLE_ADMIN_USERS_UPDATE', user) %}
+                {% if is_granted('PERMISSION_SFS_USER_ADMIN_USERS_UPDATE', user) %}
                     <a href="{{ url('sfs_user_admin_users_update', {'user': user}) }}" class="btn btn-outline-secondary">{{ 'admin_users.details.actions.update'|trans }}</a>
                 {% endif %}
 
@@ -41,7 +41,7 @@
                             <a href="{{ url('sfs_user_admin_users_promote_admin', {'user':user}) }}" class="dropdown-item text-danger">{{ 'admin_users.details.actions.promote'|trans }}</a>
                         {% endif %}
 
-                        {% if is_granted('ROLE_ADMIN_USERS_DELETE', user) %}
+                        {% if is_granted('PERMISSION_SFS_USER_ADMIN_USERS_DELETE', user) %}
                             <a href="{{ url('sfs_user_admin_users_delete', {'user':user}) }}" class="dropdown-item text-danger">{{ 'admin_users.details.actions.delete'|trans }}</a>
                         {% endif %}
                     </div>

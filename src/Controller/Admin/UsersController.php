@@ -41,7 +41,7 @@ class UsersController extends AbstractController
     {
         $user = $this->userManager->findUserBy(['id' => $user]);
 
-        $this->denyAccessUnlessGranted('ROLE_ADMIN_USERS_PROMOTE', $user);
+        $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_USERS_PROMOTE', $user);
 
         if (!$user instanceof RolesAdminInterface) {
             throw new \Exception(sprintf('User %s class must implement %s to promoting admins', get_class($user), RolesAdminInterface::class));
@@ -60,7 +60,7 @@ class UsersController extends AbstractController
             return $response;
         }
 
-        if ($this->isGranted('ROLE_ADMIN_ADMINISTRATORS_LIST')) {
+        if ($this->isGranted('PERMISSION_SFS_USER_ADMIN_ADMINISTRATORS_LIST')) {
             return $this->redirectToRoute('sfs_user_admin_administrators_list');
         } else {
             return $this->redirectToRoute('sfs_user_admin_users_list');
