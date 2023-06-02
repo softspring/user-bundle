@@ -28,7 +28,7 @@ services:
             $config:
                 entity_attribute: 'administrator'
                 list:
-                    is_granted: 'ROLE_ADMIN_ADMINISTRATORS_LIST'
+                    is_granted: 'PERMISSION_SFS_USER_ADMIN_ADMINISTRATORS_LIST'
                     initialize_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_LIST_INITIALIZE
                     view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_LIST_VIEW
                     view: '@@SfsUser/admin/administrators/list.html.twig'
@@ -36,7 +36,7 @@ services:
                     entities_attribute: 'administrators'
                     filter_form: '@Softspring\UserBundle\Form\Admin\AdministratorListFilterFormInterface'
                 update:
-                    is_granted: 'ROLE_ADMIN_ADMINISTRATORS_UPDATE'
+                    is_granted: 'PERMISSION_SFS_USER_ADMIN_ADMINISTRATORS_UPDATE'
                     param_converter_key: 'id'
                     initialize_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_UPDATE_INITIALIZE
                     form_valid_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_UPDATE_FORM_VALID
@@ -47,7 +47,7 @@ services:
                     view: '@@SfsUser/admin/administrators/update.html.twig'
                     form: '@Softspring\UserBundle\Form\Admin\AdministratorUpdateFormInterface'
                 delete:
-                    is_granted: 'ROLE_ADMIN_ADMINISTRATORS_DELETE'
+                    is_granted: 'PERMISSION_SFS_USER_ADMIN_ADMINISTRATORS_DELETE'
                     param_converter_key: 'id'
                     initialize_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_DELETE_INITIALIZE
                     form_valid_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_DELETE_FORM_VALID
@@ -58,7 +58,7 @@ services:
                     view: '@@SfsUser/admin/administrators/delete.html.twig'
                     form: '@Softspring\UserBundle\Form\Admin\AdministratorDeleteFormInterface'
                 read:
-                    is_granted: 'ROLE_ADMIN_ADMINISTRATORS_DETAILS'
+                    is_granted: 'PERMISSION_SFS_USER_ADMIN_ADMINISTRATORS_DETAILS'
                     param_converter_key: 'id'
                     initialize_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_DETAILS_INITIALIZE
                     view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ADMINISTRATORS_DETAILS_VIEW

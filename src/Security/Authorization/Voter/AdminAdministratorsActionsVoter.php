@@ -47,7 +47,7 @@ class AdminAdministratorsActionsVoter implements VoterInterface
             return VoterInterface::ACCESS_DENIED;
         }
 
-        $ownAllowedActions = ['ROLE_ADMIN_ADMINISTRATORS_UPDATE', 'ROLE_ADMIN_ADMINISTRATORS_DETAILS'];
+        $ownAllowedActions = ['PERMISSION_SFS_USER_ADMIN_ADMINISTRATORS_UPDATE', 'PERMISSION_SFS_USER_ADMIN_ADMINISTRATORS_DETAILS'];
         if ($currentLoggedInUser === $administrator && !in_array($role, $ownAllowedActions)) {
             return VoterInterface::ACCESS_DENIED;
         }

@@ -43,9 +43,9 @@ class LoginManager
         if (null !== $request) {
             $this->sessionStrategy->onAuthentication($request, $token);
 
-//            if (null !== $response && null !== $this->rememberMeService) {
-//                 $this->rememberMeService->loginSuccess($request, $response, $token);
-//            }
+            //            if (null !== $response && null !== $this->rememberMeService) {
+            //                 $this->rememberMeService->loginSuccess($request, $response, $token);
+            //            }
         }
 
         $this->tokenStorage->setToken($token);

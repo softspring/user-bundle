@@ -31,7 +31,7 @@ class UserInvitationManipulator
         $this->tokenGenerator = $tokenGenerator;
     }
 
-    public function invite(string $email, ?string $username = null, array $roles = []): UserInvitationInterface
+    public function invite(string $email, string $username = null, array $roles = []): UserInvitationInterface
     {
         $invitation = $this->userInvitationManager->createEntity();
 

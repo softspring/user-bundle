@@ -23,7 +23,7 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
     protected UserManagerInterface $userManager;
     protected ?UserAccessManagerInterface $userAccessManager;
 
-    public function __construct(UserManagerInterface $userManager, ?UserAccessManagerInterface $userAccessManager = null)
+    public function __construct(UserManagerInterface $userManager, UserAccessManagerInterface $userAccessManager = null)
     {
         $this->userManager = $userManager;
         $this->userAccessManager = $userAccessManager;
