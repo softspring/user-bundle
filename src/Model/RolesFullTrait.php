@@ -6,8 +6,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 trait RolesFullTrait
 {
-    use RolesAdminTrait;
-    use RolesTrait;
+    use RolesAdminTrait, RolesTrait {
+        RolesTrait::getRoles insteadof RolesAdminTrait;
+        RolesTrait::setRoles insteadof RolesAdminTrait;
+    }
 
     public function getRoles(): array
     {
