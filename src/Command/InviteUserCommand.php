@@ -11,7 +11,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class InviteUserCommand extends Command
 {
-    protected static $defaultName = 'sfs:user:invite';
 
     protected UserInvitationManipulator $userInvitationManipulator;
 
@@ -22,8 +21,9 @@ class InviteUserCommand extends Command
         parent::__construct($name);
     }
 
-    protected function configure()
+    protected function configure(): void
     {
+        $this->setName('sfs:user:invite');
         $this->addArgument('email', InputArgument::REQUIRED, 'Email');
         $this->addArgument('username', InputArgument::OPTIONAL, 'Username');
         $this->addOption('role', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'Add user roles (comma separated)', []);

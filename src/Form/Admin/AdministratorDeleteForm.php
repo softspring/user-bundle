@@ -12,7 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AdministratorDeleteForm extends AbstractType implements AdministratorDeleteFormInterface
 {
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => UserInterface::class,
@@ -26,7 +26,7 @@ class AdministratorDeleteForm extends AbstractType implements AdministratorDelet
         //        $resolver->setRequired('user');
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         //        if ($options['user'] instanceof MultiAccountedInterface) {
         //            $accounts = $this->getDeletableAccounts($options['user']);

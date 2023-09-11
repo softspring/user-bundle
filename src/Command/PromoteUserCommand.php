@@ -12,8 +12,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class PromoteUserCommand extends Command
 {
-    protected static $defaultName = 'sfs:user:promote';
-
     protected UserManagerInterface $userManager;
 
     public function __construct(UserManagerInterface $userManager, string $name = null)
@@ -23,8 +21,9 @@ class PromoteUserCommand extends Command
         parent::__construct($name);
     }
 
-    protected function configure()
+    protected function configure(): void
     {
+        $this->setName('sfs:user:promote');
         $this->addArgument('identifier', InputArgument::REQUIRED, 'User identifier (username or email)');
         $this->addOption('super-admin', 's', InputOption::VALUE_NONE, 'User is super admin');
     }

@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ChangePasswordForm extends AbstractType implements ChangePasswordFormInterface
 {
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => UserInterface::class,
@@ -23,7 +23,7 @@ class ChangePasswordForm extends AbstractType implements ChangePasswordFormInter
         ]);
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('currentPassword', Types\PasswordType::class, [
             'mapped' => false,

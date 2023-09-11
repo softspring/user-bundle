@@ -23,7 +23,7 @@ class PreferencesForm extends AbstractType implements PreferencesFormInterface
         $this->locales = $locales;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => UserInterface::class,
@@ -35,7 +35,7 @@ class PreferencesForm extends AbstractType implements PreferencesFormInterface
         $resolver->setAllowedTypes('locales', ['null', 'array']);
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $reflection = $this->userManager->getEntityClassReflection();
 
