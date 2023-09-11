@@ -37,7 +37,7 @@ class LoginForm extends AbstractType implements LoginFormInterface
         return '';
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'translation_domain' => 'sfs_user',
@@ -49,7 +49,7 @@ class LoginForm extends AbstractType implements LoginFormInterface
         ]);
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('_username', TextType::class, [
             'label' => $this->userManager->getEntityClassReflection()->implementsInterface(UserIdentifierEmailInterface::class) ? 'login.form.email.label' : 'login.form.username.label',

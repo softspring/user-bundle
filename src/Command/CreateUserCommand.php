@@ -12,8 +12,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateUserCommand extends Command
 {
-    protected static $defaultName = 'sfs:user:create';
-
     protected UserManipulator $userManipulator;
 
     public function __construct(UserManipulator $userManipulator, string $name = null)
@@ -23,8 +21,9 @@ class CreateUserCommand extends Command
         parent::__construct($name);
     }
 
-    protected function configure()
+    protected function configure(): void
     {
+        $this->setName('sfs:user:create');
         $this->addArgument('username', InputArgument::REQUIRED, 'Username');
         $this->addArgument('email', InputArgument::REQUIRED, 'Email');
         $this->addArgument('password', InputArgument::REQUIRED, 'Password');

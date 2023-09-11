@@ -21,7 +21,7 @@ class AdministratorUpdateForm extends AbstractType implements AdministratorUpdat
         $this->userManager = $userManager;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => UserInterface::class,
@@ -30,7 +30,7 @@ class AdministratorUpdateForm extends AbstractType implements AdministratorUpdat
         ]);
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $named = $this->userManager->getEntityClassReflection()->implementsInterface(NameSurnameInterface::class);
 

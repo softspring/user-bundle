@@ -23,7 +23,7 @@ class InvitationListFilterForm extends PaginatorForm implements InvitationListFi
         $this->invitationManager = $invitationManager;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);
         $resolver->setDefaults([
@@ -37,7 +37,7 @@ class InvitationListFilterForm extends PaginatorForm implements InvitationListFi
         ]);
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         parent::buildForm($builder, $options);
 

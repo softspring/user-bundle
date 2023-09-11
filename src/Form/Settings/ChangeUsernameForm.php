@@ -10,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ChangeUsernameForm extends AbstractType implements ChangeUsernameFormInterface
 {
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => UserInterface::class,
@@ -19,7 +19,7 @@ class ChangeUsernameForm extends AbstractType implements ChangeUsernameFormInter
         ]);
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('currentPassword', Types\PasswordType::class);
         $builder->add('username', Types\TextType::class);

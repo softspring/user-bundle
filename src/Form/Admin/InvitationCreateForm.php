@@ -28,7 +28,7 @@ class InvitationCreateForm extends AbstractType implements InvitationCreateFormI
         $this->authorizationChecker = $authorizationChecker;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => UserInvitationInterface::class,
@@ -39,7 +39,7 @@ class InvitationCreateForm extends AbstractType implements InvitationCreateFormI
         ]);
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $reflection = $this->invitationManager->getEntityClassReflection();
 
