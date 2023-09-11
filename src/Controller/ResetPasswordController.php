@@ -30,7 +30,7 @@ class ResetPasswordController extends AbstractController
 
     protected ResetPasswordFormInterface $resetForm;
 
-    protected EventDispatcherInterface   $eventDispatcher;
+    protected EventDispatcherInterface $eventDispatcher;
 
     public function __construct(UserManagerInterface $userManager, ResetPasswordRequestFormInterface $resetRequestForm, int $resetTokenTTL, ResetPasswordFormInterface $resetForm, EventDispatcherInterface $eventDispatcher)
     {

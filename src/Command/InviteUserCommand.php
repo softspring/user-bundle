@@ -11,7 +11,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class InviteUserCommand extends Command
 {
-
     protected UserInvitationManipulator $userInvitationManipulator;
 
     public function __construct(UserInvitationManipulator $userInvitationManipulator, string $name = null)
