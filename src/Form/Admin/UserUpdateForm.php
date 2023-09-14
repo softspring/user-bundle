@@ -4,6 +4,7 @@ namespace Softspring\UserBundle\Form\Admin;
 
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;
+use Softspring\UserBundle\Model\UserAvatarInterface;
 use Softspring\UserBundle\Model\UserIdentifierEmailInterface;
 use Softspring\UserBundle\Model\UserIdentifierUsernameInterface;
 use Softspring\UserBundle\Model\UserInterface;
@@ -11,6 +12,7 @@ use Softspring\UserBundle\Model\UserWithEmailInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -49,6 +51,10 @@ class UserUpdateForm extends AbstractType implements UserUpdateFormInterface
 
         if ($reflection->implementsInterface(UserWithEmailInterface::class) || $reflection->implementsInterface(UserIdentifierEmailInterface::class)) {
             $builder->add('email', EmailType::class);
+        }
+
+        if ($reflection->implementsInterface(UserAvatarInterface::class)) {
+            $builder->add('avatarUrl', UrlType::class);
         }
 
         //        if ($reflection->implementsInterface(UserHasLocalePreferenceInterface::class)) {

@@ -4,10 +4,12 @@ namespace Softspring\UserBundle\Form\Settings;
 
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;
+use Softspring\UserBundle\Model\UserAvatarInterface;
 use Softspring\UserBundle\Model\UserHasLocalePreferenceInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type as Types;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -49,6 +51,10 @@ class PreferencesForm extends AbstractType implements PreferencesFormInterface
             $builder->add('locale', Types\ChoiceType::class, [
                 'choices' => array_combine($locales, $locales),
             ]);
+        }
+
+        if ($reflection->implementsInterface(UserAvatarInterface::class)) {
+            $builder->add('avatarUrl', UrlType::class);
         }
     }
 }

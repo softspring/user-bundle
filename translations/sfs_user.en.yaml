@@ -190,6 +190,7 @@ admin_users:
             surname.label: "Surname"
             username.label: "Username"
             email.label: "Email"
+            avatarUrl.label: "Avatar URL"
 
     resend_confirmation:
         messages:
@@ -257,6 +258,7 @@ admin_administrators:
             surname.label: "Surname"
             username.label: "Username"
             email.label: "Email"
+            avatarUrl.label: "Avatar URL"
 
     invite:
         form:
