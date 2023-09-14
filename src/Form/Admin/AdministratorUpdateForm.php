@@ -4,11 +4,13 @@ namespace Softspring\UserBundle\Form\Admin;
 
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;
+use Softspring\UserBundle\Model\UserAvatarInterface;
 use Softspring\UserBundle\Model\UserIdentifierUsernameInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Model\UserWithEmailInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -45,6 +47,10 @@ class AdministratorUpdateForm extends AbstractType implements AdministratorUpdat
 
         if ($this->userManager->getEntityClassReflection()->implementsInterface(UserWithEmailInterface::class)) {
             $builder->add('email', EmailType::class);
+        }
+
+        if ($this->userManager->getEntityClassReflection()->implementsInterface(UserAvatarInterface::class)) {
+            $builder->add('avatarUrl', UrlType::class);
         }
     }
 }
