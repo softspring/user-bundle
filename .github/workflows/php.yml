@@ -2,9 +2,9 @@ name: Build
 
 on:
     push:
-        branches: [ 5.1 ]
+        branches: [ 5.2 ]
     pull_request:
-        branches: [ 5.1 ]
+        branches: [ 5.2 ]
 
 permissions:
     contents: read
@@ -43,7 +43,7 @@ jobs:
                         ${{ runner.os }}-php-
 
             -   name: Install dependencies
-                run: COMPOSER_ROOT_VERSION=dev-5.1 composer update --prefer-dist --no-interaction --no-progress ${{ matrix.composer-prefer }}
+                run: COMPOSER_ROOT_VERSION=dev-5.2 composer update --prefer-dist --no-interaction --no-progress ${{ matrix.composer-prefer }}
 
             -   name: Code Style check
                 run: ./vendor/bin/php-cs-fixer fix -v --diff --dry-run
