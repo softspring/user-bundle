@@ -16,7 +16,7 @@ abstract class User implements UserInterface
         }
     }
 
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         if ($this instanceof UserPasswordInterface) {
             $this->setPlainPassword(null);
