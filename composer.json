@@ -6,25 +6,25 @@
     "minimum-stability": "dev",
     "prefer-stable": false,
     "require": {
-        "php": ">=8.0",
+        "php": ">=8.1",
         "ext-json": "*",
         "doctrine/doctrine-bundle": "^2.5",
         "doctrine/orm": "^2.10",
-        "softspring/crudl-controller": "^5.1",
-        "softspring/doctrine-paginator": "^5.1",
-        "softspring/doctrine-query-filters": "^5.1",
-        "softspring/doctrine-target-entity-resolver": "^5.1",
-        "softspring/events": "^5.1",
-        "softspring/mime-translatable": "^5.1",
-        "softspring/permissions-bundle": "^5.1",
-        "softspring/twig-extra-bundle": "^5.1",
-        "symfony/http-foundation": "^5.4|^6.0|^7.0@dev",
-        "symfony/http-kernel": "^5.4|^6.0|^7.0@dev",
-        "symfony/security-bundle": "^5.4|^6.0|^7.0@dev",
-        "symfony/translation": "^5.4|^6.0|^7.0@dev",
-        "symfony/twig-bundle": "^5.4|^6.0|^7.0@dev",
-        "symfony/validator": "^5.4|^6.0|^7.0@dev",
-        "symfony/yaml": "^5.4|^6.0|^7.0@dev"
+        "softspring/crudl-controller": "^5.2",
+        "softspring/doctrine-paginator": "^5.2",
+        "softspring/doctrine-query-filters": "^5.2",
+        "softspring/doctrine-target-entity-resolver": "^5.2",
+        "softspring/events": "^5.2",
+        "softspring/mime-translatable": "^5.2",
+        "softspring/permissions-bundle": "^5.2",
+        "softspring/twig-extra-bundle": "^5.2",
+        "symfony/http-foundation": "^5.4|^6.0|^7.0",
+        "symfony/http-kernel": "^5.4|^6.0|^7.0",
+        "symfony/security-bundle": "^5.4|^6.0|^7.0",
+        "symfony/translation": "^5.4|^6.0|^7.0",
+        "symfony/twig-bundle": "^5.4|^6.0|^7.0",
+        "symfony/validator": "^5.4|^6.0|^7.0",
+        "symfony/yaml": "^5.4|^6.0|^7.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",
@@ -36,15 +36,15 @@
         "phpstan/phpstan-phpunit": "^1.2",
         "phpstan/phpstan-strict-rules": "^1.4",
         "phpstan/phpstan-symfony": "^1.2",
-        "softspring/account-bundle": "^5.1",
-        "softspring/doctrine-templates": "^5.1",
-        "softspring/mailer-bundle": "^5.1",
-        "symfony/browser-kit": "^5.4|^6.0|^7.0@dev",
-        "symfony/css-selector": "^5.4|^6.0|^7.0@dev",
-        "symfony/dom-crawler": "^5.4|^6.0|^7.0@dev",
-        "symfony/http-client": "^5.4|^6.0|^7.0@dev",
-        "symfony/mailer": "^5.4|^6.0|^7.0@dev",
-        "symfony/phpunit-bridge": "^5.4|^6.0|^7.0@dev"
+        "softspring/account-bundle": "^5.2",
+        "softspring/doctrine-templates": "^5.2",
+        "softspring/mailer-bundle": "^5.2",
+        "symfony/browser-kit": "^5.4|^6.0|^7.0",
+        "symfony/css-selector": "^5.4|^6.0|^7.0",
+        "symfony/dom-crawler": "^5.4|^6.0|^7.0",
+        "symfony/http-client": "^5.4|^6.0|^7.0",
+        "symfony/mailer": "^5.4|^6.0|^7.0",
+        "symfony/phpunit-bridge": "^5.4|^6.0|^7.0"
     },
     "suggest": {
         "softspring/mailer-bundle": "Integrates with softspring's mailer bundle",
@@ -66,13 +66,6 @@
         "allow-plugins": {
             "symfony/flex": true,
             "phpstan/extension-installer": true
-        }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-5.0": "5.0.x-dev",
-            "dev-5.1": "5.1.x-dev",
-            "dev-5.2": "5.2.x-dev"
         }
     }
 }
