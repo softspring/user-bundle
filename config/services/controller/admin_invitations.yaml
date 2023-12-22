@@ -20,7 +20,7 @@ services:
         arguments:
             $manager: '@Softspring\UserBundle\Manager\UserInvitationManagerInterface'
             $eventDispatcher: '@event_dispatcher'
-            $config:
+            $configs:
                 entity_attribute: 'invitation'
                 list:
                     is_granted: 'ROLE_ADMIN_INVITATIONS_LIST'

@@ -2,8 +2,8 @@
 
 namespace Softspring\UserBundle\Form\Admin;
 
-use Softspring\Component\CrudlController\Form\EntityUpdateFormInterface;
+use Symfony\Component\Form\FormTypeInterface;
 
-interface UserUpdateFormInterface extends EntityUpdateFormInterface
+interface UserUpdateFormInterface extends FormTypeInterface
 {
 }

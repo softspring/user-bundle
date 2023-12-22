@@ -2,8 +2,8 @@
 
 namespace Softspring\UserBundle\Form\Admin;
 
-use Softspring\Component\CrudlController\Form\EntityDeleteFormInterface;
+use Symfony\Component\Form\FormTypeInterface;
 
-interface UserDeleteFormInterface extends EntityDeleteFormInterface
+interface UserDeleteFormInterface extends FormTypeInterface
 {
 }

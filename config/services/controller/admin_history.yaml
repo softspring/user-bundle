@@ -14,7 +14,7 @@ services:
         arguments:
             $manager: '@Softspring\UserBundle\Manager\UserAccessManagerInterface'
             $eventDispatcher: '@event_dispatcher'
-            $config:
+            $configs:
                 entity_attribute: 'access'
                 list:
                     is_granted: 'ROLE_ADMIN_ACCESS_HISTORY_LIST'

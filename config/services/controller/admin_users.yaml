@@ -5,7 +5,7 @@ services:
         public: false
         bind:
             $impersonateBarConfig: '%sfs_user.impersonate_bar%'
-            $locales: '%kernel.enabled_locales%'
+#            $locales: '%kernel.enabled_locales%'
 
     Softspring\UserBundle\Form\Admin\:
         resource: '../../../src/Form/Admin/User*'
@@ -23,7 +23,7 @@ services:
         arguments:
             $manager: '@Softspring\UserBundle\Manager\UserManagerInterface'
             $eventDispatcher: '@event_dispatcher'
-            $config:
+            $configs:
                 entity_attribute: 'user'
                 list:
                     is_granted: 'PERMISSION_SFS_USER_ADMIN_USERS_LIST'
