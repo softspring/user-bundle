@@ -5,7 +5,6 @@ services:
         public: false
         bind:
             $impersonateBarConfig: '%sfs_user.impersonate_bar%'
-            $locales: '%kernel.enabled_locales%'
 
     Softspring\UserBundle\Form\Admin\:
         resource: '../../../src/Form/Admin/User*'
