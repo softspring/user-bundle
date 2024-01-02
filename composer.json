@@ -4,7 +4,7 @@
     "type": "symfony-bundle",
     "license": "MIT",
     "minimum-stability": "dev",
-    "prefer-stable": true,
+    "prefer-stable": false,
     "require": {
         "php": ">=8.1",
         "ext-json": "*",
