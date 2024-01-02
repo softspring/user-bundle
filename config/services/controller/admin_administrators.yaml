@@ -25,7 +25,7 @@ services:
         arguments:
             $manager: '@Softspring\UserBundle\Manager\UserManagerInterface'
             $eventDispatcher: '@event_dispatcher'
-            $config:
+            $configs:
                 entity_attribute: 'administrator'
                 list:
                     is_granted: 'PERMISSION_SFS_USER_ADMIN_ADMINISTRATORS_LIST'
