@@ -48,7 +48,6 @@ services:
     Softspring\UserBundle\Mailer\UserMailerInterface:
         class: Softspring\UserBundle\Mailer\UserMailer
 
-
     Softspring\UserBundle\Manager\UserManagerInterface:
         class: Softspring\UserBundle\Manager\UserManager
 
@@ -69,3 +68,7 @@ services:
 
     # service aliases
     sfs_user.user_provider: '@Softspring\UserBundle\Provider\UserProvider'
+
+    Softspring\UserBundle\Security\Voter\DeprecatedPermissionVoter:
+        tags:
+            - { name: security.voter, priority: 1000 }

@@ -59,7 +59,7 @@ class AdministratorsController extends AbstractController
         /** @var User|RolesAdminInterface $administrator */
         $administrator = $this->userManager->findUserBy(['id' => $administrator]);
 
-        $this->denyAccessUnlessGranted('ROLE_ADMIN_ADMINISTRATORS_PROMOTE_SUPER', $administrator);
+        $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_ADMINISTRATORS_PROMOTE_SUPER', $administrator);
 
         if ($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_ADMINISTRATORS_PROMOTE_SUPER_INITIALIZE, new GetResponseUserEvent($administrator, $request))) {
             return $response;

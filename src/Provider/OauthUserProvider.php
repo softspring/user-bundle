@@ -128,7 +128,7 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
         $this->userManager->saveEntity($user);
     }
 
-    public function refreshUser(UserInterface $user)
+    public function refreshUser(UserInterface $user): UserInterface
     {
         $identifier = $this->properties['identifier'];
         if (!$user instanceof SoftspringUserInterface || !$this->accessor->isReadable($user, $identifier)) {
@@ -143,7 +143,7 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
         return $user;
     }
 
-    public function supportsClass($class)
+    public function supportsClass($class): bool
     {
         $userClass = $this->userManager->getEntityClass();
 
