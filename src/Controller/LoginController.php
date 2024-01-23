@@ -8,12 +8,12 @@ use Softspring\Component\Events\GetResponseFormEvent;
 use Softspring\UserBundle\Form\LoginFormInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security as NewSecurity;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Exception\TooManyLoginAttemptsAuthenticationException;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class LoginController extends AbstractController
@@ -46,25 +46,28 @@ class LoginController extends AbstractController
             $loginCheckParams[$this->targetPathParameter] = $targetPath;
         }
 
+        $authenticationErrorKey = class_exists(NewSecurity::class) ? NewSecurity::AUTHENTICATION_ERROR : (class_exists('Symfony\Component\Security\Core\Security') ? constant('Symfony\Component\Security\Core\Security::AUTHENTICATION_ERROR') : null);
+        $lastUserNameKey = class_exists(NewSecurity::class) ? NewSecurity::LAST_USERNAME : (class_exists('Symfony\Component\Security\Core\Security') ? constant('Symfony\Component\Security\Core\Security::LAST_USERNAME') : null);
+
         $form = $this->createForm(get_class($this->loginForm), [
-            '_username' => $session->get(Security::LAST_USERNAME) ?? '',
+            '_username' => $session->get($lastUserNameKey) ?? '',
             '_password' => '',
         ], [
             'action' => $this->generateUrl('sfs_user_login_check', $loginCheckParams),
         ]);
 
-        if ($request->attributes->has(Security::AUTHENTICATION_ERROR)) {
-            $form->addError(new FormError($request->attributes->get(Security::AUTHENTICATION_ERROR)));
-        } elseif ($session->has(Security::AUTHENTICATION_ERROR)) {
-            $error = $session->get(Security::AUTHENTICATION_ERROR);
+        if ($request->attributes->has($authenticationErrorKey)) {
+            $form->addError(new FormError($request->attributes->get($authenticationErrorKey)));
+        } elseif ($session->has($authenticationErrorKey)) {
+            $error = $session->get($authenticationErrorKey);
 
             if ($error instanceof TooManyLoginAttemptsAuthenticationException) {
                 $form->addError(new FormError($translator->trans($error->getMessageKey(), $error->getMessageData(), 'security')));
             } else {
-                $form->addError(new FormError($session->get(Security::AUTHENTICATION_ERROR)->getMessage()));
+                $form->addError(new FormError($session->get($authenticationErrorKey)->getMessage()));
             }
 
-            $session->remove(Security::AUTHENTICATION_ERROR);
+            $session->remove($authenticationErrorKey);
         }
 
         if ($response = $this->dispatchGetResponse(SfsUserEvents::LOGIN_ATTEMPT, new GetResponseFormEvent($form, $request))) {

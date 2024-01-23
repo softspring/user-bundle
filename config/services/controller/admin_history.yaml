@@ -17,7 +17,7 @@ services:
             $config:
                 entity_attribute: 'access'
                 list:
-                    is_granted: 'ROLE_ADMIN_ACCESS_HISTORY_LIST'
+                    is_granted: 'PERMISSION_SFS_USER_ADMIN_HISTORY_LIST'
                     initialize_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ACCESS_HISTORY_LIST_INITIALIZE
                     view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_ACCESS_HISTORY_LIST_VIEW
                     view: '@@SfsUser/admin/access-history/list.html.twig'

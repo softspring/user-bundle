@@ -23,7 +23,7 @@ services:
             $config:
                 entity_attribute: 'invitation'
                 list:
-                    is_granted: 'ROLE_ADMIN_INVITATIONS_LIST'
+                    is_granted: 'PERMISSION_SFS_USER_ADMIN_INVITATIONS_LIST'
                     initialize_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_INVITATIONS_LIST_INITIALIZE
                     view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_INVITATIONS_LIST_VIEW
                     view: '@@SfsUser/admin/invitations/list.html.twig'
@@ -40,7 +40,7 @@ services:
                     view: '@@SfsUser/admin/invitations/create.html.twig'
                     form: '@Softspring\UserBundle\Form\Admin\InvitationCreateFormInterface'
                 read:
-                    is_granted: 'ROLE_ADMIN_INVITATIONS_DETAILS'
+                    is_granted: 'PERMISSION_SFS_USER_ADMIN_INVITATIONS_DETAILS'
                     param_converter_key: 'id'
                     initialize_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_INVITATIONS_DETAILS_INITIALIZE
                     view_event_name: !php/const Softspring\UserBundle\SfsUserEvents::ADMIN_INVITATIONS_DETAILS_VIEW

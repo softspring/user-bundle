@@ -1,0 +1,44 @@
+<?php
+
+namespace Softspring\UserBundle\Security\Voter;
+
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
+
+/**
+ * @deprecated since 5.1, will be removed in 6.0
+ */
+class DeprecatedPermissionVoter implements VoterInterface
+{
+    public const DEPRECATIONS = [
+        'ROLE_ADMIN_USERS_RO' => 'ROLE_SFS_USER_ADMIN_USERS_RO',
+        'ROLE_ADMIN_USERS_RW' => 'ROLE_SFS_USER_ADMIN_USERS_RW',
+        'ROLE_ADMIN_ADMINISTRATORS_RO' => 'ROLE_SFS_USER_ADMIN_ADMINISTRATORS_RO',
+        'ROLE_ADMIN_ADMINISTRATORS_RW' => 'ROLE_SFS_USER_ADMIN_ADMINISTRATORS_RW',
+        'ROLE_ADMIN_INVITATION_RO' => 'ROLE_SFS_USER_ADMIN_INVITATION_RO',
+
+        'ROLE_ADMIN_USERS_LIST' => 'PERMISSION_SFS_USER_ADMIN_USERS_LIST',
+        'ROLE_ADMIN_USERS_DETAILS' => 'PERMISSION_SFS_USER_ADMIN_USERS_DETAILS',
+        'ROLE_ADMIN_USERS_DELETE' => 'PERMISSION_SFS_USER_ADMIN_USERS_DELETE',
+        'ROLE_ADMIN_USERS_UPDATE' => 'PERMISSION_SFS_USER_ADMIN_USERS_UPDATE',
+        'ROLE_ADMIN_ADMINISTRATORS_LIST' => 'PERMISSION_SFS_USER_ADMIN_ADMINISTRATORS_LIST',
+        'ROLE_ADMIN_ADMINISTRATORS_DETAILS' => 'PERMISSION_SFS_USER_ADMIN_ADMINISTRATORS_DETAILS',
+        'ROLE_ADMIN_USERS_PROMOTE' => 'PERMISSION_SFS_USER_ADMIN_USERS_PROMOTE',
+        'ROLE_ADMIN_ADMINISTRATORS_DEMOTE' => 'PERMISSION_SFS_USER_ADMIN_ADMINISTRATORS_DEMOTE',
+        'ROLE_ADMIN_ADMINISTRATORS_UPDATE' => 'PERMISSION_SFS_USER_ADMIN_ADMINISTRATORS_UPDATE',
+        'ROLE_ADMIN_ADMINISTRATORS_DELETE' => 'PERMISSION_SFS_USER_ADMIN_ADMINISTRATORS_DELETE',
+        'ROLE_ADMIN_ADMINISTRATORS_INVITE' => 'PERMISSION_SFS_USER_ADMIN_ADMINISTRATORS_INVITE',
+        'ROLE_ADMIN_INVITATIONS_LIST' => 'PERMISSION_SFS_USER_ADMIN_INVITATIONS_LIST',
+        'ROLE_ADMIN_INVITATIONS_DETAILS' => 'PERMISSION_SFS_USER_ADMIN_INVITATIONS_DETAILS',
+        'ROLE_ADMIN_ACCESS_HISTORY_LIST' => 'PERMISSION_SFS_USER_ADMIN_HISTORY_LIST',
+    ];
+
+    public function vote(TokenInterface $token, mixed $subject, array $attributes): int
+    {
+        if (isset(self::DEPRECATIONS[$attributes[0] ?? ''])) {
+            trigger_deprecation('softspring/user-bundle', '5.1', sprintf('The role "%s" is deprecated, use "%s" instead. Will be removed in 6.0', $attributes[0], self::DEPRECATIONS[$attributes[0]]));
+        }
+
+        return self::ACCESS_ABSTAIN;
+    }
+}
