@@ -4,7 +4,6 @@ namespace Softspring\UserBundle\Form\Settings;
 
 use Softspring\UserBundle\Model\UserInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type as Types;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,7 +24,7 @@ class ChangePasswordForm extends AbstractType implements ChangePasswordFormInter
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('currentPassword', Types\PasswordType::class, [
+        $builder->add('currentPassword', PasswordType::class, [
             'mapped' => false,
             'constraints' => [
                 new NotBlank(),

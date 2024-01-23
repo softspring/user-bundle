@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
  */
 class DeprecatedPermissionVoter implements VoterInterface
 {
-    const DEPRECATIONS = [
+    public const DEPRECATIONS = [
         'ROLE_ADMIN_USERS_RO' => 'ROLE_SFS_USER_ADMIN_USERS_RO',
         'ROLE_ADMIN_USERS_RW' => 'ROLE_SFS_USER_ADMIN_USERS_RW',
         'ROLE_ADMIN_ADMINISTRATORS_RO' => 'ROLE_SFS_USER_ADMIN_ADMINISTRATORS_RO',
@@ -35,7 +35,7 @@ class DeprecatedPermissionVoter implements VoterInterface
 
     public function vote(TokenInterface $token, mixed $subject, array $attributes): int
     {
-        if (isset(self::DEPRECATIONS[$attributes[0]??''])) {
+        if (isset(self::DEPRECATIONS[$attributes[0] ?? ''])) {
             trigger_deprecation('softspring/user-bundle', '5.1', sprintf('The role "%s" is deprecated, use "%s" instead. Will be removed in 6.0', $attributes[0], self::DEPRECATIONS[$attributes[0]]));
         }
 
