@@ -64,7 +64,7 @@ class LoginController extends AbstractController
             if ($error instanceof TooManyLoginAttemptsAuthenticationException) {
                 $form->addError(new FormError($translator->trans($error->getMessageKey(), $error->getMessageData(), 'security')));
             } else {
-                $form->addError(new FormError($session->get($authenticationErrorKey->getMessage())));
+                $form->addError(new FormError($session->get($authenticationErrorKey)->getMessage()));
             }
 
             $session->remove($authenticationErrorKey);
