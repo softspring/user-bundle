@@ -37,7 +37,7 @@
 
                         <li><div class="dropdown-divider"></div></li>
 
-                        {% if is_granted('ROLE_ADMIN_USERS_PROMOTE', user) %}
+                        {% if is_granted('PERMISSION_SFS_USER_ADMIN_USERS_PROMOTE', user) %}
                             <a href="{{ url('sfs_user_admin_users_promote_admin', {'user':user}) }}" class="dropdown-item text-danger">{{ 'admin_users.details.actions.promote'|trans }}</a>
                         {% endif %}
 
@@ -114,7 +114,7 @@
             </div>
 
             <div class="col-12">
-                {% if is_granted('ROLE_ADMIN_ACCESS_HISTORY_LIST') and user_access_history is defined %}
+                {% if is_granted('PERMISSION_SFS_USER_ADMIN_HISTORY_LIST') and user_access_history is defined %}
                     {% include '@SfsUser/admin/components/_user_access_history_card.html.twig' %}
                 {% endif %}
             </div>
