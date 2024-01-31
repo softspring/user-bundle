@@ -12,10 +12,12 @@ trait RolesAdminTrait
     /**
      * @ORM\Column(name="is_admin", type="boolean", nullable=false, options={"default":false})
      */
+    #[ORM\Column(name: 'is_admin', type: 'boolean', nullable: false, options: ['default' => false])]
     protected bool $admin = false;
 
     /**
      * @ORM\Column(name="is_super_admin", type="boolean", nullable=false, options={"default":false})
      */
+    #[ORM\Column(name: 'is_super_admin', type: 'boolean', nullable: false, options: ['default' => false])]
     protected bool $superAdmin = false;
 }

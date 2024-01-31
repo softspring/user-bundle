@@ -12,10 +12,12 @@ trait NameSurnameTrait
     /**
      * @ORM\Column(name="name", type="string", nullable=true, length=50)
      */
+    #[ORM\Column(name: 'name', type: 'string', nullable: true, length: 50)]
     protected ?string $name = null;
 
     /**
      * @ORM\Column(name="surname", type="string", nullable=true, length=80)
      */
+    #[ORM\Column(name: 'surname', type: 'string', nullable: true, length: 80)]
     protected ?string $surname = null;
 }

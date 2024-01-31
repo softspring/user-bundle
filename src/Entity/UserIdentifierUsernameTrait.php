@@ -12,5 +12,6 @@ trait UserIdentifierUsernameTrait
     /**
      * @ORM\Column(name="username", type="string", nullable=false, unique=true)
      */
+    #[ORM\Column(name: 'username', type: 'string', nullable: false, unique: true)]
     protected ?string $username = null;
 }

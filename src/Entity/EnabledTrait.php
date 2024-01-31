@@ -12,5 +12,6 @@ trait EnabledTrait
     /**
      * @ORM\Column(name="enabled", type="boolean", nullable=false, options={"default":false})
      */
+    #[ORM\Column(name: 'enabled', type: 'boolean', nullable: false, options: ['default' => false])]
     protected bool $enabled = false;
 }
