@@ -19,6 +19,7 @@ use Softspring\UserBundle\Model\UserWithEmailInterface;
 /**
  * @ORM\Entity
  */
+#[ORM\Entity]
 class User extends UserModel implements NameSurnameInterface, PasswordRequestInterface, UserWithEmailInterface, UserHasLocalePreferenceInterface, RolesFullInterface
 {
     use NameSurnameTrait;
@@ -33,6 +34,9 @@ class User extends UserModel implements NameSurnameInterface, PasswordRequestInt
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
+    #[ORM\Id]
+    #[ORM\Column(type: "string", nullable: false, length: 32)]
+    #[ORM\GeneratedValue(strategy: "NONE")]
     protected ?string $id = null;
 
     public function __construct()

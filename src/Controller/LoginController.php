@@ -8,7 +8,6 @@ use Softspring\Component\Events\GetResponseFormEvent;
 use Softspring\UserBundle\Form\LoginFormInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Bundle\SecurityBundle\Security as NewSecurity;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,8 +45,8 @@ class LoginController extends AbstractController
             $loginCheckParams[$this->targetPathParameter] = $targetPath;
         }
 
-        $authenticationErrorKey = class_exists(NewSecurity::class) ? NewSecurity::AUTHENTICATION_ERROR : (class_exists('Symfony\Component\Security\Core\Security') ? constant('Symfony\Component\Security\Core\Security::AUTHENTICATION_ERROR') : null);
-        $lastUserNameKey = class_exists(NewSecurity::class) ? NewSecurity::LAST_USERNAME : (class_exists('Symfony\Component\Security\Core\Security') ? constant('Symfony\Component\Security\Core\Security::LAST_USERNAME') : null);
+        $authenticationErrorKey = class_exists('Symfony\Bundle\SecurityBundle\Security') ? constant('Symfony\Bundle\SecurityBundle\Security::AUTHENTICATION_ERROR') : (class_exists('Symfony\Component\Security\Core\Security') ? constant('Symfony\Component\Security\Core\Security::AUTHENTICATION_ERROR') : null);
+        $lastUserNameKey = class_exists('Symfony\Bundle\SecurityBundle\Security') ? constant('Symfony\Bundle\SecurityBundle\Security::LAST_USERNAME') : (class_exists('Symfony\Component\Security\Core\Security') ? constant('Symfony\Component\Security\Core\Security::LAST_USERNAME') : null);
 
         $form = $this->createForm(get_class($this->loginForm), [
             '_username' => $session->get($lastUserNameKey) ?? '',

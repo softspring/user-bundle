@@ -12,5 +12,6 @@ trait EmailTrait
     /**
      * @ORM\Column(name="email", type="string", length=180, unique=true, nullable=false)
      */
+    #[ORM\Column(name: 'email', type: 'string', length: 180, unique: true, nullable: false)]
     protected ?string $email = null;
 }
