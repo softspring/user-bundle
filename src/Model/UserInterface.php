@@ -7,11 +7,11 @@ use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 interface UserInterface extends SymfonyUserInterface
 {
     /**
-     * @see Symfony\Component\Security\Core\User\UserInterface
+     * @see SymfonyUserInterface
      */
     public function getUserIdentifier(): string;
 
-    public function getDisplayName(): ?string;
+    public function getDisplayName(): string;
 
     public function __serialize(): array;
 

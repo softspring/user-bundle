@@ -50,7 +50,7 @@ class User extends UserModel implements NameSurnameInterface, PasswordRequestInt
         return $this->id;
     }
 
-    public function getDisplayName(): ?string
+    public function getDisplayName(): string
     {
         return $this->getName();
     }
