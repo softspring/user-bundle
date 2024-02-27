@@ -24,7 +24,7 @@ class AdminAdministratorsActionsVoter implements VoterInterface
         $role = $attributes[0] ?? '';
 
         // check role
-        if (!str_starts_with($role, 'ROLE_ADMIN_ADMINISTRATORS_')) {
+        if (!str_starts_with($role, 'PERMISSION_SFS_USER_ADMIN_ADMINISTRATORS_')) {
             return VoterInterface::ACCESS_ABSTAIN;
         }
 
