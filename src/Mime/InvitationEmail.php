@@ -14,7 +14,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class InvitationEmail extends TranslatableEmail implements ExampleEmailInterface
 {
-    public static function generateExample(TranslatorInterface $translator, string $locale = null): TranslatableEmail
+    public static function generateExample(TranslatorInterface $translator, ?string $locale = null): TranslatableEmail
     {
         $user = new ExampleInvitation();
         $user->setName('Mery');
@@ -25,7 +25,7 @@ class InvitationEmail extends TranslatableEmail implements ExampleEmailInterface
         return new self($user, $acceptUrl, $translator, $locale);
     }
 
-    public function __construct(UserInvitationInterface $invitation, string $acceptUrl, TranslatorInterface $translator, string $locale = null, Headers $headers = null, AbstractPart $body = null)
+    public function __construct(UserInvitationInterface $invitation, string $acceptUrl, TranslatorInterface $translator, ?string $locale = null, ?Headers $headers = null, ?AbstractPart $body = null)
     {
         parent::__construct($translator, $locale, $headers, $body);
 

@@ -33,7 +33,7 @@ class LoginManager
         $this->requestStack = $requestStack;
     }
 
-    public function loginUser(Request $request, UserInterface $user, Response $response = null)
+    public function loginUser(Request $request, UserInterface $user, ?Response $response = null)
     {
         $this->userChecker->checkPreAuth($user);
 

@@ -12,7 +12,7 @@ class RegisterExceptionEvent extends GetResponseFormEvent
 
     protected ?\Exception $throwException;
 
-    public function __construct(FormInterface $form, \Exception $exception, Request $request = null)
+    public function __construct(FormInterface $form, \Exception $exception, ?Request $request = null)
     {
         parent::__construct($form, $request);
         $this->exception = $exception;

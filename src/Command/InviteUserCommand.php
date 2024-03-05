@@ -13,7 +13,7 @@ class InviteUserCommand extends Command
 {
     protected UserInvitationManipulator $userInvitationManipulator;
 
-    public function __construct(UserInvitationManipulator $userInvitationManipulator, string $name = null)
+    public function __construct(UserInvitationManipulator $userInvitationManipulator, ?string $name = null)
     {
         $this->userInvitationManipulator = $userInvitationManipulator;
 

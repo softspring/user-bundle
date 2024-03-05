@@ -21,7 +21,7 @@ class UserUpdateForm extends AbstractType implements UserUpdateFormInterface
     protected UserManagerInterface $userManager;
     protected ?array $locales;
 
-    public function __construct(UserManagerInterface $userManager, array $locales = null)
+    public function __construct(UserManagerInterface $userManager, ?array $locales = null)
     {
         $this->userManager = $userManager;
         $this->locales = $locales;
