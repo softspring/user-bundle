@@ -9,7 +9,7 @@
         "php": ">=8.1",
         "ext-json": "*",
         "doctrine/doctrine-bundle": "^2.5",
-        "doctrine/orm": "^2.10",
+        "doctrine/orm": "^2.10 | ^3.0",
         "softspring/crudl-controller": "^5.2",
         "softspring/doctrine-paginator": "^5.1",
         "softspring/doctrine-query-filters": "^5.1",

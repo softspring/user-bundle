@@ -117,10 +117,8 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
 
     /**
      * Disconnects a user.
-     *
-     * @param UserInterface|SoftspringUserInterface $user
      */
-    public function disconnect(UserInterface $user, UserResponseInterface $response)
+    public function disconnect(SoftspringUserInterface $user, UserResponseInterface $response)
     {
         $property = $this->getProperty($response);
 
