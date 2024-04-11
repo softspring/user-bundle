@@ -45,8 +45,8 @@ class LoginController extends AbstractController
             $loginCheckParams[$this->targetPathParameter] = $targetPath;
         }
 
-        $authenticationErrorKey = class_exists('Symfony\Bundle\SecurityBundle\Security') ? constant('Symfony\Bundle\SecurityBundle\Security::AUTHENTICATION_ERROR') : (class_exists('Symfony\Component\Security\Core\Security') ? constant('Symfony\Component\Security\Core\Security::AUTHENTICATION_ERROR') : null);
-        $lastUserNameKey = class_exists('Symfony\Bundle\SecurityBundle\Security') ? constant('Symfony\Bundle\SecurityBundle\Security::LAST_USERNAME') : (class_exists('Symfony\Component\Security\Core\Security') ? constant('Symfony\Component\Security\Core\Security::LAST_USERNAME') : null);
+        $authenticationErrorKey = class_exists('Symfony\Component\Security\Http\SecurityRequestAttributes') ? constant('Symfony\Component\Security\Http\SecurityRequestAttributes::AUTHENTICATION_ERROR') : (class_exists('Symfony\Component\Security\Core\Security') ? constant('Symfony\Component\Security\Core\Security::AUTHENTICATION_ERROR') : null);
+        $lastUserNameKey = class_exists('Symfony\Component\Security\Http\SecurityRequestAttributes') ? constant('Symfony\Component\Security\Http\SecurityRequestAttributes::LAST_USERNAME') : (class_exists('Symfony\Component\Security\Core\Security') ? constant('Symfony\Component\Security\Core\Security::LAST_USERNAME') : null);
 
         $form = $this->createForm(get_class($this->loginForm), [
             '_username' => $session->get($lastUserNameKey) ?? '',
