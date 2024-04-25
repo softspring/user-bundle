@@ -2,11 +2,9 @@
 
 namespace Softspring\UserBundle\Form\Admin;
 
-use Softspring\AccountBundle\Model\AccountInterface;
 use Softspring\AccountBundle\Model\MultiAccountedInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

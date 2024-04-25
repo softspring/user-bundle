@@ -6,9 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 trait FacebookOauthTrait
 {
-    /**
-     * @ORM\Column(name="facebook_user_id", type="string", length=180, nullable=true)
-     */
     #[ORM\Column(name: 'facebook_user_id', type: 'string', length: 180, nullable: true)]
     protected ?string $facebookUserId;
 

@@ -2,6 +2,8 @@
 
 namespace Softspring\UserBundle\EventListener;
 
+use DateTime;
+use Exception;
 use Softspring\UserBundle\Event\UserEvent;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\UserInterface;
@@ -29,20 +31,20 @@ class LastLoginEventSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function onImplicitLogin(UserEvent $event)
     {
         $user = $event->getUser();
 
         if ($user instanceof UserLastLoginInterface) {
-            $user->setLastLogin(new \DateTime());
+            $user->setLastLogin(new DateTime());
             $this->userManager->saveEntity($user);
         }
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
     {
@@ -50,7 +52,7 @@ class LastLoginEventSubscriber implements EventSubscriberInterface
         $user = $event->getAuthenticationToken()->getUser();
 
         if ($user instanceof UserLastLoginInterface) {
-            $user->setLastLogin(new \DateTime());
+            $user->setLastLogin(new DateTime());
             $this->userManager->saveEntity($user);
         }
     }

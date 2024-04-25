@@ -2,6 +2,8 @@
 
 namespace Softspring\UserBundle\Model;
 
+use DateTime;
+
 interface UserInvitationInterface
 {
     public function getId();
@@ -16,9 +18,9 @@ interface UserInvitationInterface
 
     public function setInvitationToken(?string $invitationToken): void;
 
-    public function getAcceptedAt(): ?\DateTime;
+    public function getAcceptedAt(): ?DateTime;
 
-    public function setAcceptedAt(?\DateTime $acceptedAt): void;
+    public function setAcceptedAt(?DateTime $acceptedAt): void;
 
     public function getInviter(): ?UserInterface;
 

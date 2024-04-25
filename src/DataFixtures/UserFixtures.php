@@ -2,9 +2,11 @@
 
 namespace Softspring\UserBundle\DataFixtures;
 
+use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
+use Faker\Factory;
 use Softspring\UserBundle\Manager\UserAccessManagerInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\ConfirmableInterface;
@@ -40,7 +42,7 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
 
     protected function createUser(ObjectManager $manager): UserInterface
     {
-        $faker = \Faker\Factory::create('es_ES');
+        $faker = Factory::create('es_ES');
 
         /** @var UserInterface $user */
         $user = $this->userManager->createEntity();
@@ -101,13 +103,13 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
 
     protected function createUserAccess(ObjectManager $manager, object $user): UserAccessInterface
     {
-        $faker = \Faker\Factory::create('es_ES');
+        $faker = Factory::create('es_ES');
 
         $access = $this->userAccessManager->createEntity();
         $access->setUser($user);
         $access->setUserAgent($faker->userAgent());
         $access->setIp($faker->ipv4());
-        $access->setLoginAt($user instanceof UserLastLoginInterface ? $user->getLastLogin() : new \DateTime('now'));
+        $access->setLoginAt($user instanceof UserLastLoginInterface ? $user->getLastLogin() : new DateTime('now'));
 
         if ($access instanceof UserAccessLocationInterface) {
             $access->setCountry($faker->countryCode());

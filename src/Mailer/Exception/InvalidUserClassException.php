@@ -2,6 +2,8 @@
 
 namespace Softspring\UserBundle\Mailer\Exception;
 
-class InvalidUserClassException extends \Exception
+use Exception;
+
+class InvalidUserClassException extends Exception
 {
 }

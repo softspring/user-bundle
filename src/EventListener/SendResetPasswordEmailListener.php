@@ -2,6 +2,7 @@
 
 namespace Softspring\UserBundle\EventListener;
 
+use DateTime;
 use Softspring\Component\Events\GetResponseFormEvent;
 use Softspring\UserBundle\Mailer\UserMailerInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
@@ -48,7 +49,7 @@ class SendResetPasswordEmailListener implements EventSubscriberInterface
         }
 
         $user->setPasswordRequestToken($this->tokenGenerator->generateToken());
-        $user->setPasswordRequestedAt(new \DateTime('now'));
+        $user->setPasswordRequestedAt(new DateTime('now'));
 
         /* @var UserInterface $user */
         $this->userManager->saveEntity($user);

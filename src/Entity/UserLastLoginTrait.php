@@ -9,9 +9,6 @@ trait UserLastLoginTrait
 {
     use UserLastLoginTraitModel;
 
-    /**
-     * @ORM\Column(name="last_login", type="integer", nullable=true, options={"unsigned":true})
-     */
     #[ORM\Column(name: 'last_login', type: 'integer', nullable: true, options: ['unsigned' => true])]
     protected ?int $lastLogin = null;
 }

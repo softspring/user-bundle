@@ -2,9 +2,11 @@
 
 namespace Softspring\UserBundle\Model;
 
+use DateTime;
+
 interface UserLastLoginInterface
 {
-    public function getLastLogin(): ?\DateTime;
+    public function getLastLogin(): ?DateTime;
 
-    public function setLastLogin(?\DateTime $lastLogin): void;
+    public function setLastLogin(?DateTime $lastLogin): void;
 }

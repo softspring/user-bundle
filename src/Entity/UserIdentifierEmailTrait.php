@@ -9,9 +9,6 @@ trait UserIdentifierEmailTrait
 {
     use UserIdentifierEmailTraitModel;
 
-    /**
-     * @ORM\Column(name="email", type="string", nullable=false, unique=true)
-     */
     #[ORM\Column(name: 'email', type: 'string', nullable: false, unique: true)]
     protected ?string $email = null;
 }

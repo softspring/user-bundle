@@ -2,6 +2,7 @@
 
 namespace Softspring\UserBundle\Manipulator;
 
+use DateTime;
 use Softspring\UserBundle\Manager\UserAccessManagerInterface;
 use Softspring\UserBundle\Model\UserAccessInterface;
 use Softspring\UserBundle\Model\UserAccessLatLongInterface;
@@ -22,7 +23,7 @@ class UserAccessManipulator
     {
         $userAccess = $this->userAccessManager->createEntity();
         $userAccess->setUser($user);
-        $userAccess->setLoginAt(new \DateTime('now'));
+        $userAccess->setLoginAt(new DateTime('now'));
         $userAccess->setIp($request->getClientIp());
         $userAccess->setUserAgent($request->headers->get('User-Agent'));
 

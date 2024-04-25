@@ -3,6 +3,7 @@
 namespace Softspring\UserBundle\DataFixtures;
 
 use Doctrine\Persistence\ObjectManager;
+use Faker\Factory;
 use Softspring\UserBundle\Manager\UserAccessManagerInterface;
 use Softspring\UserBundle\Manager\UserInvitationManagerInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
@@ -26,7 +27,7 @@ class InvitationsFixtures extends UserFixtures
             return;
         }
 
-        $faker = \Faker\Factory::create('es_ES');
+        $faker = Factory::create('es_ES');
 
         for ($i = 0; $i < 200; ++$i) {
             $invitation = $this->invitationManager->createEntity();

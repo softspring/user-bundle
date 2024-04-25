@@ -3,6 +3,7 @@
 namespace Softspring\UserBundle\Manipulator;
 
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Exception;
 use Softspring\UserBundle\Event\UserEvent;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\EnablableInterface;
@@ -33,7 +34,7 @@ class UserManipulator
 
     /**
      * @throws UniqueConstraintViolationException
-     * @throws \Exception
+     * @throws Exception
      */
     public function create(string $username, string $email, string $plainPassword, array $roles = [], bool $enabled = false, bool $admin = false, bool $superAdmin = false): UserInterface
     {

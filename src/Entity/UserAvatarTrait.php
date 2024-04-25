@@ -9,9 +9,6 @@ trait UserAvatarTrait
 {
     use UserAvatarTraitModel;
 
-    /**
-     * @ORM\Column(name="avatar_url", type="string", nullable=true)
-     */
     #[ORM\Column(name: 'avatar_url', type: 'string', nullable: true)]
     protected ?string $avatarUrl = null;
 }

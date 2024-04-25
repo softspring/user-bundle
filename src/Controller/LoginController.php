@@ -3,6 +3,7 @@
 namespace Softspring\UserBundle\Controller;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
+use RuntimeException;
 use Softspring\Component\Events\DispatchGetResponseTrait;
 use Softspring\Component\Events\GetResponseFormEvent;
 use Softspring\UserBundle\Form\LoginFormInterface;
@@ -82,11 +83,11 @@ class LoginController extends AbstractController
 
     public function check()
     {
-        throw new \RuntimeException('Configure check path in your firewall\'s form_login block at security.yaml');
+        throw new RuntimeException('Configure check path in your firewall\'s form_login block at security.yaml');
     }
 
     public function logout()
     {
-        throw new \RuntimeException('Activate logout feature in your firewall at security.yaml');
+        throw new RuntimeException('Activate logout feature in your firewall at security.yaml');
     }
 }

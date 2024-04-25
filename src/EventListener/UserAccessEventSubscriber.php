@@ -2,6 +2,7 @@
 
 namespace Softspring\UserBundle\EventListener;
 
+use Exception;
 use Softspring\UserBundle\Event\UserEvent;
 use Softspring\UserBundle\Manipulator\UserAccessManipulator;
 use Softspring\UserBundle\Model\UserInterface;
@@ -29,7 +30,7 @@ class UserAccessEventSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function onImplicitLogin(UserEvent $event)
     {
@@ -42,7 +43,7 @@ class UserAccessEventSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
     {

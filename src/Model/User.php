@@ -2,6 +2,9 @@
 
 namespace Softspring\UserBundle\Model;
 
+use Exception;
+use ReflectionClass;
+
 abstract class User implements UserInterface
 {
     public function __toString(): string
@@ -85,7 +88,7 @@ abstract class User implements UserInterface
             $fields[] = ['name' => 'email', 'type' => 'string'];
         }
 
-        $reflection = new \ReflectionClass($this);
+        $reflection = new ReflectionClass($this);
         if ($reflection->hasProperty('id')) {
             $fields[] = ['name' => 'id', 'type' => $reflection->getProperty('id')->getType() ?? 'string'];
         }
@@ -114,7 +117,7 @@ abstract class User implements UserInterface
     /**
      * @deprecated this method will be removed on SF 6
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function getPassword(): ?string
     {
@@ -124,7 +127,7 @@ abstract class User implements UserInterface
     /**
      * @deprecated this method will be removed on SF 6
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function getSalt(): ?string
     {

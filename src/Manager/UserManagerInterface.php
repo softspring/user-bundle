@@ -2,6 +2,7 @@
 
 namespace Softspring\UserBundle\Manager;
 
+use Exception;
 use Softspring\Component\CrudlController\Manager\CrudlEntityManagerInterface;
 use Softspring\UserBundle\Model\ConfirmableInterface;
 use Softspring\UserBundle\Model\UserInterface;
@@ -25,7 +26,7 @@ interface UserManagerInterface extends CrudlEntityManagerInterface
     /**
      * @param UserInterface $entity
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function saveEntity(object $entity): void;
 

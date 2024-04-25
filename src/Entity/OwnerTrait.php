@@ -10,11 +10,7 @@ trait OwnerTrait
 {
     use OwnerTraitModel;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Softspring\UserBundle\Model\UserInterface", cascade={"persist"})
-     * @ORM\JoinColumn(name="owner_id", referencedColumnName="id")
-     */
-    #[ORM\ManyToOne(targetEntity: "Softspring\UserBundle\Model\UserInterface", cascade: ['persist'])]
+    #[ORM\ManyToOne(targetEntity: UserInterface::class, cascade: ['persist'])]
     #[ORM\JoinColumn(name: 'owner_id', referencedColumnName: 'id')]
     protected ?UserInterface $owner = null;
 }

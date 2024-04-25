@@ -3,6 +3,7 @@
 namespace Softspring\UserBundle\Controller\Admin;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Softspring\Component\Events\DispatchGetResponseTrait;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Mailer\UserMailerInterface;
@@ -44,7 +45,7 @@ class UsersController extends AbstractController
         $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_USERS_PROMOTE', $user);
 
         if (!$user instanceof RolesAdminInterface) {
-            throw new \Exception(sprintf('User %s class must implement %s to promoting admins', get_class($user), RolesAdminInterface::class));
+            throw new Exception(sprintf('User %s class must implement %s to promoting admins', get_class($user), RolesAdminInterface::class));
         }
 
         if ($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_USERS_PROMOTE_INITIALIZE, new GetResponseUserEvent($user, $request))) {

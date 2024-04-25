@@ -2,6 +2,8 @@
 
 namespace Softspring\UserBundle\Model;
 
+use DateTime;
+
 /**
  * Class User.
  */
@@ -32,14 +34,14 @@ abstract class UserInvitation implements UserInvitationInterface
         $this->invitationToken = $invitationToken;
     }
 
-    public function getAcceptedAt(): ?\DateTime
+    public function getAcceptedAt(): ?DateTime
     {
-        return null !== $this->acceptedAt ? \DateTime::createFromFormat('U', "{$this->acceptedAt}") : null;
+        return null !== $this->acceptedAt ? DateTime::createFromFormat('U', "{$this->acceptedAt}") : null;
     }
 
-    public function setAcceptedAt(?\DateTime $acceptedAt): void
+    public function setAcceptedAt(?DateTime $acceptedAt): void
     {
-        $this->acceptedAt = $acceptedAt instanceof \DateTime ? (int) $acceptedAt->format('U') : null;
+        $this->acceptedAt = $acceptedAt instanceof DateTime ? (int) $acceptedAt->format('U') : null;
     }
 
     public function getInviter(): ?UserInterface

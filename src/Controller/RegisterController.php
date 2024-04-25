@@ -2,6 +2,9 @@
 
 namespace Softspring\UserBundle\Controller;
 
+use ArrayObject;
+use DateTime;
+use Exception;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Softspring\Component\Events\DispatchGetResponseTrait;
 use Softspring\Component\Events\GetResponseFormEvent;
@@ -66,7 +69,7 @@ class RegisterController extends AbstractController
                     }
 
                     return $this->redirectToRoute('sfs_user_register_success');
-                } catch (\Exception $e) {
+                } catch (Exception $e) {
                     $this->dispatch(SfsUserEvents::REGISTER_EXCEPTION, $exceptionEvent = new RegisterExceptionEvent($form, $e, $request));
                     if ($exceptionEvent->getThrowException()) {
                         throw $exceptionEvent->getThrowException();
@@ -79,7 +82,7 @@ class RegisterController extends AbstractController
             }
         }
 
-        $viewData = new \ArrayObject([
+        $viewData = new ArrayObject([
             'register_form' => $form->createView(),
             'register_params' => $loginCheckParams,
         ]);
@@ -91,7 +94,7 @@ class RegisterController extends AbstractController
 
     public function success(Request $request): Response
     {
-        $viewData = new \ArrayObject([]);
+        $viewData = new ArrayObject([]);
 
         $this->dispatch(SfsUserEvents::REGISTER_SUCCESS_VIEW, new ViewEvent($viewData));
 
@@ -99,7 +102,7 @@ class RegisterController extends AbstractController
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function confirm(string $user, string $token, Request $request): Response
     {
@@ -119,14 +122,14 @@ class RegisterController extends AbstractController
         }
 
         $user->setConfirmationToken(null);
-        $user->setConfirmedAt(new \DateTime('now'));
+        $user->setConfirmedAt(new DateTime('now'));
         $this->userManager->saveEntity($user);
 
         if ($response = $this->dispatchGetResponse(SfsUserEvents::CONFIRMATION_SUCCESS, new GetResponseUserEvent($user, $request))) {
             return $response;
         }
 
-        $viewData = new \ArrayObject([]);
+        $viewData = new ArrayObject([]);
 
         $this->dispatch(SfsUserEvents::CONFIRMATION_VIEW, new ViewEvent($viewData));
 

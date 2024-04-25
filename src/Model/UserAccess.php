@@ -2,6 +2,8 @@
 
 namespace Softspring\UserBundle\Model;
 
+use DateTime;
+
 /**
  * Class UserAccess.
  */
@@ -25,14 +27,14 @@ abstract class UserAccess implements UserAccessInterface
         $this->user = $user;
     }
 
-    public function getLoginAt(): ?\DateTime
+    public function getLoginAt(): ?DateTime
     {
-        return null !== $this->loginAt ? \DateTime::createFromFormat('U', "{$this->loginAt}") : null;
+        return null !== $this->loginAt ? DateTime::createFromFormat('U', "{$this->loginAt}") : null;
     }
 
-    public function setLoginAt(?\DateTime $loginAt): void
+    public function setLoginAt(?DateTime $loginAt): void
     {
-        $this->loginAt = $loginAt instanceof \DateTime ? (int) $loginAt->format('U') : null;
+        $this->loginAt = $loginAt instanceof DateTime ? (int) $loginAt->format('U') : null;
     }
 
     public function getUserAgent(): string

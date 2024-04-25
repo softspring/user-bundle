@@ -2,20 +2,22 @@
 
 namespace Softspring\UserBundle\Model;
 
+use DateTime;
+
 trait PasswordRequestTrait
 {
     protected ?string $passwordRequestToken = null;
 
     protected ?int $passwordRequestedAt = null;
 
-    public function getPasswordRequestedAt(): ?\DateTime
+    public function getPasswordRequestedAt(): ?DateTime
     {
-        return \DateTime::createFromFormat('U', $this->passwordRequestedAt) ?: null;
+        return DateTime::createFromFormat('U', $this->passwordRequestedAt) ?: null;
     }
 
-    public function setPasswordRequestedAt(?\DateTime $passwordRequestedAt): void
+    public function setPasswordRequestedAt(?DateTime $passwordRequestedAt): void
     {
-        $this->passwordRequestedAt = $passwordRequestedAt instanceof \DateTime ? $passwordRequestedAt->format('U') : null;
+        $this->passwordRequestedAt = $passwordRequestedAt instanceof DateTime ? $passwordRequestedAt->format('U') : null;
     }
 
     public function getPasswordRequestToken(): ?string

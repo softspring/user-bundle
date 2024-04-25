@@ -9,15 +9,9 @@ trait ConfirmableTrait
 {
     use ConfirmableTraitModel;
 
-    /**
-     * @ORM\Column(name="confirmation_token", type="string", length=180, unique=true, nullable=true)
-     */
     #[ORM\Column(name: 'confirmation_token', type: 'string', length: 180, unique: true, nullable: true)]
     protected ?string $confirmationToken = null;
 
-    /**
-     * @ORM\Column(name="confirmed_at", type="integer", nullable=true, options={"unsigned":true})
-     */
     #[ORM\Column(name: 'confirmed_at', type: 'integer', nullable: true, options: ['unsigned' => true])]
     protected ?int $confirmedAt = null;
 }

@@ -2,6 +2,8 @@
 
 namespace Softspring\UserBundle\Controller;
 
+use DateTime;
+use Exception;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Softspring\Component\Events\DispatchGetResponseTrait;
 use Softspring\Component\Events\FormEvent;
@@ -37,7 +39,7 @@ class InvitationController extends AbstractController
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function accept(string $token, Request $request): Response
     {
@@ -69,7 +71,7 @@ class InvitationController extends AbstractController
                 $this->dispatch(SfsUserEvents::INVITATION_FORM_VALID, $event);
 
                 $invitation->setUser($user);
-                $invitation->setAcceptedAt(new \DateTime('now'));
+                $invitation->setAcceptedAt(new DateTime('now'));
 
                 if ($user instanceof EnablableInterface) {
                     $user->setEnabled(true);

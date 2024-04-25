@@ -3,6 +3,9 @@
 namespace Softspring\UserBundle\Manager;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
+use InvalidArgumentException;
+use RuntimeException;
 use Softspring\Component\CrudlController\Manager\CrudlEntityManagerTrait;
 use Softspring\UserBundle\Model\ConfirmableInterface;
 use Softspring\UserBundle\Model\UserIdentifierEmailInterface;
@@ -10,7 +13,6 @@ use Softspring\UserBundle\Model\UserIdentifierUsernameInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Model\UserPasswordInterface;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
-use Symfony\Component\PasswordHasher\LegacyPasswordHasherInterface;
 use Symfony\Component\Security\Core\User\LegacyPasswordAuthenticatedUserInterface;
 
 class UserManager implements UserManagerInterface
@@ -35,7 +37,7 @@ class UserManager implements UserManagerInterface
     public function saveEntity(object $entity, bool $flush = true): void
     {
         if (!$this->getEntityClassReflection()->isInstance($entity)) {
-            throw new \InvalidArgumentException(sprintf('$entity must be an instance of %s', $this->getEntityClass()));
+            throw new InvalidArgumentException(sprintf('$entity must be an instance of %s', $this->getEntityClass()));
         }
 
         /* @var UserInterface $entity */
@@ -60,7 +62,7 @@ class UserManager implements UserManagerInterface
             return $this->findUserBy(['email' => $identifier]);
         }
 
-        throw new \Exception('Unknown user identifier field');
+        throw new Exception('Unknown user identifier field');
     }
 
     public function findUserByConfirmationToken(string $token): ?ConfirmableInterface
@@ -72,7 +74,7 @@ class UserManager implements UserManagerInterface
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     protected function hashPassword(UserInterface $user): void
     {
@@ -86,7 +88,7 @@ class UserManager implements UserManagerInterface
 
         try {
             $hasher = $this->encoderFactory->getPasswordHasher($user);
-        } catch (\RuntimeException $e) {
+        } catch (RuntimeException $e) {
             $hasher = $this->encoderFactory->getPasswordHasher(UserInterface::class);
         }
 

@@ -9,9 +9,6 @@ trait UserHasLocalePreferenceTrait
 {
     use UserHasLocalePreferenceTraitModel;
 
-    /**
-     * @ORM\Column(name="locale", type="string", length=5, nullable=true, options={"fixed": true})
-     */
     #[ORM\Column(name: 'locale', type: 'string', length: 5, nullable: true, options: ['fixed' => true])]
     protected ?string $locale = null;
 }

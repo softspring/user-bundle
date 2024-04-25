@@ -2,10 +2,12 @@
 
 namespace Softspring\UserBundle\Provider;
 
+use Exception;
 use HWI\Bundle\OAuthBundle\Connect\AccountConnectorInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\Exception\AccountNotLinkedException;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
+use RuntimeException;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\EnablableInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;
@@ -109,7 +111,7 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
         if ($this->accessor->isWritable($user, $property)) {
             $this->accessor->setValue($user, $property, $username);
         } else {
-            throw new \RuntimeException(sprintf('Could not determine access type for property "%s".', $property));
+            throw new RuntimeException(sprintf('Could not determine access type for property "%s".', $property));
         }
 
         $this->userManager->saveEntity($user);
@@ -153,21 +155,21 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
      *
      * @return string
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     protected function getProperty(UserResponseInterface $response)
     {
         $resourceOwnerName = $response->getResourceOwner()->getName();
 
         if (!isset($this->properties[$resourceOwnerName])) {
-            throw new \RuntimeException(sprintf("No property defined for entity for resource owner '%s'.", $resourceOwnerName));
+            throw new RuntimeException(sprintf("No property defined for entity for resource owner '%s'.", $resourceOwnerName));
         }
 
         return $this->properties[$resourceOwnerName];
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     protected function createUser(UserResponseInterface $response): SoftspringUserInterface
     {
@@ -210,13 +212,13 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
         switch ($response->getResourceOwner()->getName()) {
             case 'facebook':
                 if (!$user instanceof FacebookOauthInterface) {
-                    throw new \Exception(sprintf('Your entity does not extend %s interface. Check documentation.', FacebookOauthInterface::class));
+                    throw new Exception(sprintf('Your entity does not extend %s interface. Check documentation.', FacebookOauthInterface::class));
                 }
                 $user->setFacebookUserId($response->getUsername());
                 break;
 
             default:
-                throw new \Exception('Integration not yet implemented');
+                throw new Exception('Integration not yet implemented');
         }
     }
 }

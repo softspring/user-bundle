@@ -2,6 +2,8 @@
 
 namespace Softspring\UserBundle\Model;
 
+use DateTime;
+
 trait ConfirmableTrait
 {
     protected ?string $confirmationToken = null;
@@ -18,14 +20,14 @@ trait ConfirmableTrait
         $this->confirmationToken = $confirmationToken;
     }
 
-    public function getConfirmedAt(): ?\DateTime
+    public function getConfirmedAt(): ?DateTime
     {
-        return \DateTime::createFromFormat('U', $this->confirmedAt) ?: null;
+        return DateTime::createFromFormat('U', $this->confirmedAt) ?: null;
     }
 
-    public function setConfirmedAt(?\DateTime $confirmedAt): void
+    public function setConfirmedAt(?DateTime $confirmedAt): void
     {
-        $this->confirmedAt = $confirmedAt instanceof \DateTime ? $confirmedAt->format('U') : null;
+        $this->confirmedAt = $confirmedAt instanceof DateTime ? $confirmedAt->format('U') : null;
     }
 
     public function isConfirmed(): bool

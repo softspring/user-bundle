@@ -9,9 +9,6 @@ trait RolesTrait
 {
     use RolesTraitModel;
 
-    /**
-     * @ORM\Column(name="roles", type="array", nullable=false)
-     */
     #[ORM\Column(name: 'roles', type: 'array', nullable: false)]
     protected array $roles = [];
 }

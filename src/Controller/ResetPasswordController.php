@@ -2,6 +2,7 @@
 
 namespace Softspring\UserBundle\Controller;
 
+use ArrayObject;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Softspring\Component\Events\DispatchGetResponseTrait;
 use Softspring\Component\Events\GetResponseEvent;
@@ -70,7 +71,7 @@ class ResetPasswordController extends AbstractController
             }
         }
 
-        $viewData = new \ArrayObject([
+        $viewData = new ArrayObject([
             'reset_form' => $form->createView(),
         ]);
 
@@ -87,7 +88,7 @@ class ResetPasswordController extends AbstractController
             return $this->redirectToRoute('sfs_user_reset_password_request');
         }
 
-        $this->dispatch(SfsUserEvents::RESET_REQUESTED_VIEW, new ViewEvent($viewData = new \ArrayObject([
+        $this->dispatch(SfsUserEvents::RESET_REQUESTED_VIEW, new ViewEvent($viewData = new ArrayObject([
             'resetTokenTTL' => $this->resetTokenTTL,
             'requestedEmail' => $requestedEmail,
         ])));
@@ -137,7 +138,7 @@ class ResetPasswordController extends AbstractController
             }
         }
 
-        $viewData = new \ArrayObject([
+        $viewData = new ArrayObject([
             'reset_form' => $form->createView(),
         ]);
 
@@ -148,7 +149,7 @@ class ResetPasswordController extends AbstractController
 
     public function success(Request $request): Response
     {
-        $viewData = new \ArrayObject([]);
+        $viewData = new ArrayObject([]);
 
         $this->dispatch(SfsUserEvents::RESET_SUCCESS_VIEW, new ViewEvent($viewData));
 

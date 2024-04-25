@@ -9,15 +9,9 @@ trait UserPasswordTrait
 {
     use UserPasswordTraitModel;
 
-    /**
-     * @ORM\Column(name="salt", type="string", nullable=true)
-     */
     #[ORM\Column(name: 'salt', type: 'string', nullable: true)]
     protected ?string $salt = null;
 
-    /**
-     * @ORM\Column(name="password_encoded", type="string", nullable=true)
-     */
     #[ORM\Column(name: 'password_encoded', type: 'string', nullable: true)]
     protected ?string $password = null;
 }
