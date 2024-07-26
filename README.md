@@ -5,7 +5,7 @@
 [![License](https://poser.pugx.org/softspring/user-bundle/license.svg)](https://packagist.org/packages/softspring/user-bundle)
 [![PHP Version Require](http://poser.pugx.org/softspring/user-bundle/require/php)](https://packagist.org/packages/softspring/user-bundle)
 [![Total Downloads](https://poser.pugx.org/softspring/user-bundle/downloads)](https://packagist.org/packages/softspring/user-bundle)
-[![Build status](https://github.com/softspring/user-bundle/actions/workflows/php.yml/badge.svg?branch=5.2)](https://github.com/softspring/user-bundle/actions/workflows/php.yml)
+[![Build status](https://github.com/softspring/user-bundle/actions/workflows/php.yml/badge.svg?branch=5.3)](https://github.com/softspring/user-bundle/actions/workflows/php.yml)
 
 This package provides a new complete user bundle out of the box.
 
