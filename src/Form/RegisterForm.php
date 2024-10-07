@@ -38,20 +38,40 @@ class RegisterForm extends AbstractType implements RegisterFormInterface
         $reflection = $this->userManager->getEntityClassReflection();
 
         if ($reflection->implementsInterface(NameSurnameInterface::class)) {
-            $builder->add('name', Types\TextType::class);
-            $builder->add('surname', Types\TextType::class);
+            $builder->add('name', Types\TextType::class, [
+                'attr' => [
+                    'autocomplete' => 'given-name',
+                ],
+            ]);
+            $builder->add('surname', Types\TextType::class, [
+                'attr' => [
+                    'autocomplete' => 'family-name',
+                ],
+            ]);
         }
 
         if ($reflection->implementsInterface(UserIdentifierUsernameInterface::class)) {
-            $builder->add('username', Types\TextType::class);
+            $builder->add('username', Types\TextType::class, [
+                'attr' => [
+                    'autocomplete' => 'username',
+                ],
+            ]);
         }
 
         if ($reflection->implementsInterface(UserWithEmailInterface::class) || $reflection->implementsInterface(UserIdentifierEmailInterface::class)) {
-            $builder->add('email', Types\EmailType::class);
+            $builder->add('email', Types\EmailType::class, [
+                'attr' => [
+                    'autocomplete' => 'email',
+                ],
+            ]);
         }
 
         if ($reflection->implementsInterface(UserPasswordInterface::class)) {
-            $builder->add('plainPassword', Types\PasswordType::class);
+            $builder->add('plainPassword', Types\PasswordType::class, [
+                'attr' => [
+                    'autocomplete' => 'new-password',
+                ],
+            ]);
         }
 
         $builder->add('acceptConditions', Types\CheckboxType::class, [
