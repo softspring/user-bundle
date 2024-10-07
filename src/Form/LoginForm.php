@@ -53,8 +53,15 @@ class LoginForm extends AbstractType implements LoginFormInterface
     {
         $builder->add('_username', TextType::class, [
             'label' => $this->userManager->getEntityClassReflection()->implementsInterface(UserIdentifierEmailInterface::class) ? 'login.form.email.label' : 'login.form.username.label',
+            'attr' => [
+                'autocomplete' => 'username',
+            ],
         ]);
-        $builder->add('_password', PasswordType::class);
+        $builder->add('_password', PasswordType::class, [
+            'attr' => [
+                'autocomplete' => 'current-password',
+            ],
+        ]);
 
         if ($this->isRememberMeEnabled()) {
             // TODO obtain parameter_name from firewall configuration
