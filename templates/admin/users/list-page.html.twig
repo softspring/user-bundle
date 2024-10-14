@@ -1,5 +1,5 @@
 {% trans_default_domain 'sfs_user' %}
-{% for user in users %}
+{% for user in collection %}
     <tr>
         {% if sfs_user_is('avatar') %}
             <td class="ps-3 pe-3 align-middle"><img alt="{{ user.username }}" src="{{ user.avatarUrl }}" width="28" height="28" class="rounded-circle"></td>

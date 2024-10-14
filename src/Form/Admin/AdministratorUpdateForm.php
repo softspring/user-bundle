@@ -2,7 +2,7 @@
 
 namespace Softspring\UserBundle\Form\Admin;
 
-use Softspring\UserBundle\Manager\UserManagerInterface;
+use Softspring\UserBundle\Manager\AdminUserManagerInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;
 use Softspring\UserBundle\Model\UserAvatarInterface;
 use Softspring\UserBundle\Model\UserIdentifierUsernameInterface;
@@ -16,9 +16,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AdministratorUpdateForm extends AbstractType implements AdministratorUpdateFormInterface
 {
-    protected UserManagerInterface $userManager;
+    protected AdminUserManagerInterface $userManager;
 
-    public function __construct(UserManagerInterface $userManager)
+    public function __construct(AdminUserManagerInterface $userManager)
     {
         $this->userManager = $userManager;
     }

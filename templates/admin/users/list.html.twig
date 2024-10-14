@@ -33,7 +33,7 @@
             </div>
         {% endif %}
 
-    {% embed '@SfsComponents/paginator/table.html.twig' with {'collection':users, 'pagination_route': 'sfs_user_admin_users_list'} %}
+    {% embed '@SfsComponents/paginator/table.html.twig' with {'collection':users, 'pagination_route': 'sfs_user_admin_users_list'} only %}
         {% trans_default_domain 'sfs_user' %}
         {% block ths %}
             {% if sfs_user_is('avatar') %}
@@ -41,15 +41,15 @@
             {% endif %}
             {% if sfs_user_is('nameSurname') %}
                 <th scope="col" class="p-3">
-                    <a href="{{ users.sortToggleUrl(app.request, 'name') }}" class="text-dark">
+                    <a href="{{ collection.sortToggleUrl(app.request, 'name') }}" class="text-dark">
                         {{ 'admin_users.list.fields.name.header'|trans }}
-                        {% if users.sortedBy('name', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif users.sortedBy('name', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
+                        {% if collection.sortedBy('name', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif collection.sortedBy('name', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
                     </a>
                 </th>
                 <th scope="col" class="p-3">
-                    <a href="{{ users.sortToggleUrl(app.request, 'surname') }}" class="text-dark">
+                    <a href="{{ collection.sortToggleUrl(app.request, 'surname') }}" class="text-dark">
                         {{ 'admin_users.list.fields.surname.header'|trans }}
-                        {% if users.sortedBy('surname', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif users.sortedBy('surname', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
+                        {% if collection.sortedBy('surname', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif collection.sortedBy('surname', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
                     </a>
                 </th>
             {% endif %}
@@ -58,9 +58,9 @@
             {% endif %}
             {% if sfs_user_is('identifierEmail') or sfs_user_is('email') %}
                 <th scope="col" class="p-3">
-                    <a href="{{ users.sortToggleUrl(app.request, 'email') }}" class="text-dark">
+                    <a href="{{ collection.sortToggleUrl(app.request, 'email') }}" class="text-dark">
                         {{ 'admin_users.list.fields.email.header'|trans }}
-                        {% if users.sortedBy('email', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif users.sortedBy('email', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
+                        {% if collection.sortedBy('email', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif collection.sortedBy('email', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
                     </a>
                 </th>
             {% endif %}
@@ -69,9 +69,9 @@
             {% endif %}
             {% if sfs_user_is('lastLogin') %}
                 <th scope="col" class="p-3">
-                    <a href="{{ users.sortToggleUrl(app.request, 'lastLogin') }}" class="text-dark">
+                    <a href="{{ collection.sortToggleUrl(app.request, 'lastLogin') }}" class="text-dark">
                         {{ 'admin_users.list.fields.lastLogin.header'|trans }}
-                        {% if users.sortedBy('lastLogin', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif users.sortedBy('lastLogin', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
+                        {% if collection.sortedBy('lastLogin', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif collection.sortedBy('lastLogin', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
                     </a>
                 </th>
             {% endif %}

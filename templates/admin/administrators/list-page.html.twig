@@ -1,5 +1,5 @@
 {% trans_default_domain 'sfs_user' %}
-{% for administrator in administrators %}
+{% for administrator in collection %}
     <tr>
         {% if sfs_user_is('avatar') %}
             <td class="ps-3 pe-3 align-middle"><img alt="{{ administrator.username }}" src="{{ administrator.avatarUrl }}" width="28" height="28" class="rounded-circle"></td>

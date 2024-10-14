@@ -4,7 +4,7 @@ namespace Softspring\UserBundle\Controller\Admin;
 
 use Softspring\Component\Events\DispatchGetResponseTrait;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
-use Softspring\UserBundle\Manager\UserManagerInterface;
+use Softspring\UserBundle\Manager\AdminUserManagerInterface;
 use Softspring\UserBundle\Model\RolesAdminInterface;
 use Softspring\UserBundle\Model\User;
 use Softspring\UserBundle\SfsUserEvents;
@@ -17,11 +17,11 @@ class AdministratorsController extends AbstractController
 {
     use DispatchGetResponseTrait;
 
-    protected UserManagerInterface $userManager;
+    protected AdminUserManagerInterface $userManager;
 
     protected EventDispatcherInterface $eventDispatcher;
 
-    public function __construct(UserManagerInterface $userManager, EventDispatcherInterface $eventDispatcher)
+    public function __construct(AdminUserManagerInterface $userManager, EventDispatcherInterface $eventDispatcher)
     {
         $this->userManager = $userManager;
         $this->eventDispatcher = $eventDispatcher;
