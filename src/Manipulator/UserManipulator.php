@@ -5,6 +5,7 @@ namespace Softspring\UserBundle\Manipulator;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Exception;
 use Softspring\UserBundle\Event\UserEvent;
+use Softspring\UserBundle\Manager\AdminUserManagerInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\EnablableInterface;
 use Softspring\UserBundle\Model\RolesAdminInterface;
@@ -19,17 +20,12 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class UserManipulator
 {
-    protected UserManagerInterface $userManager;
-
-    protected EventDispatcherInterface $eventDispatcher;
-
-    protected RequestStack $requestStack;
-
-    public function __construct(UserManagerInterface $userManager, EventDispatcherInterface $eventDispatcher, RequestStack $requestStack)
-    {
-        $this->userManager = $userManager;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->requestStack = $requestStack;
+    public function __construct(
+        protected UserManagerInterface $userManager,
+        protected AdminUserManagerInterface $adminUserManager,
+        protected EventDispatcherInterface $eventDispatcher,
+        protected RequestStack $requestStack
+    ) {
     }
 
     /**
@@ -39,7 +35,7 @@ class UserManipulator
     public function create(string $username, string $email, string $plainPassword, array $roles = [], bool $enabled = false, bool $admin = false, bool $superAdmin = false): UserInterface
     {
         /** @var UserInterface $user */
-        $user = $this->userManager->createEntity();
+        $user = $admin ? $this->adminUserManager->createEntity() : $this->userManager->createEntity();
 
         if ($user instanceof UserIdentifierUsernameInterface) {
             $user->setUsername($username);
