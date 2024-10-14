@@ -15,7 +15,7 @@ use Softspring\UserBundle\Model\UserPasswordInterface;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 use Symfony\Component\Security\Core\User\LegacyPasswordAuthenticatedUserInterface;
 
-class UserManager implements UserManagerInterface
+class UserManager implements UserManagerInterface, AdminUserManagerInterface
 {
     use CrudlEntityManagerTrait;
 

@@ -8,7 +8,6 @@ services:
 #            $changeUsernameConfig: []
             $locales: '%kernel.enabled_locales%'
             $firewallMap: '@security.firewall.map'
-            $em: '@sfs_user.entity_manager'
             $resetTokenTTL: '%sfs_user.reset_password.token_ttl%'
             $oauthServices: '%sfs_user.oauth.services%'
             $targetPathParameter: '%sfs_user.login.target_path_parameter%'
@@ -50,6 +49,11 @@ services:
 
     Softspring\UserBundle\Manager\UserManagerInterface:
         class: Softspring\UserBundle\Manager\UserManager
+        arguments:
+            $em: '@sfs_user.entity_manager'
+
+    Softspring\UserBundle\Manager\AdminUserManagerInterface:
+        alias: Softspring\UserBundle\Manager\UserManagerInterface
 
     Softspring\UserBundle\Manipulator\UserManipulator: ~
 
