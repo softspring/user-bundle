@@ -5,7 +5,6 @@ namespace Softspring\UserBundle\Form\Admin;
 use Softspring\Component\DoctrinePaginator\Form\PaginatorForm;
 use Softspring\UserBundle\Manager\AdminUserManagerInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;
-use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\Model\UserWithEmailInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
