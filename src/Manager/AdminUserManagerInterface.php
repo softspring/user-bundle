@@ -11,6 +11,7 @@ interface AdminUserManagerInterface extends CrudlEntityManagerInterface
 {
     /**
      * @return UserInterface|ConfirmableInterface|null
+     * @phpstan-return UserInterface|null
      */
     public function findUserBy(array $criteria): ?UserInterface;
 

@@ -6,6 +6,7 @@ use ReflectionClass;
 use Softspring\UserBundle\Manager\UserAccessManagerInterface;
 use Softspring\UserBundle\Manager\UserInvitationManagerInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
+use Softspring\UserBundle\Model\UserInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -60,6 +61,9 @@ class ModelExtension extends AbstractExtension
         return $this->checkImplements($this->invitationManager->getEntityClassReflection(), $interface);
     }
 
+    /**
+     * @param ReflectionClass<UserInterface> $reflectionClass
+     */
     protected function checkImplements(ReflectionClass $reflectionClass, string $interface): bool
     {
         $interface = ucfirst($interface);

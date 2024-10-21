@@ -32,7 +32,7 @@ class UserAccessEventSubscriber implements EventSubscriberInterface
     /**
      * @throws Exception
      */
-    public function onImplicitLogin(UserEvent $event)
+    public function onImplicitLogin(UserEvent $event): void
     {
         $user = $event->getUser();
         $request = $event->getRequest();
@@ -45,7 +45,7 @@ class UserAccessEventSubscriber implements EventSubscriberInterface
     /**
      * @throws Exception
      */
-    public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
+    public function onSecurityInteractiveLogin(InteractiveLoginEvent $event): void
     {
         $user = $event->getAuthenticationToken()->getUser();
         $request = $event->getRequest();

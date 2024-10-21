@@ -6,5 +6,5 @@ interface UserIdentifierUsernameInterface
 {
     public function setUsername(?string $username): void;
 
-    public function getUsername();
+    public function getUsername(): ?string;
 }

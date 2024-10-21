@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\Collection;
 interface MultiUsersInterface
 {
     /**
-     * @return Collection|UserInterface[]
+     * @return Collection<int, UserInterface>
      */
     public function getUsers(): Collection;
 

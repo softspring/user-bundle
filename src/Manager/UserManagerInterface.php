@@ -9,9 +9,6 @@ use Softspring\UserBundle\Model\UserInterface;
 
 interface UserManagerInterface extends CrudlEntityManagerInterface
 {
-    /**
-     * @return UserInterface|ConfirmableInterface|null
-     */
     public function findUserBy(array $criteria): ?UserInterface;
 
     public function findUserByIdentifier(string $identifier): ?UserInterface;
