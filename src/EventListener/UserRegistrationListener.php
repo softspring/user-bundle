@@ -32,7 +32,7 @@ class UserRegistrationListener implements EventSubscriberInterface
         ];
     }
 
-    public function onRegisterSendConfirmationEmail(GetResponseUserEvent $event)
+    public function onRegisterSendConfirmationEmail(GetResponseUserEvent $event): void
     {
         $user = $event->getUser();
         if (!$user instanceof ConfirmableInterface) {

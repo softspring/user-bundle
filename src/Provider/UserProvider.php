@@ -19,7 +19,7 @@ class UserProvider implements UserProviderInterface
         $this->userManager = $userManager;
     }
 
-    public function loadUserByUsername($username): SymfonyUserInterface
+    public function loadUserByUsername(string $username): SymfonyUserInterface
     {
         return $this->loadUserByIdentifier($username);
     }
@@ -55,7 +55,7 @@ class UserProvider implements UserProviderInterface
         return $reloadedUser;
     }
 
-    public function supportsClass($class): bool
+    public function supportsClass(string $class): bool
     {
         return $this->userManager->getEntityClass() === $class || is_subclass_of($class, $this->userManager->getEntityClass());
     }

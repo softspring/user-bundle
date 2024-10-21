@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Exception\InvalidArgumentException;
 
 class SwitchUserVoter implements VoterInterface
 {
-    public function supportsObject($user): bool
+    public function supportsObject(mixed $user): bool
     {
         if (!is_object($user)) {
             return false;

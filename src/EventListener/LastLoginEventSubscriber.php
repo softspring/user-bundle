@@ -33,7 +33,7 @@ class LastLoginEventSubscriber implements EventSubscriberInterface
     /**
      * @throws Exception
      */
-    public function onImplicitLogin(UserEvent $event)
+    public function onImplicitLogin(UserEvent $event): void
     {
         $user = $event->getUser();
 
@@ -46,7 +46,7 @@ class LastLoginEventSubscriber implements EventSubscriberInterface
     /**
      * @throws Exception
      */
-    public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
+    public function onSecurityInteractiveLogin(InteractiveLoginEvent $event): void
     {
         /** @var UserInterface $user */
         $user = $event->getAuthenticationToken()->getUser();

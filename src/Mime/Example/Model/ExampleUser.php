@@ -13,7 +13,7 @@ class ExampleUser extends User implements NameSurnameInterface, UserIdentifierEm
     use NameSurnameTrait;
     use UserIdentifierEmailTrait;
 
-    public function getId()
+    public function getId(): mixed
     {
         return $this->getUserIdentifier();
     }

@@ -96,15 +96,12 @@ abstract class User implements UserInterface
         return $fields;
     }
 
-    /**
-     * @return mixed|null
-     */
-    abstract public function getId();
+    abstract public function getId(): mixed;
 
     /**
      * @deprecated this method will be removed on SF 6
      */
-    public function getUsername()
+    public function getUsername(): ?string
     {
         return $this->getUserIdentifier();
     }

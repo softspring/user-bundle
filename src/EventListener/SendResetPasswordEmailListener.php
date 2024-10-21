@@ -39,7 +39,7 @@ class SendResetPasswordEmailListener implements EventSubscriberInterface
         ];
     }
 
-    public function onResetRequestCheckToken(GetResponseFormEvent $event)
+    public function onResetRequestCheckToken(GetResponseFormEvent $event): void
     {
         /** @var UserInterface $user */
         $user = $this->userManager->findUserBy(['email' => $event->getForm()->get('email')->getData()]);
@@ -55,7 +55,7 @@ class SendResetPasswordEmailListener implements EventSubscriberInterface
         $this->userManager->saveEntity($user);
     }
 
-    public function sendResetEmail(GetResponseFormEvent $event)
+    public function sendResetEmail(GetResponseFormEvent $event): void
     {
         /** @var UserInterface $user */
         $user = $this->userManager->findUserBy(['email' => $event->getForm()->get('email')->getData()]);

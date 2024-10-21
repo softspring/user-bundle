@@ -4,3 +4,7 @@ parameters:
             message: "#Method Symfony\\\\Component\\\\PasswordHasher\\\\PasswordHasherInterface::hash\\(\\) invoked with 2 parameters, 1 required.#"
             count: 1
             path: src/Manager/UserManager.php
+        -
+            message: "#Class Softspring\\\\UserBundle\\\\Provider\\\\UserProvider implements generic interface Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserProviderInterface but does not specify its types\\: TUser#"
+            count: 1
+            path: src/Provider/UserProvider.php

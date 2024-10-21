@@ -81,12 +81,12 @@ class LoginController extends AbstractController
         ]);
     }
 
-    public function check()
+    public function check(): void
     {
         throw new RuntimeException('Configure check path in your firewall\'s form_login block at security.yaml');
     }
 
-    public function logout()
+    public function logout(): void
     {
         throw new RuntimeException('Activate logout feature in your firewall at security.yaml');
     }

@@ -29,7 +29,7 @@ class AutoAuthenticateEventSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function authenticate(GetResponseUserEvent $event, string $eventName, EventDispatcherInterface $eventDispatcher)
+    public function authenticate(GetResponseUserEvent $event, string $eventName, EventDispatcherInterface $eventDispatcher): void
     {
         $user = $event->getUser();
 

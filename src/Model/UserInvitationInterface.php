@@ -6,7 +6,7 @@ use DateTime;
 
 interface UserInvitationInterface
 {
-    public function getId();
+    public function getId(): mixed;
 
     public function getUserIdentifier(): ?string;
 

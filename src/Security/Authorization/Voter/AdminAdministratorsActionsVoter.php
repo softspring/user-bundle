@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\Exception\InvalidArgumentException;
 
 class AdminAdministratorsActionsVoter implements VoterInterface
 {
-    public function supportsObject($administrator): bool
+    public function supportsObject(mixed $administrator): bool
     {
         if (!is_object($administrator)) {
             return false;

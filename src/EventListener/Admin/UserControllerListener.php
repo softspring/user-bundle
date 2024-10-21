@@ -49,20 +49,20 @@ class UserControllerListener implements EventSubscriberInterface
         ];
     }
 
-    public function onControllerInitializeEnableFilter()
+    public function onControllerInitializeEnableFilter(): void
     {
         $this->em->getConfiguration()->addFilter('user', UserFilter::class);
         $this->em->getFilters()->enable('user');
     }
 
-    public function onDetailsViewAddMultiAccountedDetails(ViewEvent $event)
+    public function onDetailsViewAddMultiAccountedDetails(ViewEvent $event): void
     {
         $data = $event->getData();
 
         $data['multi_accounted_user'] = $data['user'] instanceof UserMultiAccountedInterface;
     }
 
-    public function onDetailsViewAddSwitchUserConfiguration(ViewEvent $event)
+    public function onDetailsViewAddSwitchUserConfiguration(ViewEvent $event): void
     {
         $data = $event->getData();
 
@@ -73,7 +73,7 @@ class UserControllerListener implements EventSubscriberInterface
         $data['switch_parameter'] = $this->impersonateBarConfig['switch_parameter'] ?? null;
     }
 
-    public function onDetailsViewShowHistory(ViewEvent $event)
+    public function onDetailsViewShowHistory(ViewEvent $event): void
     {
         if (!$this->accessManager instanceof UserAccessManagerInterface) {
             return;

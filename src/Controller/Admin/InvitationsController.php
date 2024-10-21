@@ -34,7 +34,7 @@ class InvitationsController extends AbstractController
         ]);
     }
 
-    public function resendEmail($invitation): Response
+    public function resendEmail(mixed $invitation): Response
     {
         $invitation = $this->invitationsManager->findInvitationBy(['id' => $invitation]);
 

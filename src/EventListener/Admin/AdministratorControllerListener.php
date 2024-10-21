@@ -56,20 +56,20 @@ class AdministratorControllerListener implements EventSubscriberInterface
         ];
     }
 
-    public function onControllerInitializeEnableFilter()
+    public function onControllerInitializeEnableFilter(): void
     {
         $this->em->getConfiguration()->addFilter('administrator', AdminFilter::class);
         $this->em->getFilters()->enable('administrator');
     }
 
-    public function onDetailsViewAddMultiAccountedDetails(ViewEvent $event)
+    public function onDetailsViewAddMultiAccountedDetails(ViewEvent $event): void
     {
         $data = $event->getData();
 
         $data['multi_accounted_user'] = $data['administrator'] instanceof UserMultiAccountedInterface;
     }
 
-    public function onDetailsViewAddSwitchUserConfiguration(ViewEvent $event)
+    public function onDetailsViewAddSwitchUserConfiguration(ViewEvent $event): void
     {
         $data = $event->getData();
 
@@ -80,7 +80,7 @@ class AdministratorControllerListener implements EventSubscriberInterface
         $data['switch_parameter'] = $this->impersonateBarConfig['switch_parameter'] ?? null;
     }
 
-    public function onDetailsViewShowHistory(ViewEvent $event)
+    public function onDetailsViewShowHistory(ViewEvent $event): void
     {
         if (!$this->accessManager instanceof UserAccessManagerInterface) {
             return;
