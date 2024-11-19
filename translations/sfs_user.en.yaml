@@ -107,6 +107,8 @@ preferences:
         name.label: "Name"
         surname.label: "Surname"
         locale.label: "Preferred language"
+        avatarMedia.label: "Avatar"
+        _original.label: "Image"
 
 change_password:
     title: "Change password"
@@ -191,6 +193,8 @@ admin_users:
             username.label: "Username"
             email.label: "Email"
             avatarUrl.label: "Avatar URL"
+            avatarMedia.label: "Avatar"
+            _original.label: "Image"
 
     resend_confirmation:
         messages:
@@ -259,6 +263,8 @@ admin_administrators:
             username.label: "Username"
             email.label: "Email"
             avatarUrl.label: "Avatar URL"
+            avatarMedia.label: "Avatar"
+            _original.label: "Image"
 
     invite:
         form:

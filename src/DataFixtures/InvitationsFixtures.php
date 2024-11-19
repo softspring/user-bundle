@@ -21,7 +21,7 @@ class InvitationsFixtures extends UserFixtures
         $this->invitationManager = $invitationManager;
     }
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         if (!$this->invitationManager) {
             return;

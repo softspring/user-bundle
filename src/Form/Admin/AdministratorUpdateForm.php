@@ -2,11 +2,13 @@
 
 namespace Softspring\UserBundle\Form\Admin;
 
+use Softspring\MediaBundle\Form\MediaTypeUploadType;
 use Softspring\UserBundle\Manager\AdminUserManagerInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;
 use Softspring\UserBundle\Model\UserAvatarInterface;
 use Softspring\UserBundle\Model\UserIdentifierUsernameInterface;
 use Softspring\UserBundle\Model\UserInterface;
+use Softspring\UserBundle\Model\UserMediaAvatarInterface;
 use Softspring\UserBundle\Model\UserWithEmailInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -34,22 +36,30 @@ class AdministratorUpdateForm extends AbstractType implements AdministratorUpdat
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $named = $this->userManager->getEntityClassReflection()->implementsInterface(NameSurnameInterface::class);
+        $reflection = $this->userManager->getEntityClassReflection();
 
+        $named = $reflection->implementsInterface(NameSurnameInterface::class);
         if ($named) {
             $builder->add('name');
             $builder->add('surname');
         }
 
-        if ($this->userManager->getEntityClassReflection()->implementsInterface(UserIdentifierUsernameInterface::class)) {
+        if ($reflection->implementsInterface(UserIdentifierUsernameInterface::class)) {
             $builder->add('username');
         }
 
-        if ($this->userManager->getEntityClassReflection()->implementsInterface(UserWithEmailInterface::class)) {
+        if ($reflection->implementsInterface(UserWithEmailInterface::class)) {
             $builder->add('email', EmailType::class);
         }
 
-        if ($this->userManager->getEntityClassReflection()->implementsInterface(UserAvatarInterface::class)) {
+        if ($reflection->implementsInterface(UserMediaAvatarInterface::class)) {
+            $builder->add('avatarMedia', MediaTypeUploadType::class, [
+                'media_type' => 'user_avatar',
+                'allow_name_field' => false,
+                'allow_description_field' => false,
+                'required' => false,
+            ]);
+        } elseif ($reflection->implementsInterface(UserAvatarInterface::class)) {
             $builder->add('avatarUrl', UrlType::class);
         }
     }
