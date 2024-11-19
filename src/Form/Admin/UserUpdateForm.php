@@ -2,12 +2,14 @@
 
 namespace Softspring\UserBundle\Form\Admin;
 
+use Softspring\MediaBundle\Form\MediaTypeUploadType;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;
 use Softspring\UserBundle\Model\UserAvatarInterface;
 use Softspring\UserBundle\Model\UserIdentifierEmailInterface;
 use Softspring\UserBundle\Model\UserIdentifierUsernameInterface;
 use Softspring\UserBundle\Model\UserInterface;
+use Softspring\UserBundle\Model\UserMediaAvatarInterface;
 use Softspring\UserBundle\Model\UserWithEmailInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -53,7 +55,14 @@ class UserUpdateForm extends AbstractType implements UserUpdateFormInterface
             $builder->add('email', EmailType::class);
         }
 
-        if ($reflection->implementsInterface(UserAvatarInterface::class)) {
+        if ($reflection->implementsInterface(UserMediaAvatarInterface::class)) {
+            $builder->add('avatarMedia', MediaTypeUploadType::class, [
+                'media_type' => 'user_avatar',
+                'allow_name_field' => false,
+                'allow_description_field' => false,
+                'required' => false,
+            ]);
+        } elseif ($reflection->implementsInterface(UserAvatarInterface::class)) {
             $builder->add('avatarUrl', UrlType::class);
         }
 

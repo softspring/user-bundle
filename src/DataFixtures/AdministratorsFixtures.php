@@ -7,7 +7,7 @@ use Softspring\UserBundle\Model\RolesAdminInterface;
 
 class AdministratorsFixtures extends UserFixtures
 {
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         for ($i = 0; $i < 20; ++$i) {
             $user = $this->createUser($manager);

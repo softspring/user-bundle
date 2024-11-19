@@ -2,11 +2,13 @@
 
 namespace Softspring\UserBundle\Form\Settings;
 
+use Softspring\MediaBundle\Form\MediaTypeUploadType;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;
 use Softspring\UserBundle\Model\UserAvatarInterface;
 use Softspring\UserBundle\Model\UserHasLocalePreferenceInterface;
 use Softspring\UserBundle\Model\UserInterface;
+use Softspring\UserBundle\Model\UserMediaAvatarInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type as Types;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
@@ -53,7 +55,14 @@ class PreferencesForm extends AbstractType implements PreferencesFormInterface
             ]);
         }
 
-        if ($reflection->implementsInterface(UserAvatarInterface::class)) {
+        if ($reflection->implementsInterface(UserMediaAvatarInterface::class)) {
+            $builder->add('avatarMedia', MediaTypeUploadType::class, [
+                'media_type' => 'user_avatar',
+                'allow_name_field' => false,
+                'allow_description_field' => false,
+                'required' => false,
+            ]);
+        } elseif ($reflection->implementsInterface(UserAvatarInterface::class)) {
             $builder->add('avatarUrl', UrlType::class);
         }
     }
