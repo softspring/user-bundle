@@ -33,7 +33,7 @@
         "hwi/oauth-bundle": "^2.0",
         "phpstan/phpstan": "^1.10",
         "rector/rector": "^1.0",
-        "softspring/account-bundle": "^5.2|^5.3",
+        "softspring/account-bundle": "^5.2|^5.3|^5.4",
         "softspring/doctrine-templates": "^5.2",
         "softspring/mailer-bundle": "^5.2",
         "softspring/media-bundle": "^5.4",
