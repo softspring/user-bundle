@@ -23,12 +23,6 @@ services:
         public: true
     Softspring\UserBundle\Controller\ResetPasswordController:
         public: true
-    Softspring\UserBundle\Controller\Settings\ChangeEmailController:
-        public: true
-    Softspring\UserBundle\Controller\Settings\ChangePasswordController:
-        public: true
-    Softspring\UserBundle\Controller\Settings\ChangeUsernameController:
-        public: true
     Softspring\UserBundle\Controller\Settings\ConfirmationController:
         public: true
     Softspring\UserBundle\Controller\Settings\PreferencesController:

@@ -61,7 +61,7 @@ class ChangePasswordController extends AbstractController
         }
 
         return $this->render('@SfsUser/change_password/change_password.html.twig', [
-            'change_password_form' => $form->createView(),
+            'form' => $form->createView(),
         ]);
     }
 }

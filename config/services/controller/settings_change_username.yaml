@@ -1,0 +1,15 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Softspring\UserBundle\Form\Settings\ChangeUsernameFormInterface:
+        class: Softspring\UserBundle\Form\Settings\ChangeUsernameForm
+
+    Softspring\UserBundle\Controller\Settings\ChangeUsernameController:
+        public: true
+        tags: ['controller.service_arguments']
+        arguments:
+            $userManager: '@Softspring\UserBundle\Manager\UserManagerInterface'
+            $changeUsernameForm: '@Softspring\UserBundle\Form\Settings\ChangeUsernameFormInterface'
