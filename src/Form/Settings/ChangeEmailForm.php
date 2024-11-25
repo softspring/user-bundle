@@ -5,8 +5,11 @@ namespace Softspring\UserBundle\Form\Settings;
 use Softspring\UserBundle\Model\UserInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type as Types;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ChangeEmailForm extends AbstractType implements ChangeEmailFormInterface
 {
@@ -21,7 +24,17 @@ class ChangeEmailForm extends AbstractType implements ChangeEmailFormInterface
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('currentPassword', Types\PasswordType::class);
+        $builder->add('currentPassword', PasswordType::class, [
+            'mapped' => false,
+            'constraints' => [
+                new NotBlank(),
+                new UserPassword(),
+            ],
+            'attr' => [
+                'autocomplete' => 'current-password',
+            ],
+        ]);
+
         $builder->add('email', Types\EmailType::class);
     }
 }

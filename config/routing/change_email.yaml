@@ -1,0 +1,3 @@
+sfs_user_change_email:
+    path: /
+    controller: Softspring\UserBundle\Controller\Settings\ChangeEmailController::changeEmail

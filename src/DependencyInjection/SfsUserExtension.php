@@ -60,6 +60,7 @@ class SfsUserExtension extends Extension implements PrependExtensionInterface
 
         $loader->load('services/controller/settings_change_email.yaml');
         $loader->load('services/controller/settings_change_password.yaml');
+        $loader->load('services/controller/settings_change_username.yaml');
 
         $oauthServicesConfig = $config['oauth'] ?? [];
         $container->setParameter('sfs_user.oauth.services', $oauthServicesConfig);

@@ -31,7 +31,7 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
         $this->userAccessManager = $userAccessManager;
     }
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         for ($i = 0; $i < 300; ++$i) {
             $this->createUser($manager);

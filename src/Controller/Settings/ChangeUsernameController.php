@@ -61,7 +61,7 @@ class ChangeUsernameController extends AbstractController
         }
 
         return $this->render('@SfsUser/change_username/change_username.html.twig', [
-            'change_username_form' => $form->createView(),
+            'form' => $form->createView(),
         ]);
     }
 }
