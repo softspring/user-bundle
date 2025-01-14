@@ -29,7 +29,7 @@
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "fakerphp/faker": "^1.21",
-        "friendsofphp/php-cs-fixer": "3.51.*",
+        "friendsofphp/php-cs-fixer": "^3.68",
         "hwi/oauth-bundle": "^2.0",
         "phpstan/phpstan": "^1.10",
         "rector/rector": "^1.0",

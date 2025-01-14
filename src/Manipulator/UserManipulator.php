@@ -24,7 +24,7 @@ class UserManipulator
         protected UserManagerInterface $userManager,
         protected AdminUserManagerInterface $adminUserManager,
         protected EventDispatcherInterface $eventDispatcher,
-        protected RequestStack $requestStack
+        protected RequestStack $requestStack,
     ) {
     }
 

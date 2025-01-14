@@ -34,7 +34,7 @@ class InvitationsFixtures extends UserFixtures
 
             if ($invitation instanceof NameSurnameInterface) {
                 $invitation->setName($faker->firstName());
-                $invitation->setSurname($faker->lastName() . ' ' . $faker->lastName());
+                $invitation->setSurname($faker->lastName().' '.$faker->lastName());
             }
 
             if ($invitation instanceof UserIdentifierUsernameInterface) {
