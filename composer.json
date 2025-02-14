@@ -2,7 +2,7 @@
     "name": "softspring/user-bundle",
     "description": "A complete user bundle",
     "type": "symfony-bundle",
-    "license": "AGPL-3.0",
+    "license": "AGPL-3.0-or-later",
     "minimum-stability": "dev",
     "prefer-stable": false,
     "require": {
