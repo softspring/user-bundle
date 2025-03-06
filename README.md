@@ -11,18 +11,8 @@ This package provides a new complete user bundle out of the box.
 
 ## Documentation
 
-* [1. Installation](docs/1_installation.md)
-* 2\. Configure model (TODO)
-* 3\. Security (TODO)
-* 4\. Register (TODO)
-* 5\. Confirmation (TODO)
-* 6\. User settings (TODO)
-* 7\. Admin users (TODO)
-* 8\. Admin administrators (TODO)
-* 9\. Invitations (TODO)
-* 10\. Access history (TODO)
-* 11\. Commands (TODO)
-* [12. Oauth (experimental)](docs/12_oauth.md)
+You have all information in [Armonic Docs-User Bundle](https://armonic.softspring.es/latest/bundles/user-bundle/install)
+
 
 ## License
 
