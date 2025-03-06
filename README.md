@@ -9,22 +9,19 @@
 
 This package provides a new complete user bundle out of the box.
 
+## Armonic
+
+This bundle is part of Armonic.
+
 ## Documentation
 
-* [1. Installation](docs/1_installation.md)
-* 2\. Configure model (TODO)
-* 3\. Security (TODO)
-* 4\. Register (TODO)
-* 5\. Confirmation (TODO)
-* 6\. User settings (TODO)
-* 7\. Admin users (TODO)
-* 8\. Admin administrators (TODO)
-* 9\. Invitations (TODO)
-* 10\. Access history (TODO)
-* 11\. Commands (TODO)
-* [12. Oauth (experimental)](docs/12_oauth.md)
+[Armonic Documentation](https://armonic.softspring.es/latest/bundles/user-bundle/install)
+
+
+## Contributing
+
+[Report issues](https://github.com/softspring/user-bundle/issues) and [send Pull Requests](https://github.com/softspring/user-bundle/pulls)
 
 ## License
 
-This bundle is under the MIT license. See the complete license in the bundle [LICENSE](LICENSE) file.
-
+This package is free and released under the [MIT license](LICENSE).
