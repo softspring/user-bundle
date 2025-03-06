@@ -9,12 +9,19 @@
 
 This package provides a new complete user bundle out of the box.
 
+## Armonic
+
+This bundle is part of Armonic.
+
 ## Documentation
 
-You have all information in [Armonic Docs-User Bundle](https://armonic.softspring.es/latest/bundles/user-bundle/install)
+[Armonic Documentation](https://armonic.softspring.es/latest/bundles/user-bundle/install)
 
+
+## Contributing
+
+[Report issues](https://github.com/softspring/user-bundle/issues) and [send Pull Requests](https://github.com/softspring/user-bundle/pulls)
 
 ## License
 
-This bundle is under the MIT license. See the complete license in the bundle [LICENSE](LICENSE) file.
-
+This package is free and released under the [MIT license](LICENSE).
