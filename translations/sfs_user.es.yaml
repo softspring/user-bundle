@@ -336,6 +336,9 @@ admin_invitations:
             role: "Rol"
 
     create:
+        meta.title: "Invitar"
+        breadcrumb: "Invitar"
+        title: "Invitar usuario"
         actions:
             create.button: "Invitar"
             cancel.button: "Cancelar"
