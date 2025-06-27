@@ -2,7 +2,7 @@
 
 namespace Softspring\UserBundle\Controller\Admin;
 
-use App\Entity\User;
+use Softspring\UserBundle\Model\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Softspring\Component\Events\DispatchGetResponseTrait;
