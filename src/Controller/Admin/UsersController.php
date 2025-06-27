@@ -96,6 +96,7 @@ class UsersController extends AbstractController
         if ($user->getConfirmationToken() === $token) {
             $user->setConfirmationToken(null);
             $user->setConfirmedAt(new \DateTime());
+            $user->setEnabled(true);
             $this->userManager->saveEntity($user);
         }
 
@@ -107,7 +108,8 @@ class UsersController extends AbstractController
         $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_USERS_UNCONFIRM', $user);
 
         $user->setConfirmationToken($this->tokenGenerator->generateToken());
-        $user->setUnconfirmedAt();
+        $user->setConfirmedAt();
+        $user->setEnabled(false);
         $this->userManager->saveEntity($user);
 
         return $this->redirectToRoute('sfs_user_admin_users_details', ['user' => $user->getId()]);
