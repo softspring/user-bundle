@@ -2,6 +2,7 @@
 
 namespace Softspring\UserBundle\Controller\Admin;
 
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Softspring\Component\Events\DispatchGetResponseTrait;
@@ -12,6 +13,7 @@ use Softspring\UserBundle\Model\ConfirmableInterface;
 use Softspring\UserBundle\Model\RolesAdminInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\SfsUserEvents;
+use Softspring\UserBundle\Util\TokenGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,12 +32,15 @@ class UsersController extends AbstractController
 
     protected EventDispatcherInterface $eventDispatcher;
 
-    public function __construct(UserManagerInterface $userManager, EntityManagerInterface $em, ?UserMailerInterface $userMailer, EventDispatcherInterface $eventDispatcher)
+    protected TokenGeneratorInterface $tokenGenerator;
+
+    public function __construct(UserManagerInterface $userManager, EntityManagerInterface $em, ?UserMailerInterface $userMailer, EventDispatcherInterface $eventDispatcher, TokenGeneratorInterface $tokenGenerator)
     {
         $this->userManager = $userManager;
         $this->em = $em;
         $this->userMailer = $userMailer;
         $this->eventDispatcher = $eventDispatcher;
+        $this->tokenGenerator = $tokenGenerator;
     }
 
     public function promoteAdmin(string $user, Request $request): Response
@@ -82,6 +87,26 @@ class UsersController extends AbstractController
         return $this->render('@SfsUser/admin/users/widget-pending-confirm-count.html.twig', [
             'count' => $this->userManager->getRepository()->count(['confirmedAt' => null]),
         ]);
+    }
+
+    public function userConfirm(User $user, string $token): Response
+    {
+        if ($user->getConfirmationToken() === $token) {
+            $user->setConfirmationToken(null);
+            $user->setConfirmedAt(new \DateTime());
+            $this->userManager->saveEntity($user);
+        }
+
+        return $this->redirectToRoute('sfs_user_admin_users_details', ['user' => $user->getId()]);
+    }
+
+    public function userUnconfirm(User $user): Response
+    {
+        $user->setConfirmationToken($this->tokenGenerator->generateToken());
+        $user->setUnconfirmedAt();
+        $this->userManager->saveEntity($user);
+
+        return $this->redirectToRoute('sfs_user_admin_users_details', ['user' => $user->getId()]);
     }
 
     public function resendConfirmationEmail(string $user, Request $request): Response
