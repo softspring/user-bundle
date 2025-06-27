@@ -91,6 +91,8 @@ class UsersController extends AbstractController
 
     public function userConfirm(User $user, string $token): Response
     {
+        $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_USERS_CONFIRM', $user);
+
         if ($user->getConfirmationToken() === $token) {
             $user->setConfirmationToken(null);
             $user->setConfirmedAt(new \DateTime());
@@ -102,6 +104,8 @@ class UsersController extends AbstractController
 
     public function userUnconfirm(User $user): Response
     {
+        $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_USERS_UNCONFIRM', $user);
+
         $user->setConfirmationToken($this->tokenGenerator->generateToken());
         $user->setUnconfirmedAt();
         $this->userManager->saveEntity($user);
