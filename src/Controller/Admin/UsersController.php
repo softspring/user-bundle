@@ -89,8 +89,10 @@ class UsersController extends AbstractController
         ]);
     }
 
-    public function userConfirm(User $user, string $token): Response
+    public function userConfirm(string $user, string $token): Response
     {
+        $user = $this->userManager->findUserBy(['id' => $user]);
+
         $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_USERS_CONFIRM', $user);
 
         if ($user->getConfirmationToken() === $token) {
@@ -103,12 +105,14 @@ class UsersController extends AbstractController
         return $this->redirectToRoute('sfs_user_admin_users_details', ['user' => $user->getId()]);
     }
 
-    public function userUnconfirm(User $user): Response
+    public function userUnconfirm(string $user): Response
     {
+        $user = $this->userManager->findUserBy(['id' => $user]);
+
         $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_USERS_UNCONFIRM', $user);
 
         $user->setConfirmationToken($this->tokenGenerator->generateToken());
-        $user->setConfirmedAt();
+        $user->setConfirmedAt(null);
         $user->setEnabled(false);
         $this->userManager->saveEntity($user);
 
