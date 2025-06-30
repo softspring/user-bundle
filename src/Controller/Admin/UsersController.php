@@ -92,12 +92,12 @@ class UsersController extends AbstractController
 
     public function userConfirm(string $user): Response
     {
-        /** @var User|ConfirmableInterface $user */
+        /** @var UserInterface|ConfirmableInterface $user */
         $user = $this->userManager->findUserBy(['id' => $user]);
 
         $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_USERS_CONFIRM', $user);
 
-        if (!$user instanceof ConfirmableInterface) {
+        if (!$user instanceof UserInterface || !$user instanceof ConfirmableInterface) {
             throw new Exception(sprintf('User %s class must implement %s to confirm', get_class($user), ConfirmableInterface::class));
         }
 
