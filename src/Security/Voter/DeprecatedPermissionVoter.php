@@ -33,6 +33,8 @@ class DeprecatedPermissionVoter implements VoterInterface
         'ROLE_ADMIN_ACCESS_HISTORY_LIST' => 'PERMISSION_SFS_USER_ADMIN_HISTORY_LIST',
         'ROLE_ADMIN_USERS_CONFIRM' => 'PERMISSION_SFS_USER_ADMIN_USERS_CONFIRM',
         'ROLE_ADMIN_USERS_UNCONFIRM' => 'PERMISSION_SFS_USER_ADMIN_USERS_UNCONFIRM',
+        'ROLE_ADMIN_USERS_ENABLE' => 'PERMISSION_SFS_USER_ADMIN_USERS_ENABLE',
+        'ROLE_ADMIN_USERS_DISABLE' => 'PERMISSION_SFS_USER_ADMIN_USERS_DISABLE',
     ];
 
     public function vote(TokenInterface $token, mixed $subject, array $attributes): int

@@ -2,7 +2,6 @@
 
 namespace Softspring\UserBundle\Controller\Admin;
 
-use Softspring\UserBundle\Model\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Softspring\Component\Events\DispatchGetResponseTrait;
@@ -10,6 +9,7 @@ use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Mailer\UserMailerInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\ConfirmableInterface;
+use Softspring\UserBundle\Model\EnablableInterface;
 use Softspring\UserBundle\Model\RolesAdminInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\SfsUserEvents;
@@ -89,18 +89,19 @@ class UsersController extends AbstractController
         ]);
     }
 
-    public function userConfirm(string $user, string $token): Response
+    public function userConfirm(string $user): Response
     {
         $user = $this->userManager->findUserBy(['id' => $user]);
 
         $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_USERS_CONFIRM', $user);
 
-        if ($user->getConfirmationToken() === $token) {
-            $user->setConfirmationToken(null);
-            $user->setConfirmedAt(new \DateTime());
-            $user->setEnabled(true);
-            $this->userManager->saveEntity($user);
+        if (!$user instanceof ConfirmableInterface) {
+            throw new Exception(sprintf('User %s class must implement %s to confirm', get_class($user), ConfirmableInterface::class));
         }
+
+        $user->setConfirmationToken(null);
+        $user->setConfirmedAt(new \DateTime());
+        $this->userManager->saveEntity($user);
 
         return $this->redirectToRoute('sfs_user_admin_users_details', ['user' => $user->getId()]);
     }
@@ -111,8 +112,44 @@ class UsersController extends AbstractController
 
         $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_USERS_UNCONFIRM', $user);
 
+        if (!$user instanceof ConfirmableInterface) {
+            throw new Exception(sprintf('User %s class must implement %s to confirm', get_class($user), ConfirmableInterface::class));
+        }
+
         $user->setConfirmationToken($this->tokenGenerator->generateToken());
         $user->setConfirmedAt(null);
+        $this->userManager->saveEntity($user);
+
+        return $this->redirectToRoute('sfs_user_admin_users_details', ['user' => $user->getId()]);
+    }
+
+
+    public function userEnable(string $user): Response
+    {
+        $user = $this->userManager->findUserBy(['id' => $user]);
+
+        $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_USERS_ENABLE', $user);
+
+        if (!$user instanceof EnablableInterface) {
+            throw new Exception(sprintf('User %s class must implement %s to enable', get_class($user), EnablableInterface::class));
+        }
+
+        $user->setEnabled(true);
+        $this->userManager->saveEntity($user);
+
+        return $this->redirectToRoute('sfs_user_admin_users_details', ['user' => $user->getId()]);
+    }
+
+    public function userDisable(string $user): Response
+    {
+        $user = $this->userManager->findUserBy(['id' => $user]);
+
+        $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_USERS_DISABLE', $user);
+
+        if (!$user instanceof EnablableInterface) {
+            throw new Exception(sprintf('User %s class must implement %s to enable', get_class($user), EnablableInterface::class));
+        }
+
         $user->setEnabled(false);
         $this->userManager->saveEntity($user);
 
