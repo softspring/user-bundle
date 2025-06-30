@@ -92,7 +92,7 @@ class UsersController extends AbstractController
 
     public function userConfirm(string $user): Response
     {
-        /** @var User|ConfirmableInterface $user */
+        /** @var User $user */
         $user = $this->userManager->findUserBy(['id' => $user]);
 
         $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_USERS_CONFIRM', $user);
