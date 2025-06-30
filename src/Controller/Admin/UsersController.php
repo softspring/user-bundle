@@ -92,7 +92,7 @@ class UsersController extends AbstractController
 
     public function userConfirm(string $user): Response
     {
-        /** @var UserInterface|ConfirmableInterface $user */
+        /** @var User|ConfirmableInterface $user */
         $user = $this->userManager->findUserBy(['id' => $user]);
 
         $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_USERS_CONFIRM', $user);
@@ -115,7 +115,7 @@ class UsersController extends AbstractController
 
         $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_USERS_UNCONFIRM', $user);
 
-        if (!$user instanceof ConfirmableInterface) {
+        if (!$user instanceof UserInterface || !$user instanceof ConfirmableInterface) {
             throw new Exception(sprintf('User %s class must implement %s to confirm', get_class($user), ConfirmableInterface::class));
         }
 
@@ -134,7 +134,7 @@ class UsersController extends AbstractController
 
         $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_USERS_ENABLE', $user);
 
-        if (!$user instanceof EnablableInterface) {
+        if (!$user instanceof UserInterface || !$user instanceof EnablableInterface) {
             throw new Exception(sprintf('User %s class must implement %s to enable', get_class($user), EnablableInterface::class));
         }
 
@@ -151,7 +151,7 @@ class UsersController extends AbstractController
 
         $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_USERS_DISABLE', $user);
 
-        if (!$user instanceof EnablableInterface) {
+        if (!$user instanceof UserInterface || !$user instanceof EnablableInterface) {
             throw new Exception(sprintf('User %s class must implement %s to enable', get_class($user), EnablableInterface::class));
         }
 
