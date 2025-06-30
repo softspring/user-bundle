@@ -160,10 +160,13 @@ admin_users:
             unconfirm: "Desconfirmar manualmente"
             confirm: "Confirmar manualmente"
             resend_confirm: "Reenviar confirmación"
+            enable: "Habilitar"
+            disable: "Deshabilitar"
         fields:
             username: "Nombre de usuario"
             email: "Email"
             confirmed: "Confirmado"
+            enabled: "Habilitado"
             lastLogin: "Último acceso"
             lastLogin.notYet: "aún no ha accedido"
             role: "Rol"

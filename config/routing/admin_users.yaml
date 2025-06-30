@@ -18,6 +18,22 @@ sfs_user_admin_users_delete:
     controller: sfs_user.admin.user.controller::delete
     path: /{user}/delete
 
+sfs_user_admin_users_confirm:
+    controller: Softspring\UserBundle\Controller\Admin\UsersController::userConfirm
+    path: /{user}/confirm
+
+sfs_user_admin_users_unconfirm:
+    controller: Softspring\UserBundle\Controller\Admin\UsersController::userUnconfirm
+    path: /{user}/unconfirm
+
+sfs_user_admin_users_enable:
+    controller: Softspring\UserBundle\Controller\Admin\UsersController::userEnable
+    path: /{user}/enable
+
+sfs_user_admin_users_disable:
+    controller: Softspring\UserBundle\Controller\Admin\UsersController::userDisable
+    path: /{user}/disable
+
 sfs_user_admin_users_resend_confirmation:
     controller: Softspring\UserBundle\Controller\Admin\UsersController::resendConfirmationEmail
     path: /{user}/resend
