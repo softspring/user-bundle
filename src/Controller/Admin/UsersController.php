@@ -129,7 +129,7 @@ class UsersController extends AbstractController
 
     public function userEnable(string $user): Response
     {
-        /** @var User|ConfirmableInterface $user */
+        /** @var User|EnablableInterface $user */
         $user = $this->userManager->findUserBy(['id' => $user]);
 
         $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_USERS_ENABLE', $user);
@@ -146,7 +146,7 @@ class UsersController extends AbstractController
 
     public function userDisable(string $user): Response
     {
-        /** @var User|ConfirmableInterface $user */
+        /** @var User|EnablableInterface $user */
         $user = $this->userManager->findUserBy(['id' => $user]);
 
         $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_USERS_DISABLE', $user);
