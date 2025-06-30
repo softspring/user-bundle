@@ -11,6 +11,7 @@ use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\ConfirmableInterface;
 use Softspring\UserBundle\Model\EnablableInterface;
 use Softspring\UserBundle\Model\RolesAdminInterface;
+use Softspring\UserBundle\Model\User;
 use Softspring\UserBundle\Model\UserInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Softspring\UserBundle\Util\TokenGeneratorInterface;
@@ -91,6 +92,7 @@ class UsersController extends AbstractController
 
     public function userConfirm(string $user): Response
     {
+        /** @var User|ConfirmableInterface $user */
         $user = $this->userManager->findUserBy(['id' => $user]);
 
         $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_USERS_CONFIRM', $user);
@@ -108,6 +110,7 @@ class UsersController extends AbstractController
 
     public function userUnconfirm(string $user): Response
     {
+        /** @var User|ConfirmableInterface $user */
         $user = $this->userManager->findUserBy(['id' => $user]);
 
         $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_USERS_UNCONFIRM', $user);
@@ -126,6 +129,7 @@ class UsersController extends AbstractController
 
     public function userEnable(string $user): Response
     {
+        /** @var User|ConfirmableInterface $user */
         $user = $this->userManager->findUserBy(['id' => $user]);
 
         $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_USERS_ENABLE', $user);
@@ -142,6 +146,7 @@ class UsersController extends AbstractController
 
     public function userDisable(string $user): Response
     {
+        /** @var User|ConfirmableInterface $user */
         $user = $this->userManager->findUserBy(['id' => $user]);
 
         $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_USERS_DISABLE', $user);
