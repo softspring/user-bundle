@@ -2,6 +2,7 @@
 
 namespace Softspring\UserBundle\Controller\Admin;
 
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Softspring\Component\Events\DispatchGetResponseTrait;
@@ -102,7 +103,7 @@ class UsersController extends AbstractController
         }
 
         $user->setConfirmationToken(null);
-        $user->setConfirmedAt(new \DateTime());
+        $user->setConfirmedAt(new DateTime());
         $this->userManager->saveEntity($user);
 
         return $this->redirectToRoute('sfs_user_admin_users_details', ['user' => $user->getId()]);
@@ -125,7 +126,6 @@ class UsersController extends AbstractController
 
         return $this->redirectToRoute('sfs_user_admin_users_details', ['user' => $user->getId()]);
     }
-
 
     public function userEnable(string $user): Response
     {
