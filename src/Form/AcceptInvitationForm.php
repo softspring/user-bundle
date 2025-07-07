@@ -69,6 +69,7 @@ class AcceptInvitationForm extends AbstractType implements AcceptInvitationFormI
         $builder->add('acceptConditions', CheckboxType::class, [
             'required' => true,
             'mapped' => false,
+            'label_html' => true,
         ]);
     }
 }

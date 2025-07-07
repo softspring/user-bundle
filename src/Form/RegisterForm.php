@@ -77,6 +77,7 @@ class RegisterForm extends AbstractType implements RegisterFormInterface
         $builder->add('acceptConditions', Types\CheckboxType::class, [
             'required' => true,
             'mapped' => false,
+            'label_html' => true,
         ]);
     }
 }
