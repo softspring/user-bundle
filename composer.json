@@ -29,10 +29,10 @@
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "fakerphp/faker": "^1.21",
-        "friendsofphp/php-cs-fixer": "^3.68",
+        "friendsofphp/php-cs-fixer": "^3.89",
         "hwi/oauth-bundle": "^2.0",
-        "phpstan/phpstan": "^1.10",
-        "rector/rector": "^1.0",
+        "phpstan/phpstan": "^2.1",
+        "rector/rector": "^2.2",
         "softspring/account-bundle": "^6.0@dev",
         "softspring/doctrine-templates": "^6.0@dev",
         "softspring/mailer-bundle": "^6.0@dev",
