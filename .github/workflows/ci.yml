@@ -2,9 +2,9 @@ name: CI
 
 on:
     push:
-        branches: [ 5.5 ]
+        branches: [ 6.0 ]
     pull_request:
-        branches: [ 5.5 ]
+        branches: [ 6.0 ]
 
 permissions:
     contents: read
@@ -43,7 +43,7 @@ jobs:
                         ${{ runner.os }}-php-
 
             -   name: Install dependencies
-                run: COMPOSER_ROOT_VERSION=5.5.x-dev composer update --prefer-dist --no-interaction --no-progress ${{ matrix.composer-prefer }}
+                run: COMPOSER_ROOT_VERSION=6.0.x-dev composer update --prefer-dist --no-interaction --no-progress ${{ matrix.composer-prefer }}
 
             -   name: Run phpstan
                 run: ./vendor/bin/phpstan analyse
