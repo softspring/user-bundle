@@ -34,10 +34,9 @@ class ConfirmationController extends AbstractController
 
     public function resendConfirmation(Request $request): Response
     {
+        /** @var UserInterface $user */
+        $user = $this->getUser();
         try {
-            /** @var UserInterface $user */
-            $user = $this->getUser();
-
             if ($user instanceof ConfirmableInterface && !$user->isConfirmed()) {
                 $this->userMailer->sendRegisterConfirmationEmail($user);
                 if ($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_USERS_RESEND_CONFIRMATION_SUCCESS, new GetResponseUserEvent($user, $request))) {

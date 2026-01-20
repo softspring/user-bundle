@@ -65,7 +65,7 @@ class FlashMessagesListener implements EventSubscriberInterface
         ], 'sfs_user', $locale);
     }
 
-    public function onResendInvitationsSuccess(GetResponseUserEvent $event)
+    public function onResendInvitationsSuccess(GetResponseUserEvent $event): void
     {
         $user = $event->getUser();
         $locale = $event->getRequest()->getLocale();
@@ -76,7 +76,7 @@ class FlashMessagesListener implements EventSubscriberInterface
         ], 'sfs_user', $locale);
     }
 
-    public function onResendInvitationsError(GetResponseUserEvent $event)
+    public function onResendInvitationsError(GetResponseUserEvent $event): void
     {
         $user = $event->getUser();
         $locale = $event->getRequest()->getLocale();
