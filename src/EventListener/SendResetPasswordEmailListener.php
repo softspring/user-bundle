@@ -3,6 +3,7 @@
 namespace Softspring\UserBundle\EventListener;
 
 use DateTime;
+use Exception;
 use Softspring\Component\Events\GetResponseFormEvent;
 use Softspring\UserBundle\Mailer\UserMailerInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
@@ -66,7 +67,7 @@ class SendResetPasswordEmailListener implements EventSubscriberInterface
             }
 
             $this->mailer->sendResettingEmail($user);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
         }
     }
 }

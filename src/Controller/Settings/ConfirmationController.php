@@ -2,6 +2,7 @@
 
 namespace Softspring\UserBundle\Controller\Settings;
 
+use Exception;
 use Softspring\Component\Events\DispatchGetResponseTrait;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Mailer\UserMailerInterface;
@@ -43,8 +44,7 @@ class ConfirmationController extends AbstractController
                     return $response;
                 }
             }
-
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             if ($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_USERS_RESEND_CONFIRMATION_ERROR, new GetResponseUserEvent($user, $request))) {
                 return $response;
             }

@@ -2,6 +2,7 @@
 
 namespace Softspring\UserBundle\EventListener;
 
+use Exception;
 use Softspring\UserBundle\Event\UserInvitationEvent;
 use Softspring\UserBundle\Mailer\UserMailerInterface;
 use Softspring\UserBundle\SfsUserEvents;
@@ -29,7 +30,7 @@ class EmailInvitationListener implements EventSubscriberInterface
             $invitation = $event->getInvitation();
 
             $this->mailer->sendInvitationEmail($invitation);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Softspring\UserBundle\Controller\Admin;
 
-use Symfony\Component\HttpFoundation\Request;
+use Exception;
 use Softspring\Component\Events\DispatchGetResponseTrait;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Mailer\UserMailerInterface;
@@ -10,6 +10,7 @@ use Softspring\UserBundle\Manager\UserInvitationManagerInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class InvitationsController extends AbstractController
@@ -49,12 +50,11 @@ class InvitationsController extends AbstractController
                     return $response;
                 }
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             if ($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_INVITATIONS_RESEND_ERROR, new GetResponseUserEvent($user, $request))) {
                 return $response;
             }
         }
-
 
         return $this->redirectToRoute('sfs_user_admin_invitations_details', ['invitation' => $invitation]);
     }
