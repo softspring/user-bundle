@@ -24,14 +24,12 @@ class ConfirmationController extends AbstractController
     protected ?UserMailerInterface $userMailer;
 
     protected EventDispatcherInterface $eventDispatcher;
-    protected ?FlashBagInterface $flashBag;
 
-    public function __construct(UserManagerInterface $userManager, ?UserMailerInterface $userMailer, EventDispatcherInterface $eventDispatcher, ?FlashBagInterface $flashBag)
+    public function __construct(UserManagerInterface $userManager, ?UserMailerInterface $userMailer, EventDispatcherInterface $eventDispatcher)
     {
         $this->userManager = $userManager;
         $this->userMailer = $userMailer;
         $this->eventDispatcher = $eventDispatcher;
-        $this->flashBag = $flashBag;
     }
 
     public function resendConfirmation(Request $request): Response
