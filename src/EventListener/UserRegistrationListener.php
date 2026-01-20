@@ -34,14 +34,17 @@ class UserRegistrationListener implements EventSubscriberInterface
 
     public function onRegisterSendConfirmationEmail(GetResponseUserEvent $event): void
     {
-        $user = $event->getUser();
-        if (!$user instanceof ConfirmableInterface) {
-            return;
+        try {
+            $user = $event->getUser();
+            if (!$user instanceof ConfirmableInterface) {
+                return;
+            }
+
+            $user->setConfirmationToken($this->tokenGenerator->generateToken());
+            $this->userManager->saveEntity($user);
+
+            $this->mailer->sendRegisterConfirmationEmail($user);
+        } catch (\Exception $e) {
         }
-
-        $user->setConfirmationToken($this->tokenGenerator->generateToken());
-        $this->userManager->saveEntity($user);
-
-        $this->mailer->sendRegisterConfirmationEmail($user);
     }
 }

@@ -25,8 +25,11 @@ class EmailInvitationListener implements EventSubscriberInterface
 
     public function onInvitation(UserInvitationEvent $event): void
     {
-        $invitation = $event->getInvitation();
+        try {
+            $invitation = $event->getInvitation();
 
-        $this->mailer->sendInvitationEmail($invitation);
+            $this->mailer->sendInvitationEmail($invitation);
+        } catch (\Exception $e) {
+        }
     }
 }

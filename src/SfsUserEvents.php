@@ -258,6 +258,8 @@ class SfsUserEvents
     public const ADMIN_INVITATIONS_CREATE_SUCCESS = 'sfs_user.admin.invitations.create_success';
     public const ADMIN_INVITATIONS_CREATE_FORM_INVALID = 'sfs_user.admin.invitations.create_form_invalid';
     public const ADMIN_INVITATIONS_CREATE_VIEW = 'sfs_user.admin.invitations.create_view';
+    public const ADMIN_INVITATIONS_RESEND_SUCCESS = 'sfs_user.admin.invitations.resend_success';
+    public const ADMIN_INVITATIONS_RESEND_ERROR = 'sfs_user.admin.invitations.resend__error';
 
     /** @Event("Softspring\Component\Events\GetResponseRequestEvent") */
     public const ADMIN_ACCESS_HISTORY_LIST_INITIALIZE = 'sfs_user.admin.access_history.list_initialize';
