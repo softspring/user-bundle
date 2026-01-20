@@ -27,6 +27,8 @@ class FlashMessagesListener implements EventSubscriberInterface
             SfsUserEvents::ADMIN_USERS_RESEND_CONFIRMATION_SUCCESS => 'onResendConfirmationSuccess',
             SfsUserEvents::ADMIN_USERS_RESEND_CONFIRMATION_ERROR => 'onResendConfirmationError',
             SfsUserEvents::ADMIN_USERS_RESEND_CONFIRMATION_ALREADY_CONFIRMED => 'onResendConfirmationAlready',
+            SfsUserEvents::ADMIN_INVITATIONS_RESEND_SUCCESS => 'onResendInvitationsSuccess',
+            SfsUserEvents::ADMIN_INVITATIONS_RESEND_ERROR => 'onResendInvitationsError',
         ];
     }
 
@@ -58,6 +60,28 @@ class FlashMessagesListener implements EventSubscriberInterface
         $locale = $event->getRequest()->getLocale();
 
         $this->addFlash('warning', 'admin_users.resend_confirmation.messages.already_confirmed', [
+            '%username%' => $user->getDisplayName(),
+            '%email%' => $user instanceof UserWithEmailInterface ? $user->getEmail() : $user->getDisplayName(),
+        ], 'sfs_user', $locale);
+    }
+
+    public function onResendInvitationsSuccess(GetResponseUserEvent $event): void
+    {
+        $user = $event->getUser();
+        $locale = $event->getRequest()->getLocale();
+
+        $this->addFlash('success', 'admin_users.resend_invitaion.messages.success', [
+            '%username%' => $user->getDisplayName(),
+            '%email%' => $user instanceof UserWithEmailInterface ? $user->getEmail() : $user->getDisplayName(),
+        ], 'sfs_user', $locale);
+    }
+
+    public function onResendInvitationsError(GetResponseUserEvent $event): void
+    {
+        $user = $event->getUser();
+        $locale = $event->getRequest()->getLocale();
+
+        $this->addFlash('error', 'admin_users.resend_invitaion.messages.error', [
             '%username%' => $user->getDisplayName(),
             '%email%' => $user instanceof UserWithEmailInterface ? $user->getEmail() : $user->getDisplayName(),
         ], 'sfs_user', $locale);

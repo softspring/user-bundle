@@ -204,6 +204,10 @@ admin_users:
             success: "El email de confirmación se ha enviado a %email%"
             error: "Se ha producido un error enviando el correo de confirmación, intentalo de nuevo. Si el problema persiste contacta con el soporte."
             already_confirmed: "No se ha enviado el email de confirmación, el usuario %username% ya está confirmado"
+    resend_invitation:
+        messages:
+            success: "El email de invitación se ha enviado a %email%"
+            error: "Se ha producido un error enviando el correo de invitación, intentalo de nuevo. Si el problema persiste contacta con el soporte."
 
 admin_administrators:
     list:
