@@ -6,7 +6,7 @@
     "minimum-stability": "dev",
     "prefer-stable": false,
     "require": {
-        "php": ">=8.1",
+        "php": ">=8.4",
         "ext-json": "*",
         "doctrine/doctrine-bundle": "^2.10",
         "doctrine/orm": "^3.3 | ^4.0",
@@ -18,13 +18,13 @@
         "softspring/mime-translatable": "^6.0@dev",
         "softspring/permissions-bundle": "^6.0@dev",
         "softspring/twig-extra-bundle": "^6.0@dev",
-        "symfony/http-foundation": "^6.4|^7.3",
-        "symfony/http-kernel": "^6.4|^7.3",
-        "symfony/security-bundle": "^6.4|^7.3",
-        "symfony/translation": "^6.4|^7.3",
-        "symfony/twig-bundle": "^6.4|^7.3",
-        "symfony/validator": "^6.4|^7.3",
-        "symfony/yaml": "^6.4|^7.3"
+        "symfony/http-foundation": "^6.4|^7.4|^8.0",
+        "symfony/http-kernel": "^6.4|^7.4|^8.0",
+        "symfony/security-bundle": "^6.4|^7.4|^8.0",
+        "symfony/translation": "^6.4|^7.4|^8.0",
+        "symfony/twig-bundle": "^6.4|^7.4|^8.0",
+        "symfony/validator": "^6.4|^7.4|^8.0",
+        "symfony/yaml": "^6.4|^7.4|^8.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",
@@ -37,13 +37,13 @@
         "softspring/doctrine-templates": "^6.0@dev",
         "softspring/mailer-bundle": "^6.0@dev",
         "softspring/media-bundle": "^6.0@dev",
-        "symfony/browser-kit": "^6.4|^7.3",
-        "symfony/css-selector": "^6.4|^7.3",
-        "symfony/dom-crawler": "^6.4|^7.3",
-        "symfony/form": "^6.4|^7.3",
-        "symfony/http-client": "^6.4|^7.3",
-        "symfony/mailer": "^6.4|^7.3",
-        "symfony/phpunit-bridge": "^6.4|^7.3"
+        "symfony/browser-kit": "^6.4|^7.4|^8.0",
+        "symfony/css-selector": "^6.4|^7.4|^8.0",
+        "symfony/dom-crawler": "^6.4|^7.4|^8.0",
+        "symfony/form": "^6.4|^7.4|^8.0",
+        "symfony/http-client": "^6.4|^7.4|^8.0",
+        "symfony/mailer": "^6.4|^7.4|^8.0",
+        "symfony/phpunit-bridge": "^6.4|^7.4|^8.0"
     },
     "suggest": {
         "softspring/mailer-bundle": "Integrates with softspring's mailer bundle",
