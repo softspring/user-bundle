@@ -1,15 +1,13 @@
 {
     "name": "softspring/user-bundle",
     "description": "A complete user bundle",
-    "type": "symfony-bundle",
     "license": "AGPL-3.0-or-later",
-    "minimum-stability": "dev",
-    "prefer-stable": false,
+    "type": "symfony-bundle",
     "require": {
         "php": ">=8.4",
         "ext-json": "*",
-        "doctrine/doctrine-bundle": "^2.10 | ^3.0",
-        "doctrine/orm": "^3.3 | ^4.0",
+        "doctrine/doctrine-bundle": "^2.10 || ^3.0 || ^4.0",
+        "doctrine/orm": "^2.10 || ^3.0 || ^4.0",
         "softspring/crudl-controller": "^6.0@dev",
         "softspring/doctrine-paginator": "^6.0@dev",
         "softspring/doctrine-query-filters": "^6.0@dev",
@@ -18,39 +16,41 @@
         "softspring/mime-translatable": "^6.0@dev",
         "softspring/permissions-bundle": "^6.0@dev",
         "softspring/twig-extra-bundle": "^6.0@dev",
-        "symfony/http-foundation": "^6.4|^7.4|^8.0",
-        "symfony/http-kernel": "^6.4|^7.4|^8.0",
-        "symfony/security-bundle": "^6.4|^7.4|^8.0",
-        "symfony/translation": "^6.4|^7.4|^8.0",
-        "symfony/twig-bundle": "^6.4|^7.4|^8.0",
-        "symfony/validator": "^6.4|^7.4|^8.0",
-        "symfony/yaml": "^6.4|^7.4|^8.0"
+        "symfony/http-foundation": "^6.4 || ^7.4 || ^8.0",
+        "symfony/http-kernel": "^6.4 || ^7.4 || ^8.0",
+        "symfony/security-bundle": "^6.4 || ^7.4 || ^8.0",
+        "symfony/translation": "^6.4 || ^7.4 || ^8.0",
+        "symfony/twig-bundle": "^6.4 || ^7.4 || ^8.0",
+        "symfony/validator": "^6.4 || ^7.4 || ^8.0",
+        "symfony/yaml": "^6.4 || ^7.4 || ^8.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "ergebnis/composer-normalize": "^2.50",
         "fakerphp/faker": "^1.21",
-        "friendsofphp/php-cs-fixer": "^3.89",
+        "friendsofphp/php-cs-fixer": "^3.94",
         "hwi/oauth-bundle": "^2.0",
         "phpstan/phpstan": "^2.1",
-        "rector/rector": "^2.2",
+        "rector/rector": "^2.3",
         "softspring/account-bundle": "^6.0@dev",
         "softspring/doctrine-templates": "^6.0@dev",
         "softspring/mailer-bundle": "^6.0@dev",
         "softspring/media-bundle": "^6.0@dev",
-        "symfony/browser-kit": "^6.4|^7.4|^8.0",
-        "symfony/css-selector": "^6.4|^7.4|^8.0",
-        "symfony/dom-crawler": "^6.4|^7.4|^8.0",
-        "symfony/form": "^6.4|^7.4|^8.0",
-        "symfony/http-client": "^6.4|^7.4|^8.0",
-        "symfony/mailer": "^6.4|^7.4|^8.0",
-        "symfony/phpunit-bridge": "^6.4|^7.4|^8.0"
+        "symfony/browser-kit": "^6.4 || ^7.4 || ^8.0",
+        "symfony/css-selector": "^6.4 || ^7.4 || ^8.0",
+        "symfony/dom-crawler": "^6.4 || ^7.4 || ^8.0",
+        "symfony/form": "^6.4 || ^7.4 || ^8.0",
+        "symfony/http-client": "^6.4 || ^7.4 || ^8.0",
+        "symfony/mailer": "^6.4 || ^7.4 || ^8.0",
+        "symfony/phpunit-bridge": "^6.4 || ^7.4 || ^8.0"
     },
     "suggest": {
+        "hwi/oauth-bundle": "Integrate oauth clients",
         "softspring/mailer-bundle": "Integrates with softspring's mailer bundle",
-        "softspring/media-bundle": "Stores media files for avatars",
-        "hwi/oauth-bundle": "Integrate oauth clients"
+        "softspring/media-bundle": "Stores media files for avatars"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": false,
     "autoload": {
         "psr-4": {
             "Softspring\\UserBundle\\": "src/"
@@ -58,25 +58,30 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Softspring\\UserBundle\\Tests\\TestApplication\\": "tests/TestApplication/src",
-            "Softspring\\UserBundle\\Tests\\": "tests/"
+            "Softspring\\UserBundle\\Tests\\": "tests/",
+            "Softspring\\UserBundle\\Tests\\TestApplication\\": "tests/TestApplication/src"
         }
     },
     "config": {
-        "sort-packages": true,
         "allow-plugins": {
             "ergebnis/composer-normalize": true,
             "phpstan/extension-installer": true,
             "symfony/flex": true
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-6.0": "6.0.x-dev"
         }
     },
     "scripts": {
         "fix": [
             "vendor/bin/rector process src tests",
-            "vendor/bin/php-cs-fixer fix --diff",
+            "vendor/bin/php-cs-fixer fix",
             "composer normalize"
         ],
-        "run-tests" : [
+        "run-tests": [
             "composer validate --strict --no-check-lock --ansi",
             "XDEBUG_MODE=coverage vendor/bin/phpunit",
             "vendor/bin/rector process src tests --dry-run",
