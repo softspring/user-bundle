@@ -28,6 +28,7 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",
+        "ergebnis/composer-normalize": "^2.50",
         "fakerphp/faker": "^1.21",
         "friendsofphp/php-cs-fixer": "^3.89",
         "hwi/oauth-bundle": "^2.0",
@@ -64,8 +65,34 @@
     "config": {
         "sort-packages": true,
         "allow-plugins": {
-            "symfony/flex": true,
-            "phpstan/extension-installer": true
+            "ergebnis/composer-normalize": true,
+            "phpstan/extension-installer": true,
+            "symfony/flex": true
         }
+    },
+    "scripts": {
+        "fix": [
+            "vendor/bin/rector process src tests",
+            "vendor/bin/php-cs-fixer fix --diff",
+            "composer normalize"
+        ],
+        "run-tests" : [
+            "composer validate --strict --no-check-lock --ansi",
+            "XDEBUG_MODE=coverage vendor/bin/phpunit",
+            "vendor/bin/rector process src tests --dry-run",
+            "vendor/bin/phpstan analyse src tests --level 5",
+            "vendor/bin/php-cs-fixer fix --dry-run --diff",
+            "vendor/bin/yaml-lint .github/ -vvv --parse-tags",
+            "vendor/bin/yaml-lint config/ -vvv --parse-tags",
+            "vendor/bin/yaml-lint translations/ -vvv --parse-tags"
+        ],
+        "test": [
+            "composer update --no-scripts --ansi",
+            "@run-tests"
+        ],
+        "test-bc": [
+            "composer update --no-scripts --ansi --prefer-lowest --prefer-stable",
+            "@run-tests"
+        ]
     }
 }
