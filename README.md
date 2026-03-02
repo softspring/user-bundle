@@ -1,4 +1,4 @@
-# User Bundle
+# CMS Bundle
 
 ![Latest Stable](https://img.shields.io/packagist/v/softspring/user-bundle?label=stable&style=flat-square)
 ![Latest Unstable](https://img.shields.io/packagist/v/softspring/user-bundle?label=unstable&style=flat-square&include_prereleases)
@@ -15,8 +15,7 @@ This bundle is part of [Armonic](https://softspring.es/en/armonic).
 
 ## Documentation
 
-[Documentation](https://armonic.softspring.es/latest/bundles/user-bundle/install)
-
+[Armonic Documentation](https://armonic.softspring.es/latest/bundles/user-bundle/install)
 
 ## Contributing
 
@@ -25,4 +24,3 @@ This bundle is part of [Armonic](https://softspring.es/en/armonic).
 ## License
 
 This package is free and released under the [AGPL-3.0 license](LICENSE).
-

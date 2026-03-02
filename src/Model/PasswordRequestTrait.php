@@ -12,12 +12,12 @@ trait PasswordRequestTrait
 
     public function getPasswordRequestedAt(): ?DateTime
     {
-        return DateTime::createFromFormat('U', $this->passwordRequestedAt) ?: null;
+        return DateTime::createFromFormat('U', "$this->passwordRequestedAt") ?: null;
     }
 
     public function setPasswordRequestedAt(?DateTime $passwordRequestedAt): void
     {
-        $this->passwordRequestedAt = $passwordRequestedAt instanceof DateTime ? $passwordRequestedAt->format('U') : null;
+        $this->passwordRequestedAt = $passwordRequestedAt instanceof DateTime ? (int) $passwordRequestedAt->format('U') : null;
     }
 
     public function getPasswordRequestToken(): ?string

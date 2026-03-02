@@ -44,7 +44,7 @@ class ResetPasswordController extends AbstractController
 
     public function request(Request $request): Response
     {
-        if ($response = $this->dispatchGetResponse(SfsUserEvents::RESET_REQUEST_INITIALIZE, new GetResponseEvent())) {
+        if (($response = $this->dispatchGetResponse(SfsUserEvents::RESET_REQUEST_INITIALIZE, new GetResponseEvent())) instanceof Response) {
             return $response;
         }
 
@@ -52,27 +52,23 @@ class ResetPasswordController extends AbstractController
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                if ($response = $this->dispatchGetResponse(SfsUserEvents::RESET_REQUEST_FORM_VALID, new GetResponseFormEvent($form, $request))) {
+                if (($response = $this->dispatchGetResponse(SfsUserEvents::RESET_REQUEST_FORM_VALID, new GetResponseFormEvent($form, $request))) instanceof Response) {
                     return $response;
                 }
-
                 $request->getSession()->set('requested_email', $form->get('email')->getData());
-
                 // REQUEST PERFORM (SEND EMAIL, ETC) IS DONE ON EVENT LISTENERS
-                if ($response = $this->dispatchGetResponse(SfsUserEvents::RESET_REQUEST_DO_REQUEST, new GetResponseFormEvent($form, $request))) {
+                if (($response = $this->dispatchGetResponse(SfsUserEvents::RESET_REQUEST_DO_REQUEST, new GetResponseFormEvent($form, $request))) instanceof Response) {
                     return $response;
                 }
 
                 return $this->redirectToRoute('sfs_user_reset_password_requested');
-            } else {
-                if ($response = $this->dispatchGetResponse(SfsUserEvents::RESET_REQUEST_FORM_INVALID, new GetResponseFormEvent($form, $request))) {
-                    return $response;
-                }
+            } elseif (($response = $this->dispatchGetResponse(SfsUserEvents::RESET_REQUEST_FORM_INVALID, new GetResponseFormEvent($form, $request))) instanceof Response) {
+                return $response;
             }
         }
 
         $viewData = new ArrayObject([
-            'reset_form' => $form->createView(),
+            'reset_form' => $form,
         ]);
 
         $this->dispatch(SfsUserEvents::RESET_REQUEST_VIEW, new ViewEvent($viewData));
@@ -98,7 +94,7 @@ class ResetPasswordController extends AbstractController
 
     public function reset(string $user, string $token, Request $request): Response
     {
-        if ($response = $this->dispatchGetResponse(SfsUserEvents::RESET_INITIALIZE, new GetResponseEvent())) {
+        if (($response = $this->dispatchGetResponse(SfsUserEvents::RESET_INITIALIZE, new GetResponseEvent())) instanceof Response) {
             return $response;
         }
 
@@ -118,28 +114,24 @@ class ResetPasswordController extends AbstractController
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                if ($response = $this->dispatchGetResponse(SfsUserEvents::RESET_FORM_VALID, new GetResponseFormEvent($form, $request))) {
+                if (($response = $this->dispatchGetResponse(SfsUserEvents::RESET_FORM_VALID, new GetResponseFormEvent($form, $request))) instanceof Response) {
                     return $response;
                 }
-
                 $user->setPasswordRequestedAt(null);
                 $user->setPasswordRequestToken(null);
                 $this->userManager->saveEntity($user);
-
-                if ($response = $this->dispatchGetResponse(SfsUserEvents::RESET_SUCCESS, new GetResponseUserEvent($user, $request))) {
+                if (($response = $this->dispatchGetResponse(SfsUserEvents::RESET_SUCCESS, new GetResponseUserEvent($user, $request))) instanceof Response) {
                     return $response;
                 }
 
                 return $this->redirectToRoute('sfs_user_reset_password_success');
-            } else {
-                if ($response = $this->dispatchGetResponse(SfsUserEvents::RESET_FORM_INVALID, new GetResponseFormEvent($form, $request))) {
-                    return $response;
-                }
+            } elseif (($response = $this->dispatchGetResponse(SfsUserEvents::RESET_FORM_INVALID, new GetResponseFormEvent($form, $request))) instanceof Response) {
+                return $response;
             }
         }
 
         $viewData = new ArrayObject([
-            'reset_form' => $form->createView(),
+            'reset_form' => $form,
         ]);
 
         $this->dispatch(SfsUserEvents::RESET_VIEW, new ViewEvent($viewData));

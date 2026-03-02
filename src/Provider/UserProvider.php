@@ -31,7 +31,7 @@ class UserProvider implements UserProviderInterface
     {
         $user = $this->userManager->findUserByIdentifier($identifier);
 
-        if (!$user) {
+        if (!$user instanceof SfsUserInterface) {
             throw new UserNotFoundException(sprintf('Username "%s" does not exist.', $identifier));
         }
 
@@ -48,7 +48,7 @@ class UserProvider implements UserProviderInterface
             throw new UnsupportedUserException(sprintf('Expected an instance of %s, but got "%s".', $this->userManager->getEntityClass(), get_class($user)));
         }
 
-        if (null === $reloadedUser = $this->userManager->findUserByIdentifier($user->getUserIdentifier())) {
+        if (!($reloadedUser = $this->userManager->findUserByIdentifier($user->getUserIdentifier())) instanceof SfsUserInterface) {
             throw new UserNotFoundException(sprintf('User with ID "%s" could not be reloaded.', $user->getUserIdentifier()));
         }
 

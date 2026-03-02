@@ -9,6 +9,6 @@ trait UserIdentifierUsernameTrait
 {
     use UserIdentifierUsernameTraitModel;
 
-    #[ORM\Column(name: 'username', type: 'string', nullable: false, unique: true)]
+    #[ORM\Column(name: 'username', type: 'string', unique: true, nullable: false)]
     protected ?string $username = null;
 }

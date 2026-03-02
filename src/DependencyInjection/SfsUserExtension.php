@@ -65,7 +65,7 @@ class SfsUserExtension extends Extension implements PrependExtensionInterface
         $oauthServicesConfig = $config['oauth'] ?? [];
         $container->setParameter('sfs_user.oauth.services', $oauthServicesConfig);
 
-        if (sizeof($oauthServicesConfig)) {
+        if (0 !== count($oauthServicesConfig)) {
             if (!class_exists('HWI\Bundle\OAuthBundle\HWIOAuthBundle')) {
                 throw new InvalidConfigurationException('Oauth features requires HWIOAuthBundle, see documentation.');
             }

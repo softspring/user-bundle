@@ -55,7 +55,7 @@ class UsersController extends AbstractController
             throw new Exception(sprintf('User %s class must implement %s to promoting admins', get_class($user), RolesAdminInterface::class));
         }
 
-        if ($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_USERS_PROMOTE_INITIALIZE, new GetResponseUserEvent($user, $request))) {
+        if (($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_USERS_PROMOTE_INITIALIZE, new GetResponseUserEvent($user, $request))) instanceof Response) {
             return $response;
         }
 
@@ -64,15 +64,15 @@ class UsersController extends AbstractController
             $this->em->flush();
         }
 
-        if ($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_USERS_PROMOTE_SUCCESS, new GetResponseUserEvent($user, $request))) {
+        if (($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_USERS_PROMOTE_SUCCESS, new GetResponseUserEvent($user, $request))) instanceof Response) {
             return $response;
         }
 
         if ($this->isGranted('PERMISSION_SFS_USER_ADMIN_ADMINISTRATORS_LIST')) {
             return $this->redirectToRoute('sfs_user_admin_administrators_list');
-        } else {
-            return $this->redirectToRoute('sfs_user_admin_users_list');
         }
+
+        return $this->redirectToRoute('sfs_user_admin_users_list');
     }
 
     public function usersCountWidget(): Response
@@ -93,7 +93,7 @@ class UsersController extends AbstractController
 
     public function userConfirm(string $user): Response
     {
-        /** @var User $user */
+        /** @var ?User $user */
         $user = $this->userManager->findUserBy(['id' => $user]);
 
         $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_USERS_CONFIRM', $user);
@@ -111,7 +111,7 @@ class UsersController extends AbstractController
 
     public function userUnconfirm(string $user): Response
     {
-        /** @var User $user */
+        /** @var ?User $user */
         $user = $this->userManager->findUserBy(['id' => $user]);
 
         $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_USERS_UNCONFIRM', $user);
@@ -129,7 +129,7 @@ class UsersController extends AbstractController
 
     public function userEnable(string $user): Response
     {
-        /** @var User $user */
+        /** @var ?User $user */
         $user = $this->userManager->findUserBy(['id' => $user]);
 
         $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_USERS_ENABLE', $user);
@@ -146,7 +146,7 @@ class UsersController extends AbstractController
 
     public function userDisable(string $user): Response
     {
-        /** @var User $user */
+        /** @var ?User $user */
         $user = $this->userManager->findUserBy(['id' => $user]);
 
         $this->denyAccessUnlessGranted('PERMISSION_SFS_USER_ADMIN_USERS_DISABLE', $user);
@@ -166,7 +166,7 @@ class UsersController extends AbstractController
         /** @var ConfirmableInterface|UserInterface $user */
         $user = $this->userManager->findUserBy(['id' => $user]);
 
-        if ($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_USERS_RESEND_CONFIRMATION_INITIALIZE, new GetResponseUserEvent($user, $request))) {
+        if (($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_USERS_RESEND_CONFIRMATION_INITIALIZE, new GetResponseUserEvent($user, $request))) instanceof Response) {
             return $response;
         }
 
@@ -174,18 +174,16 @@ class UsersController extends AbstractController
             try {
                 $this->userMailer && $this->userMailer->sendRegisterConfirmationEmail($user);
 
-                if ($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_USERS_RESEND_CONFIRMATION_SUCCESS, new GetResponseUserEvent($user, $request))) {
+                if (($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_USERS_RESEND_CONFIRMATION_SUCCESS, new GetResponseUserEvent($user, $request))) instanceof Response) {
                     return $response;
                 }
             } catch (TransportExceptionInterface $e) {
-                if ($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_USERS_RESEND_CONFIRMATION_ERROR, new GetResponseUserEvent($user, $request))) {
+                if (($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_USERS_RESEND_CONFIRMATION_ERROR, new GetResponseUserEvent($user, $request))) instanceof Response) {
                     return $response;
                 }
             }
-        } else {
-            if ($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_USERS_RESEND_CONFIRMATION_ALREADY_CONFIRMED, new GetResponseUserEvent($user, $request))) {
-                return $response;
-            }
+        } elseif (($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_USERS_RESEND_CONFIRMATION_ALREADY_CONFIRMED, new GetResponseUserEvent($user, $request))) instanceof Response) {
+            return $response;
         }
 
         return $this->redirectToRoute('sfs_user_admin_users_details', ['user' => $user]);

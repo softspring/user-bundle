@@ -2,7 +2,6 @@
 
 namespace Softspring\UserBundle\Model;
 
-use Exception;
 use ReflectionClass;
 
 abstract class User implements UserInterface
@@ -16,13 +15,6 @@ abstract class User implements UserInterface
     {
         if ($this instanceof RolesInterface || $this instanceof RolesAdminInterface || $this instanceof RolesFullInterface) {
             $this->setRoles([]);
-        }
-    }
-
-    public function eraseCredentials(): void
-    {
-        if ($this instanceof UserPasswordInterface) {
-            $this->setPlainPassword(null);
         }
     }
 
@@ -98,36 +90,8 @@ abstract class User implements UserInterface
 
     abstract public function getId(): mixed;
 
-    /**
-     * @deprecated this method will be removed on SF 6
-     */
-    public function getUsername(): ?string
-    {
-        return $this->getUserIdentifier();
-    }
-
     public function getRoles(): array
     {
         return ['ROLE_USER'];
-    }
-
-    /**
-     * @deprecated this method will be removed on SF 6
-     *
-     * @throws Exception
-     */
-    public function getPassword(): ?string
-    {
-        return null;
-    }
-
-    /**
-     * @deprecated this method will be removed on SF 6
-     *
-     * @throws Exception
-     */
-    public function getSalt(): ?string
-    {
-        return null;
     }
 }

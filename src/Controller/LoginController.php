@@ -42,7 +42,7 @@ class LoginController extends AbstractController
         $session = $request->getSession();
 
         $loginCheckParams = [];
-        if ($this->targetPathParameter && $targetPath = $request->get($this->targetPathParameter)) {
+        if ($this->targetPathParameter && $targetPath = $request->query->get($this->targetPathParameter, $request->request->get($this->targetPathParameter))) {
             $loginCheckParams[$this->targetPathParameter] = $targetPath;
         }
 
@@ -70,12 +70,12 @@ class LoginController extends AbstractController
             $session->remove($authenticationErrorKey);
         }
 
-        if ($response = $this->dispatchGetResponse(SfsUserEvents::LOGIN_ATTEMPT, new GetResponseFormEvent($form, $request))) {
+        if (($response = $this->dispatchGetResponse(SfsUserEvents::LOGIN_ATTEMPT, new GetResponseFormEvent($form, $request))) instanceof Response) {
             return $response;
         }
 
         return $this->render('@SfsUser/login/login.html.twig', [
-            'login_form' => $form->createView(),
+            'login_form' => $form,
             'oauth_services' => $this->oauthServices,
             'register_params' => $loginCheckParams,
         ]);

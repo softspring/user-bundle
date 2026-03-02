@@ -42,26 +42,22 @@ class ChangeUsernameController extends AbstractController
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                if ($response = $this->dispatchGetResponse(SfsUserEvents::CHANGE_USERNAME_FORM_VALID, new GetResponseFormEvent($form, $request))) {
+                if (($response = $this->dispatchGetResponse(SfsUserEvents::CHANGE_USERNAME_FORM_VALID, new GetResponseFormEvent($form, $request))) instanceof Response) {
                     return $response;
                 }
-
                 $this->userManager->saveEntity($user);
-
-                if ($response = $this->dispatchGetResponse(SfsUserEvents::CHANGE_USERNAME_UPDATED, new GetResponseUserEvent($user, $request))) {
+                if (($response = $this->dispatchGetResponse(SfsUserEvents::CHANGE_USERNAME_UPDATED, new GetResponseUserEvent($user, $request))) instanceof Response) {
                     return $response;
                 }
 
                 return $this->redirect('/');
-            } else {
-                if ($response = $this->dispatchGetResponse(SfsUserEvents::CHANGE_USERNAME_FORM_INVALID, new GetResponseFormEvent($form, $request))) {
-                    return $response;
-                }
+            } elseif (($response = $this->dispatchGetResponse(SfsUserEvents::CHANGE_USERNAME_FORM_INVALID, new GetResponseFormEvent($form, $request))) instanceof Response) {
+                return $response;
             }
         }
 
         return $this->render('@SfsUser/change_username/change_username.html.twig', [
-            'form' => $form->createView(),
+            'form' => $form,
         ]);
     }
 }

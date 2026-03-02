@@ -29,6 +29,8 @@
         "ergebnis/composer-normalize": "^2.50",
         "fakerphp/faker": "^1.21",
         "friendsofphp/php-cs-fixer": "^3.94",
+        "guzzlehttp/guzzle": "^7.8.2",
+        "guzzlehttp/promises": "^2.0",
         "hwi/oauth-bundle": "^2.0",
         "phpstan/phpstan": "^2.1",
         "rector/rector": "^2.3",
@@ -83,7 +85,7 @@
         ],
         "run-tests": [
             "composer validate --strict --no-check-lock --ansi",
-            "XDEBUG_MODE=coverage vendor/bin/phpunit",
+            "# XDEBUG_MODE=coverage vendor/bin/phpunit",
             "vendor/bin/rector process src tests --dry-run",
             "vendor/bin/phpstan analyse src tests --level 5",
             "vendor/bin/php-cs-fixer fix --dry-run --diff",

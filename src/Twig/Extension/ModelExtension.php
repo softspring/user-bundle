@@ -28,9 +28,9 @@ class ModelExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('sfs_user_is', [$this, 'userCheckInterface']),
-            new TwigFunction('sfs_user_access_is', [$this, 'userAccessCheckInterface']),
-            new TwigFunction('sfs_invitation_is', [$this, 'userInvitationInterface']),
+            new TwigFunction('sfs_user_is', $this->userCheckInterface(...)),
+            new TwigFunction('sfs_user_access_is', $this->userAccessCheckInterface(...)),
+            new TwigFunction('sfs_invitation_is', $this->userInvitationInterface(...)),
         ];
     }
 

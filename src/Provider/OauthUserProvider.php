@@ -53,19 +53,11 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
     {
         $user = $this->userManager->findUserByIdentifier($identifier);
 
-        if (!$user) {
+        if (!$user instanceof SoftspringUserInterface) {
             throw new UserNotFoundException();
         }
 
         return $user;
-    }
-
-    /**
-     * @deprecated this method will be removed on SF 6
-     */
-    public function loadUserByUsername(string $username): UserInterface
-    {
-        return $this->loadUserByIdentifier($username);
     }
 
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
@@ -73,9 +65,9 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
         $username = $response->getUsername(); // provides id (identifier)
 
         $user = $this->userManager->findUserBy([$this->getProperty($response) => $username]);
-        if (null === $user || !$username) {
+        if (!$user instanceof SoftspringUserInterface || !$username) {
             $user = $this->userManager->findUserByIdentifier($response->getEmail());
-            if ($user) {
+            if ($user instanceof SoftspringUserInterface) {
                 $this->linkUser($user, $response);
                 $this->userManager->saveEntity($user);
 
@@ -95,7 +87,7 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
         return $user;
     }
 
-    public function connect(UserInterface $user, UserResponseInterface $response)
+    public function connect(UserInterface $user, UserResponseInterface $response): void
     {
         if (!$user instanceof SoftspringUserInterface) {
             throw new UnsupportedUserException(sprintf('Expected an instance of %s, but got "%s".', SoftspringUserInterface::class, get_class($user)));
@@ -104,7 +96,7 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
         $property = $this->getProperty($response);
         $username = $response->getUsername();
 
-        if (null !== $previousUser = $this->userManager->findUserBy([$property => $username])) {
+        if (($previousUser = $this->userManager->findUserBy([$property => $username])) instanceof SoftspringUserInterface) {
             $this->disconnect($previousUser, $response);
         }
 
@@ -120,7 +112,7 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
     /**
      * Disconnects a user.
      */
-    public function disconnect(SoftspringUserInterface $user, UserResponseInterface $response)
+    public function disconnect(SoftspringUserInterface $user, UserResponseInterface $response): void
     {
         $property = $this->getProperty($response);
 
@@ -136,7 +128,7 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
         }
 
         $userId = $this->accessor->getValue($user, $identifier);
-        if (null === $user = $this->userManager->findUserBy([$identifier => $userId])) {
+        if (!($user = $this->userManager->findUserBy([$identifier => $userId])) instanceof SoftspringUserInterface) {
             throw new UserNotFoundException(sprintf('User with ID "%d" could not be reloaded.', $userId));
         }
 

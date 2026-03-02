@@ -56,9 +56,8 @@ class CreateUserCommand extends Command
                 $output->writeln(sprintf('<error>User %s exists</error>', $username));
 
                 return Command::FAILURE;
-            } else {
-                $output->writeln(sprintf('<info>User %s exists, ignoring</info>', $username));
             }
+            $output->writeln(sprintf('<info>User %s exists, ignoring</info>', $username));
         }
 
         return Command::SUCCESS;

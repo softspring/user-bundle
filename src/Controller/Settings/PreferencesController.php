@@ -42,26 +42,22 @@ class PreferencesController extends AbstractController
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                if ($response = $this->dispatchGetResponse(SfsUserEvents::PREFERENCES_FORM_VALID, new GetResponseFormEvent($form, $request))) {
+                if (($response = $this->dispatchGetResponse(SfsUserEvents::PREFERENCES_FORM_VALID, new GetResponseFormEvent($form, $request))) instanceof Response) {
                     return $response;
                 }
-
                 $this->userManager->saveEntity($user);
-
-                if ($response = $this->dispatchGetResponse(SfsUserEvents::PREFERENCES_UPDATED, new GetResponseUserEvent($user, $request))) {
+                if (($response = $this->dispatchGetResponse(SfsUserEvents::PREFERENCES_UPDATED, new GetResponseUserEvent($user, $request))) instanceof Response) {
                     return $response;
                 }
 
                 return $this->redirectToRoute('sfs_user_preferences');
-            } else {
-                if ($response = $this->dispatchGetResponse(SfsUserEvents::PREFERENCES_FORM_INVALID, new GetResponseFormEvent($form, $request))) {
-                    return $response;
-                }
+            } elseif (($response = $this->dispatchGetResponse(SfsUserEvents::PREFERENCES_FORM_INVALID, new GetResponseFormEvent($form, $request))) instanceof Response) {
+                return $response;
             }
         }
 
         return $this->render('@SfsUser/preferences/preferences.html.twig', [
-            'preferences_form' => $form->createView(),
+            'preferences_form' => $form,
         ]);
     }
 }

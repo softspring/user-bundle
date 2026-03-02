@@ -23,7 +23,7 @@ class InvitationsFixtures extends UserFixtures
 
     public function load(ObjectManager $manager): void
     {
-        if (!$this->invitationManager) {
+        if (!$this->invitationManager instanceof UserInvitationManagerInterface) {
             return;
         }
 

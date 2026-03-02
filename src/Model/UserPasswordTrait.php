@@ -10,19 +10,9 @@ trait UserPasswordTrait
 
     protected ?string $plainPassword = null;
 
-    public function getSalt(): ?string
-    {
-        return $this->salt;
-    }
-
     public function setSalt(?string $salt): void
     {
         $this->salt = $salt;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
     }
 
     public function setPassword(?string $password): void
@@ -38,5 +28,10 @@ trait UserPasswordTrait
     public function setPlainPassword(?string $plainPassword): void
     {
         $this->plainPassword = $plainPassword;
+    }
+
+    public function eraseCredentials(): void
+    {
+        $this->setPlainPassword(null);
     }
 }

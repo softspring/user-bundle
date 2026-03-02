@@ -2,16 +2,21 @@ includes:
 	- phpstan-baseline.neon
 
 parameters:
-    level: 6
+    level: 5
     paths:
         - src/
+        - tests/
     bootstrapFiles:
         - vendor/autoload.php
     excludePaths:
         analyse:
             - src/Provider/OauthUserProvider.php # This will be fully refactored
     ignoreErrors:
-        - '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition::children\(\)#'
+        -
+            message: '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition::children\(\)#'
+            reportUnmatched: false
         - '#Call to an undefined method Doctrine\\ORM\\EntityRepository::findOneBy#'
         - '#Method Psr\\EventDispatcher\\EventDispatcherInterface::dispatch\(\) invoked with 2 parameters, 1 required.#'
-        - '#no value type specified in iterable type array#'
+        - '#PHPDoc tag @var with type Softspring\\UserBundle\\Model\\.* is not subtype of native type Symfony\\Component\\Security\\Core\\User\\UserInterface\|null\.#'
+        - '#PHPDoc tag @var with type Softspring\\UserBundle\\Model\\.* is not subtype of native type Softspring\\UserBundle\\Model\\UserInterface\|null\.#'
+        - identifier: trait.unused

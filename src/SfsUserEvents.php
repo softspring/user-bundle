@@ -2,6 +2,8 @@
 
 namespace Softspring\UserBundle;
 
+use Event;
+
 class SfsUserEvents
 {
     /** @Event("Softspring\UserBundle\Event\UserEvent") */

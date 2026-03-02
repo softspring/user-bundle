@@ -27,11 +27,8 @@ class SfsUserBundle extends Bundle
         $container->addCompilerPass(new ResolveDoctrineTargetEntityPass());
     }
 
-    /**
-     * @param string|bool $enablingParameter
-     */
-    private function addRegisterMappingsPass(ContainerBuilder $container, array $mappings, $enablingParameter = false): void
+    private function addRegisterMappingsPass(ContainerBuilder $container, array $mappings): void
     {
-        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, ['sfs_user.entity_manager_name'], $enablingParameter));
+        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, ['sfs_user.entity_manager_name']));
     }
 }

@@ -41,7 +41,7 @@ class MailTemplateLoader implements TemplateLoaderInterface
             $collection->addTemplate($template);
         }
 
-        if (!empty($this->inviteClass)) {
+        if (!in_array($this->inviteClass, [null, '', '0'], true)) {
             $template = new Template();
             $template->setId('sfs_user.invite');
             $template->setClass(InvitationEmail::class);

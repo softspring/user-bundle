@@ -44,7 +44,9 @@ class UserManager implements UserManagerInterface, AdminUserManagerInterface
         $this->hashPassword($entity);
 
         $this->em->persist($entity);
-        $flush && $this->em->flush();
+        if ($flush) {
+            $this->em->flush();
+        }
     }
 
     public function findUserBy(array $criteria): ?UserInterface

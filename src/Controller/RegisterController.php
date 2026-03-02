@@ -44,12 +44,12 @@ class RegisterController extends AbstractController
     {
         $user = $this->userManager->createEntity();
 
-        if ($response = $this->dispatchGetResponse(SfsUserEvents::REGISTER_INITIALIZE, new GetResponseUserEvent($user, $request))) {
+        if (($response = $this->dispatchGetResponse(SfsUserEvents::REGISTER_INITIALIZE, new GetResponseUserEvent($user, $request))) instanceof Response) {
             return $response;
         }
 
         $loginCheckParams = [];
-        if ($this->targetPathParameter && $targetPath = $request->get($this->targetPathParameter)) {
+        if ($this->targetPathParameter && $targetPath = $request->query->get($this->targetPathParameter, $request->request->get($this->targetPathParameter))) {
             $loginCheckParams[$this->targetPathParameter] = $targetPath;
         }
 
@@ -57,33 +57,30 @@ class RegisterController extends AbstractController
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                if ($response = $this->dispatchGetResponse(SfsUserEvents::REGISTER_FORM_VALID, new GetResponseFormEvent($form, $request))) {
+                if (($response = $this->dispatchGetResponse(SfsUserEvents::REGISTER_FORM_VALID, new GetResponseFormEvent($form, $request))) instanceof Response) {
                     return $response;
                 }
-
                 try {
                     $this->userManager->saveEntity($user);
 
-                    if ($response = $this->dispatchGetResponse(SfsUserEvents::REGISTER_SUCCESS, new GetResponseUserEvent($user, $request))) {
+                    if (($response = $this->dispatchGetResponse(SfsUserEvents::REGISTER_SUCCESS, new GetResponseUserEvent($user, $request))) instanceof Response) {
                         return $response;
                     }
 
                     return $this->redirectToRoute('sfs_user_register_success');
                 } catch (Exception $e) {
                     $this->dispatch(SfsUserEvents::REGISTER_EXCEPTION, $exceptionEvent = new RegisterExceptionEvent($form, $e, $request));
-                    if ($exceptionEvent->getThrowException()) {
+                    if ($exceptionEvent->getThrowException() instanceof Exception) {
                         throw $exceptionEvent->getThrowException();
                     }
                 }
-            } else {
-                if ($response = $this->dispatchGetResponse(SfsUserEvents::REGISTER_FORM_INVALID, new GetResponseFormEvent($form, $request))) {
-                    return $response;
-                }
+            } elseif (($response = $this->dispatchGetResponse(SfsUserEvents::REGISTER_FORM_INVALID, new GetResponseFormEvent($form, $request))) instanceof Response) {
+                return $response;
             }
         }
 
         $viewData = new ArrayObject([
-            'register_form' => $form->createView(),
+            'register_form' => $form,
             'register_params' => $loginCheckParams,
         ]);
 
@@ -110,14 +107,14 @@ class RegisterController extends AbstractController
         $user = $this->userManager->getRepository()->findOneById($user);
 
         if ($user->getConfirmationToken() !== $token) {
-            if ($response = $this->dispatchGetResponse(SfsUserEvents::CONFIRMATION_FAILED, new GetResponseUserEvent($user, $request))) {
+            if (($response = $this->dispatchGetResponse(SfsUserEvents::CONFIRMATION_FAILED, new GetResponseUserEvent($user, $request))) instanceof Response) {
                 return $response;
             }
 
             return $this->redirectToRoute('sfs_user_register');
         }
 
-        if ($response = $this->dispatchGetResponse(SfsUserEvents::CONFIRMATION_VALID, new GetResponseUserEvent($user, $request))) {
+        if (($response = $this->dispatchGetResponse(SfsUserEvents::CONFIRMATION_VALID, new GetResponseUserEvent($user, $request))) instanceof Response) {
             return $response;
         }
 
@@ -125,7 +122,7 @@ class RegisterController extends AbstractController
         $user->setConfirmedAt(new DateTime('now'));
         $this->userManager->saveEntity($user);
 
-        if ($response = $this->dispatchGetResponse(SfsUserEvents::CONFIRMATION_SUCCESS, new GetResponseUserEvent($user, $request))) {
+        if (($response = $this->dispatchGetResponse(SfsUserEvents::CONFIRMATION_SUCCESS, new GetResponseUserEvent($user, $request))) instanceof Response) {
             return $response;
         }
 

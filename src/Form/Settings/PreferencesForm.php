@@ -49,7 +49,7 @@ class PreferencesForm extends AbstractType implements PreferencesFormInterface
         }
 
         if ($reflection->implementsInterface(UserHasLocalePreferenceInterface::class)) {
-            $locales = !empty($options['locales']) ? $options['locales'] : $this->locales;
+            $locales = empty($options['locales']) ? $this->locales : $options['locales'];
             $builder->add('locale', Types\ChoiceType::class, [
                 'choices' => array_combine($locales, $locales),
             ]);

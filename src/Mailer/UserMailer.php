@@ -45,6 +45,7 @@ class UserMailer implements UserMailerInterface
         }
 
         /** @var User|ConfirmableInterface|UserWithEmailInterface $user */
+        /** @phpstan-ignore-next-line  */
         $toName = $user instanceof NameSurnameInterface ? implode(' ', [$user->getName(), $user->getSurname()]) : '';
 
         $locale = $user instanceof UserHasLocalePreferenceInterface ? $user->getLocale() : $locale;
@@ -54,7 +55,7 @@ class UserMailer implements UserMailerInterface
             'token' => $user->getConfirmationToken(),
         ], UrlGeneratorInterface::ABSOLUTE_URL);
 
-        $email = (new ConfirmationEmail($user, $confirmationUrl, $this->translator, $locale))
+        $email = new ConfirmationEmail($user, $confirmationUrl, $this->translator, $locale)
             ->to(new Address($user->getEmail(), $toName))
         ;
 
@@ -84,6 +85,7 @@ class UserMailer implements UserMailerInterface
         }
 
         /** @var User|PasswordRequestInterface|UserWithEmailInterface $user */
+        /** @phpstan-ignore-next-line  */
         $toName = $user instanceof NameSurnameInterface ? implode(' ', [$user->getName(), $user->getSurname()]) : '';
 
         $resetUrl = $this->urlGenerator->generate('sfs_user_reset_password', [

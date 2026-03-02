@@ -83,7 +83,7 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
 
         $manager->persist($user); // $this->userManager->saveEntity($user, false); // this is disabled because wastes a lot of time hashing passwords
 
-        if ($this->userAccessManager) {
+        if ($this->userAccessManager instanceof UserAccessManagerInterface) {
             if ($user instanceof ConfirmableInterface && !$user->getConfirmedAt()) {
                 return $user;
             }

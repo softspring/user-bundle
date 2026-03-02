@@ -13,6 +13,7 @@ use Softspring\UserBundle\Form\AcceptInvitationFormInterface;
 use Softspring\UserBundle\Manager\UserInvitationManagerInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\EnablableInterface;
+use Softspring\UserBundle\Model\UserInvitationInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -45,12 +46,12 @@ class InvitationController extends AbstractController
     {
         $invitation = $this->invitationManager->findInvitationByToken($token);
 
-        if (null === $invitation) {
+        if (!$invitation instanceof UserInvitationInterface) {
             throw $this->createNotFoundException(sprintf('The user with invitation token "%s" does not exist', $token));
         }
 
-        if ($invitation->getAcceptedAt()) {
-            if ($response = $this->dispatchGetResponse(SfsUserEvents::INVITATION_ACCEPTED, new GetResponseUserEvent($invitation->getUser(), $request))) {
+        if ($invitation->getAcceptedAt() instanceof DateTime) {
+            if (($response = $this->dispatchGetResponse(SfsUserEvents::INVITATION_ACCEPTED, new GetResponseUserEvent($invitation->getUser(), $request))) instanceof Response) {
                 return $response;
             }
 
@@ -59,7 +60,7 @@ class InvitationController extends AbstractController
 
         $user = $invitation->getUser() ?? $this->invitationManager->createUser($invitation);
 
-        if ($response = $this->dispatchGetResponse(SfsUserEvents::INVITATION_ACCEPT, new GetResponseUserEvent($user, $request))) {
+        if (($response = $this->dispatchGetResponse(SfsUserEvents::INVITATION_ACCEPT, new GetResponseUserEvent($user, $request))) instanceof Response) {
             return $response;
         }
 
@@ -69,31 +70,25 @@ class InvitationController extends AbstractController
             if ($form->isValid()) {
                 $event = new FormEvent($form, $request);
                 $this->dispatch(SfsUserEvents::INVITATION_FORM_VALID, $event);
-
                 $invitation->setUser($user);
                 $invitation->setAcceptedAt(new DateTime('now'));
-
                 if ($user instanceof EnablableInterface) {
                     $user->setEnabled(true);
                 }
-
                 $this->userManager->saveEntity($user);
                 $this->invitationManager->saveEntity($invitation);
-
-                if ($response = $this->dispatchGetResponse(SfsUserEvents::INVITATION_ACCEPTED, new GetResponseUserEvent($user, $request))) {
+                if (($response = $this->dispatchGetResponse(SfsUserEvents::INVITATION_ACCEPTED, new GetResponseUserEvent($user, $request))) instanceof Response) {
                     return $response;
                 }
 
                 return $this->redirectToRoute('sfs_user_invitation_success');
-            } else {
-                if ($response = $this->dispatchGetResponse(SfsUserEvents::INVITATION_FORM_INVALID, new GetResponseFormEvent($form, $request))) {
-                    return $response;
-                }
+            } elseif (($response = $this->dispatchGetResponse(SfsUserEvents::INVITATION_FORM_INVALID, new GetResponseFormEvent($form, $request))) instanceof Response) {
+                return $response;
             }
         }
 
         return $this->render('@SfsUser/invitation/accept.html.twig', [
-            'accept_form' => $form->createView(),
+            'accept_form' => $form,
             'invitation' => $invitation,
             'user' => $user,
         ]);

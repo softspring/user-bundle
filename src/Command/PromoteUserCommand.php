@@ -4,6 +4,7 @@ namespace Softspring\UserBundle\Command;
 
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\RolesAdminInterface;
+use Softspring\UserBundle\Model\UserInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -35,7 +36,7 @@ class PromoteUserCommand extends Command
 
         $user = $this->userManager->findUserByIdentifier($identifier);
 
-        if (null === $user) {
+        if (!$user instanceof UserInterface) {
             $output->writeln(sprintf('User %s not found', $identifier));
 
             return Command::FAILURE;

@@ -65,7 +65,7 @@ class FlashMessagesListener implements EventSubscriberInterface
 
     protected function addFlash(string $type, string $trans, array $transParams = [], string $domain = 'sfs_user', string $locale = 'en'): void
     {
-        if (!$this->flashBag) {
+        if (!$this->flashBag instanceof FlashBagInterface) {
             return;
         }
 

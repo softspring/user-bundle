@@ -40,7 +40,7 @@ class LoginManager
         $token = $this->createToken($request, $user);
         $request = $this->requestStack->getCurrentRequest();
 
-        if (null !== $request) {
+        if ($request instanceof Request) {
             $this->sessionStrategy->onAuthentication($request, $token);
 
             //            if (null !== $response && null !== $this->rememberMeService) {

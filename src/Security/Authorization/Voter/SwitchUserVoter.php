@@ -5,6 +5,7 @@ namespace Softspring\UserBundle\Security\Authorization\Voter;
 use Softspring\UserBundle\Model\RolesAdminInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Vote;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Exception\InvalidArgumentException;
 
@@ -16,12 +17,14 @@ class SwitchUserVoter implements VoterInterface
             return false;
         }
 
-        return $user instanceof UserInterface and $user instanceof RolesAdminInterface;
+        return $user instanceof UserInterface && $user instanceof RolesAdminInterface;
     }
 
-    public function vote(TokenInterface $token, $user, array $attributes): int
+    public function vote(TokenInterface $token, $subject, array $attributes, ?Vote $vote = null): int
     {
         /** @var UserInterface|RolesAdminInterface $user */
+        $user = $subject;
+
         $role = $attributes[0] ?? '';
 
         // check role

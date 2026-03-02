@@ -27,23 +27,19 @@ class UserAccessManipulator
         $userAccess->setIp($request->getClientIp());
         $userAccess->setUserAgent($request->headers->get('User-Agent'));
 
-        if ($userAccess instanceof UserAccessLocationInterface) {
-            if ($request->server->has('GAE_APPLICATION')) {
-                // HTTP_X_APPENGINE_CITY
-                // HTTP_X_APPENGINE_COUNTRY
-                $userAccess->setCity($request->server->get('HTTP_X_APPENGINE_CITY'));
-                $userAccess->setRegion($request->server->get('HTTP_X_APPENGINE_REGION'));
-                $userAccess->setCountry($request->server->get('HTTP_X_APPENGINE_COUNTRY'));
-            }
+        if ($userAccess instanceof UserAccessLocationInterface && $request->server->has('GAE_APPLICATION')) {
+            // HTTP_X_APPENGINE_CITY
+            // HTTP_X_APPENGINE_COUNTRY
+            $userAccess->setCity($request->server->get('HTTP_X_APPENGINE_CITY'));
+            $userAccess->setRegion($request->server->get('HTTP_X_APPENGINE_REGION'));
+            $userAccess->setCountry($request->server->get('HTTP_X_APPENGINE_COUNTRY'));
         }
 
-        if ($userAccess instanceof UserAccessLatLongInterface) {
-            if ($request->server->has('GAE_APPLICATION')) {
-                // HTTP_X_APPENGINE_CITYLATLONG "37.386051,-122.083851"
-                [$lat, $long] = explode(',', $request->server->get('HTTP_X_APPENGINE_CITYLATLONG'));
-                $userAccess->setLat(floatval($lat));
-                $userAccess->setLong(floatval($long));
-            }
+        if ($userAccess instanceof UserAccessLatLongInterface && $request->server->has('GAE_APPLICATION')) {
+            // HTTP_X_APPENGINE_CITYLATLONG "37.386051,-122.083851"
+            [$lat, $long] = explode(',', $request->server->get('HTTP_X_APPENGINE_CITYLATLONG'));
+            $userAccess->setLat(floatval($lat));
+            $userAccess->setLong(floatval($long));
         }
 
         $this->userAccessManager->saveEntity($userAccess);

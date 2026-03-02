@@ -35,7 +35,7 @@ class User extends UserModel implements NameSurnameInterface, PasswordRequestInt
      * @ORM\GeneratedValue(strategy="NONE")
      */
     #[ORM\Id]
-    #[ORM\Column(type: "string", nullable: false, length: 32)]
+    #[ORM\Column(type: "string", length: 32, nullable: false)]
     #[ORM\GeneratedValue(strategy: "NONE")]
     protected ?string $id = null;
 
@@ -53,5 +53,10 @@ class User extends UserModel implements NameSurnameInterface, PasswordRequestInt
     public function getDisplayName(): string
     {
         return $this->getName();
+    }
+
+    public function eraseCredentials()
+    {
+
     }
 }
