@@ -20,6 +20,11 @@ trait UserPasswordTrait
         $this->password = $password;
     }
 
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
     public function getPlainPassword(): ?string
     {
         return $this->plainPassword;
