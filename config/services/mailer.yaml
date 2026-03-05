@@ -1,0 +1,6 @@
+services:
+    Softspring\UserBundle\Mailer\UserMailerInterface:
+        class: Softspring\UserBundle\Mailer\UserMailer
+
+    Softspring\UserBundle\EventListener\SendResetPasswordEmailListener: ~
+    Softspring\UserBundle\EventListener\UserRegistrationListener: ~

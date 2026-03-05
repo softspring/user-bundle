@@ -12,6 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\Mailer\MailerInterface;
 
 class SfsUserExtension extends Extension implements PrependExtensionInterface
 {
@@ -85,6 +86,10 @@ class SfsUserExtension extends Extension implements PrependExtensionInterface
 
         if (class_exists(Fixture::class)) {
             $loader->load('services/data_fixtures.yaml');
+        }
+
+        if (class_exists(MailerInterface::class)) {
+            $loader->load('services/mailer.yaml');
         }
     }
 

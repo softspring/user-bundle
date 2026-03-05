@@ -31,15 +31,10 @@ services:
     Softspring\UserBundle\EventListener\Admin\FlashMessagesListener: ~
     Softspring\UserBundle\EventListener\AutoAuthenticateEventSubscriber: ~
     Softspring\UserBundle\EventListener\LastLoginEventSubscriber: ~
-    Softspring\UserBundle\EventListener\SendResetPasswordEmailListener: ~
-    Softspring\UserBundle\EventListener\UserRegistrationListener: ~
 
     Softspring\UserBundle\Form\:
         resource: '../src/Form/*'
         exclude:  '../src/Form/Admin/'
-
-    Softspring\UserBundle\Mailer\UserMailerInterface:
-        class: Softspring\UserBundle\Mailer\UserMailer
 
     Softspring\UserBundle\Manager\UserManagerInterface:
         class: Softspring\UserBundle\Manager\UserManager
