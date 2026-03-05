@@ -2,7 +2,7 @@
 {% for administrator in collection %}
     <tr>
         {% if sfs_user_is('avatar') %}
-            <td class="ps-3 pe-3 align-middle"><img alt="{{ administrator.username }}" src="{{ administrator.avatarUrl }}" width="28" height="28" class="rounded-circle"></td>
+            <td class="ps-3 pe-3 align-middle"><img alt="{{ administrator.displayName }}" src="{{ administrator.avatarUrl }}" width="28" height="28" class="rounded-circle"></td>
         {% endif %}
         {% if sfs_user_is('nameSurname') %}
             <td>{{ administrator.name }}</td>

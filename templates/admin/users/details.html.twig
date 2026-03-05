@@ -57,7 +57,7 @@
                 <div class="card-body">
                     <div class="text-center mb-4">
                         {% if sfs_user_is('avatar') %}
-                            <img alt="{{ user.username }}" src="{{ user.avatarUrl }}" width="128" height="128" class="rounded-circle mb-3">
+                            <img alt="{{ user.displayName }}" src="{{ user.avatarUrl }}" width="128" height="128" class="rounded-circle mb-3">
                         {% endif %}
 
                         {% if sfs_user_is('nameSurname') %}
@@ -67,7 +67,7 @@
 
                     {% if switch_enabled and is_granted(switch_role) %}
                         {% if is_granted(switch_role, user) %}
-                            <a href="{{ url(switch_route, switch_route_params) }}{{ switch_route_params|length ? '&' : '?' }}{{ switch_parameter }}={{ user.username }}"
+                            <a href="{{ url(switch_route, switch_route_params) }}{{ switch_route_params|length ? '&' : '?' }}{{ switch_parameter }}={{ user.displayName }}"
                                class="btn btn-outline-secondary w-100 mb-4"><i class="bi bi-incognito"></i> {{ 'admin_users.details.actions.switch'|trans({'%switchUserIdentifier%':user.userIdentifier, '%switchUserDisplayName%':user.displayName}) }}</a>
                         {% else %}
                             <a href="#" class="disabled btn btn-outline-secondary w-100 mb-4"><i class="bi bi-incognito"></i> {{ 'admin_users.details.actions.switch'|trans({'%switchUserIdentifier%':user.userIdentifier, '%switchUserDisplayName%':user.displayName}) }}</a>
@@ -138,7 +138,7 @@
 {#                                {% endif %}#}
 
 {#                                {% if relation.grantedBy is defined and relation.grantedBy != relation.user %}#}
-{#                                    (granted by {{ relation.grantedBy.username }})#}
+{#                                    (granted by {{ relation.grantedBy.displayName }})#}
 {#                                {% endif %}#}
 {#                            </li>#}
 {#                        {% endfor %}#}
