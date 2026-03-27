@@ -11,6 +11,20 @@ setlocale(\LC_ALL, 'en_US.UTF-8');
 // needed to avoid failed tests when other timezones than UTC are configured for PHP
 date_default_timezone_set('UTC');
 
+$hasTests = false;
+$testsIterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__, FilesystemIterator::SKIP_DOTS));
+foreach ($testsIterator as $testFile) {
+    if (str_ends_with($testFile->getFilename(), 'Test.php')) {
+        $hasTests = true;
+        break;
+    }
+}
+unset($testsIterator);
+
+if (!$hasTests) {
+    return;
+}
+
 // we want final classes in code but we need non-final classes in tests
 // after trying many solutions (see https://tomasvotruba.com/blog/2019/03/28/how-to-mock-final-classes-in-phpunit/)
 // none was reliable enough, so this custom solution removes the 'final' keyword
@@ -37,6 +51,29 @@ if (!file_exists($file)) {
 }
 $autoload = require $file;
 
+$databaseAvailable = extension_loaded('pdo_sqlite');
+putenv(sprintf('SFS_USER_TEST_DATABASE_AVAILABLE=%d', $databaseAvailable ? 1 : 0));
+$_SERVER['SFS_USER_TEST_DATABASE_AVAILABLE'] = $databaseAvailable ? '1' : '0';
+$_ENV['SFS_USER_TEST_DATABASE_AVAILABLE'] = $databaseAvailable ? '1' : '0';
+
+if (!$databaseAvailable) {
+    return;
+}
+
+$cacheDir = sys_get_temp_dir().'/com.github.softspring.userbundle/tests/var/test/cache';
+if (is_dir($cacheDir)) {
+    $iterator = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator($cacheDir, FilesystemIterator::SKIP_DOTS),
+        RecursiveIteratorIterator::CHILD_FIRST
+    );
+
+    foreach ($iterator as $item) {
+        $item->isDir() ? rmdir($item->getPathname()) : unlink($item->getPathname());
+    }
+
+    rmdir($cacheDir);
+}
+
 $application = new Application(new Kernel());
 $application->setAutoExit(false);
 
@@ -49,7 +86,7 @@ $application->run($input, new ConsoleOutput());
 $input = new ArrayInput(['command' => 'doctrine:schema:create']);
 $application->run($input, new ConsoleOutput());
 
-$input = new ArrayInput(['command' => 'doctrine:fixtures:load', '--no-interaction' => true, '--append' => false]);
+$input = new ArrayInput(['command' => 'doctrine:fixtures:load', '--no-interaction' => true, '--append' => false, '--group' => ['test_application']]);
 $application->run($input, new ConsoleOutput());
 
 unset($input, $application);

@@ -1,29 +1,38 @@
-security:
-    enable_authenticator_manager: true
+imports:
+    - { resource: '@SfsUserBundle/config/security/admin_role_hierarchy.yaml' }
 
+security:
     password_hashers:
-        Symfony\Component\Security\Core\User\InMemoryUser: plaintext
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: auto
 
     providers:
-        test_users:
-            memory:
-                users:
-                    user:
-                        password: 123456
-                        roles: ['ROLE_USER']
-                    admin:
-                        password: 123456
-                        roles: ['ROLE_ADMIN']
+        sfs_user:
+            id: sfs_user.user_provider
+
+    access_decision_manager:
+        strategy: unanimous
+        allow_if_all_abstain: false
 
     firewalls:
-        secure_admin:
-            pattern: '^/secure_admin'
-            provider: 'test_users'
-            http_basic: null
-            logout: null
+        main:
+            lazy: true
+            provider: sfs_user
+            form_login:
+                provider: sfs_user
+                login_path: sfs_user_login
+                check_path: sfs_user_login_check
+                default_target_path: sfs_user_preferences
+            logout:
+                path: sfs_user_logout
 
     role_hierarchy:
-        ROLE_ADMIN: ['ROLE_USER']
+        ROLE_ADMIN:
+            - ROLE_SFS_USER_ADMIN_USERS_RW
+            - ROLE_SFS_USER_ADMIN_ADMINISTRATORS_RW
 
     access_control:
-        - { path: '^/secure_admin', roles: ['ROLE_USER'] }
+        - { path: '^/app/login', roles: PUBLIC_ACCESS }
+        - { path: '^/app/register', roles: PUBLIC_ACCESS }
+        - { path: '^/app/reset-password', roles: PUBLIC_ACCESS }
+        - { path: '^/admin', roles: ROLE_ADMIN }
+        - { path: '^/app', roles: ROLE_USER }

@@ -5,12 +5,14 @@ namespace Softspring\UserBundle\Command;
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\RolesAdminInterface;
 use Softspring\UserBundle\Model\UserInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'sfs:user:promote')]
 class PromoteUserCommand extends Command
 {
     protected UserManagerInterface $userManager;
@@ -24,7 +26,6 @@ class PromoteUserCommand extends Command
 
     protected function configure(): void
     {
-        $this->setName('sfs:user:promote');
         $this->addArgument('identifier', InputArgument::REQUIRED, 'User identifier (username or email)');
         $this->addOption('super-admin', 's', InputOption::VALUE_NONE, 'User is super admin');
     }

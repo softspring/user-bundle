@@ -22,4 +22,8 @@ class ExampleUser extends User implements NameSurnameInterface, UserIdentifierEm
     {
         return $this->getName().' '.$this->getSurname();
     }
+
+    public function eraseCredentials(): void
+    {
+    }
 }

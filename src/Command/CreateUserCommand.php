@@ -4,12 +4,14 @@ namespace Softspring\UserBundle\Command;
 
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Softspring\UserBundle\Manipulator\UserManipulator;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'sfs:user:create')]
 class CreateUserCommand extends Command
 {
     protected UserManipulator $userManipulator;
@@ -23,7 +25,6 @@ class CreateUserCommand extends Command
 
     protected function configure(): void
     {
-        $this->setName('sfs:user:create');
         $this->addArgument('username', InputArgument::REQUIRED, 'Username');
         $this->addArgument('email', InputArgument::REQUIRED, 'Email');
         $this->addArgument('password', InputArgument::REQUIRED, 'Password');

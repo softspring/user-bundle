@@ -8,7 +8,7 @@ use Softspring\UserBundle\Model\RolesAdminInterface;
 
 class UserFilter extends SQLFilter
 {
-    public function addFilterConstraint(ClassMetadata $targetEntity, string $targetTableAlias): string
+    public function addFilterConstraint(ClassMetadata $targetEntity, mixed $targetTableAlias): string
     {
         if (!$targetEntity->getReflectionClass()->implementsInterface(RolesAdminInterface::class)) {
             return '';
