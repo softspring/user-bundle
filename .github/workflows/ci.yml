@@ -17,8 +17,13 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                php-versions: [ '8.4' ]
-                composer-prefer: [ '', '--prefer-lowest' ]
+                include:
+                    -   php-versions: '8.4'
+                        composer-prefer: ''
+                        symfony-require: ''
+                    -   php-versions: '8.4'
+                        composer-prefer: '--prefer-lowest'
+                        symfony-require: '6.4.*'
 
         steps:
             -   uses: actions/checkout@v6
@@ -51,7 +56,12 @@ jobs:
                         ${{ runner.os }}-php-${{ matrix.php-versions }}-
 
             -   name: Install dependencies
-                run: COMPOSER_ROOT_VERSION=6.0.x-dev composer update --prefer-dist --no-interaction --no-progress --prefer-stable ${{ matrix.composer-prefer }}
+                run: |
+                    if [ -n "${{ matrix.symfony-require }}" ]; then
+                        export SYMFONY_REQUIRE="${{ matrix.symfony-require }}"
+                    fi
+
+                    COMPOSER_ROOT_VERSION=6.0.x-dev composer update --prefer-dist --no-interaction --no-progress --prefer-stable ${{ matrix.composer-prefer }}
 
             -   name: Run phpstan
                 run: ./vendor/bin/phpstan analyse
