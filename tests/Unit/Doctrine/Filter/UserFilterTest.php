@@ -5,6 +5,7 @@ namespace Softspring\UserBundle\Tests\Unit\Doctrine\Filter;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
+use stdClass;
 use Softspring\UserBundle\Doctrine\Filter\UserFilter;
 use Softspring\UserBundle\Tests\TestApplication\Entity\User;
 
@@ -23,7 +24,7 @@ class UserFilterTest extends TestCase
     public function testReturnsEmptyConstraintForUnsupportedEntities(): void
     {
         $filter = (new ReflectionClass(UserFilter::class))->newInstanceWithoutConstructor();
-        $metadata = $this->createMetadata(\stdClass::class);
+        $metadata = $this->createMetadata(stdClass::class);
 
         $constraint = $filter->addFilterConstraint($metadata, 'user_alias');
 
@@ -41,7 +42,7 @@ class UserFilterTest extends TestCase
                 $this->reflectionClass = new ReflectionClass($class);
             }
 
-            public function getReflectionClass(): ?ReflectionClass
+            public function getReflectionClass(): ReflectionClass
             {
                 return $this->reflectionClass;
             }

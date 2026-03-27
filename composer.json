@@ -44,7 +44,8 @@
         "symfony/dom-crawler": "^6.4 || ^7.4 || ^8.0",
         "symfony/form": "^6.4 || ^7.4 || ^8.0",
         "symfony/http-client": "^6.4 || ^7.4 || ^8.0",
-        "symfony/mailer": "^6.4 || ^7.4 || ^8.0"
+        "symfony/mailer": "^6.4 || ^7.4 || ^8.0",
+        "symfony/var-exporter": "^6.4 || ^7.4"
     },
     "suggest": {
         "hwi/oauth-bundle": "Integrate oauth clients",
@@ -86,7 +87,7 @@
         "run-tests": [
             "composer validate --strict --no-check-lock --ansi",
             "XDEBUG_MODE=coverage vendor/bin/phpunit",
-            "vendor/bin/rector process src tests --dry-run",
+            "vendor/bin/rector process src tests --dry-run --debug",
             "vendor/bin/phpstan analyse src tests --level 5",
             "vendor/bin/php-cs-fixer fix --dry-run --diff",
             "vendor/bin/yaml-lint .github/ -vvv --parse-tags",

@@ -2,6 +2,7 @@
 
 namespace Softspring\UserBundle\Tests\Unit\Security\Authorization\Voter;
 
+use BadMethodCallException;
 use PHPUnit\Framework\TestCase;
 use Softspring\UserBundle\Security\Authorization\Voter\SwitchUserVoter;
 use Softspring\UserBundle\Tests\TestApplication\Entity\User;
@@ -108,7 +109,7 @@ class SwitchUserVoterTest extends TestCase
 
             public function setUser(SymfonyUserInterface $user): void
             {
-                throw new \BadMethodCallException('Not implemented for tests.');
+                throw new BadMethodCallException('Not implemented for tests.');
             }
 
             public function eraseCredentials(): void

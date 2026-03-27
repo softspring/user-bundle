@@ -22,12 +22,12 @@ trait ConfirmableTrait
 
     public function getConfirmedAt(): ?DateTime
     {
-        return DateTime::createFromFormat('U', $this->confirmedAt) ?: null;
+        return $this->confirmedAt ? DateTime::createFromFormat('U', (string) $this->confirmedAt) : null;
     }
 
     public function setConfirmedAt(?DateTime $confirmedAt): void
     {
-        $this->confirmedAt = $confirmedAt instanceof DateTime ? $confirmedAt->format('U') : null;
+        $this->confirmedAt = $confirmedAt instanceof DateTime ? (int) $confirmedAt->format('U') : null;
     }
 
     public function isConfirmed(): bool

@@ -5,7 +5,6 @@ declare(strict_types=1);
 use Rector\Config\RectorConfig;
 use Rector\Set\ValueObject\SetList;
 use Rector\Symfony\Set\SymfonySetList;
-use Rector\Symfony\Symfony61\Rector\Class_\CommandConfigureToAttributeRector;
 use Rector\ValueObject\PhpVersion;
 
 return RectorConfig::configure()
@@ -23,5 +22,6 @@ return RectorConfig::configure()
     ->withPhpVersion(PhpVersion::PHP_84)
     ->withComposerBased(symfony: true)
     ->withSkip([
-        CommandConfigureToAttributeRector::class,
+        __DIR__.'/tests/Unit/Security/Authorization/Voter/AdminAdministratorsActionsVoterTest.php',
+        __DIR__.'/tests/Unit/Security/Authorization/Voter/SwitchUserVoterTest.php',
     ]);
