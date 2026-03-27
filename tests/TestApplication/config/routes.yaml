@@ -1,0 +1,27 @@
+_sfs_user:
+    resource: '@SfsUserBundle/config/routing/login.yaml'
+    prefix: /app
+
+_sfs_user_register:
+    resource: '@SfsUserBundle/config/routing/register.yaml'
+    prefix: /app/register
+
+_sfs_user_reset_password:
+    resource: '@SfsUserBundle/config/routing/reset_password.yaml'
+    prefix: /app/reset-password
+
+_sfs_user_preferences:
+    resource: '@SfsUserBundle/config/routing/preferences.yaml'
+    prefix: /app/user/preferences
+
+_sfs_user_change_password:
+    resource: '@SfsUserBundle/config/routing/change_password.yaml'
+    prefix: /app/user/change-password
+
+_sfs_user_admin:
+    resource: '@SfsUserBundle/config/routing/admin_users.yaml'
+    prefix: /admin/users/user
+
+_sfs_user_admins:
+    resource: '@SfsUserBundle/config/routing/admin_administrators.yaml'
+    prefix: /admin/users/admins

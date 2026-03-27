@@ -88,7 +88,7 @@ class SfsUserExtension extends Extension implements PrependExtensionInterface
             $loader->load('services/data_fixtures.yaml');
         }
 
-        if (class_exists(MailerInterface::class)) {
+        if (interface_exists(MailerInterface::class)) {
             $loader->load('services/mailer.yaml');
         }
     }

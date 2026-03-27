@@ -1,2 +1,10 @@
 sfs_user:
     class: Softspring\UserBundle\Tests\TestApplication\Entity\User
+    login:
+        target_path_parameter: _target_path
+
+    invite:
+        enabled: false
+
+    history:
+        enabled: false

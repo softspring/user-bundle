@@ -1,5 +1,6 @@
 framework:
     secret: 'TEST'
+    enabled_locales: ['en', 'es']
     csrf_protection: true
     session:
         handler_id: null

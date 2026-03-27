@@ -1,4 +1,9 @@
 services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
     Softspring\UserBundle\Mailer\UserMailerInterface:
         class: Softspring\UserBundle\Mailer\UserMailer
 

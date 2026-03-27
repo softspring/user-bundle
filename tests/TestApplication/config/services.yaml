@@ -16,3 +16,8 @@ services:
 
     Softspring\UserBundle\Tests\TestApplication\DataFixtures\AppFixtures:
         tags: ['doctrine.fixture.orm']
+
+    Softspring\UserBundle\Tests\TestApplication\TestUserMailer: ~
+
+    Softspring\UserBundle\Mailer\UserMailerInterface:
+        alias: Softspring\UserBundle\Tests\TestApplication\TestUserMailer

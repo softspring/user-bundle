@@ -2,7 +2,8 @@
 
 <!-- https://phpunit.de/manual/current/en/appendixes.configuration.html -->
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="vendor/bin/.phpunit/phpunit/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         cacheDirectory=".phpunit.cache"
          colors="true"
          bootstrap="tests/bootstrap.php">
 
@@ -21,16 +22,32 @@
 
     <testsuites>
         <testsuite name="UserBundle Test Suite">
-            <directory>tests/</directory>
+            <directory suffix="Test.php">tests</directory>
             <exclude>tests/DataCollector/</exclude>
             <exclude>tests/EventListener/</exclude>
             <exclude>tests/Form/</exclude>
         </testsuite>
     </testsuites>
 
-    <coverage processUncoveredFiles="true">
+    <source ignoreIndirectDeprecations="true">
         <include>
             <directory suffix=".php">src</directory>
         </include>
+        <exclude>
+            <directory>vendor</directory>
+            <directory>tests</directory>
+        </exclude>
+    </source>
+
+    <coverage>
+        <report>
+            <clover outputFile="clover.xml"/>
+            <html outputDirectory=".phpunit.cache/html-coverage"
+                  lowUpperBound="50"
+                  highLowerBound="90"/>
+            <text outputFile=".phpunit.cache/coverage.txt"
+                  showUncoveredFiles="false"
+                  showOnlySummary="true"/>
+        </report>
     </coverage>
 </phpunit>

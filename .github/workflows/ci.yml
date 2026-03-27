@@ -9,6 +9,9 @@ on:
 permissions:
     contents: read
 
+env:
+    XDEBUG_MODE: coverage
+
 jobs:
     build:
         runs-on: ubuntu-latest
@@ -24,7 +27,8 @@ jobs:
                 uses: shivammathur/setup-php@v2
                 with:
                     php-version: ${{ matrix.php-versions }}
-                    # extensions: intl #optional
+                    extensions: sqlite3, pdo_sqlite
+                    coverage: xdebug
                     ini-values: "post_max_size=256M" #optional
 
             -   name: Check PHP Version
@@ -49,14 +53,23 @@ jobs:
                 run: ./vendor/bin/phpstan analyse
 
             -   name: Run tests
-                run: ./vendor/bin/phpunit --coverage-text --coverage-html=.phpunit.cache/html-report
+                run: ./vendor/bin/phpunit
 
             -   name: Code Style check
                 run: ./vendor/bin/php-cs-fixer fix -v --diff --dry-run
 
-            -   name: phpunit-coverage-badge
-                uses: timkrase/phpunit-coverage-badge@v1.2.1
+            -   name: Check coverage report
+                id: coverage_report
+                run: |
+                    if [ -f clover.xml ]; then
+                        echo "has_clover=true" >> "$GITHUB_OUTPUT"
+                    else
+                        echo "has_clover=false" >> "$GITHUB_OUTPUT"
+                    fi
+
+            -   name: Upload coverage to Codecov
+                if: matrix.composer-prefer == '' && steps.coverage_report.outputs.has_clover == 'true'
+                uses: codecov/codecov-action@v5
                 with:
-                    push_badge: true
-                    coverage_badge_path: .github/badges/coverage.svg
-                    repo_token: ${{ secrets.GITHUB_TOKEN }}
+                    token: ${{ secrets.CODECOV_TOKEN }}
+                    files: clover.xml
