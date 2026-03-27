@@ -10,10 +10,6 @@ services:
         resource: '../src/*'
         exclude: '../src/{Entity,Tests,Kernel.php}'
 
-    Softspring\UserBundle\Tests\TestApplication\Controller\:
-        resource: '../src/Controller'
-        tags: ['controller.service_arguments']
-
     Softspring\UserBundle\Tests\TestApplication\DataFixtures\AppFixtures:
         tags: ['doctrine.fixture.orm']
 
