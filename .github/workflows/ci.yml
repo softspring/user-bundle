@@ -58,7 +58,7 @@ jobs:
             -   name: Install dependencies
                 run: |
                     if [ -n "${{ matrix.symfony-require }}" ]; then
-                        export SYMFONY_REQUIRE="${{ matrix.symfony-require }}"
+                        composer config extra.symfony.require "${{ matrix.symfony-require }}"
                     fi
 
                     COMPOSER_ROOT_VERSION=6.0.x-dev composer update --prefer-dist --no-interaction --no-progress --prefer-stable ${{ matrix.composer-prefer }}
