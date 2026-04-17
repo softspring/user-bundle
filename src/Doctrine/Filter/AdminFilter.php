@@ -14,6 +14,6 @@ class AdminFilter extends SQLFilter
             return '';
         }
 
-        return $targetTableAlias.'.is_admin = 1';
+        return $targetTableAlias.'.is_admin = true';
     }
 }

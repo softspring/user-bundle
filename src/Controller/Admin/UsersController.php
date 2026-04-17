@@ -78,8 +78,8 @@ class UsersController extends AbstractController
     public function usersCountWidget(): Response
     {
         return $this->render('@SfsUser/admin/users/widget-users-count.html.twig', [
-            'users' => $this->userManager->getRepository()->count(['admin' => 0]),
-            'administrators' => $this->userManager->getRepository()->count(['admin' => 1]),
+            'users' => $this->userManager->getRepository()->count(['admin' => false]),
+            'administrators' => $this->userManager->getRepository()->count(['admin' => true]),
             'total' => $this->userManager->getRepository()->count([]),
         ]);
     }

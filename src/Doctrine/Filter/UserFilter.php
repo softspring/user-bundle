@@ -14,6 +14,6 @@ class UserFilter extends SQLFilter
             return '';
         }
 
-        return $targetTableAlias.'.is_admin = 0';
+        return $targetTableAlias.'.is_admin = false';
     }
 }
