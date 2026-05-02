@@ -49,6 +49,8 @@ services:
 
     Softspring\UserBundle\Provider\:
         resource: '../src/Provider/*'
+        exclude:
+            - '../src/Provider/OauthUserProvider.php'
 
     Softspring\UserBundle\Security\:
         resource: '../src/Security/*'
