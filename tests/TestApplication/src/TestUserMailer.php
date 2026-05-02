@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Softspring\UserBundle\Tests\TestApplication;
 
 use Softspring\UserBundle\Mailer\UserMailerInterface;

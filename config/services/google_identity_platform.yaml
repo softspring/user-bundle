@@ -1,0 +1,17 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            $googleIdentityPlatformConfig: '%sfs_user.login.google_identity_platform%'
+
+    Softspring\UserBundle\Controller\GoogleIdentityPlatformLoginController:
+        public: true
+
+    Softspring\UserBundle\GoogleIdentityPlatform\IdentityPlatformGoogleAuthenticator:
+        arguments:
+            $apiKey: '%sfs_user.login.google_identity_platform.api_key%'
+            $tenantId: '%sfs_user.login.google_identity_platform.tenant_id%'
+
+    Softspring\UserBundle\GoogleIdentityPlatform\IdentityPlatformUserSynchronizer: ~

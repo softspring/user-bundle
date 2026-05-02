@@ -12,6 +12,7 @@ class PublicFlowsTest extends AbstractWebTestCase
         self::assertResponseIsSuccessful();
         self::assertSelectorExists('form input[name="_username"]');
         self::assertSelectorExists('form input[name="_password"]');
+        self::assertSelectorExists('.g_id_signin');
     }
 
     public function testLoginWithFixtureUserRedirectsToPreferences(): void

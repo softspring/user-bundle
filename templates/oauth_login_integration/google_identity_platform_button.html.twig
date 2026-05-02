@@ -1,0 +1,23 @@
+{% trans_default_domain 'sfs_user' %}
+
+{% if route_defined('sfs_user_login_google_identity_platform_callback') %}
+    <div id="g_id_onload"
+         data-client_id="{{ google_identity_platform.client_id }}"
+         data-context="{{ google_identity_platform.context }}"
+         data-ux_mode="{{ google_identity_platform.ux_mode }}"
+         data-login_uri="{{ absolute_url(path('sfs_user_login_google_identity_platform_callback')) }}"
+         data-auto_prompt="{{ google_identity_platform.auto_prompt ? 'true' : 'false' }}"
+         data-itp_support="{{ google_identity_platform.itp_support ? 'true' : 'false' }}"></div>
+    <div class="mt-3">
+        <div class="g_id_signin"
+             data-type="{{ google_identity_platform.button.type }}"
+             data-theme="{{ google_identity_platform.button.theme }}"
+             data-size="{{ google_identity_platform.button.size }}"
+             data-shape="{{ google_identity_platform.button.shape }}"
+             data-text="{{ google_identity_platform.button.text }}"
+             data-logo_alignment="{{ google_identity_platform.button.logo_alignment }}"
+             data-width="{{ google_identity_platform.button.width }}"></div>
+    </div>
+{% else %}
+    <div class="alert alert-warning mt-3">{{ 'login.google_identity_platform.missing_route'|trans }}</div>
+{% endif %}

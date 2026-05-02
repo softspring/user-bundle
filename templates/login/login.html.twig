@@ -35,6 +35,18 @@
             </div>
         {{ form_end(login_form) }}
 
+        {% for message in app.flashes('sfs_user_google_identity_platform_error') %}
+            <div class="alert alert-danger mt-3">{{ message }}</div>
+        {% endfor %}
+
+        {% if google_identity_platform.enabled %}
+            {% if google_identity_platform.client_id %}
+                {% include '@SfsUser/oauth_login_integration/google_identity_platform_button.html.twig' %}
+            {% else %}
+                <div class="alert alert-warning mt-3">{{ 'login.google_identity_platform.disabled_client_id'|trans }}</div>
+            {% endif %}
+        {% endif %}
+
         {% if attribute(oauth_services, 'facebook') is defined %}
             {% include '@SfsUser/oauth_login_integration/facebook_oauth_button.html.twig' %}
         {% endif %}
@@ -46,5 +58,9 @@
 
     {% if attribute(oauth_services, 'facebook') is defined %}
         <script type="text/javascript">{{ render(url('sfs_user_login_oauth_facebook_js')) }}</script>
+    {% endif %}
+
+    {% if google_identity_platform.enabled and google_identity_platform.client_id %}
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
     {% endif %}
 {% endblock javascripts %}

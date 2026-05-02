@@ -1,0 +1,9 @@
+sfs_user_login_google_identity_platform:
+    path: /one-tap
+    controller: Softspring\UserBundle\Controller\GoogleIdentityPlatformLoginController::authenticate
+    methods: [POST]
+
+sfs_user_login_google_identity_platform_callback:
+    path: /callback
+    controller: Softspring\UserBundle\Controller\GoogleIdentityPlatformLoginController::authenticate
+    methods: [POST]
