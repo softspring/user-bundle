@@ -1,5 +1,6 @@
 doctrine:
     dbal:
+        # Functional tests use SQLite to avoid external database services.
         driver: pdo_sqlite
         path: '%kernel.cache_dir%/test_database.sqlite'
     orm:

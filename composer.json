@@ -6,8 +6,8 @@
     "require": {
         "php": ">=8.4",
         "ext-json": "*",
-        "doctrine/doctrine-bundle": "^2.10 || ^3.0 || ^4.0",
-        "doctrine/orm": "^2.10 || ^3.0 || ^4.0",
+        "doctrine/doctrine-bundle": "^2.10 || ^3.0",
+        "doctrine/orm": "^2.10 || ^3.0",
         "softspring/crudl-controller": "^6.0@dev",
         "softspring/doctrine-paginator": "^6.0@dev",
         "softspring/doctrine-query-filters": "^6.0@dev",
@@ -54,7 +54,7 @@
         "softspring/media-bundle": "Stores media files for avatars"
     },
     "minimum-stability": "dev",
-    "prefer-stable": false,
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Softspring\\UserBundle\\": "src/"
