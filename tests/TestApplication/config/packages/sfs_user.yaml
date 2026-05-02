@@ -2,6 +2,12 @@ sfs_user:
     class: Softspring\UserBundle\Tests\TestApplication\Entity\User
     login:
         target_path_parameter: _target_path
+        google_identity_platform:
+            enabled: true
+            client_id: 'test-google-client-id.apps.googleusercontent.com'
+            api_key: 'test-identity-platform-api-key'
+            success_route: sfs_user_preferences
+            failure_route: sfs_user_login
 
     invite:
         enabled: false

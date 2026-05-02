@@ -11,6 +11,9 @@ login:
         facebook_oauth.button: "Facebook login"
         resetting.link: "Forgot your password?"
         signup.button: "Create your account"
+    google_identity_platform:
+        disabled_client_id: "Google sign-in is disabled because the client id is empty."
+        missing_route: "Google sign-in routes are not loaded."
 
 register:
     title: "Create your account"

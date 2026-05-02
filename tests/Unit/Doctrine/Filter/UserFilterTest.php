@@ -18,7 +18,7 @@ class UserFilterTest extends TestCase
 
         $constraint = $filter->addFilterConstraint($metadata, 'user_alias');
 
-        self::assertSame('user_alias.is_admin = 0', $constraint);
+        self::assertSame('user_alias.is_admin = false', $constraint);
     }
 
     public function testReturnsEmptyConstraintForUnsupportedEntities(): void

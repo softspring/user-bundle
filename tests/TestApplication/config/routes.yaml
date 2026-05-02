@@ -2,6 +2,10 @@ _sfs_user:
     resource: '@SfsUserBundle/config/routing/login.yaml'
     prefix: /app
 
+_sfs_user_google_identity_platform:
+    resource: '@SfsUserBundle/config/routing/login_google_identity_platform.yaml'
+    prefix: /auth/google
+
 _sfs_user_register:
     resource: '@SfsUserBundle/config/routing/register.yaml'
     prefix: /app/register

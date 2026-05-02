@@ -45,8 +45,20 @@ foreach (glob(__DIR__.'/../src/**/*.php') as $sourceFilePath) {
     file_put_contents($sourceFilePath, $sourceFileContentsWithoutFinalClasses);
 }
 
-$file = __DIR__.'/../vendor/autoload.php';
-if (!file_exists($file)) {
+$autoloadCandidates = [
+    __DIR__.'/../vendor/autoload.php',
+    __DIR__.'/../../../autoload.php',
+];
+
+$file = null;
+foreach ($autoloadCandidates as $autoloadCandidate) {
+    if (file_exists($autoloadCandidate)) {
+        $file = $autoloadCandidate;
+        break;
+    }
+}
+
+if (null === $file) {
     throw new RuntimeException('Install dependencies using Composer to run the test suite.');
 }
 $autoload = require $file;

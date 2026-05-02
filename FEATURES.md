@@ -30,6 +30,7 @@ Functional definition for `softspring/user-bundle`.
   - invitations
   - access history
 - Optional OAuth integration points.
+- Optional Google Identity Platform login with Google Sign-In and One Tap.
 - Doctrine filters for user/admin visibility.
 - Mailers, MIME classes, events, and manipulators for user lifecycle actions.
 - Console commands for common user and admin operations.

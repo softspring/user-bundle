@@ -4,18 +4,22 @@ namespace Softspring\UserBundle\Tests\TestApplication\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Softspring\UserBundle\Entity\ConfirmableTrait;
+use Softspring\UserBundle\Entity\GoogleIdentityPlatformTrait;
 use Softspring\UserBundle\Entity\NameSurnameTrait;
 use Softspring\UserBundle\Entity\PasswordRequestTrait;
 use Softspring\UserBundle\Entity\RolesFullTrait;
+use Softspring\UserBundle\Entity\UserAvatarTrait;
 use Softspring\UserBundle\Entity\UserHasLocalePreferenceTrait;
 use Softspring\UserBundle\Entity\UserIdentifierEmailTrait;
 use Softspring\UserBundle\Entity\UserLastLoginTrait;
 use Softspring\UserBundle\Entity\UserPasswordTrait;
 use Softspring\UserBundle\Model\ConfirmableInterface;
+use Softspring\UserBundle\Model\GoogleIdentityPlatformAwareInterface;
 use Softspring\UserBundle\Model\NameSurnameInterface;
 use Softspring\UserBundle\Model\PasswordRequestInterface;
 use Softspring\UserBundle\Model\RolesFullInterface;
 use Softspring\UserBundle\Model\User as UserModel;
+use Softspring\UserBundle\Model\UserAvatarInterface;
 use Softspring\UserBundle\Model\UserHasLocalePreferenceInterface;
 use Softspring\UserBundle\Model\UserIdentifierEmailInterface;
 use Softspring\UserBundle\Model\UserPasswordInterface;
@@ -24,12 +28,14 @@ use Softspring\UserBundle\Model\UserPasswordInterface;
  * @ORM\Entity
  */
 #[ORM\Entity]
-class User extends UserModel implements NameSurnameInterface, PasswordRequestInterface, UserIdentifierEmailInterface, UserHasLocalePreferenceInterface, RolesFullInterface, UserPasswordInterface, ConfirmableInterface
+class User extends UserModel implements NameSurnameInterface, PasswordRequestInterface, UserIdentifierEmailInterface, UserHasLocalePreferenceInterface, RolesFullInterface, UserPasswordInterface, ConfirmableInterface, GoogleIdentityPlatformAwareInterface, UserAvatarInterface
 {
     use ConfirmableTrait;
+    use GoogleIdentityPlatformTrait;
     use NameSurnameTrait;
     use PasswordRequestTrait;
     use UserIdentifierEmailTrait;
+    use UserAvatarTrait;
     use UserHasLocalePreferenceTrait;
     use RolesFullTrait;
     use UserLastLoginTrait;

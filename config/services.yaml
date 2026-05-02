@@ -11,6 +11,7 @@ services:
             $resetTokenTTL: '%sfs_user.reset_password.token_ttl%'
             $oauthServices: '%sfs_user.oauth.services%'
             $targetPathParameter: '%sfs_user.login.target_path_parameter%'
+            $googleIdentityPlatformConfig: '%sfs_user.login.google_identity_platform%'
 
     Softspring\UserBundle\Command\CreateUserCommand: ~
     Softspring\UserBundle\Command\PromoteUserCommand: ~

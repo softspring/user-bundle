@@ -37,6 +37,9 @@ class SfsUserExtension extends Extension implements PrependExtensionInterface
 
         $container->setParameter('sfs_user.reset_password.token_ttl', $config['reset_password']['token_ttl']);
         $container->setParameter('sfs_user.login.target_path_parameter', $config['login']['target_path_parameter']);
+        $container->setParameter('sfs_user.login.google_identity_platform', $config['login']['google_identity_platform']);
+        $container->setParameter('sfs_user.login.google_identity_platform.api_key', $config['login']['google_identity_platform']['api_key']);
+        $container->setParameter('sfs_user.login.google_identity_platform.tenant_id', $config['login']['google_identity_platform']['tenant_id']);
 
         // load services
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../../config'));
@@ -62,6 +65,10 @@ class SfsUserExtension extends Extension implements PrependExtensionInterface
         $loader->load('services/controller/settings_change_email.yaml');
         $loader->load('services/controller/settings_change_password.yaml');
         $loader->load('services/controller/settings_change_username.yaml');
+
+        if ($config['login']['google_identity_platform']['enabled']) {
+            $loader->load('services/google_identity_platform.yaml');
+        }
 
         $oauthServicesConfig = $config['oauth'] ?? [];
         $container->setParameter('sfs_user.oauth.services', $oauthServicesConfig);

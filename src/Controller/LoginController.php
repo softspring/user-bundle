@@ -26,13 +26,16 @@ class LoginController extends AbstractController
 
     protected ?string $targetPathParameter;
 
+    protected array $googleIdentityPlatformConfig;
+
     protected EventDispatcherInterface $eventDispatcher;
 
-    public function __construct(LoginFormInterface $loginForm, array $oauthServices, ?string $targetPathParameter, EventDispatcherInterface $eventDispatcher)
+    public function __construct(LoginFormInterface $loginForm, array $oauthServices, ?string $targetPathParameter, array $googleIdentityPlatformConfig, EventDispatcherInterface $eventDispatcher)
     {
         $this->loginForm = $loginForm;
         $this->oauthServices = $oauthServices;
         $this->targetPathParameter = $targetPathParameter;
+        $this->googleIdentityPlatformConfig = $googleIdentityPlatformConfig;
         $this->eventDispatcher = $eventDispatcher;
     }
 
@@ -77,6 +80,7 @@ class LoginController extends AbstractController
         return $this->render('@SfsUser/login/login.html.twig', [
             'login_form' => $form,
             'oauth_services' => $this->oauthServices,
+            'google_identity_platform' => $this->googleIdentityPlatformConfig,
             'register_params' => $loginCheckParams,
         ]);
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Softspring\UserBundle\Tests\TestApplication\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
