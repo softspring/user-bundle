@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Softspring\UserBundle\Entity;
 
 use Softspring\UserBundle\Model\RolesFullTrait as RolesFullTraitModel;

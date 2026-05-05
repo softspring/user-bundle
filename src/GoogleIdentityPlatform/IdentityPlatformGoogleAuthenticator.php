@@ -3,7 +3,7 @@
 namespace Softspring\UserBundle\GoogleIdentityPlatform;
 
 use RuntimeException;
-use Symfony\Component\HttpClient\Exception\ClientException;
+use Symfony\Contracts\HttpClient\Exception\ExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /* added-by-ea-tests final */ class IdentityPlatformGoogleAuthenticator
@@ -16,6 +16,11 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
     }
 
     public function authenticate(string $requestUri, string $googleCredential): IdentityPlatformGoogleUser
+    {
+        return $this->authenticateWithTokens($requestUri, $googleCredential)->user;
+    }
+
+    public function authenticateWithTokens(string $requestUri, string $googleCredential): IdentityPlatformGoogleAuthenticationResult
     {
         if ('' === $this->apiKey) {
             throw new RuntimeException('Identity Platform API key is not configured.');
@@ -37,11 +42,10 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
                     'tenantId' => $this->tenantId ?: null,
                 ], static fn (string|true|null $value): bool => null !== $value),
             ]);
-        } catch (ClientException $exception) {
+            $payload = $response->toArray(false);
+        } catch (ExceptionInterface $exception) {
             throw new RuntimeException('Identity Platform rejected the Google credential.', $exception->getCode(), previous: $exception);
         }
-
-        $payload = $response->toArray(false);
 
         if (is_array($payload['error'] ?? null)) {
             $errorMessage = $payload['error']['message'] ?? 'Identity Platform returned an error.';
@@ -62,18 +66,46 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
             throw new RuntimeException(sprintf('Identity Platform response is missing required fields. Keys: %s', $payloadKeys));
         }
 
-        return new IdentityPlatformGoogleUser(
-            identityPlatformUserId: $payload['localId'],
-            identityProvider: $payload['providerId'],
-            identityProviderUserId: $payload['federatedId'],
-            email: is_string($payload['email'] ?? null) ? $payload['email'] : null,
-            emailVerified: (bool) ($payload['emailVerified'] ?? false),
-            displayName: is_string($payload['displayName'] ?? null) ? $payload['displayName'] : null,
-            firstName: is_string($payload['firstName'] ?? null) ? $payload['firstName'] : null,
-            lastName: is_string($payload['lastName'] ?? null) ? $payload['lastName'] : null,
-            photoUrl: is_string($payload['photoUrl'] ?? null) ? $payload['photoUrl'] : null,
-            isNewIdentityPlatformUser: (bool) ($payload['isNewUser'] ?? false),
-            tenantId: is_string($payload['tenantId'] ?? null) ? $payload['tenantId'] : null,
+        $accessToken = is_string($payload['idToken'] ?? null) ? trim($payload['idToken']) : '';
+        $refreshToken = is_string($payload['refreshToken'] ?? null) ? trim($payload['refreshToken']) : '';
+        $expiresIn = $this->parseExpiresIn($payload['expiresIn'] ?? null);
+
+        if ('' === $accessToken || '' === $refreshToken || null === $expiresIn) {
+            throw new RuntimeException('Identity Platform response is missing token fields.');
+        }
+
+        return new IdentityPlatformGoogleAuthenticationResult(
+            user: new IdentityPlatformGoogleUser(
+                identityPlatformUserId: $payload['localId'],
+                identityProvider: $payload['providerId'],
+                identityProviderUserId: $payload['federatedId'],
+                email: is_string($payload['email'] ?? null) ? $payload['email'] : null,
+                emailVerified: (bool) ($payload['emailVerified'] ?? false),
+                displayName: is_string($payload['displayName'] ?? null) ? $payload['displayName'] : null,
+                firstName: is_string($payload['firstName'] ?? null) ? $payload['firstName'] : null,
+                lastName: is_string($payload['lastName'] ?? null) ? $payload['lastName'] : null,
+                photoUrl: is_string($payload['photoUrl'] ?? null) ? $payload['photoUrl'] : null,
+                isNewIdentityPlatformUser: (bool) ($payload['isNewUser'] ?? false),
+                tenantId: is_string($payload['tenantId'] ?? null) ? $payload['tenantId'] : null,
+            ),
+            tokens: new IdentityPlatformTokens(
+                accessToken: $accessToken,
+                refreshToken: $refreshToken,
+                expiresIn: $expiresIn,
+            ),
         );
+    }
+
+    private function parseExpiresIn(mixed $value): ?int
+    {
+        if (is_int($value) && $value > 0) {
+            return $value;
+        }
+
+        if (is_string($value) && ctype_digit($value) && (int) $value > 0) {
+            return (int) $value;
+        }
+
+        return null;
     }
 }

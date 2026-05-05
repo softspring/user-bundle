@@ -26,12 +26,16 @@ class IdentityPlatformGoogleAuthenticatorTest extends TestCase
                 'lastName' => 'Doe',
                 'photoUrl' => 'https://example.com/avatar.jpg',
                 'isNewUser' => true,
+                'idToken' => 'identity-platform-id-token',
+                'refreshToken' => 'identity-platform-refresh-token',
+                'expiresIn' => '3600',
                 'tenantId' => 'tenant-a',
             ], JSON_THROW_ON_ERROR)),
         ]);
 
         $authenticator = new IdentityPlatformGoogleAuthenticator($httpClient, 'api-key', 'tenant-a');
-        $user = $authenticator->authenticate('https://presenciaonline.softspring.dev/auth/google/one-tap', 'google-credential');
+        $result = $authenticator->authenticateWithTokens('https://presenciaonline.softspring.dev/auth/google/one-tap', 'google-credential');
+        $user = $result->user;
 
         self::assertSame('gcip-user-1', $user->identityPlatformUserId);
         self::assertSame('google.com', $user->identityProvider);
@@ -41,6 +45,9 @@ class IdentityPlatformGoogleAuthenticatorTest extends TestCase
         self::assertSame('Jane', $user->firstName);
         self::assertSame('Doe', $user->lastName);
         self::assertTrue($user->isNewIdentityPlatformUser);
+        self::assertSame('identity-platform-id-token', $result->tokens->accessToken);
+        self::assertSame('identity-platform-refresh-token', $result->tokens->refreshToken);
+        self::assertSame(3600, $result->tokens->expiresIn);
     }
 
     public function testAuthenticateSurfacesIdentityPlatformErrorMessage(): void

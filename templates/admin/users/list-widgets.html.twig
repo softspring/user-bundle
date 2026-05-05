@@ -1,45 +1,25 @@
 {% trans_default_domain 'sfs_user' %}
 
-<div class="container mb-5">
-    <div class="row">
-        <div class="col">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h6 class="font-weight-bold text-dark">{{ 'admin_users.list.widgets.total.title'|trans }}</h6>
-                    <p class="h1" id="totalUsersWidget">{#{{ render(url('sfs_user_admin_users_count_widget')) }}#}</p>
-                    <script type="text/javascript">
-                        var totalUsersWidgetXhr = new XMLHttpRequest();
-                        totalUsersWidgetXhr.onreadystatechange = function() {
-                            if (totalUsersWidgetXhr.readyState === 4){
-                                document.getElementById('totalUsersWidget').innerHTML = totalUsersWidgetXhr.responseText;
-                            }
-                        };
-                        totalUsersWidgetXhr.open('GET', '{{ url('sfs_user_admin_users_count_widget') }}');
-                        totalUsersWidgetXhr.send()
-                    </script>
-                </div>
-            </div>
-        </div>
+{% set render_row = render_row|default(true) %}
+{% set fill_remaining_columns = fill_remaining_columns|default(render_row) %}
 
-        <div class="col">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h6 class="font-weight-bold text-dark">{{ 'admin_users.list.widgets.pending_confirm.title'|trans }}</h6>
-                    <p class="h1" id="pendingConfirmUsersWidget">{#{{ render(url('sfs_user_admin_users_pending_confirm_count_widget')) }}#}</p>
-                    <script type="text/javascript">
-                        var pendingConfirmUsersWidgetXhr = new XMLHttpRequest();
-                        pendingConfirmUsersWidgetXhr.onreadystatechange = function() {
-                            if (pendingConfirmUsersWidgetXhr.readyState === 4){
-                                document.getElementById('pendingConfirmUsersWidget').innerHTML = pendingConfirmUsersWidgetXhr.responseText;
-                            }
-                        };
-                        pendingConfirmUsersWidgetXhr.open('GET', '{{ url('sfs_user_admin_users_pending_confirm_count_widget') }}');
-                        pendingConfirmUsersWidgetXhr.send()
-                    </script>
-                </div>
-            </div>
-        </div>
-        <div class="col"></div>
-        <div class="col"></div>
+{% if render_row %}
+<div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-3 mb-4">
+{% endif %}
+    <div class="col">
+        {% include '@SfsUser/admin/users/widget-total.html.twig' %}
     </div>
+
+    {% if supports_confirmable|default(sfs_user_is('confirmable')) %}
+        <div class="col">
+            {% include '@SfsUser/admin/users/widget-pending-confirm.html.twig' %}
+        </div>
+    {% endif %}
+
+    {% if fill_remaining_columns %}
+        <div class="col d-none d-xl-block"></div>
+        <div class="col d-none d-xl-block"></div>
+    {% endif %}
+{% if render_row %}
 </div>
+{% endif %}

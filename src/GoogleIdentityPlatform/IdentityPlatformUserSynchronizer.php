@@ -76,7 +76,7 @@ use Softspring\UserBundle\Model\UserWithEmailInterface;
         );
     }
 
-    private function findExistingUser(IdentityPlatformGoogleUser $identityUser): ?UserInterface
+    public function findExistingUser(IdentityPlatformGoogleUser $identityUser): ?UserInterface
     {
         $user = $this->userManager->findUserBy(['identityPlatformUserId' => $identityUser->identityPlatformUserId]);
 

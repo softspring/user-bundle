@@ -15,3 +15,13 @@ services:
             $tenantId: '%sfs_user.login.google_identity_platform.tenant_id%'
 
     Softspring\UserBundle\GoogleIdentityPlatform\IdentityPlatformUserSynchronizer: ~
+
+    Softspring\UserBundle\Manager\IdentityPlatformSessionManager:
+        arguments:
+            $apiKey: '%sfs_user.login.google_identity_platform.api_key%'
+            $tenantId: '%sfs_user.login.google_identity_platform.tenant_id%'
+
+    Softspring\UserBundle\Manager\IdentityPlatformSessionManagerInterface:
+        alias: Softspring\UserBundle\Manager\IdentityPlatformSessionManager
+
+    Softspring\UserBundle\Security\IdentityPlatformAccessTokenHandler: ~

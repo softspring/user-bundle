@@ -81,11 +81,16 @@ class UsersController extends AbstractController
             'users' => $this->userManager->getRepository()->count(['admin' => false]),
             'administrators' => $this->userManager->getRepository()->count(['admin' => true]),
             'total' => $this->userManager->getRepository()->count([]),
+            'supports_confirmable' => $this->supportsConfirmableUsers(),
         ]);
     }
 
     public function usersPendingConfirmCountWidget(): Response
     {
+        if (!$this->supportsConfirmableUsers()) {
+            return new Response('', Response::HTTP_NO_CONTENT);
+        }
+
         return $this->render('@SfsUser/admin/users/widget-pending-confirm-count.html.twig', [
             'count' => $this->userManager->getRepository()->count(['confirmedAt' => null]),
         ]);
@@ -187,5 +192,10 @@ class UsersController extends AbstractController
         }
 
         return $this->redirectToRoute('sfs_user_admin_users_details', ['user' => $user]);
+    }
+
+    private function supportsConfirmableUsers(): bool
+    {
+        return $this->userManager->getEntityClassReflection()->implementsInterface(ConfirmableInterface::class);
     }
 }

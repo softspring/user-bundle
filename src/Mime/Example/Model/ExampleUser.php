@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Softspring\UserBundle\Mime\Example\Model;
 
 use Softspring\UserBundle\Entity\NameSurnameTrait;

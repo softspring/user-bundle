@@ -1,5 +1,6 @@
 framework:
     secret: 'TEST'
+    asset_mapper: false
     enabled_locales: ['en', 'es']
     csrf_protection: true
     session:

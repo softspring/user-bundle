@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Softspring\UserBundle\Model;
 
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;

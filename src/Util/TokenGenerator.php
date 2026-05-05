@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Softspring\UserBundle\Util;
 
 class TokenGenerator implements TokenGeneratorInterface
