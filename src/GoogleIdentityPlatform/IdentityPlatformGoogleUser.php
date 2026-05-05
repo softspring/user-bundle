@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Softspring\UserBundle\GoogleIdentityPlatform;
 
 final readonly class IdentityPlatformGoogleUser

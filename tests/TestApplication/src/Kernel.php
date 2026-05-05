@@ -4,6 +4,7 @@ namespace Softspring\UserBundle\Tests\TestApplication;
 
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle;
+use Softspring\Component\Components\SfsComponentsBundle;
 use Softspring\PermissionsBundle\SfsPermissionsBundle;
 use Softspring\TwigExtraBundle\SfsTwigExtraBundle;
 use Softspring\UserBundle\SfsUserBundle;
@@ -35,6 +36,7 @@ final class Kernel extends SymfonyKernel
             new DoctrineBundle(),
             new DoctrineFixturesBundle(),
             new SecurityBundle(),
+            new SfsComponentsBundle(),
             new SfsTwigExtraBundle(),
             new SfsPermissionsBundle(),
             new SfsUserBundle(),

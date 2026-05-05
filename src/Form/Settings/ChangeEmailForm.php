@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Softspring\UserBundle\Form\Settings;
 
 use Softspring\UserBundle\Model\UserInterface;

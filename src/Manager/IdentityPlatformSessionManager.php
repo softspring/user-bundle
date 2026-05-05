@@ -235,7 +235,7 @@ class IdentityPlatformSessionManager implements IdentityPlatformSessionManagerIn
             }
         }
 
-        return is_array($payload) ? $payload : [];
+        return $payload;
     }
 
     private function assertApiKeyConfigured(): void
