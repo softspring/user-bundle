@@ -53,3 +53,8 @@ Functional definition for `softspring/user-bundle`.
 - Must work with the supported dependency matrix of this line, including Symfony `6.4`, `7.x`, and `8.x`.
 - Must keep both regular and lowest dependency validation workflows working (`composer test` and `composer test-bc`).
 - Must keep user-facing and admin-facing user workflows stable across minor releases in the same line.
+
+## Asset Integration
+
+- When this bundle ships browser assets, applications may consume them through Webpack or AssetMapper if either tool is present.
+- The bundle must not require Webpack or AssetMapper as a hard dependency.
