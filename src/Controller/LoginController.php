@@ -43,6 +43,7 @@ class LoginController extends AbstractController
     {
         /** @var Session $session */
         $session = $request->getSession();
+        $manualLoginEnabled = $this->loginForm->supportsManualLogin();
 
         $loginCheckParams = [];
         if ($this->targetPathParameter && $targetPath = $request->query->get($this->targetPathParameter, $request->request->get($this->targetPathParameter))) {
@@ -52,33 +53,38 @@ class LoginController extends AbstractController
         $authenticationErrorKey = class_exists('Symfony\Component\Security\Http\SecurityRequestAttributes') ? constant('Symfony\Component\Security\Http\SecurityRequestAttributes::AUTHENTICATION_ERROR') : (class_exists('Symfony\Component\Security\Core\Security') ? constant('Symfony\Component\Security\Core\Security::AUTHENTICATION_ERROR') : null);
         $lastUserNameKey = class_exists('Symfony\Component\Security\Http\SecurityRequestAttributes') ? constant('Symfony\Component\Security\Http\SecurityRequestAttributes::LAST_USERNAME') : (class_exists('Symfony\Component\Security\Core\Security') ? constant('Symfony\Component\Security\Core\Security::LAST_USERNAME') : null);
 
-        $form = $this->createForm(get_class($this->loginForm), [
-            '_username' => $session->get($lastUserNameKey) ?? '',
-            '_password' => '',
-        ], [
-            'action' => $this->generateUrl('sfs_user_login_check', $loginCheckParams),
-        ]);
+        $form = null;
 
-        if ($request->attributes->has($authenticationErrorKey)) {
-            $form->addError(new FormError($request->attributes->get($authenticationErrorKey)));
-        } elseif ($session->has($authenticationErrorKey)) {
-            $error = $session->get($authenticationErrorKey);
+        if ($manualLoginEnabled) {
+            $form = $this->createForm(get_class($this->loginForm), [
+                '_username' => $session->get($lastUserNameKey) ?? '',
+                '_password' => '',
+            ], [
+                'action' => $this->generateUrl('sfs_user_login_check', $loginCheckParams),
+            ]);
 
-            if ($error instanceof TooManyLoginAttemptsAuthenticationException) {
-                $form->addError(new FormError($translator->trans($error->getMessageKey(), $error->getMessageData(), 'security')));
-            } else {
-                $form->addError(new FormError($session->get($authenticationErrorKey)->getMessage()));
+            if ($request->attributes->has($authenticationErrorKey)) {
+                $form->addError(new FormError($request->attributes->get($authenticationErrorKey)));
+            } elseif ($session->has($authenticationErrorKey)) {
+                $error = $session->get($authenticationErrorKey);
+
+                if ($error instanceof TooManyLoginAttemptsAuthenticationException) {
+                    $form->addError(new FormError($translator->trans($error->getMessageKey(), $error->getMessageData(), 'security')));
+                } else {
+                    $form->addError(new FormError($session->get($authenticationErrorKey)->getMessage()));
+                }
+
+                $session->remove($authenticationErrorKey);
             }
-
-            $session->remove($authenticationErrorKey);
         }
 
-        if (($response = $this->dispatchGetResponse(SfsUserEvents::LOGIN_ATTEMPT, new GetResponseFormEvent($form, $request))) instanceof Response) {
+        if ($form && ($response = $this->dispatchGetResponse(SfsUserEvents::LOGIN_ATTEMPT, new GetResponseFormEvent($form, $request))) instanceof Response) {
             return $response;
         }
 
         return $this->render('@SfsUser/login/login.html.twig', [
             'login_form' => $form,
+            'manual_login_enabled' => $manualLoginEnabled,
             'oauth_services' => $this->oauthServices,
             'google_identity_platform' => $this->googleIdentityPlatformConfig,
             'register_params' => $loginCheckParams,

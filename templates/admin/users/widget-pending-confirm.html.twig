@@ -1,0 +1,18 @@
+{% trans_default_domain 'sfs_user' %}
+
+{% embed '@SfsComponents/admin/widget.html.twig' %}
+    {% block title %}{{ 'admin_users.list.widgets.pending_confirm.title'|trans({}, 'sfs_user') }}{% endblock title %}
+    {% block body %}
+        <p class="display-6 fw-semibold mb-0" id="pendingConfirmUsersWidget"></p>
+        <script type="text/javascript">
+            var pendingConfirmUsersWidgetXhr = new XMLHttpRequest();
+            pendingConfirmUsersWidgetXhr.onreadystatechange = function() {
+                if (pendingConfirmUsersWidgetXhr.readyState === 4){
+                    document.getElementById('pendingConfirmUsersWidget').innerHTML = pendingConfirmUsersWidgetXhr.responseText;
+                }
+            };
+            pendingConfirmUsersWidgetXhr.open('GET', '{{ url('sfs_user_admin_users_pending_confirm_count_widget') }}');
+            pendingConfirmUsersWidgetXhr.send()
+        </script>
+    {% endblock body %}
+{% endembed %}

@@ -4,6 +4,7 @@ namespace Softspring\UserBundle\Form;
 
 use Softspring\UserBundle\Manager\UserManagerInterface;
 use Softspring\UserBundle\Model\UserIdentifierEmailInterface;
+use Softspring\UserBundle\Model\UserPasswordInterface;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -51,6 +52,10 @@ class LoginForm extends AbstractType implements LoginFormInterface
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        if (!$this->supportsManualLogin()) {
+            return;
+        }
+
         $builder->add('_username', TextType::class, [
             'label' => $this->userManager->getEntityClassReflection()->implementsInterface(UserIdentifierEmailInterface::class) ? 'login.form.email.label' : 'login.form.username.label',
             'attr' => [
@@ -78,5 +83,10 @@ class LoginForm extends AbstractType implements LoginFormInterface
         $firewallConfig = $this->firewallMap->getFirewallConfig($request);
 
         return in_array('remember_me', $firewallConfig->getAuthenticators());
+    }
+
+    public function supportsManualLogin(): bool
+    {
+        return $this->userManager->getEntityClassReflection()->implementsInterface(UserPasswordInterface::class);
     }
 }

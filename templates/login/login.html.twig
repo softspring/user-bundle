@@ -3,37 +3,39 @@
 
 {% block content %}
     <div class="bg-white p-5" style="width: 450px">
-        {{ form_start(login_form) }}
-            <h1 class="h4 mb-3 fw-normal">{{ 'login.title'|trans }}</h1>
+        <h1 class="h4 mb-3 fw-normal">{{ 'login.title'|trans }}</h1>
 
-            {% if route_defined('sfs_user_register') %}
-                <p>
-                    {{ 'login.signup.question'|trans }}
-                    <a href="{{ url('sfs_user_register', register_params) }}">{{ 'login.actions.signup.button'|trans }}</a>
-                </p>
-            {% endif %}
+        {% if route_defined('sfs_user_register') %}
+            <p>
+                {{ 'login.signup.question'|trans }}
+                <a href="{{ url('sfs_user_register', register_params) }}">{{ 'login.actions.signup.button'|trans }}</a>
+            </p>
+        {% endif %}
 
-            {{ form_row(login_form._username) }}
+        {% if manual_login_enabled %}
+            {{ form_start(login_form) }}
+                {{ form_row(login_form._username) }}
 
-            <div class="mb-3">
-                <div class="d-block">
-                    <div class="w-25 float-start">{{ form_label(login_form._password) }}</div>
-                    <div class="w-75 text-end float-end">
-                        {% if route_defined('sfs_user_reset_password_request') %}
-                            <a href="{{ url('sfs_user_reset_password_request') }}">{{ 'login.actions.resetting.link'|trans }}</a>
-                        {% endif %}
+                <div class="mb-3">
+                    <div class="d-block">
+                        <div class="w-25 float-start">{{ form_label(login_form._password) }}</div>
+                        <div class="w-75 text-end float-end">
+                            {% if route_defined('sfs_user_reset_password_request') %}
+                                <a href="{{ url('sfs_user_reset_password_request') }}">{{ 'login.actions.resetting.link'|trans }}</a>
+                            {% endif %}
+                        </div>
                     </div>
+                    {{ form_widget(login_form._password) }}
                 </div>
-                {{ form_widget(login_form._password) }}
-            </div>
 
-            {{ form_rest(login_form) }}
-            {{ form_errors(login_form) }}
+                {{ form_rest(login_form) }}
+                {{ form_errors(login_form) }}
 
-            <div class="d-grid gap-2 mt-3">
-                <button type="submit" class="btn btn-primary btn-lg">{{ 'login.actions.login.button'|trans }}</button>
-            </div>
-        {{ form_end(login_form) }}
+                <div class="d-grid gap-2 mt-3">
+                    <button type="submit" class="btn btn-primary btn-lg">{{ 'login.actions.login.button'|trans }}</button>
+                </div>
+            {{ form_end(login_form) }}
+        {% endif %}
 
         {% for message in app.flashes('sfs_user_google_identity_platform_error') %}
             <div class="alert alert-danger mt-3">{{ message }}</div>
