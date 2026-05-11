@@ -1,6 +1,10 @@
 {% trans_default_domain 'sfs_user' %}
 {% for administrator in collection %}
-    <tr>
+    <tr
+    {% if is_granted('PERMISSION_SFS_USER_ADMIN_ADMINISTRATORS_DETAILS', administrator) %}
+        data-row-href="{{ url('sfs_user_admin_administrators_details', {'administrator': administrator}) }}"
+    {% endif %}
+    >
         {% if sfs_user_is('avatar') %}
             <td class="ps-3 pe-3 align-middle"><img alt="{{ administrator.displayName }}" src="{{ administrator.avatarUrl }}" width="28" height="28" class="rounded-circle"></td>
         {% endif %}
