@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Softspring\UserBundle\Form\Admin;
 
-use Softspring\AccountBundle\Model\MultiAccountedInterface;
+use Softspring\AccountBundle\Model\UserAccountMembershipsInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -45,7 +45,7 @@ class UserDeleteForm extends AbstractType implements UserDeleteFormInterface
         //        }
     }
 
-    protected function getDeletableAccounts(MultiAccountedInterface $user): array
+    protected function getDeletableAccounts(UserAccountMembershipsInterface $user): array
     {
         return [];
 

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Softspring\UserBundle\EventListener\Admin;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Softspring\AccountBundle\Model\UserMultiAccountedInterface;
+use Softspring\AccountBundle\Model\UserAccountMembershipsInterface;
 use Softspring\Component\CrudlController\Event\GetResponseEntityEvent;
 use Softspring\Component\Events\ViewEvent;
 use Softspring\UserBundle\Doctrine\Filter\AdminFilter;
@@ -68,7 +68,7 @@ class AdministratorControllerListener implements EventSubscriberInterface
     {
         $data = $event->getData();
 
-        $data['multi_accounted_user'] = $data['administrator'] instanceof UserMultiAccountedInterface;
+        $data['multi_accounted_user'] = $data['administrator'] instanceof UserAccountMembershipsInterface;
     }
 
     public function onDetailsViewAddSwitchUserConfiguration(ViewEvent $event): void
