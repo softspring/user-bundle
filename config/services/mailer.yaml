@@ -9,3 +9,4 @@ services:
 
     Softspring\UserBundle\EventListener\SendResetPasswordEmailListener: ~
     Softspring\UserBundle\EventListener\UserRegistrationListener: ~
+    Softspring\UserBundle\EventListener\EmailInvitationListener: ~

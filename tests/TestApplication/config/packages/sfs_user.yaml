@@ -12,5 +12,8 @@ sfs_user:
     invite:
         enabled: false
 
+    mailer:
+        enabled: true
+
     history:
         enabled: false

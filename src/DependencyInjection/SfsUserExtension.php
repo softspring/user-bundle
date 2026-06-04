@@ -95,9 +95,18 @@ class SfsUserExtension extends Extension implements PrependExtensionInterface
             $loader->load('services/data_fixtures.yaml');
         }
 
-        if (interface_exists(MailerInterface::class)) {
+        if ($config['mailer']['enabled'] && !$this->hasSymfonyMailer()) {
+            throw new InvalidConfigurationException('The "sfs_user.mailer" feature requires symfony/mailer. Install symfony/mailer or disable sfs_user.mailer.enabled.');
+        }
+
+        if ($config['mailer']['enabled']) {
             $loader->load('services/mailer.yaml');
         }
+    }
+
+    protected function hasSymfonyMailer(): bool
+    {
+        return interface_exists(MailerInterface::class);
     }
 
     public function prepend(ContainerBuilder $container): void

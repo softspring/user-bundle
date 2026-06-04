@@ -34,7 +34,7 @@ class ConfirmationController extends AbstractController
         /** @var UserInterface $user */
         $user = $this->getUser();
 
-        if ($user instanceof ConfirmableInterface && !$user->isConfirmed()) {
+        if ($user instanceof ConfirmableInterface && !$user->isConfirmed() && $this->userMailer) {
             $this->userMailer->sendRegisterConfirmationEmail($user);
         }
 

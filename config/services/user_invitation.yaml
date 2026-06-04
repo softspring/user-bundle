@@ -11,8 +11,6 @@ services:
 
     Softspring\UserBundle\Command\InviteUserCommand: ~
 
-    Softspring\UserBundle\EventListener\EmailInvitationListener: ~
-
     Softspring\UserBundle\Manager\UserInvitationManagerInterface:
         class: Softspring\UserBundle\Manager\UserInvitationManager
 

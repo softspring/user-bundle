@@ -70,7 +70,10 @@ class Configuration implements ConfigurationInterface
                 ->end()
 
                 ->arrayNode('mailer')
+                    ->canBeDisabled()
+                    ->addDefaultsIfNotSet()
                     ->children()
+                        ->booleanNode('enabled')->defaultFalse()->end()
                         ->arrayNode('from')
                             ->children()
                                 ->scalarNode('address')->end()
