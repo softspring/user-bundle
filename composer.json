@@ -48,6 +48,9 @@
         "symfony/mailer": "^6.4 || ^7.4 || ^8.0",
         "symfony/var-exporter": "^6.4 || ^7.4"
     },
+    "conflict": {
+        "symfony/twig-bridge": "<6.4.31"
+    },
     "suggest": {
         "hwi/oauth-bundle": "Integrate oauth clients",
         "softspring/mailer-bundle": "Integrates with softspring's mailer bundle",
