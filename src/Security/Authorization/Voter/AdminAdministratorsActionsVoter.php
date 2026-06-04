@@ -4,6 +4,7 @@ namespace Softspring\UserBundle\Security\Authorization\Voter;
 
 use Softspring\UserBundle\Model\RolesAdminInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Vote;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Exception\InvalidArgumentException;
 
@@ -18,7 +19,7 @@ class AdminAdministratorsActionsVoter implements VoterInterface
         return $administrator instanceof RolesAdminInterface;
     }
 
-    public function vote(TokenInterface $token, $subject, array $attributes, mixed $vote = null): int
+    public function vote(TokenInterface $token, mixed $subject, array $attributes, ?Vote $vote = null): int
     {
         /** @var RolesAdminInterface $administrator */
         $administrator = $subject;
