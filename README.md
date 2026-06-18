@@ -6,7 +6,7 @@
 [![PHP Version](https://img.shields.io/packagist/dependency-v/softspring/user-bundle/php?style=flat-square)](https://github.com/softspring/user-bundle/blob/6.0/composer.json)
 [![Downloads](https://img.shields.io/packagist/dt/softspring/user-bundle?style=flat-square)](https://packagist.org/packages/softspring/user-bundle)
 [![CI](https://img.shields.io/github/actions/workflow/status/softspring/user-bundle/ci.yml?branch=6.0&style=flat-square&label=CI)](https://github.com/softspring/user-bundle/actions/workflows/ci.yml)
-[![Coverage](https://img.shields.io/codecov/c/github/softspring/user-bundle?branch=6.0&style=flat-square)](https://codecov.io/gh/softspring/user-bundle)
+[![Coverage](https://img.shields.io/codecov/c/github/softspring/user-bundle?branch=6.0&style=flat-square)](https://app.codecov.io/gh/softspring/user-bundle/tree/6.0)
 
 A complete user bundle for Symfony applications, including user authentication flows, settings pages, invitations, and admin user management screens.
 
