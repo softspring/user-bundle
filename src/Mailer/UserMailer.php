@@ -44,8 +44,7 @@ class UserMailer implements UserMailerInterface
             throw new InvalidUserClassException(sprintf('%s must implements %s interface', get_class($user), UserWithEmailInterface::class));
         }
 
-        /** @var User|ConfirmableInterface|UserWithEmailInterface $user */
-        /** @phpstan-ignore-next-line  */
+        /** @var User&ConfirmableInterface&UserWithEmailInterface $user */
         $toName = $user instanceof NameSurnameInterface ? implode(' ', [$user->getName(), $user->getSurname()]) : '';
 
         $locale = $user instanceof UserHasLocalePreferenceInterface ? $user->getLocale() : $locale;
@@ -84,8 +83,7 @@ class UserMailer implements UserMailerInterface
             throw new InvalidUserClassException(sprintf('%s must implements %s interface', get_class($user), UserWithEmailInterface::class));
         }
 
-        /** @var User|PasswordRequestInterface|UserWithEmailInterface $user */
-        /** @phpstan-ignore-next-line  */
+        /** @var User&PasswordRequestInterface&UserWithEmailInterface $user */
         $toName = $user instanceof NameSurnameInterface ? implode(' ', [$user->getName(), $user->getSurname()]) : '';
 
         $resetUrl = $this->urlGenerator->generate('sfs_user_reset_password', [
