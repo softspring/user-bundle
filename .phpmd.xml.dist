@@ -10,4 +10,3 @@
     <rule ref="rulesets/codesize.xml" />
     <rule ref="rulesets/unusedcode.xml" />
 </ruleset>
-
