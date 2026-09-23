@@ -177,7 +177,9 @@ class UsersController extends AbstractController
 
         if (!$user->isConfirmed()) {
             try {
-                $this->userMailer && $this->userMailer->sendRegisterConfirmationEmail($user);
+                if ($this->userMailer instanceof UserMailerInterface) {
+                    $this->userMailer->sendRegisterConfirmationEmail($user);
+                }
 
                 if (($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_USERS_RESEND_CONFIRMATION_SUCCESS, new GetResponseUserEvent($user, $request))) instanceof Response) {
                     return $response;

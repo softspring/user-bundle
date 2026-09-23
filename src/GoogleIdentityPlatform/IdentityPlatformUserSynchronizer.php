@@ -80,7 +80,7 @@ use Softspring\UserBundle\Model\UserWithEmailInterface;
     {
         $user = $this->userManager->findUserBy(['identityPlatformUserId' => $identityUser->identityPlatformUserId]);
 
-        if ($user || !$identityUser->email || !$this->supportsEmailLookup()) {
+        if ($user instanceof UserInterface || !$identityUser->email || !$this->supportsEmailLookup()) {
             return $user;
         }
 

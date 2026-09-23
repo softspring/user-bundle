@@ -10,6 +10,7 @@ use Softspring\UserBundle\Form\LoginFormInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -78,7 +79,7 @@ class LoginController extends AbstractController
             }
         }
 
-        if ($form && ($response = $this->dispatchGetResponse(SfsUserEvents::LOGIN_ATTEMPT, new GetResponseFormEvent($form, $request))) instanceof Response) {
+        if ($form instanceof FormInterface && ($response = $this->dispatchGetResponse(SfsUserEvents::LOGIN_ATTEMPT, new GetResponseFormEvent($form, $request))) instanceof Response) {
             return $response;
         }
 

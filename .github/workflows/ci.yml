@@ -74,6 +74,15 @@ jobs:
             -   name: Code Style check
                 run: ./vendor/bin/php-cs-fixer fix -v --diff --dry-run
 
+            -   name: Run Rector
+                run: ./vendor/bin/rector process src tests --dry-run
+
+            -   name: Lint YAML
+                run: |
+                    ./vendor/bin/yaml-lint .github/ -vvv --parse-tags
+                    ./vendor/bin/yaml-lint config/ -vvv --parse-tags
+                    ./vendor/bin/yaml-lint translations/ -vvv --parse-tags
+
             -   name: Check coverage report
                 id: coverage_report
                 run: |

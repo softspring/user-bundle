@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
 use Rector\Set\ValueObject\SetList;
-use Rector\Symfony\Set\SymfonySetList;
+use Rector\Symfony\Symfony73\Rector\Class_\GetFiltersAndFunctionsToAsTwigAttributeRector;
 use Rector\ValueObject\PhpVersion;
 
 return RectorConfig::configure()
@@ -13,7 +13,6 @@ return RectorConfig::configure()
         is_dir(__DIR__.'/tests') ? __DIR__.'/tests' : null,
     ])))
     ->withSets([
-        SymfonySetList::SYMFONY_80,
         SetList::CODE_QUALITY,
         SetList::DEAD_CODE,
         SetList::TYPE_DECLARATION,
@@ -22,6 +21,7 @@ return RectorConfig::configure()
     ->withPhpVersion(PhpVersion::PHP_84)
     ->withComposerBased(symfony: true)
     ->withSkip([
+        GetFiltersAndFunctionsToAsTwigAttributeRector::class,
         __DIR__.'/tests/Unit/Security/Authorization/Voter/AdminAdministratorsActionsVoterTest.php',
         __DIR__.'/tests/Unit/Security/Authorization/Voter/SwitchUserVoterTest.php',
     ]);

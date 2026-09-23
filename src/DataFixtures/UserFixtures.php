@@ -88,7 +88,7 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
                 return $user;
             }
 
-            if ($user instanceof UserLastLoginInterface && $user->getLastLogin()) {
+            if ($user instanceof UserLastLoginInterface && $user->getLastLogin() instanceof DateTime) {
                 $this->createUserAccess($manager, $user);
             }
 

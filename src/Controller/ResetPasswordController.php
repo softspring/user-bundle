@@ -62,7 +62,8 @@ class ResetPasswordController extends AbstractController
                 }
 
                 return $this->redirectToRoute('sfs_user_reset_password_requested');
-            } elseif (($response = $this->dispatchGetResponse(SfsUserEvents::RESET_REQUEST_FORM_INVALID, new GetResponseFormEvent($form, $request))) instanceof Response) {
+            }
+            if (($response = $this->dispatchGetResponse(SfsUserEvents::RESET_REQUEST_FORM_INVALID, new GetResponseFormEvent($form, $request))) instanceof Response) {
                 return $response;
             }
         }
@@ -125,7 +126,8 @@ class ResetPasswordController extends AbstractController
                 }
 
                 return $this->redirectToRoute('sfs_user_reset_password_success');
-            } elseif (($response = $this->dispatchGetResponse(SfsUserEvents::RESET_FORM_INVALID, new GetResponseFormEvent($form, $request))) instanceof Response) {
+            }
+            if (($response = $this->dispatchGetResponse(SfsUserEvents::RESET_FORM_INVALID, new GetResponseFormEvent($form, $request))) instanceof Response) {
                 return $response;
             }
         }

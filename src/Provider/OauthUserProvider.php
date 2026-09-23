@@ -135,7 +135,7 @@ class OauthUserProvider implements UserProviderInterface, AccountConnectorInterf
         return $user;
     }
 
-    public function supportsClass($class): bool
+    public function supportsClass(string $class): bool
     {
         $userClass = $this->userManager->getEntityClass();
 

@@ -38,7 +38,7 @@ class InvitationsController extends AbstractController
     {
         $invitation = $this->invitationsManager->findInvitationBy(['id' => $invitation]);
 
-        if (!$invitation->getAcceptedAt() && $this->userMailer) {
+        if (!$invitation->getAcceptedAt() && $this->userMailer instanceof UserMailerInterface) {
             $this->userMailer->sendInvitationEmail($invitation);
         }
 
