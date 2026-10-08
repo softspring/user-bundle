@@ -85,10 +85,9 @@ class InvitationController extends AbstractController
                 }
 
                 return $this->redirectToRoute('sfs_user_invitation_success');
-            } else {
-                if ($response = $this->dispatchGetResponse(SfsUserEvents::INVITATION_FORM_INVALID, new GetResponseFormEvent($form, $request))) {
-                    return $response;
-                }
+            }
+            if ($response = $this->dispatchGetResponse(SfsUserEvents::INVITATION_FORM_INVALID, new GetResponseFormEvent($form, $request))) {
+                return $response;
             }
         }
 

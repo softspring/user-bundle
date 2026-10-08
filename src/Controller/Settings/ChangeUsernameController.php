@@ -53,10 +53,9 @@ class ChangeUsernameController extends AbstractController
                 }
 
                 return $this->redirect('/');
-            } else {
-                if ($response = $this->dispatchGetResponse(SfsUserEvents::CHANGE_USERNAME_FORM_INVALID, new GetResponseFormEvent($form, $request))) {
-                    return $response;
-                }
+            }
+            if ($response = $this->dispatchGetResponse(SfsUserEvents::CHANGE_USERNAME_FORM_INVALID, new GetResponseFormEvent($form, $request))) {
+                return $response;
             }
         }
 

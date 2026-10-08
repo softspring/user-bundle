@@ -53,10 +53,9 @@ class PreferencesController extends AbstractController
                 }
 
                 return $this->redirectToRoute('sfs_user_preferences');
-            } else {
-                if ($response = $this->dispatchGetResponse(SfsUserEvents::PREFERENCES_FORM_INVALID, new GetResponseFormEvent($form, $request))) {
-                    return $response;
-                }
+            }
+            if ($response = $this->dispatchGetResponse(SfsUserEvents::PREFERENCES_FORM_INVALID, new GetResponseFormEvent($form, $request))) {
+                return $response;
             }
         }
 

@@ -70,9 +70,9 @@ class UsersController extends AbstractController
 
         if ($this->isGranted('PERMISSION_SFS_USER_ADMIN_ADMINISTRATORS_LIST')) {
             return $this->redirectToRoute('sfs_user_admin_administrators_list');
-        } else {
-            return $this->redirectToRoute('sfs_user_admin_users_list');
         }
+
+        return $this->redirectToRoute('sfs_user_admin_users_list');
     }
 
     public function usersCountWidget(): Response

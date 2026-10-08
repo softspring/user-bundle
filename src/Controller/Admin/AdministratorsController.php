@@ -49,9 +49,9 @@ class AdministratorsController extends AbstractController
 
         if ($this->isGranted('PERMISSION_SFS_USER_ADMIN_USERS_LIST')) {
             return $this->redirectToRoute('sfs_user_admin_users_list');
-        } else {
-            return $this->redirectToRoute('sfs_user_admin_administrators_list');
         }
+
+        return $this->redirectToRoute('sfs_user_admin_administrators_list');
     }
 
     public function promoteSuper(string $administrator, Request $request): Response
@@ -76,9 +76,9 @@ class AdministratorsController extends AbstractController
 
         if ($this->isGranted('PERMISSION_SFS_USER_ADMIN_USERS_LIST')) {
             return $this->redirectToRoute('sfs_user_admin_users_list');
-        } else {
-            return $this->redirectToRoute('sfs_user_admin_administrators_list');
         }
+
+        return $this->redirectToRoute('sfs_user_admin_administrators_list');
     }
 
     public function demoteSuper(string $administrator, Request $request): Response
@@ -103,8 +103,8 @@ class AdministratorsController extends AbstractController
 
         if ($this->isGranted('PERMISSION_SFS_USER_ADMIN_USERS_LIST')) {
             return $this->redirectToRoute('sfs_user_admin_users_list');
-        } else {
-            return $this->redirectToRoute('sfs_user_admin_administrators_list');
         }
+
+        return $this->redirectToRoute('sfs_user_admin_administrators_list');
     }
 }
