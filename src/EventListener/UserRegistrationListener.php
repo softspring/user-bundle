@@ -2,6 +2,9 @@
 
 namespace Softspring\UserBundle\EventListener;
 
+use Exception;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Mailer\UserMailerInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
@@ -12,17 +15,12 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class UserRegistrationListener implements EventSubscriberInterface
 {
-    protected UserManagerInterface $userManager;
-
-    protected UserMailerInterface $mailer;
-
-    protected TokenGenerator $tokenGenerator;
-
-    public function __construct(UserManagerInterface $userManager, UserMailerInterface $mailer, TokenGenerator $tokenGenerator)
-    {
-        $this->userManager = $userManager;
-        $this->mailer = $mailer;
-        $this->tokenGenerator = $tokenGenerator;
+    public function __construct(
+        protected UserManagerInterface $userManager,
+        protected UserMailerInterface $mailer,
+        protected TokenGenerator $tokenGenerator,
+        protected LoggerInterface $logger = new NullLogger(),
+    ) {
     }
 
     public static function getSubscribedEvents(): array
@@ -42,6 +40,10 @@ class UserRegistrationListener implements EventSubscriberInterface
         $user->setConfirmationToken($this->tokenGenerator->generateToken());
         $this->userManager->saveEntity($user);
 
-        $this->mailer->sendRegisterConfirmationEmail($user);
+        try {
+            $this->mailer->sendRegisterConfirmationEmail($user);
+        } catch (Exception $e) {
+            $this->logger->error('Failed to send registration confirmation email.', ['exception' => $e, 'user_identifier' => $user->getUserIdentifier()]);
+        }
     }
 }

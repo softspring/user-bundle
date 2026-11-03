@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Softspring\UserBundle\EventListener;
 
+use Exception;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Softspring\UserBundle\Event\UserInvitationEvent;
 use Softspring\UserBundle\Mailer\UserMailerInterface;
 use Softspring\UserBundle\SfsUserEvents;
@@ -11,11 +14,10 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class EmailInvitationListener implements EventSubscriberInterface
 {
-    protected UserMailerInterface $mailer;
-
-    public function __construct(UserMailerInterface $mailer)
-    {
-        $this->mailer = $mailer;
+    public function __construct(
+        protected UserMailerInterface $mailer,
+        protected LoggerInterface $logger = new NullLogger(),
+    ) {
     }
 
     public static function getSubscribedEvents(): array
@@ -28,7 +30,10 @@ class EmailInvitationListener implements EventSubscriberInterface
     public function onInvitation(UserInvitationEvent $event): void
     {
         $invitation = $event->getInvitation();
-
-        $this->mailer->sendInvitationEmail($invitation);
+        try {
+            $this->mailer->sendInvitationEmail($invitation);
+        } catch (Exception $e) {
+            $this->logger->error('Failed to send invitation email.', ['exception' => $e, 'invitation_id' => $invitation->getId()]);
+        }
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Rector\Config\RectorConfig;
 use Rector\Set\ValueObject\SetList;
 use Rector\Symfony\Symfony73\Rector\Class_\GetFiltersAndFunctionsToAsTwigAttributeRector;
+use Rector\Symfony\CodeQuality\Rector\Class_\EventSubscriberToAttributeRector;
 use Rector\ValueObject\PhpVersion;
 
 return RectorConfig::configure()
@@ -22,6 +23,8 @@ return RectorConfig::configure()
     ->withComposerBased(symfony: true)
     ->withSkip([
         GetFiltersAndFunctionsToAsTwigAttributeRector::class,
+        // Keep explicit subscriptions available to application event dispatchers.
+        ...(class_exists(EventSubscriberToAttributeRector::class) ? [EventSubscriberToAttributeRector::class] : []),
         __DIR__.'/tests/Unit/Security/Authorization/Voter/AdminAdministratorsActionsVoterTest.php',
         __DIR__.'/tests/Unit/Security/Authorization/Voter/SwitchUserVoterTest.php',
     ]);

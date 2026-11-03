@@ -33,6 +33,8 @@ Functional definition for `softspring/user-bundle`.
 - Optional Google Identity Platform login with Google Sign-In and One Tap.
 - Doctrine filters for user/admin visibility.
 - Mailers, MIME classes, events, and manipulators for user lifecycle actions.
+- Mail delivery failures are logged with exception context and do not interrupt successful registration or invitation creation.
+- Resend actions provide success and error events with translated feedback. Invitations can be resent before a user is associated.
 - Console commands for common user and admin operations.
 
 ## Integration And Extension

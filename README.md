@@ -20,7 +20,7 @@ This package is part of [Armonic](https://softspring.es/en/armonic).
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md).
+See [CONTRIBUTING.md](CONTRIBUTING.md). Event subscribers keep their explicit subscription maps for applications that register them directly.
 
 [Report issues](https://github.com/softspring/user-bundle/issues) and [send Pull Requests](https://github.com/softspring/user-bundle/pulls)
 

@@ -3,6 +3,9 @@
 namespace Softspring\UserBundle\EventListener;
 
 use DateTime;
+use Exception;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Softspring\Component\Events\GetResponseFormEvent;
 use Softspring\UserBundle\Mailer\UserMailerInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
@@ -14,17 +17,12 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class SendResetPasswordEmailListener implements EventSubscriberInterface
 {
-    protected UserMailerInterface $mailer;
-
-    protected UserManagerInterface $userManager;
-
-    protected TokenGenerator $tokenGenerator;
-
-    public function __construct(UserMailerInterface $mailer, UserManagerInterface $userManager, TokenGenerator $tokenGenerator)
-    {
-        $this->mailer = $mailer;
-        $this->userManager = $userManager;
-        $this->tokenGenerator = $tokenGenerator;
+    public function __construct(
+        protected UserMailerInterface $mailer,
+        protected UserManagerInterface $userManager,
+        protected TokenGenerator $tokenGenerator,
+        protected LoggerInterface $logger = new NullLogger(),
+    ) {
     }
 
     public static function getSubscribedEvents(): array
@@ -64,6 +62,10 @@ class SendResetPasswordEmailListener implements EventSubscriberInterface
             return;
         }
 
-        $this->mailer->sendResettingEmail($user);
+        try {
+            $this->mailer->sendResettingEmail($user);
+        } catch (Exception $e) {
+            $this->logger->error('Failed to send password reset email.', ['exception' => $e, 'user_identifier' => $user->getUserIdentifier()]);
+        }
     }
 }
