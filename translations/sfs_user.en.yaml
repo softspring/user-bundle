@@ -205,6 +205,12 @@ admin_users:
             error: "An error has occurred sending the confirmation email, try it again. If the problem persist contact to support."
             already_confirmed: "The email has not been send, user %username% is already confirmed"
 
+    resend_invitation:
+        messages:
+            success: "The invitation email has been sent to %email%"
+            error: "An error has occurred sending the invitation email, try it again. If the problem persist contact to support."
+
+
 admin_administrators:
     list:
         meta.title: "Administrators"

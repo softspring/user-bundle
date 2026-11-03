@@ -20,6 +20,8 @@ This bundle is part of [Armonic](https://softspring.es/en/armonic).
 
 ## Contributing
 
+See [CONTRIBUTING.md](CONTRIBUTING.md) for local validation commands.
+
 [Report issues](https://github.com/softspring/user-bundle/issues) and [send Pull Requests](https://github.com/softspring/user-bundle/pulls)
 
 ## License
