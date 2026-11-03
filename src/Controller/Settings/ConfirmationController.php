@@ -3,6 +3,8 @@
 namespace Softspring\UserBundle\Controller\Settings;
 
 use Exception;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Softspring\Component\Events\DispatchGetResponseTrait;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Mailer\UserMailerInterface;
@@ -25,8 +27,11 @@ class ConfirmationController extends AbstractController
 
     protected EventDispatcherInterface $eventDispatcher;
 
-    public function __construct(UserManagerInterface $userManager, ?UserMailerInterface $userMailer, EventDispatcherInterface $eventDispatcher)
+    protected LoggerInterface $logger;
+
+    public function __construct(UserManagerInterface $userManager, ?UserMailerInterface $userMailer, EventDispatcherInterface $eventDispatcher, ?LoggerInterface $logger = null)
     {
+        $this->logger = $logger ?? new NullLogger();
         $this->userManager = $userManager;
         $this->userMailer = $userMailer;
         $this->eventDispatcher = $eventDispatcher;
@@ -36,15 +41,16 @@ class ConfirmationController extends AbstractController
     {
         /** @var UserInterface $user */
         $user = $this->getUser();
-        try {
-            if ($user instanceof ConfirmableInterface && !$user->isConfirmed()) {
+        if ($user instanceof ConfirmableInterface && !$user->isConfirmed() && $this->userMailer) {
+            $eventName = SfsUserEvents::ADMIN_USERS_RESEND_CONFIRMATION_SUCCESS;
+            try {
                 $this->userMailer->sendRegisterConfirmationEmail($user);
-                if ($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_USERS_RESEND_CONFIRMATION_SUCCESS, new GetResponseUserEvent($user, $request))) {
-                    return $response;
-                }
+            } catch (Exception $e) {
+                $this->logger->error('Failed to resend confirmation email.', ['exception' => $e, 'user_identifier' => $user->getUserIdentifier()]);
+                $eventName = SfsUserEvents::ADMIN_USERS_RESEND_CONFIRMATION_ERROR;
             }
-        } catch (Exception $e) {
-            if ($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_USERS_RESEND_CONFIRMATION_ERROR, new GetResponseUserEvent($user, $request))) {
+
+            if ($response = $this->dispatchGetResponse($eventName, new GetResponseUserEvent($user, $request))) {
                 return $response;
             }
         }

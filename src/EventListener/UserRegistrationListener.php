@@ -3,6 +3,8 @@
 namespace Softspring\UserBundle\EventListener;
 
 use Exception;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Softspring\UserBundle\Event\GetResponseUserEvent;
 use Softspring\UserBundle\Mailer\UserMailerInterface;
 use Softspring\UserBundle\Manager\UserManagerInterface;
@@ -19,8 +21,11 @@ class UserRegistrationListener implements EventSubscriberInterface
 
     protected TokenGenerator $tokenGenerator;
 
-    public function __construct(UserManagerInterface $userManager, UserMailerInterface $mailer, TokenGenerator $tokenGenerator)
+    protected LoggerInterface $logger;
+
+    public function __construct(UserManagerInterface $userManager, UserMailerInterface $mailer, TokenGenerator $tokenGenerator, ?LoggerInterface $logger = null)
     {
+        $this->logger = $logger ?? new NullLogger();
         $this->userManager = $userManager;
         $this->mailer = $mailer;
         $this->tokenGenerator = $tokenGenerator;
@@ -35,17 +40,18 @@ class UserRegistrationListener implements EventSubscriberInterface
 
     public function onRegisterSendConfirmationEmail(GetResponseUserEvent $event): void
     {
+        $user = $event->getUser();
+        if (!$user instanceof ConfirmableInterface) {
+            return;
+        }
+
+        $user->setConfirmationToken($this->tokenGenerator->generateToken());
+        $this->userManager->saveEntity($user);
+
         try {
-            $user = $event->getUser();
-            if (!$user instanceof ConfirmableInterface) {
-                return;
-            }
-
-            $user->setConfirmationToken($this->tokenGenerator->generateToken());
-            $this->userManager->saveEntity($user);
-
             $this->mailer->sendRegisterConfirmationEmail($user);
         } catch (Exception $e) {
+            $this->logger->error('Failed to send registration confirmation email.', ['exception' => $e, 'user_identifier' => $user->getUserIdentifier()]);
         }
     }
 }

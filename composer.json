@@ -4,12 +4,13 @@
     "type": "symfony-bundle",
     "license": "AGPL-3.0-or-later",
     "minimum-stability": "dev",
-    "prefer-stable": false,
+    "prefer-stable": true,
     "require": {
-        "php": ">=8.1",
-        "ext-json": "*",
         "doctrine/doctrine-bundle": "^2.10",
         "doctrine/orm": "^3.3 | ^4.0",
+        "ext-json": "*",
+        "php": ">=8.1",
+        "psr/log": "^1.1|^2.0|^3.0",
         "softspring/crudl-controller": "^5.5",
         "softspring/doctrine-paginator": "^5.5",
         "softspring/doctrine-query-filters": "^5.5",
@@ -32,6 +33,7 @@
         "friendsofphp/php-cs-fixer": "^3.68",
         "hwi/oauth-bundle": "^2.0",
         "phpstan/phpstan": "^1.10",
+        "phpunit/phpunit": "^9.6",
         "rector/rector": "^1.0",
         "softspring/account-bundle": "^5.5",
         "softspring/doctrine-templates": "^5.5",
@@ -67,5 +69,23 @@
             "symfony/flex": true,
             "phpstan/extension-installer": true
         }
+    },
+    "scripts": {
+        "test": [
+            "@putenv COMPOSER_ROOT_VERSION=5.5.x-dev",
+            "@composer update --prefer-dist --no-interaction --no-progress",
+            "@check"
+        ],
+        "test-bc": [
+            "@putenv COMPOSER_ROOT_VERSION=5.5.x-dev",
+            "@composer update --prefer-lowest --prefer-dist --no-interaction --no-progress",
+            "@check"
+        ],
+        "check": [
+            "@composer validate --strict",
+            "phpstan analyse --no-progress",
+            "phpunit --configuration phpunit-unit.xml.dist",
+            "php-cs-fixer fix --diff --dry-run"
+        ]
     }
 }

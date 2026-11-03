@@ -3,8 +3,10 @@
 namespace Softspring\UserBundle\Controller\Admin;
 
 use Exception;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Softspring\Component\Events\DispatchGetResponseTrait;
-use Softspring\UserBundle\Event\GetResponseUserEvent;
+use Softspring\UserBundle\Event\GetResponseUserInvitationEvent;
 use Softspring\UserBundle\Mailer\UserMailerInterface;
 use Softspring\UserBundle\Manager\UserInvitationManagerInterface;
 use Softspring\UserBundle\SfsUserEvents;
@@ -23,8 +25,11 @@ class InvitationsController extends AbstractController
 
     protected EventDispatcherInterface $eventDispatcher;
 
-    public function __construct(UserInvitationManagerInterface $invitationsManager, ?UserMailerInterface $userMailer, EventDispatcherInterface $eventDispatcher)
+    protected LoggerInterface $logger;
+
+    public function __construct(UserInvitationManagerInterface $invitationsManager, ?UserMailerInterface $userMailer, EventDispatcherInterface $eventDispatcher, ?LoggerInterface $logger = null)
     {
+        $this->logger = $logger ?? new NullLogger();
         $this->invitationsManager = $invitationsManager;
         $this->userMailer = $userMailer;
         $this->eventDispatcher = $eventDispatcher;
@@ -40,18 +45,21 @@ class InvitationsController extends AbstractController
 
     public function resendEmail(mixed $invitation, Request $request): Response
     {
-        try {
-            $invitation = $this->invitationsManager->findInvitationBy(['id' => $invitation]);
-            $user = $invitation->getUser();
+        $invitation = $this->invitationsManager->findInvitationBy(['id' => $invitation]);
+        if (!$invitation) {
+            throw $this->createNotFoundException('Invitation not found.');
+        }
 
-            if (!$invitation->getAcceptedAt() && $this->userMailer) {
+        if (!$invitation->getAcceptedAt() && $this->userMailer) {
+            $eventName = SfsUserEvents::ADMIN_INVITATIONS_RESEND_SUCCESS;
+            try {
                 $this->userMailer->sendInvitationEmail($invitation);
-                if ($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_INVITATIONS_RESEND_SUCCESS, new GetResponseUserEvent($user, $request))) {
-                    return $response;
-                }
+            } catch (Exception $e) {
+                $this->logger->error('Failed to resend invitation email.', ['exception' => $e, 'invitation_id' => $invitation->getId()]);
+                $eventName = SfsUserEvents::ADMIN_INVITATIONS_RESEND_ERROR;
             }
-        } catch (Exception $e) {
-            if ($response = $this->dispatchGetResponse(SfsUserEvents::ADMIN_INVITATIONS_RESEND_ERROR, new GetResponseUserEvent($user, $request))) {
+
+            if ($response = $this->dispatchGetResponse($eventName, new GetResponseUserInvitationEvent($invitation, $request))) {
                 return $response;
             }
         }

@@ -3,6 +3,7 @@
 namespace Softspring\UserBundle\EventListener\Admin;
 
 use Softspring\UserBundle\Event\GetResponseUserEvent;
+use Softspring\UserBundle\Event\GetResponseUserInvitationEvent;
 use Softspring\UserBundle\Model\UserWithEmailInterface;
 use Softspring\UserBundle\SfsUserEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -65,26 +66,18 @@ class FlashMessagesListener implements EventSubscriberInterface
         ], 'sfs_user', $locale);
     }
 
-    public function onResendInvitationsSuccess(GetResponseUserEvent $event): void
+    public function onResendInvitationsSuccess(GetResponseUserInvitationEvent $event): void
     {
-        $user = $event->getUser();
-        $locale = $event->getRequest()->getLocale();
-
-        $this->addFlash('success', 'admin_users.resend_invitaion.messages.success', [
-            '%username%' => $user->getDisplayName(),
-            '%email%' => $user instanceof UserWithEmailInterface ? $user->getEmail() : $user->getDisplayName(),
-        ], 'sfs_user', $locale);
+        $this->addFlash('success', 'admin_users.resend_invitation.messages.success', [
+            '%email%' => $event->getInvitation()->getEmail(),
+        ], 'sfs_user', $event->getRequest()->getLocale());
     }
 
-    public function onResendInvitationsError(GetResponseUserEvent $event): void
+    public function onResendInvitationsError(GetResponseUserInvitationEvent $event): void
     {
-        $user = $event->getUser();
-        $locale = $event->getRequest()->getLocale();
-
-        $this->addFlash('error', 'admin_users.resend_invitaion.messages.error', [
-            '%username%' => $user->getDisplayName(),
-            '%email%' => $user instanceof UserWithEmailInterface ? $user->getEmail() : $user->getDisplayName(),
-        ], 'sfs_user', $locale);
+        $this->addFlash('error', 'admin_users.resend_invitation.messages.error', [
+            '%email%' => $event->getInvitation()->getEmail(),
+        ], 'sfs_user', $event->getRequest()->getLocale());
     }
 
     protected function addFlash(string $type, string $trans, array $transParams = [], string $domain = 'sfs_user', string $locale = 'en'): void
