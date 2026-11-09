@@ -9,14 +9,14 @@
         "doctrine/doctrine-bundle": "^2.17.2 || ^3.0",
         "doctrine/orm": "^2.10 || ^3.0",
         "psr/log": "^1.1 || ^2.0 || ^3.0",
-        "softspring/crudl-controller": "^6.0@dev",
-        "softspring/doctrine-paginator": "^6.0@dev",
-        "softspring/doctrine-query-filters": "^6.0@dev",
-        "softspring/doctrine-target-entity-resolver": "^6.0@dev",
-        "softspring/events": "^6.0@dev",
-        "softspring/mime-translatable": "^6.0@dev",
-        "softspring/permissions-bundle": "^6.0@dev",
-        "softspring/twig-extra-bundle": "^6.0@dev",
+        "softspring/crudl-controller": "6.1.*@dev",
+        "softspring/doctrine-paginator": "6.1.*@dev",
+        "softspring/doctrine-query-filters": "6.1.*@dev",
+        "softspring/doctrine-target-entity-resolver": "6.1.*@dev",
+        "softspring/events": "6.1.*@dev",
+        "softspring/mime-translatable": "6.1.*@dev",
+        "softspring/permissions-bundle": "6.1.*@dev",
+        "softspring/twig-extra-bundle": "6.1.*@dev",
         "symfony/http-foundation": "^6.4 || ^7.4 || ^8.0",
         "symfony/http-kernel": "^6.4 || ^7.4 || ^8.0",
         "symfony/security-bundle": "^6.4 || ^7.4 || ^8.0",
@@ -36,10 +36,10 @@
         "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^12.5",
         "rector/rector": "^2.6.7",
-        "softspring/account-bundle": "^6.0@dev",
-        "softspring/doctrine-templates": "^6.0@dev",
-        "softspring/mailer-bundle": "^6.0@dev",
-        "softspring/media-bundle": "^6.0@dev",
+        "softspring/account-bundle": "6.1.*@dev",
+        "softspring/doctrine-templates": "6.1.*@dev",
+        "softspring/mailer-bundle": "6.1.*@dev",
+        "softspring/media-bundle": "6.1.*@dev",
         "symfony/browser-kit": "^6.4 || ^7.4 || ^8.0",
         "symfony/css-selector": "^6.4 || ^7.4 || ^8.0",
         "symfony/dom-crawler": "^6.4 || ^7.4 || ^8.0",
@@ -81,7 +81,8 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-6.0": "6.0.x-dev"
+            "dev-6.0": "6.0.x-dev",
+            "dev-6.1": "6.1.x-dev"
         }
     },
     "scripts": {
