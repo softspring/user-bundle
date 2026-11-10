@@ -16,7 +16,7 @@ This package is part of [Armonic](https://softspring.es/en/armonic).
 
 ## Documentation
 
-[Armonic Documentation](https://armonic.softspring.es/6.1@dev/bundles/user-bundle)
+[Armonic Documentation](https://armonic.softspring.es/6.1-dev/bundles/user-bundle)
 
 ## Contributing
 
